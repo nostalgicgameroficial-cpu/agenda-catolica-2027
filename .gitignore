@@ -1,0 +1,11 @@
+# Arquivos temporários e grandes
+*.txt
+*.PDF
+*.pdf
+*.backup.html
+Agenda_text_preview.html
+pdf_images/
+original_html_images/
+node_modules/
+.DS_Store
+Thumbs.db
