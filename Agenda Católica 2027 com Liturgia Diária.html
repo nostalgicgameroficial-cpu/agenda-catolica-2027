@@ -3434,16 +3434,44 @@
         });
       }
 
-      // ─── CLIQUE NOS BOTÕES DE COMPRA ────────────────────
+      // ─── CLIQUE NOS BOTÕES DE COMPRA (DIRECIONA PARA LASTLINK) ───
       document.querySelectorAll('[data-plan]').forEach(function(el) {
         el.addEventListener('click', function(e) {
+          var plan = this.getAttribute('data-plan');
+          var product = PRODUCTS[plan];
+          if (!product) return;
+
           e.preventDefault();
-          var plan = this.getAttribute('data-plan') || 'completo';
-          openCheckoutModal(plan);
+
+          // Dispara InitiateCheckout avançado com todos os parâmetros
+          if (typeof window.fbTrackEvent === 'function') {
+            var eventId = window.fbTrackEvent('InitiateCheckout', {
+              content_name: product.name,
+              content_ids: [product.id],
+              content_type: 'product',
+              content_category: product.category,
+              value: product.value,
+              currency: 'BRL',
+              num_items: 1
+            }, true);
+
+            // Armazena event_id para deduplicação com CAPI
+            try {
+              sessionStorage.setItem('_fb_last_checkout_event_id', eventId);
+              sessionStorage.setItem('_fb_last_checkout_plan', plan);
+            } catch(err) {}
+          }
+
+          // Redireciona com parâmetros de rastreamento para a Lastlink
+          var finalUrl = buildCheckoutUrl(product.url);
+
+          setTimeout(function() {
+            window.location.href = finalUrl;
+          }, 300);
         });
       });
 
-      // Abre checkout também ao clicar nos botões com href="#oferta" se o usuário preferir
+      // Disponível para testes manuais no console quando desejar: window.openNativeCheckout('completo');
       window.openNativeCheckout = openCheckoutModal;
 
       // ─── SCROLL SUAVE PARA ÂNCORAS ──────────────────────
