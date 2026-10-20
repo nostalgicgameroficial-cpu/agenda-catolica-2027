@@ -2136,21 +2136,114 @@
       border-radius: 6px;
     }
 
-    /* AVISO OBRIGATÓRIO PUSHINPAY (ITEM 4.10) */
-    .pushinpay-legal-notice {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-size: 0.72rem;
-      color: #64748b;
-      line-height: 1.45;
-      margin: 14px 0 16px;
-      text-align: justify;
+    /* ORDER BUMP (OFERTA COMPLEMENTAR NO CHECKOUT) */
+    .checkout-order-bump {
+      background: #fffdf5;
+      border: 2px dashed #f59e0b;
+      border-radius: 14px;
+      padding: 14px;
+      margin: 16px 0 16px;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .pushinpay-legal-notice strong {
-      color: #475569;
+    .checkout-order-bump:hover {
+      background: #fffbeb;
+      border-color: #d97706;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.15);
+    }
+
+    .checkout-order-bump.selected {
+      background: #fefce8;
+      border: 2px solid #16a34a;
+      box-shadow: 0 4px 16px rgba(22, 163, 74, 0.18);
+    }
+
+    .order-bump-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #ea580c;
+      color: #ffffff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 8px;
+    }
+
+    .order-bump-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .order-bump-checkbox-custom {
+      margin-top: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      background: #ffffff;
+      transition: all 0.2s ease;
+    }
+
+    .checkout-order-bump.selected .order-bump-checkbox-custom {
+      background: #16a34a;
+      border-color: #16a34a;
+      color: #ffffff;
+    }
+
+    .order-bump-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    .order-bump-price-tag {
+      color: #15803d;
+      font-weight: 900;
+    }
+
+    .order-bump-content-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .order-bump-img {
+      width: 82px;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid #fed7aa;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      flex-shrink: 0;
+    }
+
+    .order-bump-bullets {
+      list-style: none;
+      font-size: 0.76rem;
+      color: var(--ink-secondary);
+      display: grid;
+      gap: 4px;
+      line-height: 1.35;
+    }
+
+    .order-bump-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
     }
 
     /* BOTÃO SUBMIT */
@@ -3253,6 +3346,27 @@
               </div>
             </div>
 
+            <!-- ORDER BUMP: CADERNO CATÓLICO DE COLORIR E HISTÓRIAS DOS SANTOS -->
+            <div class="checkout-order-bump" id="order-bump-box">
+              <span class="order-bump-badge">⚡ Oportunidade Única no Checkout</span>
+              <div class="order-bump-header">
+                <div class="order-bump-checkbox-custom" id="order-bump-check-icon">✓</div>
+                <div>
+                  <div class="order-bump-title">
+                    Sim! Adicionar o <strong>Caderno de Colorir dos Santos</strong> por apenas <span class="order-bump-price-tag">+ R$ 7,90</span>
+                  </div>
+                </div>
+              </div>
+              <div class="order-bump-content-row">
+                <img src="assets/order_bump_historias_santos.png" alt="Caderno de Colorir e Histórias dos Santos para Crianças" class="order-bump-img" width="160" height="90" loading="lazy">
+                <ul class="order-bump-bullets">
+                  <li><span>✅</span> <span><strong>Mais de 50 páginas</strong> de desenhos e histórias dos santos</span></li>
+                  <li><span>🎨</span> <span>Atividade criativa para <strong>colorir e se divertir</strong></span></li>
+                  <li><span>🙏</span> <span>Incentivo à fé e aos <strong>valores cristãos</strong></span></li>
+                </ul>
+              </div>
+            </div>
+
             <div id="checkout-form-error" style="display:none; color: #dc2626; font-size: 0.85rem; font-weight: 700; margin: 10px 0 12px; text-align: center;"></div>
 
             <!-- BOTÃO GERAR PIX -->
@@ -3468,6 +3582,7 @@
       var pixTransIdDisplay = document.getElementById('pix-trans-id-display');
 
       var currentPlan = 'completo';
+      var hasOrderBump = false;
       var currentOrderId = null;
       var currentTransactionId = null;
       var currentCustomerName = '';
@@ -3477,10 +3592,21 @@
 
       var detailsBasico = document.getElementById('details-basico');
       var detailsCompleto = document.getElementById('details-completo');
+      var orderBumpBox = document.getElementById('order-bump-box');
+      var orderBumpCheckIcon = document.getElementById('order-bump-check-icon');
+
+      function calculateTotal() {
+        var base = currentPlan === 'basico' ? 19.90 : 27.90;
+        var total = hasOrderBump ? (base + 7.90) : base;
+        var totalCents = hasOrderBump ? (currentPlan === 'basico' ? 2780 : 3580) : (currentPlan === 'basico' ? 1990 : 2790);
+        var formatted = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        return { base: base, total: total, totalCents: totalCents, formatted: formatted };
+      }
 
       function updatePlanUI(plan) {
-        currentPlan = plan === 'basico' ? 'basico' : 'completo';
-        var priceText = currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90';
+        if (plan) {
+          currentPlan = plan === 'basico' ? 'basico' : 'completo';
+        }
         
         if (currentPlan === 'basico') {
           optBasico.classList.add('selected');
@@ -3494,9 +3620,21 @@
           if (detailsCompleto) detailsCompleto.style.display = 'block';
         }
 
-        // Atualiza dinamicamente o botão com o valor selecionado
+        // Atualiza estado visual do Order Bump
+        if (orderBumpBox) {
+          if (hasOrderBump) {
+            orderBumpBox.classList.add('selected');
+            if (orderBumpCheckIcon) orderBumpCheckIcon.textContent = '✓';
+          } else {
+            orderBumpBox.classList.remove('selected');
+            if (orderBumpCheckIcon) orderBumpCheckIcon.textContent = '';
+          }
+        }
+
+        // Atualiza dinamicamente o botão com o valor total selecionado
+        var pricing = calculateTotal();
         if (btnGeneratePix) {
-          btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong id="btn-price-display">' + priceText + '</strong></span>';
+          btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong id="btn-price-display">' + pricing.formatted + '</strong></span>';
         }
       }
 
@@ -3505,6 +3643,14 @@
       }
       if (optCompleto) {
         optCompleto.addEventListener('click', function() { updatePlanUI('completo'); });
+      }
+
+      // Alternar Order Bump ao clicar no container ou checkbox
+      if (orderBumpBox) {
+        orderBumpBox.addEventListener('click', function() {
+          hasOrderBump = !hasOrderBump;
+          updatePlanUI();
+        });
       }
 
       // Máscaras de entrada (Telefone e CPF)
@@ -3540,6 +3686,7 @@
 
       function openCheckoutModal(plan) {
         if (!checkoutModal) return;
+        hasOrderBump = false; // Começa desmarcado por padrão para transparência
         updatePlanUI(plan || 'completo');
         
         // Reseta telas
@@ -3548,7 +3695,6 @@
         stepSuccess.classList.remove('active');
         checkoutFormError.style.display = 'none';
         btnGeneratePix.disabled = false;
-        btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong id="btn-price-display">' + (currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90') + '</strong></span>';
         
         checkoutModal.classList.add('active');
         checkoutModal.scrollTop = 0;
@@ -3615,15 +3761,18 @@
         // para deduplicação sem duplicação de conversões com a Meta CAPI
         var purchaseEventId = currentOrderId ? ('purchase_' + currentOrderId) : ('eid_pur_' + Date.now());
         var product = PRODUCTS[activePlan];
+        var pricing = calculateTotal();
         if (typeof window.fbTrackEvent === 'function' && product) {
+          var contentName = product.name + (hasOrderBump ? ' + Caderno de Colorir dos Santos' : '');
+          var contentIds = hasOrderBump ? [product.id, 'caderno-colorir-santos'] : [product.id];
           window.fbTrackEvent('Purchase', {
-            content_name: product.name,
-            content_ids: [product.id],
+            content_name: contentName,
+            content_ids: contentIds,
             content_type: 'product',
             content_category: product.category,
-            value: product.value,
+            value: pricing.total,
             currency: 'BRL',
-            num_items: 1,
+            num_items: hasOrderBump ? 2 : 1,
             order_id: currentOrderId || ''
           }, true, purchaseEventId);
         }
@@ -3632,7 +3781,7 @@
         stepPix.classList.remove('active');
         stepSuccess.classList.add('active');
         if (btnGoToDownloads) {
-          btnGoToDownloads.href = 'sucesso.html?order_id=' + (currentOrderId || '') + '&plan=' + activePlan;
+          btnGoToDownloads.href = 'sucesso.html?order_id=' + (currentOrderId || '') + '&plan=' + activePlan + (hasOrderBump ? '&order_bump=1' : '');
         }
       }
 
@@ -3734,17 +3883,21 @@
             ? window.generateEventId() 
             : 'eid_ic_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
+          var pricing = calculateTotal();
+
           // Dispara InitiateCheckout no Pixel do navegador com este eventId exato
           var product = PRODUCTS[currentPlan];
           if (typeof window.fbTrackEvent === 'function' && product) {
+            var contentName = product.name + (hasOrderBump ? ' + Caderno de Colorir dos Santos' : '');
+            var contentIds = hasOrderBump ? [product.id, 'caderno-colorir-santos'] : [product.id];
             window.fbTrackEvent('InitiateCheckout', {
-              content_name: product.name,
-              content_ids: [product.id],
+              content_name: contentName,
+              content_ids: contentIds,
               content_type: 'product',
               content_category: product.category,
-              value: product.value,
+              value: pricing.total,
               currency: 'BRL',
-              num_items: 1
+              num_items: hasOrderBump ? 2 : 1
             }, true, checkoutEventId);
           }
 
@@ -3761,6 +3914,7 @@
               phone: phone,
               cpf: cpf,
               plan: currentPlan,
+              order_bump: hasOrderBump,
               event_id: checkoutEventId,
               event_source_url: window.location.href,
               tracking: {
@@ -3779,7 +3933,7 @@
           .then(function(result) {
             if (!result.ok || !result.data || !result.data.qr_code) {
               btnGeneratePix.disabled = false;
-              btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong>' + (currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90') + '</strong></span>';
+              updatePlanUI();
               var errorMsg = (result.data && result.data.error) ? result.data.error : 'Erro ao gerar o código PIX na operadora.';
               if (checkoutFormError) {
                 checkoutFormError.textContent = errorMsg;
@@ -3798,7 +3952,7 @@
 
             // Renderiza QR Code e dados na tela
             btnGeneratePix.disabled = false;
-            btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong>' + (currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90') + '</strong></span>';
+            updatePlanUI();
             
             stepForm.style.display = 'none';
             stepPix.classList.add('active');
@@ -3807,7 +3961,8 @@
             }
 
             if (pixDisplayVal) {
-              pixDisplayVal.textContent = currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90';
+              var displayFormatted = (pixData.amount_cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+              pixDisplayVal.textContent = displayFormatted;
             }
             if (pixTransIdDisplay) {
               pixTransIdDisplay.textContent = escapeHtml(pixData.transaction_id);

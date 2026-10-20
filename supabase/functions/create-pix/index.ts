@@ -13,6 +13,7 @@ async function sendPixPendingEmail(order: {
   customer_name: string;
   customer_email: string;
   plan: string;
+  order_bump?: boolean;
   amount_cents: number;
   pix_code: string;
 }) {
@@ -24,7 +25,8 @@ async function sendPixPendingEmail(order: {
 
   const firstName = order.customer_name ? order.customer_name.split(' ')[0] : 'Irmão(ã) em Cristo';
   const isCompleto = order.plan === 'completo';
-  const packageName = isCompleto ? 'Agenda Católica 2027 Completa + 5 Bônus' : 'Agenda Católica 2027 Básica';
+  const baseName = isCompleto ? 'Agenda Católica 2027 Completa + 5 Bônus' : 'Agenda Católica 2027 Básica';
+  const packageName = order.order_bump ? `${baseName} + Caderno de Colorir dos Santos` : baseName;
   const valorFormatado = (order.amount_cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
   const html = `<!DOCTYPE html>
@@ -150,7 +152,7 @@ serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     const body = await req.json();
-    const { name, email, phone, cpf, plan, tracking, event_id, event_source_url } = body;
+    const { name, email, phone, cpf, plan, order_bump, tracking, event_id, event_source_url } = body;
 
     const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 
                      req.headers.get('cf-connecting-ip') || 
@@ -165,7 +167,9 @@ serve(async (req) => {
     }
 
     const selectedPlan = plan === 'basico' ? 'basico' : 'completo';
-    const amountCents = selectedPlan === 'basico' ? 1990 : 2790;
+    const hasOrderBump = order_bump === true || order_bump === 'true' || order_bump === 1 || order_bump === '1';
+    const baseCents = selectedPlan === 'basico' ? 1990 : 2790;
+    const amountCents = hasOrderBump ? (baseCents + 790) : baseCents;
     const finalEventId = event_id || `eid_ic_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
     // 1. Cria o registro inicial do pedido no Supabase
@@ -177,6 +181,7 @@ serve(async (req) => {
         customer_phone: phone,
         customer_cpf: cpf || null,
         plan: selectedPlan,
+        order_bump: hasOrderBump,
         amount_cents: amountCents,
         status: 'pending',
         utm_source: tracking?.utm_source || null,
@@ -256,6 +261,7 @@ serve(async (req) => {
         customer_name: name,
         customer_email: email,
         plan: selectedPlan,
+        order_bump: hasOrderBump,
         amount_cents: amountCents,
         pix_code: pushinData.qr_code,
       }).catch(e => console.error('Falha assíncrona ao enviar PIX por email:', e));
@@ -283,10 +289,12 @@ serve(async (req) => {
         customData: {
           currency: 'BRL',
           value: amountCents / 100,
-          content_name: selectedPlan === 'completo' ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica',
-          content_ids: [selectedPlan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'],
+          content_name: (selectedPlan === 'completo' ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica') + (hasOrderBump ? ' + Caderno de Colorir dos Santos' : ''),
+          content_ids: hasOrderBump 
+            ? [selectedPlan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica', 'caderno-colorir-santos']
+            : [selectedPlan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'],
           content_type: 'product',
-          num_items: 1,
+          num_items: hasOrderBump ? 2 : 1,
           order_id: order.id,
         }
       }).catch(metaErr => console.error('Erro assíncrono ao enviar CAPI InitiateCheckout:', metaErr));

@@ -99,7 +99,16 @@ serve(async (req) => {
             // com event_id único correspondente ao ID do pedido para deduplicação sem contagem dupla
             try {
               const purchaseEventId = `purchase_${order.id}`;
-              const amount = order.amount_cents ? (order.amount_cents / 100) : (order.plan === 'basico' ? 19.90 : 27.90);
+              const hasOrderBump = !!order.order_bump;
+              const baseAmount = order.plan === 'basico' ? 19.90 : 27.90;
+              const amount = order.amount_cents ? (order.amount_cents / 100) : (baseAmount + (hasOrderBump ? 7.90 : 0));
+
+              const contentIds = [order.plan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'];
+              let contentName = order.plan === 'completo' ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
+              if (hasOrderBump) {
+                contentIds.push('caderno-colorir-santos');
+                contentName += ' + 50 Histórias dos Santos para Colorir';
+              }
 
               sendMetaEvent({
                 eventName: 'Purchase',
@@ -116,10 +125,10 @@ serve(async (req) => {
                 customData: {
                   currency: 'BRL',
                   value: amount,
-                  content_name: order.plan === 'completo' ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica',
-                  content_ids: [order.plan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'],
+                  content_name: contentName,
+                  content_ids: contentIds,
                   content_type: 'product',
-                  num_items: 1,
+                  num_items: hasOrderBump ? 2 : 1,
                   order_id: order.id,
                 }
               }).catch(metaErr => console.error('Erro assíncrono ao enviar CAPI Purchase (CheckPix):', metaErr));

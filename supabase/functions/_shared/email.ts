@@ -5,6 +5,7 @@ export async function sendDeliveryEmail(order: {
   customer_name: string;
   customer_email: string;
   plan: string;
+  order_bump?: boolean;
 }) {
   const apiKey = Deno.env.get('RESEND_API_KEY') || '';
   if (!apiKey) {
@@ -13,8 +14,14 @@ export async function sendDeliveryEmail(order: {
   }
 
   const isCompleto = order.plan === 'completo';
+  const hasOrderBump = !!order.order_bump;
   const firstName = order.customer_name ? order.customer_name.split(' ')[0] : 'Irmão(ã) em Cristo';
-  const packageName = isCompleto ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
+  
+  let packageName = isCompleto ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
+  if (hasOrderBump) {
+    packageName += ' + 50 Histórias dos Santos para Colorir';
+  }
+
   const driveLink = isCompleto
     ? 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing'
     : 'https://drive.google.com/drive/folders/1vstC1uvFR11TZIg5zXpILGT-khchTjJp?usp=sharing';
@@ -53,6 +60,13 @@ export async function sendDeliveryEmail(order: {
                 <a href="${driveLink}" target="_blank" style="color: #1d4d90; font-size: 13px; text-decoration: underline;">${driveLink}</a>
               </div>
 
+              ${hasOrderBump ? `
+              <div style="background-color: #fefce8; border: 1px solid #fef08a; border-left: 4px solid #ca8a04; border-radius: 6px; padding: 14px; margin: 20px 0;">
+                <p style="margin: 0 0 4px; color: #854d0e; font-size: 14px; font-weight: 700;">🎨 Bônus Incluso: 50 Histórias dos Santos para Crianças Colorir</p>
+                <p style="margin: 0; font-size: 13px; color: #713f12; line-height: 1.5;">O seu caderno infantil com mais de 50 páginas de desenhos e histórias para colorir já está liberado dentro da sua pasta no Google Drive!</p>
+              </div>
+              ` : ''}
+
               <p style="font-size: 13px; color: #475569; line-height: 1.6; margin: 16px 0;">
                 <strong>Instruções de uso:</strong> Os arquivos estão organizados em alta definição para impressão (formatos A4 e A5) e também prontos para leitura no celular, tablet ou computador. Você pode salvar a pasta no seu próprio Google Drive para ter acesso permanente.
               </p>
@@ -81,6 +95,7 @@ Confirmamos o seu pagamento da ${packageName}. Seus arquivos digitais já estão
 
 Link direto de acesso:
 ${driveLink}
+${hasOrderBump ? '\n🎨 Bônus Especial: 50 Histórias dos Santos para Colorir incluso na sua pasta do Google Drive!\n' : ''}
 
 Instruções de uso:
 Os arquivos estão organizados em alta definição para impressão (formatos A4 e A5) e também prontos para leitura no celular, tablet ou computador. Você pode salvar a pasta no seu próprio Google Drive para ter acesso permanente.
@@ -124,6 +139,7 @@ export async function sendPixPendingEmail(order: {
   plan: string;
   amount_cents: number;
   pix_code: string;
+  order_bump?: boolean;
 }) {
   const apiKey = Deno.env.get('RESEND_API_KEY') || '';
   if (!apiKey) {
@@ -133,7 +149,11 @@ export async function sendPixPendingEmail(order: {
 
   const firstName = order.customer_name ? order.customer_name.split(' ')[0] : 'Irmão(ã) em Cristo';
   const isCompleto = order.plan === 'completo';
-  const packageName = isCompleto ? 'Agenda Católica 2027 Completa + 5 Bônus' : 'Agenda Católica 2027 Básica';
+  const hasOrderBump = !!order.order_bump;
+  let packageName = isCompleto ? 'Agenda Católica 2027 Completa + 5 Bônus' : 'Agenda Católica 2027 Básica';
+  if (hasOrderBump) {
+    packageName += ' + 50 Histórias dos Santos para Colorir';
+  }
   const valorFormatado = (order.amount_cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
   const html = `<!DOCTYPE html>
