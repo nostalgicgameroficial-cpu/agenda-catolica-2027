@@ -14,15 +14,21 @@ export async function sendDeliveryEmail(order: {
   }
 
   const isCompleto = order.plan === 'completo';
+  const isUpsell = order.plan === 'upsell';
+  const isDownsell = order.plan === 'downsell';
   const hasOrderBump = !!order.order_bump;
   const firstName = order.customer_name ? order.customer_name.split(' ')[0] : 'Irmão(ã) em Cristo';
   
   let packageName = isCompleto ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
-  if (hasOrderBump) {
+  if (isUpsell) {
+    packageName = 'Mega Coleção de 150 Quadros Sacros em Alta Definição';
+  } else if (isDownsell) {
+    packageName = 'Seleção Especial de 50 Quadros Sacros em Alta Definição';
+  } else if (hasOrderBump) {
     packageName += ' + 50 Histórias dos Santos para Colorir';
   }
 
-  const driveLink = isCompleto
+  const driveLink = (isCompleto || isUpsell || isDownsell)
     ? 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing'
     : 'https://drive.google.com/drive/folders/1vstC1uvFR11TZIg5zXpILGT-khchTjJp?usp=sharing';
 

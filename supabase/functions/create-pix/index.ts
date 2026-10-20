@@ -24,8 +24,14 @@ async function sendPixPendingEmail(order: {
   }
 
   const firstName = order.customer_name ? order.customer_name.split(' ')[0] : 'Irmão(ã) em Cristo';
-  const isCompleto = order.plan === 'completo';
-  const baseName = isCompleto ? 'Agenda Católica 2027 Completa + 5 Bônus' : 'Agenda Católica 2027 Básica';
+  let baseName = 'Agenda Católica 2027 Completa + 5 Bônus';
+  if (order.plan === 'basico') {
+    baseName = 'Agenda Católica 2027 Básica';
+  } else if (order.plan === 'upsell') {
+    baseName = 'Mega Coleção 150 Quadros Sacros em Alta Definição';
+  } else if (order.plan === 'downsell') {
+    baseName = 'Seleção 50 Quadros Sacros em Alta Definição';
+  }
   const packageName = order.order_bump ? `${baseName} + Caderno de Colorir dos Santos` : baseName;
   const valorFormatado = (order.amount_cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
@@ -166,10 +172,35 @@ serve(async (req) => {
       );
     }
 
-    const selectedPlan = plan === 'basico' ? 'basico' : 'completo';
-    const hasOrderBump = order_bump === true || order_bump === 'true' || order_bump === 1 || order_bump === '1';
-    const baseCents = selectedPlan === 'basico' ? 1990 : 2790;
+    let selectedPlan = 'completo';
+    let baseCents = 2790;
+    let contentName = 'Agenda Católica 2027 + 5 Bônus Exclusivos';
+    let contentIds = ['agenda-catolica-2027-completa'];
+
+    if (plan === 'basico') {
+      selectedPlan = 'basico';
+      baseCents = 1990;
+      contentName = 'Agenda Católica 2027 Básica';
+      contentIds = ['agenda-catolica-2027-basica'];
+    } else if (plan === 'upsell') {
+      selectedPlan = 'upsell';
+      baseCents = 6790;
+      contentName = 'Mega Coleção 150 Quadros Sacros em Alta Definição';
+      contentIds = ['quadros-sacros-150'];
+    } else if (plan === 'downsell') {
+      selectedPlan = 'downsell';
+      baseCents = 2990;
+      contentName = 'Seleção 50 Quadros Sacros em Alta Definição';
+      contentIds = ['quadros-sacros-50'];
+    }
+
+    const hasOrderBump = (selectedPlan === 'basico' || selectedPlan === 'completo') && 
+      (order_bump === true || order_bump === 'true' || order_bump === 1 || order_bump === '1');
     const amountCents = hasOrderBump ? (baseCents + 790) : baseCents;
+    if (hasOrderBump) {
+      contentName += ' + Caderno de Colorir dos Santos';
+      contentIds.push('caderno-colorir-santos');
+    }
     const finalEventId = event_id || `eid_ic_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
     // 1. Cria o registro inicial do pedido no Supabase
@@ -289,10 +320,8 @@ serve(async (req) => {
         customData: {
           currency: 'BRL',
           value: amountCents / 100,
-          content_name: (selectedPlan === 'completo' ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica') + (hasOrderBump ? ' + Caderno de Colorir dos Santos' : ''),
-          content_ids: hasOrderBump 
-            ? [selectedPlan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica', 'caderno-colorir-santos']
-            : [selectedPlan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'],
+          content_name: contentName,
+          content_ids: contentIds,
           content_type: 'product',
           num_items: hasOrderBump ? 2 : 1,
           order_id: order.id,

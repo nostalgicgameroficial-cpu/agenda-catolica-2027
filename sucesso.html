@@ -412,6 +412,52 @@
             ⬇ BAIXAR
           </a>
         </div>
+      <!-- SEÇÃO DO UPSELL: 150 QUADROS SACROS -->
+      <div id="upsell-download-section" style="display: none; margin-top: 20px; padding-top: 18px; border-top: 2px dashed #16a34a;">
+        <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: 12px; padding: 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.4rem;">🖼️</span>
+          <div>
+            <strong style="color: #166534; font-size: 0.95rem; display: block;">Sua Mega Coleção com 150 Quadros Sacros está liberada!</strong>
+            <span style="color: #15803d; font-size: 0.82rem;">Arquivos em 300 DPI prontos para moldura nos formatos A3, A4, A5 e 10x15cm.</span>
+          </div>
+        </div>
+
+        <div class="file-item">
+          <div class="file-info">
+            <div class="file-icon gold">🖼️</div>
+            <div class="file-text">
+              <h4>Mega Coleção: 150 Quadros Sacros em Altíssima Definição</h4>
+              <span>Pasta no Google Drive com todas as 150 artes organizadas por categorias</span>
+            </div>
+          </div>
+          <a class="btn-download" href="https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing" target="_blank">
+            ⬇ ACESSAR QUADROS
+          </a>
+        </div>
+      </div>
+
+      <!-- SEÇÃO DO DOWNSELL: 50 QUADROS SACROS -->
+      <div id="downsell-download-section" style="display: none; margin-top: 20px; padding-top: 18px; border-top: 2px dashed #f97316;">
+        <div style="background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: 12px; padding: 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.4rem;">🖼️</span>
+          <div>
+            <strong style="color: #9a3412; font-size: 0.95rem; display: block;">Sua Seleção de 50 Quadros Sacros está liberada!</strong>
+            <span style="color: #c2410c; font-size: 0.82rem;">As 50 artes sacras mais queridas em 300 DPI prontas para impressão.</span>
+          </div>
+        </div>
+
+        <div class="file-item">
+          <div class="file-info">
+            <div class="file-icon gold">🖼️</div>
+            <div class="file-text">
+              <h4>Seleção Especial: 50 Quadros Sacros em Alta Definição</h4>
+              <span>Pasta no Google Drive com as 50 artes prontas para imprimir</span>
+            </div>
+          </div>
+          <a class="btn-download" href="https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing" target="_blank">
+            ⬇ ACESSAR QUADROS
+          </a>
+        </div>
       </div>
 
     </div>
@@ -436,6 +482,8 @@
     // Recupera parâmetros da URL
     var params = new URLSearchParams(window.location.search);
     var plan = params.get('plan') || 'completo';
+    var hasUpsell = params.get('upsell') === '1' || params.get('upsell') === 'true';
+    var hasDownsell = params.get('downsell') === '1' || params.get('downsell') === 'true';
 
     var DRIVE_LINKS = {
       basico: 'https://drive.google.com/drive/folders/1vstC1uvFR11TZIg5zXpILGT-khchTjJp?usp=sharing',
@@ -452,7 +500,7 @@
       linkDrive.textContent = targetDriveLink;
     }
 
-    if (plan === 'basico') {
+    if (plan === 'basico' && !hasUpsell && !hasDownsell) {
       var bonusSection = document.getElementById('bonus-section');
       if (bonusSection) bonusSection.style.display = 'none';
       var pageTitle = document.getElementById('page-title');
@@ -465,17 +513,34 @@
       if (bumpSection) bumpSection.style.display = 'block';
     }
 
+    if (hasUpsell) {
+      var upSection = document.getElementById('upsell-download-section');
+      if (upSection) upSection.style.display = 'block';
+    }
+
+    if (hasDownsell) {
+      var downSection = document.getElementById('downsell-download-section');
+      if (downSection) downSection.style.display = 'block';
+    }
+
     // Dispara Purchase via Pixel com deduplicação segura (eventID: purchase_orderId)
     // Se o evento já foi processado no modal ou pelo CAPI, a Meta deduplica perfeitamente
     var orderId = params.get('order_id');
     var purchaseEventId = orderId ? ('purchase_' + orderId) : ('eid_pur_' + Date.now());
     var baseValue = plan === 'basico' ? 19.90 : 27.90;
     var amountValue = hasOrderBumpParam ? (baseValue + 7.90) : baseValue;
+    if (hasUpsell) amountValue += 67.90;
+    if (hasDownsell) amountValue += 29.90;
+
     var basePackageName = plan === 'basico' ? 'Agenda Católica 2027 Básica' : 'Agenda Católica 2027 + 5 Bônus Exclusivos';
     var packageName = hasOrderBumpParam ? (basePackageName + ' + Caderno de Colorir dos Santos') : basePackageName;
-    var contentIds = hasOrderBumpParam 
-      ? [plan === 'basico' ? 'agenda-catolica-2027-basica' : 'agenda-catolica-2027-completa', 'caderno-colorir-santos']
-      : [plan === 'basico' ? 'agenda-catolica-2027-basica' : 'agenda-catolica-2027-completa'];
+    if (hasUpsell) packageName += ' + 150 Quadros Sacros';
+    if (hasDownsell) packageName += ' + 50 Quadros Sacros';
+
+    var contentIds = [plan === 'basico' ? 'agenda-catolica-2027-basica' : 'agenda-catolica-2027-completa'];
+    if (hasOrderBumpParam) contentIds.push('caderno-colorir-santos');
+    if (hasUpsell) contentIds.push('quadros-sacros-150');
+    if (hasDownsell) contentIds.push('quadros-sacros-50');
 
     if (typeof fbq === 'function') {
       fbq('track', 'Purchase', {
@@ -485,7 +550,7 @@
         content_category: 'Produtos Digitais > Agenda Católica',
         value: amountValue,
         currency: 'BRL',
-        num_items: hasOrderBumpParam ? 2 : 1,
+        num_items: contentIds.length,
         order_id: orderId || ''
       }, { eventID: purchaseEventId });
     }

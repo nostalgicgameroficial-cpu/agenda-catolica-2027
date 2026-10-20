@@ -100,12 +100,21 @@ serve(async (req) => {
             try {
               const purchaseEventId = `purchase_${order.id}`;
               const hasOrderBump = !!order.order_bump;
-              const baseAmount = order.plan === 'basico' ? 19.90 : 27.90;
+              const isUpsell = order.plan === 'upsell';
+              const isDownsell = order.plan === 'downsell';
+              const baseAmount = order.plan === 'basico' ? 19.90 : (isUpsell ? 67.90 : (isDownsell ? 29.90 : 27.90));
               const amount = order.amount_cents ? (order.amount_cents / 100) : (baseAmount + (hasOrderBump ? 7.90 : 0));
 
-              const contentIds = [order.plan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'];
+              let contentIds = [order.plan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'];
               let contentName = order.plan === 'completo' ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
-              if (hasOrderBump) {
+
+              if (isUpsell) {
+                contentIds = ['quadros-sacros-150'];
+                contentName = 'Mega Coleção 150 Quadros Sacros em Alta Definição';
+              } else if (isDownsell) {
+                contentIds = ['quadros-sacros-50'];
+                contentName = 'Seleção 50 Quadros Sacros em Alta Definição';
+              } else if (hasOrderBump) {
                 contentIds.push('caderno-colorir-santos');
                 contentName += ' + 50 Histórias dos Santos para Colorir';
               }

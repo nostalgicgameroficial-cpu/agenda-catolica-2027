@@ -3457,18 +3457,22 @@
           </p>
         </div>
 
-        <!-- ETAPA 3: SUCESSO E DOWNLOADS -->
+        <!-- ETAPA 3: SUCESSO E TRANSIÇÃO PARA UPSELL -->
         <div class="success-screen" id="checkout-step-success">
           <div class="success-check-icon">✓</div>
           <h3 style="font-size: 1.35rem; color: #15803d; font-weight: 900; margin-bottom: 6px;">
             PAGAMENTO CONFIRMADO! 🙏
           </h3>
-          <p style="font-size: 0.92rem; color: var(--ink-secondary); margin-bottom: 18px;">
-            Sua <strong>Agenda Católica 2027</strong> está liberada! Enviamos todos os detalhes para o seu e-mail e você já pode acessar tudo agora mesmo:
+          <p style="font-size: 0.92rem; color: var(--ink-secondary); margin-bottom: 12px;">
+            Seu pedido foi aprovado e a confirmação com o acesso já foi enviada para o seu e-mail!
           </p>
+          <div style="background: #fefce8; border: 1.5px solid #fde047; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 0.88rem; color: #854d0e;">
+            🎁 <strong>Espere! Preparamos uma bênção especial para o seu lar...</strong><br>
+            Redirecionando em instantes...
+          </div>
 
-          <a href="#" class="checkout-submit-btn" id="btn-go-to-downloads" target="_blank" style="text-decoration:none;">
-            📥 BAIXAR MEUS ARQUIVOS AGORA
+          <a href="#" class="checkout-submit-btn" id="btn-go-to-downloads" style="text-decoration:none;">
+            👉 CONTINUAR PARA MEU ACESSO
           </a>
         </div>
 
@@ -3777,12 +3781,38 @@
           }, true, purchaseEventId);
         }
 
-        // 2. Transiciona para tela de sucesso com links de download
+        // 2. Transiciona para tela de sucesso e redireciona para o upsell
         stepPix.classList.remove('active');
         stepSuccess.classList.add('active');
+
+        var custName = inputName ? inputName.value.trim() : '';
+        var custEmail = inputEmail ? inputEmail.value.trim() : '';
+        var custPhone = inputPhone ? inputPhone.value.trim() : '';
+        var custCpf = inputCpf ? inputCpf.value.trim() : '';
+        var trackingData = window.fbTrackingData || {};
+        var utmParams = trackingData.utmParams || {};
+
+        var upsellUrl = 'upsell.html?order_id=' + (currentOrderId || '') +
+          '&plan=' + activePlan +
+          (hasOrderBump ? '&order_bump=1' : '') +
+          '&name=' + encodeURIComponent(custName) +
+          '&email=' + encodeURIComponent(custEmail) +
+          '&phone=' + encodeURIComponent(custPhone) +
+          '&cpf=' + encodeURIComponent(custCpf);
+
+        Object.keys(utmParams).forEach(function(k) {
+          if (utmParams[k]) upsellUrl += '&' + encodeURIComponent(k) + '=' + encodeURIComponent(utmParams[k]);
+        });
+        if (trackingData.fbclid) upsellUrl += '&fbclid=' + encodeURIComponent(trackingData.fbclid);
+
         if (btnGoToDownloads) {
-          btnGoToDownloads.href = 'sucesso.html?order_id=' + (currentOrderId || '') + '&plan=' + activePlan + (hasOrderBump ? '&order_bump=1' : '');
+          btnGoToDownloads.href = upsellUrl;
+          btnGoToDownloads.removeAttribute('target');
         }
+
+        setTimeout(function() {
+          window.location.href = upsellUrl;
+        }, 2200);
       }
 
       // ─── CONSULTAR STATUS DO PIX VIA EDGE FUNCTION SEGURA ───
