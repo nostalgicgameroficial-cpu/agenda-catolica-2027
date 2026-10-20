@@ -1699,12 +1699,19 @@
     }
 
     /* ===================================================
-       CARROSSEL DE DEPOIMENTOS DO WHATSAPP (APENAS IMAGENS)
+       SEÇÃO DE DEPOIMENTOS DO WHATSAPP (APÓS BÔNUS E ANTES DE PREÇOS)
        =================================================== */
-    .hero-testimonials {
+    .section-whatsapp-proof {
+      padding: 60px 0 65px;
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+      position: relative;
+    }
+
+    .testimonials-carousel-container {
       width: 100%;
-      max-width: 680px;
-      margin: 26px auto 10px;
+      max-width: 720px;
+      margin: 16px auto 0;
       text-align: center;
       position: relative;
     }
@@ -1723,7 +1730,7 @@
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
-      padding: 10px 4px 18px;
+      padding: 12px 6px 20px;
       scrollbar-width: none;
     }
 
@@ -1745,19 +1752,19 @@
 
     .slide-card {
       background: #0b141a;
-      border: 2px solid rgba(247, 214, 121, 0.4);
+      border: 2px solid rgba(201, 152, 52, 0.45);
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.7), 0 0 22px rgba(38, 100, 190, 0.25);
+      box-shadow: 0 14px 34px rgba(12, 24, 48, 0.16), 0 0 18px rgba(201, 152, 52, 0.12);
       transition: all 0.25s ease;
       display: block;
       line-height: 0;
     }
 
     .slide-card:hover {
-      border-color: var(--gold-400);
+      border-color: var(--gold-500);
       transform: translateY(-4px);
-      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.85), 0 0 30px rgba(201, 152, 52, 0.35);
+      box-shadow: 0 18px 42px rgba(12, 24, 48, 0.25), 0 0 26px rgba(201, 152, 52, 0.28);
     }
 
     .slide-card img {
@@ -1769,37 +1776,37 @@
 
     .carousel-btn {
       position: absolute;
-      top: 45%;
+      top: 50%;
       transform: translateY(-50%);
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: rgba(12, 24, 48, 0.92);
+      background: #ffffff;
       border: 2px solid var(--gold-500);
-      color: var(--gold-300);
-      font-size: 1.2rem;
+      color: var(--navy-900);
+      font-size: 1.25rem;
       font-weight: 900;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 5;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 4px 16px rgba(12, 24, 48, 0.18);
       transition: all 0.2s ease;
     }
 
     .carousel-btn:hover {
       background: var(--gold-gradient);
       color: #0c1830;
-      transform: translateY(-50%) scale(1.1);
+      transform: translateY(-50%) scale(1.08);
     }
 
     .carousel-btn.prev {
-      left: -14px;
+      left: -16px;
     }
 
     .carousel-btn.next {
-      right: -14px;
+      right: -16px;
     }
 
     @media (max-width: 540px) {
@@ -1812,14 +1819,14 @@
       display: flex;
       justify-content: center;
       gap: 8px;
-      margin-top: 6px;
+      margin-top: 10px;
     }
 
     .carousel-dots .dot {
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(12, 24, 48, 0.22);
       cursor: pointer;
       transition: all 0.25s ease;
     }
@@ -1844,7 +1851,7 @@
       <div class="hero-content">
         
         <!-- 1. HEADLINE PRINCIPAL -->
-        <h1>COMECE 2027 COM A <em>PALAVRA DE DEUS</em> NO CENTRO DA SUA VIDA.</h1>
+        <h1>E SE TODOS OS 365 DIAS DE 2027 COMEÇASSEM COM O <em>EVANGELHO</em> E COM <em>NOSSA SENHORA</em> ABENÇOANDO A SUA ROTINA? ✨</h1>
 
         <!-- 2. IMAGEM DA HERO ENTRE A HEADLINE E A SUBHEADLINE (MOBILE-FIRST) -->
         <div class="hero-mid-image">
@@ -1874,52 +1881,6 @@
             <span>👉 QUERO MINHA AGENDA CATÓLICA 2027</span>
           </a>
           <span class="btn-subtext">⚡ Acesso imediato no e-mail e WhatsApp · A partir de apenas R$ 19,90</span>
-        </div>
-
-        <!-- 6. CARROSSEL DE DEPOIMENTOS DO WHATSAPP (APENAS IMAGENS) -->
-        <div class="hero-testimonials" id="depoimentos-whatsapp">
-          <div class="carousel-wrapper">
-            <button class="carousel-btn prev" aria-label="Depoimento Anterior" id="carousel-prev">❮</button>
-            <div class="carousel-track" id="carousel-track">
-              
-              <!-- DEPOIMENTO 1 -->
-              <div class="carousel-slide">
-                <div class="slide-card">
-                  <img src="assets/depoimento_whatsapp_1.png" alt="Depoimento WhatsApp Mariana Ferreira" width="414" height="820" loading="lazy">
-                </div>
-              </div>
-
-              <!-- DEPOIMENTO 2 -->
-              <div class="carousel-slide">
-                <div class="slide-card">
-                  <img src="assets/depoimento_whatsapp_2.png" alt="Depoimento WhatsApp Gabriel" width="414" height="820" loading="lazy">
-                </div>
-              </div>
-
-              <!-- DEPOIMENTO 3 -->
-              <div class="carousel-slide">
-                <div class="slide-card">
-                  <img src="assets/depoimento_whatsapp_3.png" alt="Depoimento WhatsApp Dona Teresa" width="414" height="820" loading="lazy">
-                </div>
-              </div>
-
-              <!-- DEPOIMENTO 4 -->
-              <div class="carousel-slide">
-                <div class="slide-card">
-                  <img src="assets/depoimento_whatsapp_4.png" alt="Depoimento WhatsApp Fernanda" width="414" height="820" loading="lazy">
-                </div>
-              </div>
-
-            </div>
-            <button class="carousel-btn next" aria-label="Próximo Depoimento" id="carousel-next">❯</button>
-          </div>
-
-          <div class="carousel-dots" id="carousel-dots">
-            <span class="dot active" data-index="0" aria-label="Ir para depoimento 1"></span>
-            <span class="dot" data-index="1" aria-label="Ir para depoimento 2"></span>
-            <span class="dot" data-index="2" aria-label="Ir para depoimento 3"></span>
-            <span class="dot" data-index="3" aria-label="Ir para depoimento 4"></span>
-          </div>
         </div>
 
       </div>
@@ -2281,6 +2242,64 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO DE DEPOIMENTOS DO WHATSAPP (APÓS OS BÔNUS E ANTES DOS PREÇOS) -->
+  <section class="section-whatsapp-proof" id="depoimentos-whatsapp">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">DEPOIMENTOS REAIS NO WHATSAPP</span>
+        <h2>QUEM JÁ RECEBEU ESTÁ ENCANTADA</h2>
+        <p class="section-subtitle">
+          Veja mensagens e prints reais enviados por fiéis de todo o Brasil que já garantiram suas edições:
+        </p>
+      </div>
+
+      <div class="testimonials-carousel-container">
+        <div class="carousel-wrapper">
+          <button class="carousel-btn prev" aria-label="Depoimento Anterior" id="carousel-prev">❮</button>
+          <div class="carousel-track" id="carousel-track">
+            
+            <!-- DEPOIMENTO 1 -->
+            <div class="carousel-slide">
+              <div class="slide-card">
+                <img src="assets/depoimento_whatsapp_1.png" alt="Depoimento WhatsApp Mariana Ferreira" width="414" height="820" loading="lazy">
+              </div>
+            </div>
+
+            <!-- DEPOIMENTO 2 -->
+            <div class="carousel-slide">
+              <div class="slide-card">
+                <img src="assets/depoimento_whatsapp_2.png" alt="Depoimento WhatsApp Gabriel" width="414" height="820" loading="lazy">
+              </div>
+            </div>
+
+            <!-- DEPOIMENTO 3 -->
+            <div class="carousel-slide">
+              <div class="slide-card">
+                <img src="assets/depoimento_whatsapp_3.png" alt="Depoimento WhatsApp Dona Teresa" width="414" height="820" loading="lazy">
+              </div>
+            </div>
+
+            <!-- DEPOIMENTO 4 -->
+            <div class="carousel-slide">
+              <div class="slide-card">
+                <img src="assets/depoimento_whatsapp_4.png" alt="Depoimento WhatsApp Fernanda" width="414" height="820" loading="lazy">
+              </div>
+            </div>
+
+          </div>
+          <button class="carousel-btn next" aria-label="Próximo Depoimento" id="carousel-next">❯</button>
+        </div>
+
+        <div class="carousel-dots" id="carousel-dots">
+          <span class="dot active" data-index="0" aria-label="Ir para depoimento 1"></span>
+          <span class="dot" data-index="1" aria-label="Ir para depoimento 2"></span>
+          <span class="dot" data-index="2" aria-label="Ir para depoimento 3"></span>
+          <span class="dot" data-index="3" aria-label="Ir para depoimento 4"></span>
+        </div>
       </div>
     </div>
   </section>
