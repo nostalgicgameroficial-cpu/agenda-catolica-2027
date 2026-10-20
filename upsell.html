@@ -813,6 +813,11 @@
       var SUPABASE_URL = 'https://cittmkbqdzxaexprujyy.supabase.co';
       var SUPABASE_ANON_KEY = 'sb_publishable_K8pfshJSKXwLwpWScjer-g_uRx4kCnn';
 
+      function getCookie(name) {
+        var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
+        return match ? decodeURIComponent(match[3]) : null;
+      }
+
       // Parâmetros da URL ou LocalStorage da compra anterior
       var params = new URLSearchParams(window.location.search);
       var custName = params.get('name') || '';
@@ -973,7 +978,10 @@
                 utm_campaign: params.get('utm_campaign'),
                 utm_content: params.get('utm_content'),
                 utm_term: params.get('utm_term'),
-                fbclid: params.get('fbclid')
+                fbclid: params.get('fbclid'),
+                fbc: params.get('fbc') || getCookie('_fbc') || (params.get('fbclid') ? ('fb.1.' + Date.now() + '.' + params.get('fbclid')) : null),
+                fbp: params.get('fbp') || getCookie('_fbp') || null,
+                external_id: prevOrderId || null
               }
             })
           })

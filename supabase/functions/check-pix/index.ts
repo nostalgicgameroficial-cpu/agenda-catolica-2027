@@ -119,6 +119,8 @@ serve(async (req) => {
                 contentName += ' + 50 Histórias dos Santos para Colorir';
               }
 
+              const finalFbc = order.fbc || (order.fbclid ? `fb.1.${new Date(order.created_at || Date.now()).getTime()}.${order.fbclid}` : undefined);
+
               sendMetaEvent({
                 eventName: 'Purchase',
                 eventId: purchaseEventId,
@@ -127,9 +129,9 @@ serve(async (req) => {
                   email: order.customer_email,
                   phone: order.customer_phone,
                   name: order.customer_name,
-                  fbc: order.fbc || undefined,
+                  fbc: finalFbc,
                   fbp: order.fbp || undefined,
-                  externalId: order.fbeid || order.id || undefined,
+                  externalId: order.id || undefined,
                 },
                 customData: {
                   currency: 'BRL',

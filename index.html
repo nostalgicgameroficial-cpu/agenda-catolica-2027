@@ -3816,6 +3816,8 @@
           if (utmParams[k]) upsellUrl += '&' + encodeURIComponent(k) + '=' + encodeURIComponent(utmParams[k]);
         });
         if (trackingData.fbclid) upsellUrl += '&fbclid=' + encodeURIComponent(trackingData.fbclid);
+        if (trackingData.fbc) upsellUrl += '&fbc=' + encodeURIComponent(trackingData.fbc);
+        if (trackingData.fbp) upsellUrl += '&fbp=' + encodeURIComponent(trackingData.fbp);
 
         if (btnGoToDownloads) {
           btnGoToDownloads.href = upsellUrl;

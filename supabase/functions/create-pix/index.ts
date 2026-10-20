@@ -203,6 +203,8 @@ serve(async (req) => {
     }
     const finalEventId = event_id || `eid_ic_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
+    const resolvedFbc = tracking?.fbc || (tracking?.fbclid ? `fb.1.${Date.now()}.${tracking.fbclid}` : null);
+
     // 1. Cria o registro inicial do pedido no Supabase
     const { data: order, error: insertError } = await supabase
       .from('orders')
@@ -221,7 +223,7 @@ serve(async (req) => {
         utm_content: tracking?.utm_content || null,
         utm_term: tracking?.utm_term || null,
         fbclid: tracking?.fbclid || null,
-        fbc: tracking?.fbc || null,
+        fbc: resolvedFbc,
         fbp: tracking?.fbp || null,
       })
       .select()
@@ -313,7 +315,7 @@ serve(async (req) => {
           name: name,
           clientIp: clientIp,
           clientUserAgent: clientUserAgent,
-          fbc: tracking?.fbc || undefined,
+          fbc: resolvedFbc || undefined,
           fbp: tracking?.fbp || undefined,
           externalId: tracking?.external_id || undefined,
         },
