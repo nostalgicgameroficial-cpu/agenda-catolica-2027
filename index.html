@@ -3792,6 +3792,18 @@
         var trackingData = window.fbTrackingData || {};
         var utmParams = trackingData.utmParams || {};
 
+        // Persistência local garantida para a página de upsell
+        try {
+          if (custName) localStorage.setItem('agenda_customer_name', custName);
+          if (custEmail) localStorage.setItem('agenda_customer_email', custEmail);
+          if (custPhone) localStorage.setItem('agenda_customer_phone', custPhone);
+          if (custCpf) localStorage.setItem('agenda_customer_cpf', custCpf);
+          if (currentOrderId) {
+            localStorage.setItem('agenda_last_order_id', currentOrderId);
+            sessionStorage.setItem('agenda_last_order_id', currentOrderId);
+          }
+        } catch(e) {}
+
         var upsellUrl = 'upsell.html?order_id=' + (currentOrderId || '') +
           '&plan=' + activePlan +
           (hasOrderBump ? '&order_bump=1' : '') +
@@ -3810,9 +3822,10 @@
           btnGoToDownloads.removeAttribute('target');
         }
 
+        // Redirecionamento ágil para a oferta de upsell
         setTimeout(function() {
           window.location.href = upsellUrl;
-        }, 2200);
+        }, 1200);
       }
 
       // ─── CONSULTAR STATUS DO PIX VIA EDGE FUNCTION SEGURA ───
@@ -3844,7 +3857,7 @@
           } else {
             if (isManual) {
               if (pixVerifyMsg) {
-                pixVerifyMsg.textContent = '⏳ Seu pagamento ainda não foi identificado pelo Banco Central. Se você concluiu a transferência agora, aguarde 10 a 20 segundos e clique novamente!';
+                pixVerifyMsg.textContent = '⏳ Seu pagamento ainda não foi identificado pelo Banco Central. Se você concluiu a transferência agora, aguarde 5 a 10 segundos e clique novamente!';
                 pixVerifyMsg.style.display = 'block';
               }
               setTimeout(function() {
@@ -3852,7 +3865,7 @@
                   btnManualVerifyPix.disabled = false;
                   btnManualVerifyPix.innerHTML = '<span>🟢 JÁ REALIZEI O PAGAMENTO (LIBERAR AGORA)</span>';
                 }
-              }, 2500);
+              }, 2000);
             }
           }
         })
@@ -3865,14 +3878,26 @@
         });
       }
 
-      // Iniciar Polling de Verificação periódica em segundo plano
+      // Iniciar Polling de Verificação periódica em segundo plano (2.5s para resposta instantânea)
       function startPixPolling() {
         if (pixPollingInterval) clearInterval(pixPollingInterval);
-        // Consulta periódica a cada 10 segundos
         pixPollingInterval = setInterval(function() {
           checkPixStatus(false);
-        }, 10000);
+        }, 2500);
       }
+
+      // Despertar checagem imediata assim que o usuário volta do aplicativo do banco para o navegador
+      function handleTabWakeUp() {
+        if (currentTransactionId && !isPaymentProcessing && checkoutModal && checkoutModal.classList.contains('active')) {
+          checkPixStatus(false);
+        }
+      }
+      document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') {
+          handleTabWakeUp();
+        }
+      });
+      window.addEventListener('focus', handleTabWakeUp);
 
       // Evento de clique no botão manual "Já Realizei o Pagamento"
       if (btnManualVerifyPix) {

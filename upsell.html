@@ -833,6 +833,11 @@
       if (buyerEmailEl) buyerEmailEl.textContent = custEmail || 'Seu e-mail cadastrado';
 
       var prevOrderId = params.get('order_id') || '';
+      if (!prevOrderId) {
+        try {
+          prevOrderId = sessionStorage.getItem('agenda_last_order_id') || localStorage.getItem('agenda_last_order_id') || '';
+        } catch(e) {}
+      }
       var initialPlan = params.get('plan') || 'completo';
       var hasOrderBump = params.get('order_bump') === '1';
 
@@ -1022,50 +1027,59 @@
         });
       }
 
-      // POLLING DE PAGAMENTO
+      // POLLING DE PAGAMENTO (2.5s para resposta imediata)
+      function checkUpsellStatus() {
+        if (!currentOrderId) return;
+        fetch(SUPABASE_URL + '/functions/v1/check-pix', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY
+          },
+          body: JSON.stringify({
+            order_id: currentOrderId,
+            transaction_id: currentTransId
+          })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(res) {
+          if (res && res.status === 'paid') {
+            if (pollInterval) clearInterval(pollInterval);
+            // Dispara Purchase do Upsell no Pixel
+            var purEventId = 'purchase_' + currentOrderId;
+            if (typeof fbq === 'function') {
+              fbq('track', 'Purchase', {
+                content_name: 'Mega Coleção 150 Quadros Sacros em Alta Definição',
+                content_ids: ['quadros-sacros-150'],
+                content_type: 'product',
+                value: 67.90,
+                currency: 'BRL',
+                num_items: 1,
+                order_id: currentOrderId
+              }, { eventID: purEventId });
+            }
+
+            // Redireciona para sucesso com upsell liberado
+            var finalParams = new URLSearchParams(window.location.search);
+            finalParams.set('upsell', '1');
+            finalParams.set('order_id', currentOrderId);
+            window.location.href = 'sucesso.html?' + finalParams.toString();
+          }
+        })
+        .catch(function(e) { console.warn('Erro ao checar status upsell:', e); });
+      }
+
       function startPolling() {
         if (pollInterval) clearInterval(pollInterval);
-        pollInterval = setInterval(function() {
-          if (!currentOrderId) return;
-          fetch(SUPABASE_URL + '/functions/v1/check-pix', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': SUPABASE_ANON_KEY
-            },
-            body: JSON.stringify({
-              order_id: currentOrderId,
-              transaction_id: currentTransId
-            })
-          })
-          .then(function(r) { return r.json(); })
-          .then(function(res) {
-            if (res && res.status === 'paid') {
-              clearInterval(pollInterval);
-              // Dispara Purchase do Upsell no Pixel
-              var purEventId = 'purchase_' + currentOrderId;
-              if (typeof fbq === 'function') {
-                fbq('track', 'Purchase', {
-                  content_name: 'Mega Coleção 150 Quadros Sacros em Alta Definição',
-                  content_ids: ['quadros-sacros-150'],
-                  content_type: 'product',
-                  value: 67.90,
-                  currency: 'BRL',
-                  num_items: 1,
-                  order_id: currentOrderId
-                }, { eventID: purEventId });
-              }
-
-              // Redireciona para sucesso com upsell liberado
-              var finalParams = new URLSearchParams(window.location.search);
-              finalParams.set('upsell', '1');
-              finalParams.set('order_id', currentOrderId);
-              window.location.href = 'sucesso.html?' + finalParams.toString();
-            }
-          })
-          .catch(function(e) { console.warn('Erro ao checar status upsell:', e); });
-        }, 6000);
+        pollInterval = setInterval(checkUpsellStatus, 2500);
       }
+
+      // Wake-up ao retornar ao navegador do app do banco
+      document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible' && upsellPixModal && upsellPixModal.classList.contains('active')) {
+          checkUpsellStatus();
+        }
+      });
 
     })();
   </script>
