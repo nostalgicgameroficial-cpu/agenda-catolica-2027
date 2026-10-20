@@ -28,9 +28,12 @@ export async function sendDeliveryEmail(order: {
     packageName += ' + 50 Histórias dos Santos para Colorir';
   }
 
-  const driveLink = (isCompleto || isUpsell || isDownsell)
-    ? 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing'
-    : 'https://drive.google.com/drive/folders/1vstC1uvFR11TZIg5zXpILGT-khchTjJp?usp=sharing';
+  let driveLink = 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing';
+  if (isUpsell || isDownsell) {
+    driveLink = 'https://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=sharing';
+  } else if (!isCompleto) {
+    driveLink = 'https://drive.google.com/drive/folders/1vstC1uvFR11TZIg5zXpILGT-khchTjJp?usp=sharing';
+  }
 
   const html = `<!DOCTYPE html>
 <html lang="pt-BR">
