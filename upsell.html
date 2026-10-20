@@ -735,9 +735,17 @@
       <h3 style="font-size: 1.25rem; font-weight: 800; color: #0b1528; margin-bottom: 6px;">
         Pague via Pix e Libere Seus 150 Quadros
       </h3>
-      <p style="font-size: 0.88rem; color: #64748b;">
+      <p style="font-size: 0.88rem; color: #64748b; margin-bottom: 12px;">
         Total com desconto especial: <strong style="color: #15803d; font-size: 1.1rem;">R$ 67,90</strong>
       </p>
+
+      <!-- DADOS DO COMPRADOR REUTILIZADOS -->
+      <div id="upsell-buyer-box" style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; text-align: left; font-size: 0.83rem;">
+        <div style="font-weight: 700; color: #0b1528; margin-bottom: 3px;">👤 Titular da Compra:</div>
+        <div style="color: #334155;">Nome: <strong id="upsell-buyer-name" style="color: #0f172a;"></strong></div>
+        <div style="color: #334155;">E-mail: <strong id="upsell-buyer-email" style="color: #0f172a;"></strong></div>
+        <div style="font-size: 0.74rem; color: #16a34a; font-weight: 600; margin-top: 4px;">✓ Usando os mesmos dados da sua compra anterior para liberação automática.</div>
+      </div>
 
       <div id="pix-loading-state" style="padding: 24px 0;">
         <div style="font-size: 1.8rem; animation: pulse 1s infinite;">⏳</div>
@@ -804,12 +812,25 @@
       var SUPABASE_URL = 'https://cittmkbqdzxaexprujyy.supabase.co';
       var SUPABASE_ANON_KEY = 'sb_publishable_K8pfshJSKXwLwpWScjer-g_uRx4kCnn';
 
-      // Parâmetros da URL
+      // Parâmetros da URL ou LocalStorage da compra anterior
       var params = new URLSearchParams(window.location.search);
       var custName = params.get('name') || '';
       var custEmail = params.get('email') || '';
       var custPhone = params.get('phone') || '';
       var custCpf = params.get('cpf') || '';
+
+      try {
+        if (!custName) custName = localStorage.getItem('agenda_customer_name') || '';
+        if (!custEmail) custEmail = localStorage.getItem('agenda_customer_email') || '';
+        if (!custPhone) custPhone = localStorage.getItem('agenda_customer_phone') || '';
+        if (!custCpf) custCpf = localStorage.getItem('agenda_customer_cpf') || '';
+      } catch (e) {}
+
+      var buyerNameEl = document.getElementById('upsell-buyer-name');
+      var buyerEmailEl = document.getElementById('upsell-buyer-email');
+      if (buyerNameEl) buyerNameEl.textContent = custName || 'Cliente Católica';
+      if (buyerEmailEl) buyerEmailEl.textContent = custEmail || 'Seu e-mail cadastrado';
+
       var prevOrderId = params.get('order_id') || '';
       var initialPlan = params.get('plan') || 'completo';
       var hasOrderBump = params.get('order_bump') === '1';
@@ -831,23 +852,49 @@
       var btnExitToSuccess = document.getElementById('btn-exit-to-success');
       if (btnExitToSuccess) btnExitToSuccess.href = successUrl;
 
-      // BACKREDIRECT: se o usuário clicar no botão voltar do navegador, vai para o downsell
-      try {
-        history.pushState(null, null, location.href);
-        window.onpopstate = function() {
-          window.location.href = downsellUrl;
-        };
-      } catch (e) {}
-
-      // EXIT INTENT (Desktop): ao mover mouse para fechar a aba
+      // CONTROLE DE NAVEGAÇÃO SEGURA (NÃO DISPARA SOZINHO!)
+      var pageStartTime = Date.now();
+      var userHasInteracted = false;
+      var exitModalShown = false;
       var exitModal = document.getElementById('exit-intent-modal');
-      var exitTriggered = false;
-      document.addEventListener('mouseleave', function(e) {
-        if (e.clientY <= 15 && !exitTriggered) {
-          exitTriggered = true;
-          if (exitModal) exitModal.classList.add('active');
-        }
-      });
+
+      function markInteracted() {
+        userHasInteracted = true;
+      }
+      window.addEventListener('scroll', markInteracted, { passive: true, once: true });
+      window.addEventListener('click', markInteracted, { passive: true, once: true });
+      window.addEventListener('touchstart', markInteracted, { passive: true, once: true });
+
+      // BACKREDIRECT: Só arma após o usuário ter rolado ou clicado E após 6 segundos
+      setTimeout(function() {
+        try {
+          history.pushState({ page: 'upsell' }, '', location.href);
+          window.onpopstate = function(e) {
+            // Só redireciona se houve interação voluntária do usuário e após tempo mínimo
+            if (userHasInteracted && (Date.now() - pageStartTime > 6000)) {
+              window.location.href = downsellUrl;
+            }
+          };
+        } catch (e) {}
+      }, 5000);
+
+      // EXIT INTENT: EXCLUSIVO para Desktop (telas grandes), APENAS após 20 segundos de leitura e com o cursor saindo pelo topo
+      if (window.innerWidth >= 1024) {
+        document.addEventListener('mouseleave', function(e) {
+          var isPixModalActive = upsellPixModal && upsellPixModal.classList.contains('active');
+          if (
+            e.clientY <= 0 &&
+            !e.relatedTarget &&
+            !exitModalShown &&
+            !isPixModalActive &&
+            userHasInteracted &&
+            (Date.now() - pageStartTime > 20000)
+          ) {
+            exitModalShown = true;
+            if (exitModal) exitModal.classList.add('active');
+          }
+        });
+      }
 
       var btnCloseExitModal = document.getElementById('btn-close-exit-modal');
       if (btnCloseExitModal && exitModal) {

@@ -3785,10 +3785,10 @@
         stepPix.classList.remove('active');
         stepSuccess.classList.add('active');
 
-        var custName = inputName ? inputName.value.trim() : '';
-        var custEmail = inputEmail ? inputEmail.value.trim() : '';
-        var custPhone = inputPhone ? inputPhone.value.trim() : '';
-        var custCpf = inputCpf ? inputCpf.value.trim() : '';
+        var custName = (inputName && inputName.value.trim()) || currentCustomerName || localStorage.getItem('agenda_customer_name') || '';
+        var custEmail = (inputEmail && inputEmail.value.trim()) || currentCustomerEmail || localStorage.getItem('agenda_customer_email') || '';
+        var custPhone = (inputPhone && inputPhone.value.trim()) || localStorage.getItem('agenda_customer_phone') || '';
+        var custCpf = (inputCpf && inputCpf.value.trim()) || localStorage.getItem('agenda_customer_cpf') || '';
         var trackingData = window.fbTrackingData || {};
         var utmParams = trackingData.utmParams || {};
 
@@ -3906,6 +3906,12 @@
 
           currentCustomerName = name;
           currentCustomerEmail = email;
+          try {
+            localStorage.setItem('agenda_customer_name', name);
+            localStorage.setItem('agenda_customer_email', email);
+            localStorage.setItem('agenda_customer_phone', phone);
+            localStorage.setItem('agenda_customer_cpf', cpf);
+          } catch (e) {}
           var tracking = window.fbTrackingData || {};
 
           // Gera event_id único compartilhado entre o Browser Pixel e a Conversions API (CAPI)

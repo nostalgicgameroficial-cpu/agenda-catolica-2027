@@ -443,9 +443,17 @@
       <h3 style="font-size: 1.25rem; font-weight: 800; color: #0b1528; margin-bottom: 6px;">
         Pague via Pix e Libere Seus 50 Quadros
       </h3>
-      <p style="font-size: 0.88rem; color: #64748b;">
+      <p style="font-size: 0.88rem; color: #64748b; margin-bottom: 12px;">
         Valor final da seleção: <strong style="color: #15803d; font-size: 1.1rem;">R$ 29,90</strong>
       </p>
+
+      <!-- DADOS DO COMPRADOR REUTILIZADOS -->
+      <div id="downsell-buyer-box" style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; text-align: left; font-size: 0.83rem;">
+        <div style="font-weight: 700; color: #0b1528; margin-bottom: 3px;">👤 Titular da Compra:</div>
+        <div style="color: #334155;">Nome: <strong id="downsell-buyer-name" style="color: #0f172a;"></strong></div>
+        <div style="color: #334155;">E-mail: <strong id="downsell-buyer-email" style="color: #0f172a;"></strong></div>
+        <div style="font-size: 0.74rem; color: #16a34a; font-weight: 600; margin-top: 4px;">✓ Usando os mesmos dados da sua compra anterior para liberação automática.</div>
+      </div>
 
       <div id="pix-loading-state" style="padding: 24px 0;">
         <div style="font-size: 1.8rem;">⏳</div>
@@ -487,6 +495,19 @@
       var custEmail = params.get('email') || '';
       var custPhone = params.get('phone') || '';
       var custCpf = params.get('cpf') || '';
+
+      try {
+        if (!custName) custName = localStorage.getItem('agenda_customer_name') || '';
+        if (!custEmail) custEmail = localStorage.getItem('agenda_customer_email') || '';
+        if (!custPhone) custPhone = localStorage.getItem('agenda_customer_phone') || '';
+        if (!custCpf) custCpf = localStorage.getItem('agenda_customer_cpf') || '';
+      } catch (e) {}
+
+      var buyerNameEl = document.getElementById('downsell-buyer-name');
+      var buyerEmailEl = document.getElementById('downsell-buyer-email');
+      if (buyerNameEl) buyerNameEl.textContent = custName || 'Cliente Católica';
+      if (buyerEmailEl) buyerEmailEl.textContent = custEmail || 'Seu e-mail cadastrado';
+
       var successUrl = 'sucesso.html' + window.location.search;
 
       var btnDecline = document.getElementById('btn-decline-downsell');
