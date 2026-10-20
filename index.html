@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Agenda Católica 2027 com Liturgia Diária | Edição Nossa Senhora Aparecida (PDF)</title>
   <meta name="description" content="Agenda Católica 2027 em PDF com Liturgia Diária completa, Caminho Quaresmal e 5 Bônus Devocionais exclusivos. Pronta para imprimir ou usar no tablet/celular.">
+  <meta name="facebook-domain-verification" content="3qnjbbunfxbuv0akbaodi4rwws60fa" />
 
   <!-- =============================================
        META PIXEL + RASTREAMENTO AVANÇADO
@@ -208,14 +209,15 @@
       });
     }, 5000);
 
-    // ─── FUNÇÃO GLOBAL PARA DISPARAR EVENTOS ────────────
-    window.fbTrackEvent = function(eventName, data, isStandard) {
+    // ─── FUNÇÃO GLOBAL PARA DISPARAR EVENTOS COM DEDUPLICAÇÃO ───
+    window.fbTrackEvent = function(eventName, data, isStandard, customEventId) {
       if (typeof fbq !== 'function') return null;
-      var eventId = generateEventId();
+      var eventId = customEventId || generateEventId();
       var method = isStandard ? 'track' : 'trackCustom';
       fbq(method, eventName, data || {}, { eventID: eventId });
       return eventId;
     };
+    window.generateEventId = generateEventId;
 
   })();
   </script>
@@ -519,6 +521,7 @@
       font-style: normal;
       background: linear-gradient(135deg, #f7d679 0%, #d8a436 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
@@ -1854,9 +1857,10 @@
       backdrop-filter: blur(6px);
       z-index: 10000;
       justify-content: center;
-      align-items: center;
-      padding: 14px;
+      align-items: flex-start;
+      padding: 18px 12px 60px;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .checkout-modal.active {
@@ -1873,7 +1877,7 @@
       position: relative;
       border: 1px solid var(--line);
       animation: modalFadeIn 0.28s ease-out;
-      margin: auto;
+      margin: 10px auto;
     }
 
     @keyframes modalFadeIn {
@@ -1921,10 +1925,22 @@
       background: rgba(255, 255, 255, 0.3);
     }
 
+    .checkout-banner-wrap {
+      width: 100%;
+      line-height: 0;
+      border-bottom: 1px solid var(--line);
+      background: #fdfaf3;
+      position: relative;
+    }
+
+    .checkout-banner-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     .checkout-body {
-      padding: 20px 22px 24px;
-      max-height: 82vh;
-      overflow-y: auto;
+      padding: 18px 20px 24px;
     }
 
     /* SELETOR DE PLANOS NO CHECKOUT */
@@ -1932,7 +1948,69 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
+    }
+
+    /* DESCRIÇÃO DO QUE A PESSOA VAI RECEBER */
+    .checkout-plan-details {
+      background: #f8fafd;
+      border: 1.5px solid #dce7f5;
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .plan-details-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .plan-details-header.vip {
+      color: #b45309;
+    }
+
+    .plan-details-bullets {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+
+    .plan-details-bullets li {
+      font-size: 0.79rem;
+      color: var(--ink-secondary);
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+    }
+
+    .plan-details-bullets li strong {
+      color: var(--ink-primary);
+      font-weight: 700;
+    }
+
+    .plan-details-bullets .chk {
+      color: #16a34a;
+      font-weight: 900;
+      font-size: 0.82rem;
+      flex-shrink: 0;
+      line-height: 1.2;
+    }
+
+    .plan-details-bullets .chk-gold {
+      color: #d97706;
+      font-weight: 900;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      line-height: 1.2;
     }
 
     .checkout-plan-opt {
@@ -2203,10 +2281,135 @@
       animation: pixPulse 1.4s infinite;
     }
 
-    @keyframes pixPulse {
-      0% { transform: scale(0.9); opacity: 0.6; }
-      50% { transform: scale(1.3); opacity: 1; }
-      100% { transform: scale(0.9); opacity: 0.6; }
+    /* ALERTA DE NÃO FECHAR A PÁGINA */
+    .pix-dont-close-alert {
+      background: #fef3c7;
+      border: 1.5px solid #f59e0b;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 14px 0 16px;
+      text-align: left;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .pix-dont-close-alert .alert-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .pix-dont-close-alert .alert-text {
+      font-size: 0.82rem;
+      color: #78350f;
+      line-height: 1.45;
+    }
+
+    .pix-dont-close-alert .alert-text strong {
+      color: #92400e;
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.86rem;
+    }
+
+    /* INSTRUÇÕES PASSO A PASSO DE COMO PAGAR */
+    .pix-instructions-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px;
+      margin: 14px 0;
+      text-align: left;
+    }
+
+    .pix-instructions-title {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pix-steps-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .pix-steps-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: #334155;
+      line-height: 1.4;
+    }
+
+    .pix-step-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--navy-900);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* BOTÃO JÁ REALIZEI O PAGAMENTO */
+    .btn-verify-pix {
+      width: 100%;
+      background: #16a34a;
+      color: #ffffff;
+      border: none;
+      padding: 14px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn-verify-pix:hover {
+      background: #15803d;
+      transform: translateY(-1px);
+    }
+
+    .btn-verify-pix:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .pix-verify-feedback {
+      font-size: 0.82rem;
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-align: center;
+      display: none;
+    }
+
+    .pix-verify-feedback.info {
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
     }
 
     /* TELA DE SUCESSO DO CHECKOUT */
@@ -2957,6 +3160,11 @@
         <button class="checkout-close-btn" id="close-checkout-btn" aria-label="Fechar">✕</button>
       </div>
 
+      <!-- BANNER DE PAGAMENTO SEGURO E RECEBIMENTO IMEDIATO -->
+      <div class="checkout-banner-wrap">
+        <img src="assets/checkout_banner.png" alt="Pagamento Seguro - Recebimento Imediato via Email e WhatsApp" width="1040" height="380" loading="eager">
+      </div>
+
       <div class="checkout-body">
         
         <!-- ETAPA 1: FORMULÁRIO DE DADOS & SELEÇÃO DE PLANO -->
@@ -2973,6 +3181,44 @@
               <div class="checkout-plan-name">Completa + 5 Bônus</div>
               <div class="checkout-plan-price">R$ 27,90</div>
             </div>
+          </div>
+
+          <!-- DESCRIÇÃO DO QUE A PESSOA VAI RECEBER CONFORME O PLANO -->
+          <div class="checkout-plan-details" id="plan-details-box">
+            
+            <!-- DETALHES DO PLANO BÁSICO -->
+            <div id="details-basico" style="display: none;">
+              <div class="plan-details-header">
+                <span>📦</span>
+                <strong>O que você vai receber na Agenda Básica:</strong>
+              </div>
+              <ul class="plan-details-bullets">
+                <li><span class="chk">✓</span> <span><strong>Agenda Católica 2027 em PDF:</strong> alta resolução para imprimir ou usar no tablet/celular</span></li>
+                <li><span class="chk">✓</span> <span><strong>Liturgia Diária dos 365 Dias:</strong> com cor litúrgica, evangelho e santo padroeiro</span></li>
+                <li><span class="chk">✓</span> <span><strong>Caminho Quaresmal 2027:</strong> checklist diário de oração, penitência e caridade</span></li>
+                <li><span class="chk">✓</span> <span><strong>Acesso Vitalício:</strong> download imediato no seu e-mail e WhatsApp</span></li>
+              </ul>
+            </div>
+
+            <!-- DETALHES DO PLANO COMPLETO -->
+            <div id="details-completo">
+              <div class="plan-details-header vip">
+                <span>🎁</span>
+                <strong>O que você vai receber no Pacote Completo VIP:</strong>
+              </div>
+              <ul class="plan-details-bullets">
+                <li><span class="chk">✓</span> <span><strong>Agenda Católica 2027 Completa em PDF:</strong> formatos prontos para impressão (A4 e A5)</span></li>
+                <li><span class="chk">✓</span> <span><strong>Liturgia Diária dos 365 Dias:</strong> calendário oficial Romano da Igreja no Brasil</span></li>
+                <li><span class="chk">✓</span> <span><strong>Caminho Quaresmal 2027:</strong> checklist completo Quaresma dia a dia</span></li>
+                <li><span class="chk-gold">★</span> <span><strong>BÔNUS 1:</strong> Caderno de Novenas & Orações Poderosas (PDF)</span></li>
+                <li><span class="chk-gold">★</span> <span><strong>BÔNUS 2:</strong> Guia da Via Sacra Ilustrada de Santo Afonso (PDF)</span></li>
+                <li><span class="chk-gold">★</span> <span><strong>BÔNUS 3:</strong> Calendário Litúrgico de Parede 2027 (Pôster A4)</span></li>
+                <li><span class="chk-gold">★</span> <span><strong>BÔNUS 4:</strong> Plano de Leitura da Bíblia Sagrada em 1 Ano</span></li>
+                <li><span class="chk-gold">★</span> <span><strong>BÔNUS 5:</strong> Kit 12 Marcadores de Páginas Católicos em Alta Resolução</span></li>
+                <li><span class="chk">✓</span> <span><strong>Acesso Vitalício:</strong> download imediato no e-mail e WhatsApp</span></li>
+              </ul>
+            </div>
+
           </div>
 
           <form id="checkout-native-form" onsubmit="return false;">
@@ -3007,12 +3253,7 @@
               </div>
             </div>
 
-            <!-- AVISO OBRIGATÓRIO PUSHINPAY (ITEM 4.10 DOS TERMOS DE USO) -->
-            <div class="pushinpay-legal-notice">
-              <strong>Aviso legal:</strong> A PUSHIN PAY atua exclusivamente como processadora de pagamentos e não possui qualquer responsabilidade pela entrega, suporte, conteúdo, qualidade ou cumprimento das obrigações relacionadas aos produtos ou serviços oferecidos pelo vendedor.
-            </div>
-
-            <div id="checkout-form-error" style="display:none; color: #dc2626; font-size: 0.85rem; font-weight: 700; margin-bottom: 12px; text-align: center;"></div>
+            <div id="checkout-form-error" style="display:none; color: #dc2626; font-size: 0.85rem; font-weight: 700; margin: 10px 0 12px; text-align: center;"></div>
 
             <!-- BOTÃO GERAR PIX -->
             <button type="submit" class="checkout-submit-btn" id="btn-generate-pix">
@@ -3030,11 +3271,11 @@
 
         <!-- ETAPA 2: EXIBIÇÃO DO QR CODE E CHAVE PIX -->
         <div class="pix-screen" id="checkout-step-pix">
-          <h3 style="font-size: 1.15rem; color: var(--navy-900); font-weight: 800; margin-bottom: 4px;">
-            Quase lá! Pague via PIX para liberar agora:
+          <h3 style="font-size: 1.2rem; color: var(--navy-900); font-weight: 800; margin-bottom: 4px;">
+            Quase lá! Pague via PIX para liberar seu acesso:
           </h3>
-          <p style="font-size: 0.85rem; color: var(--ink-secondary); margin-bottom: 12px;">
-            Abra o app do seu banco e escaneie o QR Code ou copie o código abaixo:
+          <p style="font-size: 0.9rem; color: var(--ink-secondary); margin-bottom: 12px;">
+            Valor a pagar: <strong id="pix-display-val" style="color: #15803d; font-size: 1.15rem;">R$ 27,90</strong>
           </p>
 
           <div class="pix-qr-container">
@@ -3046,18 +3287,59 @@
             <button type="button" class="btn-copy-pix" id="btn-copy-pix">
               <span>📋 COPIAR CÓDIGO PIX COPIA E COLA</span>
             </button>
-            <div id="copy-feedback" style="display:none; color: #15803d; font-size: 0.82rem; font-weight: 800; margin-top: 6px;">
+            <div id="copy-feedback" style="display:none; color: #15803d; font-size: 0.84rem; font-weight: 800; margin-top: 6px;">
               ✓ Código PIX copiado com sucesso! Abra o app do seu banco e cole na opção Pix Copia e Cola.
             </div>
           </div>
 
-          <div class="pix-waiting-box">
-            <div class="pix-pulse-dot"></div>
-            <span>Aguardando pagamento... Liberando em tempo real</span>
+          <!-- ALERTA IMPORTANTE: NÃO FECHE ESTA PÁGINA -->
+          <div class="pix-dont-close-alert">
+            <span class="alert-icon">⚠️</span>
+            <div class="alert-text">
+              <strong>ATENÇÃO: NÃO FECHE OU ATUALIZE ESTA PÁGINA!</strong>
+              Após concluir o pagamento no seu banco, <strong>retorne imediatamente a esta tela</strong>. O sistema reconhecerá seu PIX e liberará seu download aqui em instantes.
+            </div>
           </div>
 
-          <p style="font-size: 0.74rem; color: #64748b; margin-top: 10px;">
-            Assim que você concluir no aplicativo do seu banco, o sistema reconhecerá automaticamente e liberará o download.
+          <!-- INSTRUÇÕES PASSO A PASSO -->
+          <div class="pix-instructions-box">
+            <div class="pix-instructions-title">
+              <span>📖</span>
+              <span>Como pagar no seu banco passo a passo:</span>
+            </div>
+            <ul class="pix-steps-list">
+              <li>
+                <span class="pix-step-num">1</span>
+                <span>Clique no botão azul acima <strong>"Copiar Código Pix Copia e Cola"</strong> (ou aponte a câmera para o QR Code).</span>
+              </li>
+              <li>
+                <span class="pix-step-num">2</span>
+                <span>Abra o app do seu banco no celular (Nubank, Bradesco, Itaú, Inter, Caixa, Banco do Brasil, etc.) e acesse a área <strong>PIX</strong>.</span>
+              </li>
+              <li>
+                <span class="pix-step-num">3</span>
+                <span>Escolha a opção <strong>"Pix Copia e Cola"</strong>, cole o código e confirme a transferência.</span>
+              </li>
+              <li>
+                <span class="pix-step-num">4</span>
+                <span><strong>Retorne a esta página</strong> e clique no botão verde abaixo para liberar seus arquivos na hora.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- BOTÃO JÁ REALIZEI O PAGAMENTO -->
+          <button type="button" class="btn-verify-pix" id="btn-manual-verify-pix">
+            <span>🟢 JÁ REALIZEI O PAGAMENTO (LIBERAR AGORA)</span>
+          </button>
+          <div id="pix-verify-msg" class="pix-verify-feedback info"></div>
+
+          <div class="pix-waiting-box">
+            <div class="pix-pulse-dot"></div>
+            <span>Aguardando compensação bancária em tempo real...</span>
+          </div>
+
+          <p style="font-size: 0.72rem; color: #64748b; margin-top: 10px;">
+            ID da Transação: <code id="pix-trans-id-display" style="font-family: monospace; color: #334155;"></code>
           </p>
         </div>
 
@@ -3155,8 +3437,10 @@
         observer.observe(pricingSection);
       }
 
-      // ─── CHECKOUT PRÓPRIO NATIVO ───────────────────────
-      var SUPABASE_FUNCTIONS_URL = 'https://cittmkbqdzxaexprujyy.supabase.co/functions/v1';
+      // ─── CHECKOUT SEGURO VIA EDGE FUNCTIONS (ZERO TOKENS EXPOSTOS) ───
+      var SUPABASE_URL = 'https://cittmkbqdzxaexprujyy.supabase.co';
+      var SUPABASE_ANON_KEY = 'sb_publishable_K8pfshJSKXwLwpWScjer-g_uRx4kCnn';
+
       var checkoutModal = document.getElementById('checkout-modal');
       var closeCheckoutBtn = document.getElementById('close-checkout-btn');
       var stepForm = document.getElementById('checkout-step-form');
@@ -3178,21 +3462,41 @@
       var btnCopyPix = document.getElementById('btn-copy-pix');
       var copyFeedback = document.getElementById('copy-feedback');
       var btnGoToDownloads = document.getElementById('btn-go-to-downloads');
+      var btnManualVerifyPix = document.getElementById('btn-manual-verify-pix');
+      var pixVerifyMsg = document.getElementById('pix-verify-msg');
+      var pixDisplayVal = document.getElementById('pix-display-val');
+      var pixTransIdDisplay = document.getElementById('pix-trans-id-display');
 
       var currentPlan = 'completo';
       var currentOrderId = null;
+      var currentTransactionId = null;
+      var currentCustomerName = '';
+      var currentCustomerEmail = '';
       var pixPollingInterval = null;
+      var isPaymentProcessing = false;
+
+      var detailsBasico = document.getElementById('details-basico');
+      var detailsCompleto = document.getElementById('details-completo');
 
       function updatePlanUI(plan) {
         currentPlan = plan === 'basico' ? 'basico' : 'completo';
+        var priceText = currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90';
+        
         if (currentPlan === 'basico') {
           optBasico.classList.add('selected');
           optCompleto.classList.remove('selected');
-          btnPriceDisplay.textContent = 'R$ 19,90';
+          if (detailsBasico) detailsBasico.style.display = 'block';
+          if (detailsCompleto) detailsCompleto.style.display = 'none';
         } else {
           optCompleto.classList.add('selected');
           optBasico.classList.remove('selected');
-          btnPriceDisplay.textContent = 'R$ 27,90';
+          if (detailsBasico) detailsBasico.style.display = 'none';
+          if (detailsCompleto) detailsCompleto.style.display = 'block';
+        }
+
+        // Atualiza dinamicamente o botão com o valor selecionado
+        if (btnGeneratePix) {
+          btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong id="btn-price-display">' + priceText + '</strong></span>';
         }
       }
 
@@ -3247,26 +3551,8 @@
         btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong id="btn-price-display">' + (currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90') + '</strong></span>';
         
         checkoutModal.classList.add('active');
+        checkoutModal.scrollTop = 0;
         document.body.style.overflow = 'hidden';
-
-        // Dispara InitiateCheckout no Pixel
-        var product = PRODUCTS[currentPlan];
-        if (typeof window.fbTrackEvent === 'function' && product) {
-          var eventId = window.fbTrackEvent('InitiateCheckout', {
-            content_name: product.name,
-            content_ids: [product.id],
-            content_type: 'product',
-            content_category: product.category,
-            value: product.value,
-            currency: 'BRL',
-            num_items: 1
-          }, true);
-
-          try {
-            sessionStorage.setItem('_fb_last_checkout_event_id', eventId);
-            sessionStorage.setItem('_fb_last_checkout_plan', currentPlan);
-          } catch(err) {}
-        }
       }
 
       function closeCheckoutModal() {
@@ -3306,50 +3592,117 @@
         });
       }
 
-      // Iniciar Polling de Verificação do PIX
-      function startPixPolling(orderId) {
-        if (pixPollingInterval) clearInterval(pixPollingInterval);
-
-        pixPollingInterval = setInterval(function() {
-          fetch(SUPABASE_FUNCTIONS_URL + '/check-pix', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ order_id: orderId })
-          })
-          .then(function(res) { return res.json(); })
-          .then(function(data) {
-            if (data && data.status === 'paid') {
-              clearInterval(pixPollingInterval);
-              pixPollingInterval = null;
-
-              // Dispara Purchase no Pixel
-              var product = PRODUCTS[currentPlan];
-              if (typeof window.fbTrackEvent === 'function' && product) {
-                window.fbTrackEvent('Purchase', {
-                  content_name: product.name,
-                  content_ids: [product.id],
-                  content_type: 'product',
-                  value: product.value,
-                  currency: 'BRL',
-                  num_items: 1
-                }, true);
-              }
-
-              // Transiciona para tela de sucesso
-              stepPix.classList.remove('active');
-              stepSuccess.classList.add('active');
-              if (btnGoToDownloads) {
-                btnGoToDownloads.href = 'sucesso.html?order_id=' + orderId + '&plan=' + currentPlan;
-              }
-            }
-          })
-          .catch(function(err) {
-            console.warn('Polling check-pix:', err);
-          });
-        }, 3500);
+      // Função para sanitização de strings (Proteção contra XSS)
+      function escapeHtml(str) {
+        return String(str || '').replace(/[&<>'"]/g, function(t) {
+          return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[t] || t);
+        });
       }
 
-      // Submissão do Formulário de Checkout (Gerar PIX)
+      // ─── TRATAMENTO DE CONFIRMAÇÃO DE PAGAMENTO ───
+      function handlePaymentSuccess(confirmedPlan) {
+        if (isPaymentProcessing) return;
+        isPaymentProcessing = true;
+
+        if (pixPollingInterval) {
+          clearInterval(pixPollingInterval);
+          pixPollingInterval = null;
+        }
+
+        var activePlan = confirmedPlan || currentPlan;
+
+        // 1. Dispara evento de Purchase no Facebook Pixel com event_id único correspondente ao orderId
+        // para deduplicação sem duplicação de conversões com a Meta CAPI
+        var purchaseEventId = currentOrderId ? ('purchase_' + currentOrderId) : ('eid_pur_' + Date.now());
+        var product = PRODUCTS[activePlan];
+        if (typeof window.fbTrackEvent === 'function' && product) {
+          window.fbTrackEvent('Purchase', {
+            content_name: product.name,
+            content_ids: [product.id],
+            content_type: 'product',
+            content_category: product.category,
+            value: product.value,
+            currency: 'BRL',
+            num_items: 1,
+            order_id: currentOrderId || ''
+          }, true, purchaseEventId);
+        }
+
+        // 2. Transiciona para tela de sucesso com links de download
+        stepPix.classList.remove('active');
+        stepSuccess.classList.add('active');
+        if (btnGoToDownloads) {
+          btnGoToDownloads.href = 'sucesso.html?order_id=' + (currentOrderId || '') + '&plan=' + activePlan;
+        }
+      }
+
+      // ─── CONSULTAR STATUS DO PIX VIA EDGE FUNCTION SEGURA ───
+      function checkPixStatus(isManual) {
+        if (!currentTransactionId || isPaymentProcessing) return;
+
+        if (isManual && btnManualVerifyPix) {
+          btnManualVerifyPix.disabled = true;
+          btnManualVerifyPix.innerHTML = '<span>⏳ Consultando Banco Central...</span>';
+          if (pixVerifyMsg) pixVerifyMsg.style.display = 'none';
+        }
+
+        fetch(SUPABASE_URL + '/functions/v1/check-pix', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY
+          },
+          body: JSON.stringify({
+            order_id: currentOrderId,
+            transaction_id: currentTransactionId
+          })
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data && data.status === 'paid') {
+            var confirmedPlan = (data.order && data.order.plan) ? data.order.plan : (data.plan || currentPlan);
+            handlePaymentSuccess(confirmedPlan);
+          } else {
+            if (isManual) {
+              if (pixVerifyMsg) {
+                pixVerifyMsg.textContent = '⏳ Seu pagamento ainda não foi identificado pelo Banco Central. Se você concluiu a transferência agora, aguarde 10 a 20 segundos e clique novamente!';
+                pixVerifyMsg.style.display = 'block';
+              }
+              setTimeout(function() {
+                if (btnManualVerifyPix && !isPaymentProcessing) {
+                  btnManualVerifyPix.disabled = false;
+                  btnManualVerifyPix.innerHTML = '<span>🟢 JÁ REALIZEI O PAGAMENTO (LIBERAR AGORA)</span>';
+                }
+              }, 2500);
+            }
+          }
+        })
+        .catch(function(err) {
+          console.warn('Erro ao consultar check-pix:', err);
+          if (isManual && btnManualVerifyPix) {
+            btnManualVerifyPix.disabled = false;
+            btnManualVerifyPix.innerHTML = '<span>🟢 JÁ REALIZEI O PAGAMENTO (LIBERAR AGORA)</span>';
+          }
+        });
+      }
+
+      // Iniciar Polling de Verificação periódica em segundo plano
+      function startPixPolling() {
+        if (pixPollingInterval) clearInterval(pixPollingInterval);
+        // Consulta periódica a cada 10 segundos
+        pixPollingInterval = setInterval(function() {
+          checkPixStatus(false);
+        }, 10000);
+      }
+
+      // Evento de clique no botão manual "Já Realizei o Pagamento"
+      if (btnManualVerifyPix) {
+        btnManualVerifyPix.addEventListener('click', function() {
+          checkPixStatus(true);
+        });
+      }
+
+      // Submissão do Formulário de Checkout (Gera PIX com Validação de Preço no Servidor)
       var checkoutForm = document.getElementById('checkout-native-form');
       if (checkoutForm) {
         checkoutForm.addEventListener('submit', function(e) {
@@ -3370,82 +3723,21 @@
 
           checkoutFormError.style.display = 'none';
           btnGeneratePix.disabled = true;
-          btnGeneratePix.innerHTML = '<span>⏳ Gerando PIX...</span>';
+          btnGeneratePix.innerHTML = '<span>⏳ Gerando PIX Seguro...</span>';
 
-          var payload = {
-            name: name,
-            email: email,
-            phone: phone,
-            cpf: cpf,
-            plan: currentPlan,
-            tracking: window.fbTrackingData || {}
-          };
+          currentCustomerName = name;
+          currentCustomerEmail = email;
+          var tracking = window.fbTrackingData || {};
 
-          fetch(SUPABASE_FUNCTIONS_URL + '/create-pix', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          })
-          .then(function(res) {
-            return res.json().then(function(data) {
-              return { ok: res.ok, status: res.status, data: data };
-            });
-          })
-          .then(function(result) {
-            btnGeneratePix.disabled = false;
-            btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong>' + (currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90') + '</strong></span>';
+          // Gera event_id único compartilhado entre o Browser Pixel e a Conversions API (CAPI)
+          var checkoutEventId = typeof window.generateEventId === 'function' 
+            ? window.generateEventId() 
+            : 'eid_ic_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
-            if (!result.ok || !result.data || !result.data.qr_code) {
-              var errorMsg = (result.data && result.data.error) ? result.data.error : 'Erro ao gerar o PIX. Tente novamente.';
-              if (checkoutFormError) {
-                checkoutFormError.textContent = errorMsg;
-                checkoutFormError.style.display = 'block';
-              }
-              return;
-            }
-
-            // Sucesso na geração do PIX
-            currentOrderId = result.data.order_id;
-            stepForm.style.display = 'none';
-            stepPix.classList.add('active');
-
-            // Injeta dados do QR Code
-            if (pixQrImage) {
-              pixQrImage.src = result.data.qr_code_base64.startsWith('data:') 
-                ? result.data.qr_code_base64 
-                : 'data:image/png;base64,' + result.data.qr_code_base64;
-            }
-            if (pixCopyPaste) {
-              pixCopyPaste.value = result.data.qr_code;
-            }
-
-            // Inicia verificação automática
-            startPixPolling(currentOrderId);
-          })
-          .catch(function(err) {
-            console.error('Erro na requisição create-pix:', err);
-            btnGeneratePix.disabled = false;
-            btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong>' + (currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90') + '</strong></span>';
-            if (checkoutFormError) {
-              checkoutFormError.textContent = 'Erro de conexão com o servidor. Verifique sua internet.';
-              checkoutFormError.style.display = 'block';
-            }
-          });
-        });
-      }
-
-      // ─── CLIQUE NOS BOTÕES DE COMPRA (DIRECIONA PARA LASTLINK) ───
-      document.querySelectorAll('[data-plan]').forEach(function(el) {
-        el.addEventListener('click', function(e) {
-          var plan = this.getAttribute('data-plan');
-          var product = PRODUCTS[plan];
-          if (!product) return;
-
-          e.preventDefault();
-
-          // Dispara InitiateCheckout avançado com todos os parâmetros
-          if (typeof window.fbTrackEvent === 'function') {
-            var eventId = window.fbTrackEvent('InitiateCheckout', {
+          // Dispara InitiateCheckout no Pixel do navegador com este eventId exato
+          var product = PRODUCTS[currentPlan];
+          if (typeof window.fbTrackEvent === 'function' && product) {
+            window.fbTrackEvent('InitiateCheckout', {
               content_name: product.name,
               content_ids: [product.id],
               content_type: 'product',
@@ -3453,25 +3745,106 @@
               value: product.value,
               currency: 'BRL',
               num_items: 1
-            }, true);
-
-            // Armazena event_id para deduplicação com CAPI
-            try {
-              sessionStorage.setItem('_fb_last_checkout_event_id', eventId);
-              sessionStorage.setItem('_fb_last_checkout_plan', plan);
-            } catch(err) {}
+            }, true, checkoutEventId);
           }
 
-          // Redireciona com parâmetros de rastreamento para a Lastlink
-          var finalUrl = buildCheckoutUrl(product.url);
+          // Chamada à Edge Function segura (O servidor gera o PIX e envia CAPI com o mesmo checkoutEventId)
+          fetch(SUPABASE_URL + '/functions/v1/create-pix', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPABASE_ANON_KEY
+            },
+            body: JSON.stringify({
+              name: name,
+              email: email,
+              phone: phone,
+              cpf: cpf,
+              plan: currentPlan,
+              event_id: checkoutEventId,
+              event_source_url: window.location.href,
+              tracking: {
+                ...(tracking.utmParams || {}),
+                fbc: tracking.fbc || null,
+                fbp: tracking.fbp || null,
+                external_id: tracking.externalId || null
+              }
+            })
+          })
+          .then(function(res) {
+            return res.json().then(function(data) {
+              return { ok: res.ok, status: res.status, data: data };
+            });
+          })
+          .then(function(result) {
+            if (!result.ok || !result.data || !result.data.qr_code) {
+              btnGeneratePix.disabled = false;
+              btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong>' + (currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90') + '</strong></span>';
+              var errorMsg = (result.data && result.data.error) ? result.data.error : 'Erro ao gerar o código PIX na operadora.';
+              if (checkoutFormError) {
+                checkoutFormError.textContent = errorMsg;
+                checkoutFormError.style.display = 'block';
+              }
+              return;
+            }
 
-          setTimeout(function() {
-            window.location.href = finalUrl;
-          }, 300);
+            var pixData = result.data;
+            currentTransactionId = pixData.transaction_id;
+            currentOrderId = pixData.order_id;
+            isPaymentProcessing = false;
+
+            // Inicia o polling seguro
+            startPixPolling();
+
+            // Renderiza QR Code e dados na tela
+            btnGeneratePix.disabled = false;
+            btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong>' + (currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90') + '</strong></span>';
+            
+            stepForm.style.display = 'none';
+            stepPix.classList.add('active');
+            if (checkoutModal) {
+              checkoutModal.scrollTop = 0;
+            }
+
+            if (pixDisplayVal) {
+              pixDisplayVal.textContent = currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90';
+            }
+            if (pixTransIdDisplay) {
+              pixTransIdDisplay.textContent = escapeHtml(pixData.transaction_id);
+            }
+            if (pixQrImage) {
+              pixQrImage.src = pixData.qr_code_base64.startsWith('data:') 
+                ? pixData.qr_code_base64 
+                : 'data:image/png;base64,' + pixData.qr_code_base64;
+            }
+            if (pixCopyPaste) {
+              pixCopyPaste.value = pixData.qr_code;
+            }
+            if (pixVerifyMsg) {
+              pixVerifyMsg.style.display = 'none';
+            }
+          })
+          .catch(function(err) {
+            console.error('Erro na requisição create-pix:', err);
+            btnGeneratePix.disabled = false;
+            btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong>' + (currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90') + '</strong></span>';
+            if (checkoutFormError) {
+              checkoutFormError.textContent = 'Erro ao conectar à operadora de pagamento. Tente novamente.';
+              checkoutFormError.style.display = 'block';
+            }
+          });
+        });
+      }
+
+      // ─── CLIQUE NOS BOTÕES DE COMPRA (ABRE CHECKOUT PRÓPRIO PUSHINPAY) ───
+      document.querySelectorAll('[data-plan]').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+          e.preventDefault();
+          var plan = this.getAttribute('data-plan') || 'completo';
+          openCheckoutModal(plan);
         });
       });
 
-      // Disponível para testes manuais no console quando desejar: window.openNativeCheckout('completo');
       window.openNativeCheckout = openCheckoutModal;
 
       // ─── SCROLL SUAVE PARA ÂNCORAS ──────────────────────

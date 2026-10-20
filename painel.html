@@ -1,0 +1,2417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo | Agenda Católica 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --card-bg: #111827;
+      --card-border: #1f2937;
+      --card-hover: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --gold: #f59e0b;
+      --gold-dark: #d97706;
+      --green: #10b981;
+      --green-dark: #059669;
+      --red: #ef4444;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --whatsapp: #25d366;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Tela de Login */
+    #login-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 15, 25, 0.95);
+      backdrop-filter: blur(12px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 36px 32px;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .login-box h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .login-box p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .login-input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: #0b0f19;
+      color: #fff;
+      font-size: 16px;
+      margin-bottom: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .login-input:focus {
+      border-color: var(--gold);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #0b0f19;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .login-btn:hover {
+      opacity: 0.95;
+    }
+
+    /* Topbar */
+    header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--card-border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #f59e0b, #b45309);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      background: #1f2937;
+      color: #e2e8f0;
+      border: 1px solid #374151;
+    }
+
+    .btn-secondary:hover {
+      background: #374151;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #0b0f19;
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-dark);
+    }
+
+    .btn-success {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .btn-success:hover {
+      background: var(--green-dark);
+    }
+
+    .btn-danger {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .btn-danger:hover {
+      background: #dc2626;
+    }
+
+    .btn-whatsapp {
+      background: #25d366;
+      color: #0b0f19;
+      font-weight: 700;
+    }
+
+    .btn-whatsapp:hover {
+      background: #1eb857;
+    }
+
+    /* Container Principal */
+    main {
+      flex: 1;
+      padding: 24px;
+      max-width: 1440px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* BARRA DE FILTRO POR DATA */
+    .date-filter-bar {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .date-filter-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .date-btn {
+      background: #1f2937;
+      border: 1px solid #374151;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .date-btn:hover {
+      color: #fff;
+      border-color: #4b5563;
+    }
+
+    .date-btn.active {
+      background: var(--gold);
+      color: #0b0f19;
+      border-color: var(--gold-dark);
+      font-weight: 700;
+    }
+
+    .custom-date-inputs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .date-input {
+      background: #0b0f19;
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .date-input:focus {
+      border-color: var(--gold);
+    }
+
+    /* Cards de Métricas */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: transparent;
+    }
+
+    .metric-card.net-revenue::before { background: #10b981; }
+    .metric-card.gross-revenue::before { background: var(--gold); }
+    .metric-card.fee::before { background: #ef4444; }
+    .metric-card.paid::before { background: var(--blue); }
+    .metric-card.pending::before { background: var(--purple); }
+
+    .metric-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .metric-value {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .metric-value.highlight-green {
+      color: #34d399;
+      text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .metric-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Tabs de Navegação */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: #1f2937;
+      color: #fff;
+    }
+
+    .tab-btn:hover:not(.active) {
+      color: #fff;
+    }
+
+    /* Seções */
+    .campaigns-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Barra de Ações em Massa (Bulk) */
+    .bulk-bar {
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 10px 16px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .bulk-bar.active {
+      display: flex;
+    }
+
+    .bulk-info {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    /* Tabela */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    th {
+      background: #0f172a;
+      padding: 12px 14px;
+      color: var(--text-muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--card-border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 14px;
+      border-bottom: 1px solid var(--card-border);
+      color: #e2e8f0;
+      vertical-align: middle;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Checkboxes customizados */
+    .custom-checkbox {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--gold);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-paid {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .badge-plan {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .badge-fee {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    /* Barra de Filtros e Busca */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-input {
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: #fff;
+      font-size: 13px;
+      min-width: 280px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--gold);
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .filter-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      background: #1f2937;
+      color: #fff;
+      border-color: #4b5563;
+    }
+
+    /* Ações na linha da tabela */
+    .row-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .action-btn {
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.2s;
+    }
+
+    .action-btn:hover {
+      opacity: 0.85;
+    }
+
+    /* Modais */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      width: 100%;
+      max-width: 650px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 12px;
+    }
+
+    .modal-title {
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .code-box {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 6px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #94a3b8;
+      word-break: break-all;
+      margin: 10px 0;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: #0b0f19;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-textarea {
+      min-height: 180px;
+      resize: vertical;
+      font-family: 'Inter', monospace;
+      line-height: 1.5;
+    }
+
+    /* Seletor de Público-Alvo */
+    .audience-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .audience-option {
+      background: #0b0f19;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .audience-option:hover {
+      border-color: #4b5563;
+    }
+
+    .audience-option.selected {
+      border-color: var(--gold);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .audience-option input {
+      margin-top: 3px;
+      accent-color: var(--gold);
+    }
+
+    .audience-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .audience-count {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Painel de Progresso do Disparo */
+    .progress-box {
+      background: #0b0f19;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 16px;
+      display: none;
+    }
+
+    .progress-box.active {
+      display: block;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 10px;
+      background: #1f2937;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), #10b981);
+      transition: width 0.3s ease;
+    }
+
+    .progress-stats {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .stat-badge {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .stat-success { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .stat-fail { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+    .stat-pending { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+
+    .progress-log {
+      max-height: 140px;
+      overflow-y: auto;
+      background: #080c14;
+      border: 1px solid #1e293b;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    .log-entry.success { color: #34d399; }
+    .log-entry.error { color: #f87171; }
+    .log-entry.info { color: #f59e0b; }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1f2937;
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      border-left: 4px solid var(--gold);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      z-index: 10000;
+      display: none;
+    }
+
+    #toast.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Overlay de Login -->
+  <div id="login-overlay">
+    <div class="login-box">
+      <div style="font-size: 40px; margin-bottom: 12px;">🛡️</div>
+      <h2>Painel de Gestão</h2>
+      <p>Agenda Católica 2027 · Acesso Restrito</p>
+      <form id="login-form">
+        <input type="password" id="admin-pass" class="login-input" placeholder="Digite a senha de administrador" required autofocus>
+        <button type="submit" class="login-btn">Entrar no Painel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Header Superior -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">✝️</div>
+      <div>
+        <div class="brand-title">Painel de Vendas & Campanhas</div>
+        <div class="brand-subtitle">Agenda Católica 2027 · Controle em Tempo Real</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-secondary" id="btn-refresh" title="Recarregar Dados">
+        🔄 Atualizar
+      </button>
+      <button class="btn btn-gold" id="btn-open-global-remarketing">
+        📢 Disparar Remarketing
+      </button>
+      <button class="btn btn-secondary" id="btn-logout" title="Sair do Painel">
+        Sair 🚪
+      </button>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main>
+    
+    <!-- BARRA DE FILTRO POR DATA -->
+    <div class="date-filter-bar">
+      <div class="date-filter-presets">
+        <span style="font-size: 13px; font-weight: 700; color: #fff; margin-right: 6px;">📅 Período:</span>
+        <button class="date-btn active" data-range="all">Todas as Datas</button>
+        <button class="date-btn" data-range="today">Hoje</button>
+        <button class="date-btn" data-range="yesterday">Ontem</button>
+        <button class="date-btn" data-range="7days">Últimos 7 dias</button>
+        <button class="date-btn" data-range="30days">Últimos 30 dias</button>
+        <button class="date-btn" data-range="this_month">Este Mês</button>
+        <button class="date-btn" data-range="custom">Personalizado</button>
+      </div>
+
+      <div class="custom-date-inputs" id="custom-date-container" style="display: none;">
+        <span>De:</span>
+        <input type="date" id="date-start" class="date-input">
+        <span>Até:</span>
+        <input type="date" id="date-end" class="date-input">
+        <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 11px;" onclick="applyDateFilter()">Filtrar</button>
+      </div>
+    </div>
+
+    <!-- Grid de Métricas Principais COM CÁLCULO LÍQUIDO REAL -->
+    <div class="metrics-grid">
+      <!-- 1. FATURAMENTO LÍQUIDO REAL (VALOR QUE RECEBE) -->
+      <div class="metric-card net-revenue">
+        <div class="metric-title">
+          <span>💰 Faturamento Líquido Real (Você Recebe)</span>
+        </div>
+        <div class="metric-value highlight-green" id="m-net-revenue">R$ 0,00</div>
+        <div class="metric-sub" id="m-net-revenue-sub">Líquido na sua conta bancária</div>
+      </div>
+
+      <!-- 2. FATURAMENTO BRUTO -->
+      <div class="metric-card gross-revenue">
+        <div class="metric-title">
+          <span>💵 Faturamento Bruto</span>
+        </div>
+        <div class="metric-value" id="m-gross-revenue">R$ 0,00</div>
+        <div class="metric-sub" id="m-gross-revenue-sub">0 pedidos pagos</div>
+      </div>
+
+      <!-- 3. TAXAS PUSHINPAY (R$ 0,45 / VENDA) -->
+      <div class="metric-card fee">
+        <div class="metric-title">
+          <span>🧾 Taxas PushinPay (R$ 0,45/venda)</span>
+        </div>
+        <div class="metric-value" style="color: #f87171;" id="m-fee">R$ 0,00</div>
+        <div class="metric-sub" id="m-fee-sub">0 vendas x R$ 0,45</div>
+      </div>
+
+      <!-- 4. VENDAS APROVADAS -->
+      <div class="metric-card paid">
+        <div class="metric-title">
+          <span>🟢 Vendas Aprovadas</span>
+        </div>
+        <div class="metric-value" id="m-paid">0</div>
+        <div class="metric-sub" id="m-paid-sub">Taxa de Conversão: 0%</div>
+      </div>
+
+      <!-- 5. PIX PENDENTES -->
+      <div class="metric-card pending">
+        <div class="metric-title">
+          <span>🟡 PIX Pendentes</span>
+        </div>
+        <div class="metric-value" id="m-pending">0</div>
+        <div class="metric-sub" id="m-pending-sub">Potencial: R$ 0,00</div>
+      </div>
+    </div>
+
+    <!-- Navegação em Abas -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="orders">📋 Pedidos & Clientes</button>
+      <button class="tab-btn" data-tab="daily">📅 Faturamento Real por Dia</button>
+      <button class="tab-btn" data-tab="campaigns">🎯 Desempenho de Campanhas (UTMs)</button>
+      <button class="tab-btn" data-tab="sources">🌐 Origens de Tráfego</button>
+    </div>
+
+    <!-- ABA 1: PEDIDOS & CLIENTES -->
+    <div id="tab-orders" class="tab-content">
+      
+      <!-- Barra de Ações em Massa (Aparece quando 1 ou mais pedidos estão marcados) -->
+      <div id="bulk-bar" class="bulk-bar">
+        <div class="bulk-info">
+          <span id="bulk-count">0</span> pedido(s) selecionado(s)
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-gold" onclick="openBulkRemarketingModal()">
+            📢 Disparar E-mail para Selecionados
+          </button>
+          <button class="btn btn-danger" onclick="deleteBulkOrdersConfirm()">
+            🗑️ Apagar Selecionados
+          </button>
+          <button class="btn btn-secondary" onclick="clearSelection()">
+            Desmarcar Todos
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="order-search" class="search-input" placeholder="🔍 Buscar por nome, e-mail, telefone, CPF ou UTM...">
+        
+        <div class="filter-group">
+          <button class="filter-btn active" data-status="all">Todos</button>
+          <button class="filter-btn" data-status="paid">🟢 Pagos</button>
+          <button class="filter-btn" data-status="pending">🟡 Pendentes</button>
+        </div>
+      </div>
+
+      <div class="campaigns-container">
+        <div class="section-header">
+          <div class="section-title">
+            <span>Lista de Pedidos</span>
+            <span id="orders-count" style="font-size: 12px; color: var(--text-muted); font-weight: normal;">(0 encontrados)</span>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 40px; text-align: center;">
+                  <input type="checkbox" id="check-all" class="custom-checkbox" title="Selecionar Todos">
+                </th>
+                <th>Data / Hora</th>
+                <th>Cliente</th>
+                <th>Contato</th>
+                <th>Pacote</th>
+                <th>Bruto / Líquido</th>
+                <th>Campanha (UTM)</th>
+                <th>Status</th>
+                <th>E-mail Drive</th>
+                <th style="text-align: right;">Ações de Gestão</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody">
+              <tr>
+                <td colspan="10" style="text-align: center; padding: 30px; color: var(--text-muted);">
+                  Carregando pedidos do servidor...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 2: FATURAMENTO REAL POR DIA (NOVA!) -->
+    <div id="tab-daily" class="tab-content" style="display: none;">
+      <div class="campaigns-container">
+        <div class="section-header">
+          <div class="section-title">📅 Faturamento Real por Dia (Descontando R$ 0,45 por Venda)</div>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Veja exatamente quanto dinheiro entrou em cada dia, a taxa da PushinPay e o <strong>valor real líquido</strong> que fica para você.
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Vendas Pagas</th>
+                <th>Faturamento Bruto</th>
+                <th>Taxa PushinPay (R$ 0,45/un)</th>
+                <th>Líquido Real (Você Recebe)</th>
+                <th>PIX Gerados</th>
+                <th>Conversão do Dia</th>
+              </tr>
+            </thead>
+            <tbody id="daily-tbody">
+              <!-- Preenchido via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 3: ANÁLISE DE CAMPANHAS (UTM_CAMPAIGN) -->
+    <div id="tab-campaigns" class="tab-content" style="display: none;">
+      <div class="campaigns-container">
+        <div class="section-header">
+          <div class="section-title">🎯 Desempenho por Campanha (utm_campaign)</div>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Veja exatamente quais campanhas de anúncios geraram mais pedidos de PIX, quais converteram em vendas reais e o faturamento líquido de cada uma.
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome da Campanha</th>
+                <th>PIX Gerados</th>
+                <th>Vendas Pagas</th>
+                <th>Taxa de Conversão</th>
+                <th>Faturamento Bruto</th>
+                <th>Líquido Real (Recebido)</th>
+              </tr>
+            </thead>
+            <tbody id="campaigns-tbody">
+              <!-- Preenchido via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 4: ORIGENS DE TRÁFEGO (UTM_SOURCE) -->
+    <div id="tab-sources" class="tab-content" style="display: none;">
+      <div class="campaigns-container">
+        <div class="section-header">
+          <div class="section-title">🌐 Desempenho por Origem (utm_source)</div>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Análise agregada por canal de aquisição (ex: facebook, instagram, google, direto).
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Origem (utm_source)</th>
+                <th>PIX Gerados</th>
+                <th>Vendas Pagas</th>
+                <th>Taxa de Conversão</th>
+                <th>Faturamento Bruto</th>
+                <th>Líquido Real (Recebido)</th>
+              </tr>
+            </thead>
+            <tbody id="sources-tbody">
+              <!-- Preenchido via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL: VER CÓDIGO PIX DO CLIENTE -->
+  <div id="modal-pix" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Código PIX Copia e Cola</div>
+        <button class="close-modal" onclick="closeModal('modal-pix')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 8px;">Cliente: <strong id="pix-modal-name">-</strong></p>
+        <p style="margin-bottom: 12px;">Valor: <strong id="pix-modal-value">-</strong></p>
+        <p class="form-label">Código PIX para Copiar:</p>
+        <div class="code-box" id="pix-modal-code">Nenhum código disponível</div>
+        <button class="btn btn-gold" style="width: 100%; margin-top: 10px;" onclick="copyPixCodeModal()">
+          📋 Copiar Código PIX
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ENVIAR EMAIL DE REMARKETING COM SELEÇÃO, BENEFÍCIOS E RATE LIMIT -->
+  <div id="modal-email" class="modal-overlay">
+    <div class="modal-content" style="max-width: 720px;">
+      <div class="modal-header">
+        <div class="modal-title">📢 Disparo de E-mails com Benefícios & Remarketing</div>
+        <button class="close-modal" onclick="closeModal('modal-email')">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- 1. Seleção do Público Alvo -->
+        <div class="form-group">
+          <label class="form-label">1. Escolha o Público-Alvo do Disparo:</label>
+          <div class="audience-selector">
+            <label class="audience-option" id="opt-pending">
+              <input type="radio" name="audience" value="pending" onchange="onAudienceChange()">
+              <div>
+                <div class="audience-title">🟡 Apenas Não Pagos</div>
+                <div class="audience-count" id="count-pending-opt">0 contatos</div>
+              </div>
+            </label>
+
+            <label class="audience-option" id="opt-paid">
+              <input type="radio" name="audience" value="paid" onchange="onAudienceChange()">
+              <div>
+                <div class="audience-title">🟢 Apenas Pagos</div>
+                <div class="audience-count" id="count-paid-opt">0 contatos</div>
+              </div>
+            </label>
+
+            <label class="audience-option" id="opt-all">
+              <input type="radio" name="audience" value="all" onchange="onAudienceChange()">
+              <div>
+                <div class="audience-title">🌐 Todos os Clientes</div>
+                <div class="audience-count" id="count-all-opt">0 contatos</div>
+              </div>
+            </label>
+
+            <label class="audience-option" id="opt-selected">
+              <input type="radio" name="audience" value="selected" onchange="onAudienceChange()">
+              <div>
+                <div class="audience-title">☑️ Marcados na Tabela</div>
+                <div class="audience-count" id="count-selected-opt">0 contatos</div>
+              </div>
+            </label>
+
+            <label class="audience-option" id="opt-single">
+              <input type="radio" name="audience" value="single" onchange="onAudienceChange()">
+              <div>
+                <div class="audience-title">👤 E-mail Único</div>
+                <div class="audience-count">Manual</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" id="group-single-email" style="display: none;">
+          <label class="form-label">E-mail de Destino:</label>
+          <input type="email" id="email-to" class="form-input" placeholder="exemplo@gmail.com">
+        </div>
+
+        <!-- 2. Modelo de Mensagem -->
+        <div class="form-group">
+          <label class="form-label">2. Modelo de Conteúdo & Benefícios:</label>
+          <select id="email-template-select" class="form-select" onchange="applyEmailTemplate()">
+            <option value="benefits_pix">✨ [RECOMENDADO] Destaque de Benefícios da Agenda 2027 + Recuperação</option>
+            <option value="bonus_offer">🎁 Oferta Especial: Desbloqueio dos 5 Bônus Exclusivos</option>
+            <option value="access_drive">📥 Reenvio do Link do Google Drive (Acesso Vitalício)</option>
+            <option value="custom">✏️ Mensagem Personalizada Livre</option>
+          </select>
+        </div>
+
+        <!-- 3. Assunto e Corpo -->
+        <div class="form-group">
+          <label class="form-label">Assunto do E-mail:</label>
+          <input type="text" id="email-subject" class="form-input" placeholder="Assunto persuasivo do e-mail...">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Corpo do E-mail (HTML com Benefícios Formatados):</label>
+          <textarea id="email-message" class="form-textarea" placeholder="Digite o HTML ou texto do e-mail..."></textarea>
+        </div>
+
+        <!-- Alerta de Segurança de Envio (2s Resend) -->
+        <div style="background: rgba(59, 130, 246, 0.1); border-left: 3px solid var(--blue); padding: 10px 14px; border-radius: 4px; font-size: 12px; color: #93c5fd; margin-bottom: 16px;">
+          ⏱️ <strong>Envio Seguro Ativado:</strong> Cada e-mail será disparado com <strong>intervalo de 2 segundos</strong> para garantir 100% de entrega e evitar limites do Resend.
+        </div>
+
+        <!-- Painel de Progresso do Disparo -->
+        <div id="progress-box" class="progress-box">
+          <div class="progress-header">
+            <span id="progress-status-text">Disparando e-mails...</span>
+            <span id="progress-percentage">0%</span>
+          </div>
+          <div class="progress-bar-container">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+          <div class="progress-stats">
+            <span class="stat-badge stat-pending">Total: <strong id="stat-total">0</strong></span>
+            <span class="stat-badge stat-success">Enviados com Sucesso: <strong id="stat-success">0</strong></span>
+            <span class="stat-badge stat-fail">Falhas: <strong id="stat-failed">0</strong></span>
+            <span style="color: var(--text-muted); font-size: 11px; margin-left: auto;" id="stat-eta"></span>
+          </div>
+          <div class="progress-log" id="progress-log"></div>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div style="display: flex; gap: 10px; margin-top: 16px;">
+          <button class="btn btn-success" style="flex: 1; padding: 12px; font-size: 14px;" id="btn-start-send" onclick="startBatchSending()">
+            🚀 Iniciar Disparo Seguro
+          </button>
+          <button class="btn btn-danger" style="display: none; padding: 12px 18px;" id="btn-cancel-send" onclick="cancelBatchSending()">
+            ⏹️ Cancelar
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: WHATSAPP SCRIPTS -->
+  <div id="modal-whatsapp" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">💬 Iniciar Conversa no WhatsApp</div>
+        <button class="close-modal" onclick="closeModal('modal-whatsapp')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 12px;">Cliente: <strong id="wa-modal-name">-</strong> | Telefone: <strong id="wa-modal-phone">-</strong></p>
+        
+        <div class="form-group">
+          <label class="form-label">Escolha o Script de Conversa:</label>
+          <select id="wa-script-select" class="form-input" onchange="updateWhatsAppMessage()">
+            <option value="cobranca">🟡 Cobrança Amigável de PIX Pendente</option>
+            <option value="boasvindas">🟢 Boas-vindas e Confirmação de Acesso</option>
+            <option value="oferta">🎁 Oferta de Bônus / Remarketing</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Texto da Mensagem (pode editar livremente antes de abrir):</label>
+          <textarea id="wa-modal-text" class="form-textarea" rows="4"></textarea>
+        </div>
+
+        <button class="btn btn-whatsapp" style="width: 100%; font-size: 15px; padding: 12px;" onclick="openWhatsAppChat()">
+          💬 Abrir Conversa no WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast">Operação realizada com sucesso!</div>
+
+  <script>
+    // Configurações Globais
+    const API_URL = 'https://cittmkbqdzxaexprujyy.supabase.co/functions/v1/painel-api';
+    const ANON_KEY = 'sb_publishable_K8pfshJSKXwLwpWScjer-g_uRx4kCnn';
+    const EXPECTED_PASS = 'Guh@150629';
+    const PUSHINPAY_FEE_CENTS = 45; // R$ 0,45 por venda paga
+
+    let allOrders = [];
+    let currentFilter = 'all';
+    let currentDateRange = 'all';
+    let currentSearch = '';
+    let selectedOrder = null;
+    let selectedOrderIds = new Set();
+    let isSendingBatch = false;
+    let cancelRequested = false;
+
+    // Elementos DOM
+    const loginOverlay = document.getElementById('login-overlay');
+    const loginForm = document.getElementById('login-form');
+    const adminPassInput = document.getElementById('admin-pass');
+    const toast = document.getElementById('toast');
+
+    // Inicialização da Autenticação
+    function checkAuth() {
+      const savedPass = sessionStorage.getItem('painel_pass');
+      if (savedPass === EXPECTED_PASS) {
+        loginOverlay.style.display = 'none';
+        loadDashboardData();
+      } else {
+        loginOverlay.style.display = 'flex';
+      }
+    }
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const entered = adminPassInput.value.trim();
+      if (entered === EXPECTED_PASS) {
+        sessionStorage.setItem('painel_pass', entered);
+        loginOverlay.style.display = 'none';
+        showToast('Login realizado com sucesso!');
+        loadDashboardData();
+      } else {
+        alert('Senha incorreta! Verifique a senha fornecida.');
+        adminPassInput.value = '';
+        adminPassInput.focus();
+      }
+    });
+
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      sessionStorage.removeItem('painel_pass');
+      location.reload();
+    });
+
+    // Toast Helper
+    function showToast(msg, isError = false) {
+      toast.innerText = msg;
+      toast.style.borderLeftColor = isError ? 'var(--red)' : 'var(--green)';
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    // Navegação de Abas
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const tab = btn.dataset.tab;
+        document.getElementById('tab-orders').style.display = tab === 'orders' ? 'block' : 'none';
+        document.getElementById('tab-daily').style.display = tab === 'daily' ? 'block' : 'none';
+        document.getElementById('tab-campaigns').style.display = tab === 'campaigns' ? 'block' : 'none';
+        document.getElementById('tab-sources').style.display = tab === 'sources' ? 'block' : 'none';
+      });
+    });
+
+    // FILTROS DE DATA
+    document.querySelectorAll('.date-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentDateRange = btn.dataset.range;
+        
+        const customContainer = document.getElementById('custom-date-container');
+        if (currentDateRange === 'custom') {
+          customContainer.style.display = 'flex';
+        } else {
+          customContainer.style.display = 'none';
+          recalculateAndRender();
+        }
+      });
+    });
+
+    function applyDateFilter() {
+      recalculateAndRender();
+    }
+
+    // Carregamento de Dados da API
+    async function loadDashboardData() {
+      const password = sessionStorage.getItem('painel_pass');
+      if (!password) return;
+
+      const refreshBtn = document.getElementById('btn-refresh');
+      refreshBtn.disabled = true;
+      refreshBtn.innerText = '⏳ Carregando...';
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': ANON_KEY,
+            'Authorization': 'Bearer ' + ANON_KEY,
+            'x-admin-password': password,
+          },
+          body: JSON.stringify({ action: 'list' }),
+        });
+
+        if (response.status === 401) {
+          sessionStorage.removeItem('painel_pass');
+          loginOverlay.style.display = 'flex';
+          alert('Sessão expirada ou senha incorreta.');
+          return;
+        }
+
+        const data = await response.json();
+        if (data.success) {
+          allOrders = data.orders || [];
+          recalculateAndRender();
+        } else {
+          showToast(data.error || 'Erro ao carregar dados.', true);
+        }
+      } catch (err) {
+        console.error('Erro de conexão com o painel:', err);
+        showToast('Falha na comunicação com o servidor.', true);
+      } finally {
+        refreshBtn.disabled = false;
+        refreshBtn.innerText = '🔄 Atualizar';
+      }
+    }
+
+    document.getElementById('btn-refresh').addEventListener('click', loadDashboardData);
+
+    // FILTRA PEDIDOS PELA DATA SELECIONADA
+    function getOrdersFilteredByDate() {
+      if (currentDateRange === 'all') {
+        return allOrders;
+      }
+
+      const now = new Date();
+      const todayStr = now.toISOString().slice(0, 10);
+
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      const yesterdayStr = yesterday.toISOString().slice(0, 10);
+
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+      const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+      return allOrders.filter(o => {
+        if (!o.created_at) return false;
+        const orderDate = new Date(o.created_at);
+        const orderDateStr = orderDate.toISOString().slice(0, 10);
+
+        if (currentDateRange === 'today') {
+          return orderDateStr === todayStr;
+        }
+        if (currentDateRange === 'yesterday') {
+          return orderDateStr === yesterdayStr;
+        }
+        if (currentDateRange === '7days') {
+          return orderDate >= sevenDaysAgo;
+        }
+        if (currentDateRange === '30days') {
+          return orderDate >= thirtyDaysAgo;
+        }
+        if (currentDateRange === 'this_month') {
+          return orderDate >= startOfMonth;
+        }
+        if (currentDateRange === 'custom') {
+          const s = document.getElementById('date-start').value;
+          const e = document.getElementById('date-end').value;
+          if (s && orderDateStr < s) return false;
+          if (e && orderDateStr > e) return false;
+          return true;
+        }
+        return true;
+      });
+    }
+
+    // RECALCULA TODAS AS MÉTRICAS E TABELAS COM BASE NO FILTRO DE DATA
+    function recalculateAndRender() {
+      const filteredByDate = getOrdersFilteredByDate();
+
+      let grossRevenueCents = 0;
+      let totalPaidCount = 0;
+      let totalPendingCount = 0;
+
+      filteredByDate.forEach(o => {
+        if (o.status === 'paid') {
+          grossRevenueCents += o.amount_cents || 0;
+          totalPaidCount++;
+        } else if (o.status === 'pending') {
+          totalPendingCount++;
+        }
+      });
+
+      const totalFeeCents = totalPaidCount * PUSHINPAY_FEE_CENTS;
+      const netRevenueCents = grossRevenueCents - totalFeeCents;
+      const convRate = filteredByDate.length > 0 ? ((totalPaidCount / filteredByDate.length) * 100).toFixed(1) : '0.0';
+
+      // 1. Renderiza Cards de Métricas
+      document.getElementById('m-net-revenue').innerText = (netRevenueCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('m-net-revenue-sub').innerText = `Líquido na sua conta (${totalPaidCount} vendas pagas)`;
+
+      document.getElementById('m-gross-revenue').innerText = (grossRevenueCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('m-gross-revenue-sub').innerText = `${totalPaidCount} pedidos pagos no período`;
+
+      document.getElementById('m-fee').innerText = `- ${(totalFeeCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+      document.getElementById('m-fee-sub').innerText = `${totalPaidCount} venda(s) x R$ 0,45`;
+
+      document.getElementById('m-paid').innerText = totalPaidCount;
+      document.getElementById('m-paid-sub').innerText = `Taxa de Conversão: ${convRate}%`;
+
+      document.getElementById('m-pending').innerText = totalPendingCount;
+      const pendingCents = filteredByDate
+        .filter(o => o.status === 'pending')
+        .reduce((acc, cur) => acc + (cur.amount_cents || 0), 0);
+      document.getElementById('m-pending-sub').innerText = `Potencial: ${(pendingCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+
+      // 2. Renderiza Tabelas
+      renderOrdersTable(filteredByDate);
+      renderDailyTable(filteredByDate);
+      renderCampaignsTable(filteredByDate);
+      renderSourcesTable(filteredByDate);
+      updateAudienceCounts();
+    }
+
+    // Renderizar Tabela de Pedidos
+    function renderOrdersTable(dateFilteredList) {
+      const listToFilter = dateFilteredList || getOrdersFilteredByDate();
+      const tbody = document.getElementById('orders-tbody');
+      
+      let filtered = listToFilter.filter(order => {
+        if (currentFilter !== 'all' && order.status !== currentFilter) {
+          return false;
+        }
+
+        if (currentSearch) {
+          const q = currentSearch.toLowerCase();
+          const matchName = (order.customer_name || '').toLowerCase().includes(q);
+          const matchEmail = (order.customer_email || '').toLowerCase().includes(q);
+          const matchPhone = (order.customer_phone || '').toLowerCase().includes(q);
+          const matchCpf = (order.customer_cpf || '').toLowerCase().includes(q);
+          const matchCampaign = (order.utm_campaign || '').toLowerCase().includes(q);
+          const matchSource = (order.utm_source || '').toLowerCase().includes(q);
+          return matchName || matchEmail || matchPhone || matchCpf || matchCampaign || matchSource;
+        }
+        return true;
+      });
+
+      document.getElementById('orders-count').innerText = `(${filtered.length} de ${listToFilter.length})`;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="10" style="text-align: center; padding: 30px; color: var(--text-muted);">
+              Nenhum pedido encontrado com os filtros selecionados.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(o => {
+        const date = new Date(o.created_at);
+        const dateStr = date.toLocaleDateString('pt-BR') + ' ' + date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        const brutoFormatted = ((o.amount_cents || 0) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        
+        const isPaid = o.status === 'paid';
+        const liquidoCents = isPaid ? (o.amount_cents - PUSHINPAY_FEE_CENTS) : o.amount_cents;
+        const liquidoFormatted = ((liquidoCents || 0) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+        const statusBadge = isPaid
+          ? `<span class="badge badge-paid">🟢 PAGO</span>`
+          : `<span class="badge badge-pending">🟡 PENDENTE</span>`;
+        
+        const planName = o.plan === 'completo' ? 'Completo + Bônus' : 'Básico';
+        const emailSentIcon = o.email_sent ? '✅ Entregue' : '⏳ Pendente';
+
+        const safeOrderJson = JSON.stringify(o).replace(/"/g, '&quot;');
+        const isChecked = selectedOrderIds.has(o.id) ? 'checked' : '';
+
+        return `
+          <tr>
+            <td style="text-align: center;">
+              <input type="checkbox" class="custom-checkbox order-checkbox" data-id="${o.id}" ${isChecked} onchange="toggleSelectOrder('${o.id}', this.checked)">
+            </td>
+            <td style="font-size: 12px; color: var(--text-muted);">${dateStr}</td>
+            <td>
+              <div style="font-weight: 600; color: #fff;">${escapeHtml(o.customer_name || 'Sem Nome')}</div>
+              <div style="font-size: 11px; color: var(--text-muted);">CPF: ${escapeHtml(o.customer_cpf || 'Não informado')}</div>
+            </td>
+            <td>
+              <div style="font-size: 12px;">${escapeHtml(o.customer_email || '')}</div>
+              <div style="font-size: 11px; color: var(--text-muted);">${escapeHtml(o.customer_phone || '')}</div>
+            </td>
+            <td>
+              <span class="badge badge-plan">${planName}</span>
+            </td>
+            <td>
+              <div style="font-weight: 700; color: #fff;">${brutoFormatted}</div>
+              ${isPaid ? `
+                <div style="font-size: 11px; color: #34d399; font-weight: 600;">Líq: ${liquidoFormatted} <span class="badge badge-fee" style="font-size:9px; padding:1px 4px;">-0,45</span></div>
+              ` : `
+                <div style="font-size: 11px; color: var(--text-muted);">Pendente</div>
+              `}
+            </td>
+            <td>
+              <div style="font-size: 12px; font-weight: 500; color: #f59e0b;">${escapeHtml(o.utm_campaign || '(Direto)')}</div>
+              <div style="font-size: 11px; color: var(--text-muted);">src: ${escapeHtml(o.utm_source || 'orgânico')}</div>
+            </td>
+            <td>${statusBadge}</td>
+            <td style="font-size: 12px;">${emailSentIcon}</td>
+            <td style="text-align: right;">
+              <div class="row-actions" style="justify-content: flex-end;">
+                ${!isPaid ? `
+                  <button class="action-btn btn-success" title="Aprovar Compra Manualmente" onclick="manualApprove('${o.id}', '${escapeHtml(o.customer_name)}')">
+                    🟢 Aprovar
+                  </button>
+                ` : `
+                  <button class="action-btn btn-secondary" title="Reenviar Acesso do Drive" onclick="resendAccess('${o.id}', '${escapeHtml(o.customer_name)}')">
+                    📨 Reenviar
+                  </button>
+                `}
+                <button class="action-btn btn-whatsapp" title="Conversar no WhatsApp" onclick="openWhatsAppModal(${safeOrderJson})">
+                  💬 Whats
+                </button>
+                ${o.pix_code ? `
+                  <button class="action-btn btn-secondary" title="Ver Código PIX" onclick="openPixModal(${safeOrderJson})">
+                    💠 PIX
+                  </button>
+                ` : ''}
+                <button class="action-btn btn-secondary" title="Enviar E-mail Individual" onclick="openSingleEmailModal(${safeOrderJson})">
+                  📧 Email
+                </button>
+                <!-- BOTÃO APAGAR VENDA -->
+                <button class="action-btn btn-danger" title="Apagar Pedido Errado" onclick="deleteOrderConfirm('${o.id}', '${escapeHtml(o.customer_name)}')">
+                  🗑️
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      updateBulkBar();
+    }
+
+    // ========================================================
+    // TABELA DE FATURAMENTO REAL POR DIA (NOVA!)
+    // ========================================================
+    function renderDailyTable(ordersList) {
+      const tbody = document.getElementById('daily-tbody');
+      if (!ordersList || ordersList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 25px; color: var(--text-muted);">Nenhum pedido no período selecionado.</td></tr>`;
+        return;
+      }
+
+      // Agrupa pedidos por data local (YYYY-MM-DD)
+      const dayMap = {};
+
+      ordersList.forEach(o => {
+        const d = new Date(o.created_at);
+        const dayKey = d.toLocaleDateString('pt-BR'); // Ex: 20/10/2026
+        
+        if (!dayMap[dayKey]) {
+          dayMap[dayKey] = {
+            totalPix: 0,
+            paidCount: 0,
+            grossCents: 0,
+            rawDate: d,
+          };
+        }
+
+        dayMap[dayKey].totalPix++;
+        if (o.status === 'paid') {
+          dayMap[dayKey].paidCount++;
+          dayMap[dayKey].grossCents += o.amount_cents || 0;
+        }
+      });
+
+      // Ordena dias do mais recente ao mais antigo
+      const sortedDays = Object.entries(dayMap).sort((a, b) => b[1].rawDate - a[1].rawDate);
+
+      tbody.innerHTML = sortedDays.map(([dayStr, stat]) => {
+        const feeCents = stat.paidCount * PUSHINPAY_FEE_CENTS;
+        const netCents = stat.grossCents - feeCents;
+
+        const grossFormatted = (stat.grossCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const feeFormatted = (feeCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const netFormatted = (netCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const convRate = stat.totalPix > 0 ? ((stat.paidCount / stat.totalPix) * 100).toFixed(1) : '0.0';
+
+        return `
+          <tr>
+            <td style="font-weight: 700; color: #fff;">📅 ${dayStr}</td>
+            <td style="color: #34d399; font-weight: 700;">${stat.paidCount}</td>
+            <td style="font-weight: 600;">${grossFormatted}</td>
+            <td style="color: #f87171;">- ${feeFormatted}</td>
+            <td style="font-weight: 800; color: #34d399; font-size: 15px;">${netFormatted}</td>
+            <td>${stat.totalPix}</td>
+            <td><span class="badge ${parseFloat(convRate) > 0 ? 'badge-paid' : 'badge-pending'}">${convRate}%</span></td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // ========================================================
+    // TABELAS DE CAMPANHAS E ORIGENS COM LÍQUIDO
+    // ========================================================
+    function renderCampaignsTable(ordersList) {
+      const tbody = document.getElementById('campaigns-tbody');
+      const campMap = {};
+
+      ordersList.forEach(o => {
+        const camp = o.utm_campaign || '(Direto / Sem Campanha)';
+        if (!campMap[camp]) {
+          campMap[camp] = { total: 0, paid: 0, grossCents: 0 };
+        }
+        campMap[camp].total++;
+        if (o.status === 'paid') {
+          campMap[camp].paid++;
+          campMap[camp].grossCents += o.amount_cents || 0;
+        }
+      });
+
+      if (Object.keys(campMap).length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 20px;">Nenhum dado de campanha no período.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = Object.entries(campMap).map(([campName, stat]) => {
+        const feeCents = stat.paid * PUSHINPAY_FEE_CENTS;
+        const netCents = stat.grossCents - feeCents;
+        const convRate = stat.total > 0 ? ((stat.paid / stat.total) * 100).toFixed(1) : '0.0';
+
+        return `
+          <tr>
+            <td style="font-weight: 600; color: #f59e0b;">${escapeHtml(campName)}</td>
+            <td><strong>${stat.total}</strong></td>
+            <td style="color: #34d399;"><strong>${stat.paid}</strong></td>
+            <td><span class="badge ${parseFloat(convRate) > 0 ? 'badge-paid' : 'badge-pending'}">${convRate}%</span></td>
+            <td>${(stat.grossCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+            <td style="font-weight: 700; color: #34d399;">${(netCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderSourcesTable(ordersList) {
+      const tbody = document.getElementById('sources-tbody');
+      const srcMap = {};
+
+      ordersList.forEach(o => {
+        const src = o.utm_source || '(Direto / Orgânico)';
+        if (!srcMap[src]) {
+          srcMap[src] = { total: 0, paid: 0, grossCents: 0 };
+        }
+        srcMap[src].total++;
+        if (o.status === 'paid') {
+          srcMap[src].paid++;
+          srcMap[src].grossCents += o.amount_cents || 0;
+        }
+      });
+
+      if (Object.keys(srcMap).length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 20px;">Nenhum dado de origem no período.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = Object.entries(srcMap).map(([srcName, stat]) => {
+        const feeCents = stat.paid * PUSHINPAY_FEE_CENTS;
+        const netCents = stat.grossCents - feeCents;
+        const convRate = stat.total > 0 ? ((stat.paid / stat.total) * 100).toFixed(1) : '0.0';
+
+        return `
+          <tr>
+            <td style="font-weight: 600; color: #60a5fa;">${escapeHtml(srcName)}</td>
+            <td><strong>${stat.total}</strong></td>
+            <td style="color: #34d399;"><strong>${stat.paid}</strong></td>
+            <td><span class="badge ${parseFloat(convRate) > 0 ? 'badge-paid' : 'badge-pending'}">${convRate}%</span></td>
+            <td>${(stat.grossCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+            <td style="font-weight: 700; color: #34d399;">${(netCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // ========================================================
+    // AÇÕES DE EXCLUSÃO (APAGAR VENDA INDIVIDUAL OU EM MASSA)
+    // ========================================================
+
+    async function deleteOrderConfirm(orderId, customerName) {
+      if (!confirm(`⚠️ ATENÇÃO: Tem certeza que deseja APAGAR permanentemente o pedido de "${customerName}"?\n\nEssa ação não poderá ser desfeita e o pedido será removido do banco de dados.`)) {
+        return;
+      }
+
+      const password = sessionStorage.getItem('painel_pass');
+      showToast('Apagando pedido do banco de dados...');
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': ANON_KEY,
+            'Authorization': 'Bearer ' + ANON_KEY,
+            'x-admin-password': password,
+          },
+          body: JSON.stringify({ action: 'delete_order', order_id: orderId }),
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          showToast('🗑️ Pedido apagado com sucesso!');
+          selectedOrderIds.delete(orderId);
+          loadDashboardData();
+        } else {
+          showToast(data.error || 'Erro ao apagar pedido.', true);
+        }
+      } catch (err) {
+        showToast('Erro ao comunicar com o servidor.', true);
+      }
+    }
+
+    async function deleteBulkOrdersConfirm() {
+      const count = selectedOrderIds.size;
+      if (count === 0) return;
+
+      if (!confirm(`⚠️ ATENÇÃO: Tem certeza que deseja APAGAR ${count} pedido(s) selecionado(s) permanentemente do banco de dados?\n\nEsta operação é irreversível.`)) {
+        return;
+      }
+
+      const password = sessionStorage.getItem('painel_pass');
+      showToast(`Apagando ${count} pedidos...`);
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': ANON_KEY,
+            'Authorization': 'Bearer ' + ANON_KEY,
+            'x-admin-password': password,
+          },
+          body: JSON.stringify({
+            action: 'delete_bulk_orders',
+            order_ids: Array.from(selectedOrderIds),
+          }),
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          showToast(`🗑️ ${count} pedido(s) apagado(s) com sucesso!`);
+          clearSelection();
+          loadDashboardData();
+        } else {
+          showToast(data.error || 'Erro ao apagar pedidos.', true);
+        }
+      } catch (err) {
+        showToast('Erro ao comunicar com o servidor.', true);
+      }
+    }
+
+    // Gerenciamento de Seleção de Pedidos (Checkbox)
+    function toggleSelectOrder(id, isChecked) {
+      if (isChecked) {
+        selectedOrderIds.add(id);
+      } else {
+        selectedOrderIds.delete(id);
+      }
+      updateBulkBar();
+    }
+
+    document.getElementById('check-all').addEventListener('change', (e) => {
+      const checked = e.target.checked;
+      document.querySelectorAll('.order-checkbox').forEach(cb => {
+        cb.checked = checked;
+        const id = cb.dataset.id;
+        if (checked) selectedOrderIds.add(id);
+        else selectedOrderIds.delete(id);
+      });
+      updateBulkBar();
+    });
+
+    function clearSelection() {
+      selectedOrderIds.clear();
+      document.getElementById('check-all').checked = false;
+      document.querySelectorAll('.order-checkbox').forEach(cb => cb.checked = false);
+      updateBulkBar();
+    }
+
+    function updateBulkBar() {
+      const count = selectedOrderIds.size;
+      const bar = document.getElementById('bulk-bar');
+      document.getElementById('bulk-count').innerText = count;
+      if (count > 0) {
+        bar.classList.add('active');
+      } else {
+        bar.classList.remove('active');
+      }
+      updateAudienceCounts();
+    }
+
+    function updateAudienceCounts() {
+      const pendingCount = allOrders.filter(o => o.status === 'pending').length;
+      const paidCount = allOrders.filter(o => o.status === 'paid').length;
+      const allCount = allOrders.length;
+      const selectedCount = selectedOrderIds.size;
+
+      document.getElementById('count-pending-opt').innerText = `${pendingCount} contatos`;
+      document.getElementById('count-paid-opt').innerText = `${paidCount} contatos`;
+      document.getElementById('count-all-opt').innerText = `${allCount} contatos`;
+      document.getElementById('count-selected-opt').innerText = `${selectedCount} selecionados`;
+    }
+
+    // Filtros de Status
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.status;
+        renderOrdersTable();
+      });
+    });
+
+    // Campo de Busca
+    document.getElementById('order-search').addEventListener('input', (e) => {
+      currentSearch = e.target.value.trim();
+      renderOrdersTable();
+    });
+
+    // AÇÃO: APROVAÇÃO MANUAL
+    async function manualApprove(orderId, customerName) {
+      if (!confirm(`Deseja aprovar manualmente o pedido de "${customerName}"?\n\nO status passará para PAGO e o e-mail de acesso aos arquivos do Google Drive será enviado imediatamente ao cliente via Resend.`)) {
+        return;
+      }
+
+      const password = sessionStorage.getItem('painel_pass');
+      showToast('Processando aprovação e disparo de e-mail...');
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': ANON_KEY,
+            'Authorization': 'Bearer ' + ANON_KEY,
+            'x-admin-password': password,
+          },
+          body: JSON.stringify({ action: 'approve', order_id: orderId }),
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          showToast('✅ Pedido aprovado com sucesso! Acesso enviado.');
+          loadDashboardData();
+        } else {
+          showToast(data.error || 'Erro ao aprovar pedido.', true);
+        }
+      } catch (err) {
+        showToast('Erro ao comunicar com servidor.', true);
+      }
+    }
+
+    // AÇÃO: REENVIAR ACESSO
+    async function resendAccess(orderId, customerName) {
+      if (!confirm(`Reenviar o e-mail com os links do Google Drive para "${customerName}"?`)) {
+        return;
+      }
+
+      const password = sessionStorage.getItem('painel_pass');
+      showToast('Reenviando e-mail de acesso...');
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': ANON_KEY,
+            'Authorization': 'Bearer ' + ANON_KEY,
+            'x-admin-password': password,
+          },
+          body: JSON.stringify({ action: 'resend_access', order_id: orderId }),
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          showToast('✅ E-mail de acesso reenviado com sucesso!');
+        } else {
+          showToast(data.error || 'Erro ao reenviar e-mail.', true);
+        }
+      } catch (err) {
+        showToast('Erro ao comunicar com servidor.', true);
+      }
+    }
+
+    // MODAL: VER PIX
+    function openPixModal(order) {
+      selectedOrder = order;
+      document.getElementById('pix-modal-name').innerText = order.customer_name || 'Cliente';
+      const val = ((order.amount_cents || 0) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('pix-modal-value').innerText = val;
+      document.getElementById('pix-modal-code').innerText = order.pix_code || 'Nenhum código gerado para este pedido.';
+      document.getElementById('modal-pix').classList.add('active');
+    }
+
+    function copyPixCodeModal() {
+      const code = document.getElementById('pix-modal-code').innerText;
+      if (!code || code.includes('Nenhum código')) return;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('📋 Código PIX copiado com sucesso!');
+      });
+    }
+
+    // MODAL: WHATSAPP
+    function openWhatsAppModal(order) {
+      selectedOrder = order;
+      document.getElementById('wa-modal-name').innerText = order.customer_name || 'Cliente';
+      document.getElementById('wa-modal-phone').innerText = order.customer_phone || 'Sem telefone';
+      document.getElementById('wa-script-select').value = order.status === 'paid' ? 'boasvindas' : 'cobranca';
+      updateWhatsAppMessage();
+      document.getElementById('modal-whatsapp').classList.add('active');
+    }
+
+    function updateWhatsAppMessage() {
+      if (!selectedOrder) return;
+      const scriptType = document.getElementById('wa-script-select').value;
+      const firstName = (selectedOrder.customer_name || '').split(' ')[0] || 'Irmão(ã)';
+      const isCompleto = selectedOrder.plan === 'completo';
+      const driveLink = isCompleto
+        ? 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing'
+        : 'https://drive.google.com/drive/folders/1vstC1uvFR11TZIg5zXpILGT-khchTjJp?usp=sharing';
+      
+      let msg = '';
+      if (scriptType === 'cobranca') {
+        msg = `Olá, ${firstName}! Tudo bem? Paz e bem! 🙏\n\nVi aqui que você iniciou o pedido da Agenda Católica 2027, mas o pagamento do PIX ainda não foi concluído.\n\nQuer que eu envie novamente o código PIX por aqui para você concluir rapidinho pelo seu banco e já receber os arquivos? Estou à disposição! ✨`;
+      } else if (scriptType === 'boasvindas') {
+        msg = `Olá, ${firstName}! Paz e bem! 🙏✨\n\nConfirmamos seu pagamento da Agenda Católica 2027 com sucesso!\n\nSeus arquivos já estão disponíveis para download no Google Drive:\n🔗 ${driveLink}\n\nTambém enviamos para o seu e-mail (${selectedOrder.customer_email}). Qualquer dúvida que tiver, pode me chamar por aqui. Deus abençoe seu 2027!`;
+      } else {
+        msg = `Olá, ${firstName}! Passando para compartilhar uma bênção com você: liberamos uma condição especial de upgrade da Agenda Católica 2027 com todos os 5 bônus exclusivos. Se tiver interesse em conhecer, me avise por aqui! 🙏`;
+      }
+
+      document.getElementById('wa-modal-text').value = msg;
+    }
+
+    function openWhatsAppChat() {
+      if (!selectedOrder) return;
+      let phone = (selectedOrder.customer_phone || '').replace(/\D/g, '');
+      if (!phone) {
+        alert('Este cliente não possui telefone cadastrado.');
+        return;
+      }
+      if (!phone.startsWith('55') && phone.length <= 11) {
+        phone = '55' + phone;
+      }
+
+      const text = encodeURIComponent(document.getElementById('wa-modal-text').value);
+      const url = `https://wa.me/${phone}?text=${text}`;
+      window.open(url, '_blank');
+      closeModal('modal-whatsapp');
+    }
+
+    // ========================================================
+    // MODAL DE REMARKETING COM BENEFÍCIOS, SELEÇÃO E RATE LIMIT
+    // ========================================================
+
+    document.getElementById('btn-open-global-remarketing').addEventListener('click', () => {
+      openRemarketingModalWithAudience('pending');
+    });
+
+    function openBulkRemarketingModal() {
+      openRemarketingModalWithAudience('selected');
+    }
+
+    function openSingleEmailModal(order) {
+      selectedOrder = order;
+      document.getElementById('email-to').value = order.customer_email || '';
+      openRemarketingModalWithAudience('single');
+    }
+
+    function openRemarketingModalWithAudience(audienceType) {
+      updateAudienceCounts();
+      
+      const radio = document.querySelector(`input[name="audience"][value="${audienceType}"]`);
+      if (radio) {
+        radio.checked = true;
+      }
+      onAudienceChange();
+      applyEmailTemplate();
+      
+      document.getElementById('progress-box').classList.remove('active');
+      document.getElementById('btn-start-send').style.display = 'block';
+      document.getElementById('btn-start-send').disabled = false;
+      document.getElementById('btn-cancel-send').style.display = 'none';
+
+      document.getElementById('modal-email').classList.add('active');
+    }
+
+    function onAudienceChange() {
+      const selectedValue = document.querySelector('input[name="audience"]:checked')?.value || 'pending';
+      
+      document.querySelectorAll('.audience-option').forEach(opt => opt.classList.remove('selected'));
+      const activeCard = document.getElementById(`opt-${selectedValue}`);
+      if (activeCard) activeCard.classList.add('selected');
+
+      document.getElementById('group-single-email').style.display = selectedValue === 'single' ? 'block' : 'none';
+
+      const templateSelect = document.getElementById('email-template-select');
+      if (selectedValue === 'pending') {
+        templateSelect.value = 'benefits_pix';
+      } else if (selectedValue === 'paid') {
+        templateSelect.value = 'bonus_offer';
+      } else {
+        templateSelect.value = 'benefits_pix';
+      }
+      applyEmailTemplate();
+    }
+
+    function applyEmailTemplate() {
+      const template = document.getElementById('email-template-select').value;
+      const firstName = selectedOrder ? (selectedOrder.customer_name || '').split(' ')[0] : 'Irmão(ã) em Cristo';
+      const isCompleto = selectedOrder ? selectedOrder.plan === 'completo' : true;
+      const driveLink = isCompleto
+        ? 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing'
+        : 'https://drive.google.com/drive/folders/1vstC1uvFR11TZIg5zXpILGT-khchTjJp?usp=sharing';
+
+      if (template === 'benefits_pix') {
+        document.getElementById('email-subject').value = '✨ Não perca: Sua caminhada com Deus em 2027 começa aqui [Agenda Católica 2027]';
+        document.getElementById('email-message').value = `
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px 16px; color: #1e293b; line-height: 1.6;">
+  <div style="text-align: center; margin-bottom: 24px;">
+    <h2 style="color: #0c1830; font-size: 22px; margin: 0 0 6px;">Uma Bênção para o Seu Ano de 2027 🙏✨</h2>
+    <p style="color: #64748b; font-size: 14px; margin: 0;">Agenda Católica 2027 com Liturgia Diária e Devoções</p>
+  </div>
+
+  <p style="font-size: 15px;">Olá, <strong>{NOME}</strong>!</p>
+  <p style="font-size: 15px;">Paz e bem! Notamos que você iniciou o seu pedido da <strong>Agenda Católica 2027</strong> mas o pagamento ainda não foi confirmado.</p>
+  <p style="font-size: 15px;">Preparamos este material com imenso carinho para que cada dia do seu ano seja repleto de oração, propósito e proximidade com Deus. Veja tudo o que está esperando por você:</p>
+
+  <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px; margin: 20px 0;">
+    <h3 style="color: #0c1830; font-size: 16px; margin: 0 0 14px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;">🌟 Principais Benefícios da sua Agenda Católica:</h3>
+    <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #334155; line-height: 1.8;">
+      <li>📖 <strong>Liturgia Diária Completa:</strong> Primeira Leitura, Salmo Responsorial e Evangelho para os 365 dias do ano de 2027.</li>
+      <li>⛪ <strong>Calendário dos Santos & Cores Litúrgicas:</strong> Todas as solenidades, festas da Igreja, dias santos de guarda e memória de cada santo.</li>
+      <li>📿 <strong>Devocionário Católico Essencial:</strong> Santo Rosário completo ilustrado com todos os mistérios, Terço da Misericórdia, Angelus, Via Sacra e orações diárias.</li>
+      <li>🖨️ <strong>Pronta para Imprimir ou Usar Digital:</strong> Arquivos em alta definição (formatos A4 e A5) para você encadernar ou usar no celular, tablet e computador.</li>
+      <li>🎁 <strong>5 Super Bônus Exclusivos:</strong> Caderno de Novenas, Planejador de Leitura Bíblica em 1 Ano, Rastreador de Hábitos de Oração e Guia de Exame de Consciência para Confissão.</li>
+      <li>⚡ <strong>Acesso Vitalício:</strong> Os arquivos ficam salvos em segurança no Google Drive para você baixar quando quiser.</li>
+    </ul>
+  </div>
+
+  <div style="text-align: center; margin: 28px 0;">
+    <a href="https://agendanossasenhora.online" target="_blank" style="background-color: #16a34a; color: #ffffff; text-decoration: none; padding: 16px 32px; border-radius: 8px; font-weight: bold; font-size: 16px; display: inline-block; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);">
+      👉 CONCLUIR MEU PEDIDO E GARANTIR MEU ACESSO
+    </a>
+  </div>
+
+  <p style="font-size: 13px; color: #64748b; text-align: center;">
+    Site oficial: <a href="https://agendanossasenhora.online" target="_blank" style="color: #1d4d90; font-weight: 600;">agendanossasenhora.online</a><br>
+    Se tiver qualquer dúvida ou precisar do seu código PIX atualizado, basta responder a este e-mail que nossa equipe de suporte irá te ajudar com carinho.
+  </p>
+
+  <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 24px 0 14px;">
+  <p style="font-size: 12px; color: #94a3b8; text-align: center; margin: 0;">
+    Agenda Católica 2027 · Suporte: suporte@suporteagenda.online
+  </p>
+</div>`.trim();
+
+      } else if (template === 'bonus_offer') {
+        document.getElementById('email-subject').value = '🎁 Oportunidade Especial: Seus 5 Bônus Exclusivos da Agenda Católica 2027';
+        document.getElementById('email-message').value = `
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px 16px; color: #1e293b; line-height: 1.6;">
+  <div style="text-align: center; margin-bottom: 24px;">
+    <h2 style="color: #0c1830; font-size: 22px; margin: 0 0 6px;">Condição Especial para Membros 🙏✨</h2>
+    <p style="color: #64748b; font-size: 14px; margin: 0;">Agenda Católica 2027 · Coleção Completa</p>
+  </div>
+  <p style="font-size: 15px;">Olá, <strong>{NOME}</strong>!</p>
+  <p style="font-size: 15px;">Que a graça de Nosso Senhor Jesus Cristo e a proteção de Nossa Senhora estejam com você e com a sua família!</p>
+  <p style="font-size: 15px;">Liberamos uma oportunidade exclusiva para você garantir o pacote completo da <strong>Agenda Católica 2027</strong> com todos os <strong>5 Bônus Especiais de Oração e Organização</strong>:</p>
+  <div style="background-color: #fefce8; border-left: 4px solid #eab308; padding: 14px; margin: 20px 0; font-size: 14px;">
+    <p style="margin: 0 0 6px;"><strong>Bônus 1:</strong> Caderno de Novenas e Orações Fortes</p>
+    <p style="margin: 0 0 6px;"><strong>Bônus 2:</strong> Planejador de Leitura Bíblica Anual</p>
+    <p style="margin: 0 0 6px;"><strong>Bônus 3:</strong> Rastreador de Hábitos de Fé e Devoção</p>
+    <p style="margin: 0 0 6px;"><strong>Bônus 4:</strong> Guia Completo para uma Boa Confissão</p>
+    <p style="margin: 0;"><strong>Bônus 5:</strong> Marcadores de Página Católicos para Imprimir</p>
+  </div>
+  <div style="text-align: center; margin: 26px 0;">
+    <a href="https://agendanossasenhora.online" target="_blank" style="background-color: #16a34a; color: #ffffff; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; font-size: 15px; display: inline-block;">
+      👉 ACESSAR OFERTA NO SITE OFICIAL
+    </a>
+  </div>
+  <p style="font-size: 13px; color: #64748b; text-align: center;">Ou acesse diretamente: <a href="https://agendanossasenhora.online" style="color: #1d4d90;">https://agendanossasenhora.online</a></p>
+  <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 24px 0 14px;">
+  <p style="font-size: 12px; color: #94a3b8; text-align: center;">Agenda Católica 2027 · suporte@suporteagenda.online</p>
+</div>`.trim();
+
+      } else if (template === 'access_drive') {
+        document.getElementById('email-subject').value = '📥 Reenvio do seu acesso vitalício: Agenda Católica 2027';
+        document.getElementById('email-message').value = `
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px 16px; color: #1e293b; line-height: 1.6;">
+  <div style="text-align: center; margin-bottom: 24px;">
+    <h2 style="color: #0c1830; font-size: 22px; margin: 0 0 6px;">Seus Arquivos no Google Drive 📥</h2>
+    <p style="color: #64748b; font-size: 14px; margin: 0;">Agenda Católica 2027 · Acesso Imediato</p>
+  </div>
+  <p style="font-size: 15px;">Olá, <strong>{NOME}</strong>!</p>
+  <p style="font-size: 15px;">Estamos reenviando o link direto para você baixar seus arquivos da <strong>Agenda Católica 2027</strong> diretamente no Google Drive:</p>
+  <div style="text-align: center; margin: 26px 0;">
+    <a href="${driveLink}" target="_blank" style="background-color: #16a34a; color: #ffffff; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; font-size: 15px; display: inline-block;">
+      📥 ACESSAR ARQUIVOS NO GOOGLE DRIVE
+    </a>
+  </div>
+  <p style="font-size: 13px; color: #64748b;">Link direto: <a href="${driveLink}">${driveLink}</a></p>
+  <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 24px 0 14px;">
+  <p style="font-size: 12px; color: #94a3b8; text-align: center;">Agenda Católica 2027 · suporte@suporteagenda.online</p>
+</div>`.trim();
+
+      } else {
+        document.getElementById('email-subject').value = '';
+        document.getElementById('email-message').value = '';
+      }
+    }
+
+    // ========================================================
+    // MOTOR DE DISPARO COM INTERVALO DE 2 SEGUNDOS
+    // ========================================================
+
+    async function startBatchSending() {
+      const audienceType = document.querySelector('input[name="audience"]:checked')?.value || 'pending';
+      const subject = document.getElementById('email-subject').value.trim();
+      const rawMessage = document.getElementById('email-message').value.trim();
+
+      if (!subject || !rawMessage) {
+        alert('Por favor, preencha o assunto e o corpo do e-mail.');
+        return;
+      }
+
+      let targetList = [];
+
+      if (audienceType === 'single') {
+        const singleEmail = document.getElementById('email-to').value.trim();
+        if (!singleEmail) {
+          alert('Por favor, informe o e-mail de destino.');
+          return;
+        }
+        targetList = [{
+          customer_email: singleEmail,
+          customer_name: 'Irmão(ã) em Cristo',
+        }];
+      } else if (audienceType === 'selected') {
+        if (selectedOrderIds.size === 0) {
+          alert('Nenhum pedido foi selecionado na tabela. Marque as caixinhas ao lado dos clientes primeiro.');
+          return;
+        }
+        targetList = allOrders.filter(o => selectedOrderIds.has(o.id) && o.customer_email);
+      } else if (audienceType === 'pending') {
+        targetList = allOrders.filter(o => o.status === 'pending' && o.customer_email);
+      } else if (audienceType === 'paid') {
+        targetList = allOrders.filter(o => o.status === 'paid' && o.customer_email);
+      } else if (audienceType === 'all') {
+        targetList = allOrders.filter(o => !!o.customer_email);
+      }
+
+      if (targetList.length === 0) {
+        alert('Nenhum destinatário com e-mail válido encontrado para este filtro.');
+        return;
+      }
+
+      const uniqueTargets = [];
+      const seenEmails = new Set();
+      for (const item of targetList) {
+        const emailLower = item.customer_email.trim().toLowerCase();
+        if (!seenEmails.has(emailLower)) {
+          seenEmails.add(emailLower);
+          uniqueTargets.push(item);
+        }
+      }
+
+      const total = uniqueTargets.length;
+      const confirmMsg = `Deseja iniciar o disparo para ${total} contato(s)?\n\nTempo estimado: ~${total * 2} segundos (com pausa segura de 2s por envio para proteção do Resend).`;
+      if (!confirm(confirmMsg)) return;
+
+      isSendingBatch = true;
+      cancelRequested = false;
+
+      document.getElementById('btn-start-send').style.display = 'none';
+      document.getElementById('btn-cancel-send').style.display = 'block';
+      
+      const progressBox = document.getElementById('progress-box');
+      progressBox.classList.add('active');
+
+      const progressBar = document.getElementById('progress-bar');
+      const progressPercent = document.getElementById('progress-percentage');
+      const statusText = document.getElementById('progress-status-text');
+      const logBox = document.getElementById('progress-log');
+      logBox.innerHTML = '';
+
+      document.getElementById('stat-total').innerText = total;
+      let successCount = 0;
+      let failedCount = 0;
+      document.getElementById('stat-success').innerText = '0';
+      document.getElementById('stat-failed').innerText = '0';
+
+      const password = sessionStorage.getItem('painel_pass');
+
+      appendLog(`🚀 Iniciando disparo para ${total} destinatários...`, 'info');
+
+      for (let i = 0; i < total; i++) {
+        if (cancelRequested) {
+          appendLog(`⏹️ Disparo cancelado pelo usuário no contato ${i + 1} de ${total}.`, 'error');
+          statusText.innerText = 'Disparo Interrompido';
+          break;
+        }
+
+        const contact = uniqueTargets[i];
+        const firstName = (contact.customer_name || 'Irmão(ã) em Cristo').split(' ')[0];
+        const personalizedHtml = rawMessage.replace(/\{NOME\}/g, firstName);
+
+        statusText.innerText = `Enviando ${i + 1} de ${total}: ${contact.customer_email}...`;
+        
+        const remaining = (total - (i + 1)) * 2;
+        document.getElementById('stat-eta').innerText = `Restam ~${remaining}s`;
+
+        try {
+          const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': ANON_KEY,
+              'Authorization': 'Bearer ' + ANON_KEY,
+              'x-admin-password': password,
+            },
+            body: JSON.stringify({
+              action: 'send_remarketing',
+              to: contact.customer_email,
+              subject: subject,
+              html_content: personalizedHtml,
+            }),
+          });
+
+          const data = await res.json();
+          if (data.success) {
+            successCount++;
+            document.getElementById('stat-success').innerText = successCount;
+            appendLog(`[${new Date().toLocaleTimeString()}] ✅ ${contact.customer_name || 'Cliente'} (${contact.customer_email}) enviado com sucesso!`, 'success');
+          } else {
+            failedCount++;
+            document.getElementById('stat-failed').innerText = failedCount;
+            appendLog(`[${new Date().toLocaleTimeString()}] ❌ ${contact.customer_email}: ${data.error || 'Erro no Resend'}`, 'error');
+          }
+        } catch (err) {
+          failedCount++;
+          document.getElementById('stat-failed').innerText = failedCount;
+          appendLog(`[${new Date().toLocaleTimeString()}] ❌ ${contact.customer_email}: Falha de conexão`, 'error');
+        }
+
+        const pct = Math.round(((i + 1) / total) * 100);
+        progressBar.style.width = pct + '%';
+        progressPercent.innerText = pct + '%';
+
+        if (i < total - 1 && !cancelRequested) {
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+      }
+
+      isSendingBatch = false;
+      document.getElementById('btn-cancel-send').style.display = 'none';
+      document.getElementById('btn-start-send').style.display = 'block';
+      document.getElementById('btn-start-send').innerText = '✅ Disparo Concluído!';
+      document.getElementById('stat-eta').innerText = 'Finalizado';
+      
+      if (!cancelRequested) {
+        statusText.innerText = 'Disparo Concluído com Sucesso!';
+        appendLog(`🎉 Concluído: ${successCount} enviados com sucesso, ${failedCount} falhas.`, 'info');
+        showToast(`Disparo concluído: ${successCount} enviados, ${failedCount} falhas.`);
+      }
+    }
+
+    function cancelBatchSending() {
+      if (confirm('Deseja interromper o envio dos próximos e-mails da fila?')) {
+        cancelRequested = true;
+      }
+    }
+
+    function appendLog(text, type = '') {
+      const logBox = document.getElementById('progress-log');
+      const div = document.createElement('div');
+      div.className = `log-entry ${type}`;
+      div.innerText = text;
+      logBox.appendChild(div);
+      logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    // Fechar Modal
+    function closeModal(id) {
+      if (id === 'modal-email' && isSendingBatch) {
+        if (!confirm('O disparo de e-mails ainda está em andamento. Deseja realmente fechar? Os envios continuarão em segundo plano até você pausar.')) {
+          return;
+        }
+      }
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // Escapar HTML para Segurança XSS
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // Inicialização ao carregar a página
+    window.addEventListener('DOMContentLoaded', checkAuth);
+  </script>
+</body>
+</html>

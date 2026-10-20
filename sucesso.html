@@ -9,6 +9,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+  <!-- Meta Pixel + Conversions Deduplication -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1133049763020624');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1133049763020624&ev=PageView&noscript=1"
+  /></noscript>
+
   <style>
     :root {
       --navy-950: #070e1c;
@@ -288,18 +305,17 @@
 
       <h3 class="downloads-title">📥 Seus Arquivos Prontos para Download:</h3>
 
-      <!-- ARQUIVO PRINCIPAL: AGENDA CATÓLICA 2027 -->
-      <div class="file-item">
-        <div class="file-info">
-          <div class="file-icon">📄</div>
-          <div class="file-text">
-            <h4>Agenda Católica 2027 Completa (PDF)</h4>
-            <span>Liturgia Diária dos 365 Dias · Formatos A4 e A5 em alta resolução</span>
-          </div>
-        </div>
-        <a class="btn-download" href="Agenda Católica 2027 com Liturgia Diária.html" download="Agenda_Catolica_2027.pdf" target="_blank">
-          ⬇ BAIXAR AGORA
+      <!-- ACESSO DIRETO AO GOOGLE DRIVE -->
+      <div style="background: #f0fdf4; border: 2px solid #86efac; border-radius: var(--radius-md); padding: 22px 20px; text-align: center; margin-bottom: 24px;">
+        <h4 style="color: #15803d; font-size: 1.15rem; font-weight: 800; margin-bottom: 6px;">📂 Pasta Oficial no Google Drive</h4>
+        <p style="font-size: 0.88rem; color: #166534; margin-bottom: 16px;">Todos os seus arquivos organizados em alta resolução prontos para download ou salvamento na nuvem:</p>
+        <a class="btn-download" id="btn-drive-folder" href="https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing" target="_blank" style="display:inline-block; padding: 14px 28px; font-size: 1rem;">
+          👉 ABRIR ARQUIVOS NO GOOGLE DRIVE
         </a>
+        <div style="margin-top: 14px; font-size: 0.78rem; color: #4b5563; word-break: break-all;">
+          <span>Link direto: </span>
+          <a id="link-drive-folder" href="https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing" target="_blank" style="color: #1d4d90; text-decoration: underline;">https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing</a>
+        </div>
       </div>
 
       <div id="bonus-section">
@@ -393,14 +409,51 @@
   </main>
 
   <script>
-    // Recupera order_id da URL
+    // Recupera parâmetros da URL
     var params = new URLSearchParams(window.location.search);
-    var orderId = params.get('order_id');
-    var plan = params.get('plan');
+    var plan = params.get('plan') || 'completo';
+
+    var DRIVE_LINKS = {
+      basico: 'https://drive.google.com/drive/folders/1vstC1uvFR11TZIg5zXpILGT-khchTjJp?usp=sharing',
+      completo: 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing'
+    };
+
+    var targetDriveLink = DRIVE_LINKS[plan] || DRIVE_LINKS.completo;
+
+    var btnDrive = document.getElementById('btn-drive-folder');
+    var linkDrive = document.getElementById('link-drive-folder');
+    if (btnDrive) btnDrive.href = targetDriveLink;
+    if (linkDrive) {
+      linkDrive.href = targetDriveLink;
+      linkDrive.textContent = targetDriveLink;
+    }
 
     if (plan === 'basico') {
       var bonusSection = document.getElementById('bonus-section');
       if (bonusSection) bonusSection.style.display = 'none';
+      var pageTitle = document.getElementById('page-title');
+      if (pageTitle) pageTitle.textContent = 'Sua Agenda Católica 2027 Chegou!';
+    }
+
+    // Dispara Purchase via Pixel com deduplicação segura (eventID: purchase_orderId)
+    // Se o evento já foi processado no modal ou pelo CAPI, a Meta deduplica perfeitamente
+    var orderId = params.get('order_id');
+    var purchaseEventId = orderId ? ('purchase_' + orderId) : ('eid_pur_' + Date.now());
+    var amountValue = plan === 'basico' ? 19.90 : 27.90;
+    var packageName = plan === 'basico' ? 'Agenda Católica 2027 Básica' : 'Agenda Católica 2027 + 5 Bônus Exclusivos';
+    var contentId = plan === 'basico' ? 'agenda-catolica-2027-basica' : 'agenda-catolica-2027-completa';
+
+    if (typeof fbq === 'function') {
+      fbq('track', 'Purchase', {
+        content_name: packageName,
+        content_ids: [contentId],
+        content_type: 'product',
+        content_category: 'Produtos Digitais > Agenda Católica',
+        value: amountValue,
+        currency: 'BRL',
+        num_items: 1,
+        order_id: orderId || ''
+      }, { eventID: purchaseEventId });
     }
   </script>
 </body>

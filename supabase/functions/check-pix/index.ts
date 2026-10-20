@@ -1,7 +1,9 @@
+// @ts-nocheck
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { corsHeaders } from '../_shared/cors.ts';
 import { sendDeliveryEmail } from '../_shared/email.ts';
+import { sendMetaEvent } from '../_shared/meta.ts';
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -11,7 +13,7 @@ serve(async (req) => {
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL') || '';
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
-    const pushinToken = Deno.env.get('PUSHINPAY_TOKEN') || '';
+    const pushinToken = Deno.env.get('PUSHINPAY_TOKEN') || '72676|8QUpNQcdgWRminwQupCLHOtgNW7wWdBXGk2OJEdR338642a9';
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
@@ -91,6 +93,38 @@ serve(async (req) => {
                   .eq('id', order.id);
                 order.email_sent = true;
               }
+            }
+
+            // Dispara evento Purchase na Meta Conversions API (CAPI)
+            // com event_id único correspondente ao ID do pedido para deduplicação sem contagem dupla
+            try {
+              const purchaseEventId = `purchase_${order.id}`;
+              const amount = order.amount_cents ? (order.amount_cents / 100) : (order.plan === 'basico' ? 19.90 : 27.90);
+
+              sendMetaEvent({
+                eventName: 'Purchase',
+                eventId: purchaseEventId,
+                eventSourceUrl: 'https://agendanossasenhora.online',
+                userData: {
+                  email: order.customer_email,
+                  phone: order.customer_phone,
+                  name: order.customer_name,
+                  fbc: order.fbc || undefined,
+                  fbp: order.fbp || undefined,
+                  externalId: order.fbeid || order.id || undefined,
+                },
+                customData: {
+                  currency: 'BRL',
+                  value: amount,
+                  content_name: order.plan === 'completo' ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica',
+                  content_ids: [order.plan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'],
+                  content_type: 'product',
+                  num_items: 1,
+                  order_id: order.id,
+                }
+              }).catch(metaErr => console.error('Erro assíncrono ao enviar CAPI Purchase (CheckPix):', metaErr));
+            } catch (metaErr) {
+              console.error('Erro ao agendar CAPI Purchase (CheckPix):', metaErr);
             }
 
             return new Response(
