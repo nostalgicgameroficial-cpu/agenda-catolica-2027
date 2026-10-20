@@ -1698,8 +1698,136 @@
       border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    footer p {
-      margin-bottom: 6px;
+    /* ===================================================
+       CARROSSEL DE DEPOIMENTOS DO WHATSAPP (APENAS IMAGENS)
+       =================================================== */
+    .hero-testimonials {
+      width: 100%;
+      max-width: 680px;
+      margin: 26px auto 10px;
+      text-align: center;
+      position: relative;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding: 10px 4px 18px;
+      scrollbar-width: none;
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-slide {
+      flex: 0 0 280px;
+      scroll-snap-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    @media (min-width: 480px) {
+      .carousel-slide {
+        flex: 0 0 310px;
+      }
+    }
+
+    .slide-card {
+      background: #0b141a;
+      border: 2px solid rgba(247, 214, 121, 0.4);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.7), 0 0 22px rgba(38, 100, 190, 0.25);
+      transition: all 0.25s ease;
+      display: block;
+      line-height: 0;
+    }
+
+    .slide-card:hover {
+      border-color: var(--gold-400);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.85), 0 0 30px rgba(201, 152, 52, 0.35);
+    }
+
+    .slide-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 18px;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(12, 24, 48, 0.92);
+      border: 2px solid var(--gold-500);
+      color: var(--gold-300);
+      font-size: 1.2rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+      transition: all 0.2s ease;
+    }
+
+    .carousel-btn:hover {
+      background: var(--gold-gradient);
+      color: #0c1830;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-btn.prev {
+      left: -14px;
+    }
+
+    .carousel-btn.next {
+      right: -14px;
+    }
+
+    @media (max-width: 540px) {
+      .carousel-btn {
+        display: none; /* No mobile o swipe natural pelo toque é mais fluido */
+      }
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .carousel-dots .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .carousel-dots .dot.active {
+      width: 28px;
+      border-radius: 10px;
+      background: var(--gold-gradient);
     }
   </style>
 </head>
@@ -1715,8 +1843,8 @@
     <div class="wrap">
       <div class="hero-content">
         
-        <!-- 1. HEADLINE PRINCIPAL (SEM O TEXTO ANTERIOR) -->
-        <h1>2027 NÃO PRECISA SER MAIS UM ANO EM QUE VOCÊ <em>TENTA</em> REZAR TODO DIA.</h1>
+        <!-- 1. HEADLINE PRINCIPAL -->
+        <h1>COMECE 2027 COM A <em>PALAVRA DE DEUS</em> NO CENTRO DA SUA VIDA.</h1>
 
         <!-- 2. IMAGEM DA HERO ENTRE A HEADLINE E A SUBHEADLINE (MOBILE-FIRST) -->
         <div class="hero-mid-image">
@@ -1746,6 +1874,52 @@
             <span>👉 QUERO MINHA AGENDA CATÓLICA 2027</span>
           </a>
           <span class="btn-subtext">⚡ Acesso imediato no e-mail e WhatsApp · A partir de apenas R$ 19,90</span>
+        </div>
+
+        <!-- 6. CARROSSEL DE DEPOIMENTOS DO WHATSAPP (APENAS IMAGENS) -->
+        <div class="hero-testimonials" id="depoimentos-whatsapp">
+          <div class="carousel-wrapper">
+            <button class="carousel-btn prev" aria-label="Depoimento Anterior" id="carousel-prev">❮</button>
+            <div class="carousel-track" id="carousel-track">
+              
+              <!-- DEPOIMENTO 1 -->
+              <div class="carousel-slide">
+                <div class="slide-card">
+                  <img src="assets/depoimento_whatsapp_1.png" alt="Depoimento WhatsApp Mariana Ferreira" width="414" height="820" loading="lazy">
+                </div>
+              </div>
+
+              <!-- DEPOIMENTO 2 -->
+              <div class="carousel-slide">
+                <div class="slide-card">
+                  <img src="assets/depoimento_whatsapp_2.png" alt="Depoimento WhatsApp Gabriel" width="414" height="820" loading="lazy">
+                </div>
+              </div>
+
+              <!-- DEPOIMENTO 3 -->
+              <div class="carousel-slide">
+                <div class="slide-card">
+                  <img src="assets/depoimento_whatsapp_3.png" alt="Depoimento WhatsApp Dona Teresa" width="414" height="820" loading="lazy">
+                </div>
+              </div>
+
+              <!-- DEPOIMENTO 4 -->
+              <div class="carousel-slide">
+                <div class="slide-card">
+                  <img src="assets/depoimento_whatsapp_4.png" alt="Depoimento WhatsApp Fernanda" width="414" height="820" loading="lazy">
+                </div>
+              </div>
+
+            </div>
+            <button class="carousel-btn next" aria-label="Próximo Depoimento" id="carousel-next">❯</button>
+          </div>
+
+          <div class="carousel-dots" id="carousel-dots">
+            <span class="dot active" data-index="0" aria-label="Ir para depoimento 1"></span>
+            <span class="dot" data-index="1" aria-label="Ir para depoimento 2"></span>
+            <span class="dot" data-index="2" aria-label="Ir para depoimento 3"></span>
+            <span class="dot" data-index="3" aria-label="Ir para depoimento 4"></span>
+          </div>
         </div>
 
       </div>
@@ -2487,6 +2661,58 @@
           }
         });
       }
+
+      // ─── CARROSSEL DE DEPOIMENTOS DO WHATSAPP ───────────
+      (function initTestimonialCarousel() {
+        var track = document.getElementById('carousel-track');
+        var prevBtn = document.getElementById('carousel-prev');
+        var nextBtn = document.getElementById('carousel-next');
+        var dots = document.querySelectorAll('#carousel-dots .dot');
+        var slides = document.querySelectorAll('.carousel-slide');
+        if (!track || !slides.length) return;
+
+        function getSlideWidth() {
+          var slide = slides[0];
+          var gap = 18;
+          return slide ? slide.offsetWidth + gap : 330;
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function() {
+            track.scrollBy({ left: -getSlideWidth(), behavior: 'smooth' });
+          });
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function() {
+            track.scrollBy({ left: getSlideWidth(), behavior: 'smooth' });
+          });
+        }
+
+        dots.forEach(function(dot, idx) {
+          dot.addEventListener('click', function() {
+            if (slides[idx]) {
+              slides[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+          });
+        });
+
+        // Atualizar bolinhas indicadoras ao rolar
+        var scrollTimeout;
+        track.addEventListener('scroll', function() {
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(function() {
+            var scrollLeft = track.scrollLeft;
+            var slideWidth = getSlideWidth();
+            var activeIdx = Math.round(scrollLeft / slideWidth);
+            activeIdx = Math.max(0, Math.min(activeIdx, dots.length - 1));
+            dots.forEach(function(d, i) {
+              if (i === activeIdx) d.classList.add('active');
+              else d.classList.remove('active');
+            });
+          }, 60);
+        }, { passive: true });
+      })();
 
       // ─── LOG DE DIAGNÓSTICO (só em dev) ─────────────────
       if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
