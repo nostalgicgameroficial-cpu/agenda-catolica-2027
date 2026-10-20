@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Seus Arquivos Chegaram! · Agenda Católica 2027</title>
+  <meta name="description" content="Página de download e acesso aos arquivos da Agenda Católica 2027 e Bônus Devocionais.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy-950: #070e1c;
+      --navy-900: #0c1830;
+      --navy-850: #122244;
+      --blue-marian: #1d4d90;
+      --blue-accent: #2664be;
+      --blue-soft: #ebf3fd;
+      --blue-canvas: #f4f8fd;
+      --gold-500: #c99834;
+      --gold-300: #f4cc6e;
+      --gold-gradient: linear-gradient(135deg, #f7d679 0%, #d8a436 45%, #b3801f 100%);
+      --green-btn: #16a34a;
+      --green-btn-hover: #15803d;
+      --ink-primary: #181f2c;
+      --ink-secondary: #42526e;
+      --line: #d8e4f2;
+      --white: #ffffff;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --shadow-card: 0 8px 24px rgba(12, 24, 48, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--blue-canvas);
+      color: var(--ink-primary);
+      line-height: 1.6;
+      padding: 0 0 60px;
+    }
+
+    .top-header {
+      background: linear-gradient(135deg, #0c1830 0%, #1d4d90 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 40px 16px 50px;
+      border-bottom: 3px solid var(--gold-500);
+    }
+
+    .top-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(247, 214, 121, 0.18);
+      border: 1px solid rgba(247, 214, 121, 0.4);
+      color: var(--gold-300);
+      padding: 5px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .top-header h1 {
+      font-size: clamp(1.6rem, 4.5vw, 2.3rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .top-header p {
+      color: #cbd8ef;
+      font-size: 1.05rem;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 820px;
+      margin: -24px auto 0;
+      padding: 0 16px;
+    }
+
+    .card-main {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 28px 20px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--line);
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .card-main { padding: 36px 32px; }
+    }
+
+    .alert-success {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .alert-icon {
+      font-size: 1.6rem;
+      color: #16a34a;
+      flex-shrink: 0;
+    }
+
+    .alert-text strong {
+      display: block;
+      color: #15803d;
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .alert-text span {
+      font-size: 0.84rem;
+      color: #166534;
+    }
+
+    .downloads-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .file-item {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 18px;
+      background: var(--blue-canvas);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      margin-bottom: 12px;
+      transition: all 0.2s ease;
+    }
+
+    @media (min-width: 540px) {
+      .file-item {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .file-item:hover {
+      border-color: var(--blue-accent);
+      background: #ffffff;
+      box-shadow: 0 4px 14px rgba(12, 24, 48, 0.05);
+    }
+
+    .file-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .file-icon {
+      width: 44px;
+      height: 44px;
+      background: #fee2e2;
+      color: #dc2626;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .file-icon.gold {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .file-text h4 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 2px;
+    }
+
+    .file-text span {
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--green-btn);
+      color: #ffffff;
+      padding: 12px 22px;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-download:hover {
+      background: var(--green-btn-hover);
+      transform: translateY(-2px);
+    }
+
+    .guide-box {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 26px 20px;
+      margin-top: 20px;
+    }
+
+    .guide-box h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 12px;
+    }
+
+    .guide-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    @media (min-width: 600px) {
+      .guide-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .guide-item {
+      padding: 14px 16px;
+      background: var(--blue-canvas);
+      border-radius: var(--radius-md);
+    }
+
+    .guide-item strong {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--navy-900);
+      margin-bottom: 4px;
+    }
+
+    .guide-item p {
+      font-size: 0.82rem;
+      color: var(--ink-secondary);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-header">
+    <span class="top-badge">✨ Acesso Liberado com Sucesso</span>
+    <h1 id="page-title">Sua Agenda Católica 2027 Chegou!</h1>
+    <p id="page-subtitle">Faça o download dos seus materiais digitais abaixo e salve no seu dispositivo.</p>
+  </header>
+
+  <main class="wrap">
+    <div class="card-main">
+      <div class="alert-success">
+        <span class="alert-icon">✓</span>
+        <div class="alert-text">
+          <strong>Pagamento Confirmado!</strong>
+          <span id="cust-msg">Uma cópia com todos os links também foi enviada para o seu e-mail cadastrado.</span>
+        </div>
+      </div>
+
+      <h3 class="downloads-title">📥 Seus Arquivos Prontos para Download:</h3>
+
+      <!-- ARQUIVO PRINCIPAL: AGENDA CATÓLICA 2027 -->
+      <div class="file-item">
+        <div class="file-info">
+          <div class="file-icon">📄</div>
+          <div class="file-text">
+            <h4>Agenda Católica 2027 Completa (PDF)</h4>
+            <span>Liturgia Diária dos 365 Dias · Formatos A4 e A5 em alta resolução</span>
+          </div>
+        </div>
+        <a class="btn-download" href="Agenda Católica 2027 com Liturgia Diária.html" download="Agenda_Catolica_2027.pdf" target="_blank">
+          ⬇ BAIXAR AGORA
+        </a>
+      </div>
+
+      <div id="bonus-section">
+        <!-- BÔNUS 1 -->
+        <div class="file-item">
+          <div class="file-info">
+            <div class="file-icon gold">🎁</div>
+            <div class="file-text">
+              <h4>Bônus 1: Caderno de Novenas e Orações Poderosas</h4>
+              <span>Coletânea de Novenas e Terço da Misericórdia (PDF)</span>
+            </div>
+          </div>
+          <a class="btn-download" href="assets/bonus1_novenas.jpg" download="Bonus_1_Novenas.jpg" target="_blank">
+            ⬇ BAIXAR
+          </a>
+        </div>
+
+        <!-- BÔNUS 2 -->
+        <div class="file-item">
+          <div class="file-info">
+            <div class="file-icon gold">🎁</div>
+            <div class="file-text">
+              <h4>Bônus 2: Guia da Via Sacra Ilustrada</h4>
+              <span>As 14 estações com meditações de Santo Afonso (PDF)</span>
+            </div>
+          </div>
+          <a class="btn-download" href="assets/bonus2_viasacra.jpg" download="Bonus_2_Via_Sacra.jpg" target="_blank">
+            ⬇ BAIXAR
+          </a>
+        </div>
+
+        <!-- BÔNUS 3 -->
+        <div class="file-item">
+          <div class="file-info">
+            <div class="file-icon gold">🎁</div>
+            <div class="file-text">
+              <h4>Bônus 3: Calendário Litúrgico de Parede 2027</h4>
+              <span>Pôster colorido em alta resolução para imprimir (PDF A4)</span>
+            </div>
+          </div>
+          <a class="btn-download" href="assets/bonus3_calendario.jpg" download="Bonus_3_Calendario.jpg" target="_blank">
+            ⬇ BAIXAR
+          </a>
+        </div>
+
+        <!-- BÔNUS 4 -->
+        <div class="file-item">
+          <div class="file-info">
+            <div class="file-icon gold">🎁</div>
+            <div class="file-text">
+              <h4>Bônus 4: Plano de Leitura da Bíblia em 1 Ano</h4>
+              <span>Cronograma diário estruturado do Gênesis ao Apocalipse</span>
+            </div>
+          </div>
+          <a class="btn-download" href="assets/bonus4_leitura_biblia.jpg" download="Bonus_4_Plano_Biblico.jpg" target="_blank">
+            ⬇ BAIXAR
+          </a>
+        </div>
+
+        <!-- BÔNUS 5 -->
+        <div class="file-item">
+          <div class="file-info">
+            <div class="file-icon gold">🎁</div>
+            <div class="file-text">
+              <h4>Bônus 5: Kit 12 Marcadores de Páginas Católicos</h4>
+              <span>Lâminas ilustradas em alta resolução para impressão</span>
+            </div>
+          </div>
+          <a class="btn-download" href="assets/bonus5_marcadores.jpg" download="Bonus_5_Marcadores.jpg" target="_blank">
+            ⬇ BAIXAR
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- GUIA DE USO -->
+    <div class="guide-box">
+      <h3>💡 Como usar o seu material:</h3>
+      <div class="guide-grid">
+        <div class="guide-item">
+          <strong>🖨️ Para Imprimir e Encadernar:</strong>
+          <p>Você pode imprimir em casa ou levar a qualquer papelaria/gráfica rápida. Peça para imprimir frente e verso em folha A4 ou A5 e encadernar com espiral plástica ou capa dura.</p>
+        </div>
+        <div class="guide-item">
+          <strong>📱 No iPad, Tablet ou Celular:</strong>
+          <p>Abra o arquivo diretamente em aplicativos como GoodNotes, Samsung Notes, Notability, Xodo ou Adobe Acrobat para escrever com caneta stylus ou digitar.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Recupera order_id da URL
+    var params = new URLSearchParams(window.location.search);
+    var orderId = params.get('order_id');
+    var plan = params.get('plan');
+
+    if (plan === 'basico') {
+      var bonusSection = document.getElementById('bonus-section');
+      if (bonusSection) bonusSection.style.display = 'none';
+    }
+  </script>
+</body>
+</html>

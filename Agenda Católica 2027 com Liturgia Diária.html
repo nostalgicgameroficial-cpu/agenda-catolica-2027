@@ -1839,6 +1839,401 @@
       border-radius: 10px;
       background: var(--gold-gradient);
     }
+
+    /* ===================================================
+       CHECKOUT PRÓPRIO NATIVO (MODAL DE ALTA CONVERSÃO)
+       =================================================== */
+    .checkout-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(7, 14, 28, 0.78);
+      backdrop-filter: blur(6px);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      padding: 14px;
+      overflow-y: auto;
+    }
+
+    .checkout-modal.active {
+      display: flex;
+    }
+
+    .checkout-dialog {
+      background: #ffffff;
+      width: 100%;
+      max-width: 520px;
+      border-radius: 22px;
+      box-shadow: 0 25px 60px rgba(7, 14, 28, 0.45);
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--line);
+      animation: modalFadeIn 0.28s ease-out;
+      margin: auto;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .checkout-header {
+      background: linear-gradient(135deg, #0c1830 0%, #1d4d90 100%);
+      color: #ffffff;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--gold-500);
+    }
+
+    .checkout-header-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .checkout-close-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #ffffff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+
+    .checkout-close-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .checkout-body {
+      padding: 20px 22px 24px;
+      max-height: 82vh;
+      overflow-y: auto;
+    }
+
+    /* SELETOR DE PLANOS NO CHECKOUT */
+    .checkout-plans-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .checkout-plan-opt {
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 10px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .checkout-plan-opt.selected {
+      border-color: #16a34a;
+      background: #f0fdf4;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.15);
+    }
+
+    .checkout-plan-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ea580c;
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .checkout-plan-name {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 4px;
+    }
+
+    .checkout-plan-price {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #15803d;
+    }
+
+    /* FORMULÁRIO DE DADOS */
+    .checkout-field {
+      margin-bottom: 14px;
+    }
+
+    .checkout-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 6px;
+    }
+
+    .checkout-input {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--ink-primary);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #ffffff;
+    }
+
+    .checkout-input:focus {
+      outline: none;
+      border-color: var(--blue-accent);
+      box-shadow: 0 0 0 3px rgba(38, 100, 190, 0.15);
+    }
+
+    .checkout-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .checkout-field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* MÉTODOS DE PAGAMENTO */
+    .checkout-payment-tabs {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0 14px;
+    }
+
+    .checkout-pay-tab {
+      flex: 1;
+      padding: 10px 8px;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: #f8fafc;
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .checkout-pay-tab.active {
+      border-color: #16a34a;
+      background: #f0fdf4;
+      color: #15803d;
+    }
+
+    .checkout-pay-tab .tag-fast {
+      font-size: 0.62rem;
+      background: #22c55e;
+      color: #ffffff;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    /* AVISO OBRIGATÓRIO PUSHINPAY (ITEM 4.10) */
+    .pushinpay-legal-notice {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.72rem;
+      color: #64748b;
+      line-height: 1.45;
+      margin: 14px 0 16px;
+      text-align: justify;
+    }
+
+    .pushinpay-legal-notice strong {
+      color: #475569;
+    }
+
+    /* BOTÃO SUBMIT */
+    .checkout-submit-btn {
+      width: 100%;
+      background: var(--green-btn);
+      color: #ffffff;
+      border: none;
+      padding: 16px 20px;
+      border-radius: var(--radius-full);
+      font-size: 1.05rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 6px 18px rgba(22, 163, 74, 0.35);
+      transition: all 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .checkout-submit-btn:hover {
+      background: var(--green-btn-hover);
+      transform: translateY(-2px);
+    }
+
+    .checkout-submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .checkout-security-seals {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      font-size: 0.74rem;
+      color: var(--ink-muted);
+      font-weight: 600;
+      margin-top: 12px;
+    }
+
+    /* TELA DO PIX (QR CODE) */
+    .pix-screen {
+      display: none;
+      text-align: center;
+      padding: 8px 0;
+    }
+
+    .pix-screen.active {
+      display: block;
+    }
+
+    .pix-qr-container {
+      background: #ffffff;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      display: inline-block;
+      margin: 12px auto 14px;
+      box-shadow: 0 8px 24px rgba(12, 24, 48, 0.06);
+    }
+
+    .pix-qr-container img {
+      width: 220px;
+      height: 220px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .pix-copy-box {
+      margin: 14px 0;
+    }
+
+    .pix-code-input {
+      width: 100%;
+      background: #f1f5f9;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 0.78rem;
+      font-family: monospace;
+      color: #334155;
+      margin-bottom: 8px;
+      cursor: text;
+    }
+
+    .btn-copy-pix {
+      width: 100%;
+      background: linear-gradient(135deg, #1d4d90 0%, #0c1830 100%);
+      color: #ffffff;
+      border: 2px solid var(--gold-500);
+      padding: 13px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy-pix:hover {
+      background: var(--gold-gradient);
+      color: #0c1830;
+    }
+
+    .pix-waiting-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--navy-900);
+      font-weight: 700;
+    }
+
+    .pix-pulse-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pixPulse 1.4s infinite;
+    }
+
+    @keyframes pixPulse {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.6; }
+    }
+
+    /* TELA DE SUCESSO DO CHECKOUT */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 16px 0;
+    }
+
+    .success-screen.active {
+      display: block;
+    }
+
+    .success-check-icon {
+      width: 70px;
+      height: 70px;
+      background: #dcfce7;
+      color: #16a34a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: 900;
+      margin: 0 auto 16px;
+      border: 3px solid #86efac;
+    }
   </style>
 </head>
 <body>
@@ -2547,6 +2942,144 @@
     </div>
   </section>
 
+  <!-- ===================================================
+       MODAL DE CHECKOUT PRÓPRIO NATIVO
+       =================================================== -->
+  <div class="checkout-modal" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+    <div class="checkout-dialog">
+      
+      <!-- HEADER DO CHECKOUT -->
+      <div class="checkout-header">
+        <div class="checkout-header-title">
+          <span>🔒</span>
+          <span id="checkout-title">Checkout 100% Seguro</span>
+        </div>
+        <button class="checkout-close-btn" id="close-checkout-btn" aria-label="Fechar">✕</button>
+      </div>
+
+      <div class="checkout-body">
+        
+        <!-- ETAPA 1: FORMULÁRIO DE DADOS & SELEÇÃO DE PLANO -->
+        <div id="checkout-step-form">
+          
+          <!-- SELETOR DE PLANO COM ORDER BUMP -->
+          <div class="checkout-plans-toggle">
+            <div class="checkout-plan-opt" id="opt-plan-basico" data-plan-target="basico">
+              <div class="checkout-plan-name">Agenda Básica</div>
+              <div class="checkout-plan-price">R$ 19,90</div>
+            </div>
+            <div class="checkout-plan-opt selected" id="opt-plan-completo" data-plan-target="completo">
+              <span class="checkout-plan-badge">★ MAIS ESCOLHIDO</span>
+              <div class="checkout-plan-name">Completa + 5 Bônus</div>
+              <div class="checkout-plan-price">R$ 27,90</div>
+            </div>
+          </div>
+
+          <form id="checkout-native-form" onsubmit="return false;">
+            
+            <div class="checkout-field">
+              <label class="checkout-label" for="cust-name">Seu Nome Completo *</label>
+              <input class="checkout-input" type="text" id="cust-name" placeholder="Ex: Maria Clara Silveira" required autocomplete="name">
+            </div>
+
+            <div class="checkout-field">
+              <label class="checkout-label" for="cust-email">Seu Melhor E-mail (para onde enviaremos os arquivos) *</label>
+              <input class="checkout-input" type="email" id="cust-email" placeholder="Ex: seuemail@gmail.com" required autocomplete="email">
+            </div>
+
+            <div class="checkout-field-row">
+              <div class="checkout-field">
+                <label class="checkout-label" for="cust-phone">WhatsApp com DDD *</label>
+                <input class="checkout-input" type="tel" id="cust-phone" placeholder="(11) 99999-9999" required autocomplete="tel">
+              </div>
+              <div class="checkout-field">
+                <label class="checkout-label" for="cust-cpf">CPF (para PIX) *</label>
+                <input class="checkout-input" type="text" id="cust-cpf" placeholder="000.000.000-00" required>
+              </div>
+            </div>
+
+            <!-- FORMA DE PAGAMENTO -->
+            <label class="checkout-label" style="margin-top: 6px;">Forma de Pagamento:</label>
+            <div class="checkout-payment-tabs">
+              <div class="checkout-pay-tab active">
+                <span>💠 PIX</span>
+                <span class="tag-fast">Aprovação Imediata</span>
+              </div>
+            </div>
+
+            <!-- AVISO OBRIGATÓRIO PUSHINPAY (ITEM 4.10 DOS TERMOS DE USO) -->
+            <div class="pushinpay-legal-notice">
+              <strong>Aviso legal:</strong> A PUSHIN PAY atua exclusivamente como processadora de pagamentos e não possui qualquer responsabilidade pela entrega, suporte, conteúdo, qualidade ou cumprimento das obrigações relacionadas aos produtos ou serviços oferecidos pelo vendedor.
+            </div>
+
+            <div id="checkout-form-error" style="display:none; color: #dc2626; font-size: 0.85rem; font-weight: 700; margin-bottom: 12px; text-align: center;"></div>
+
+            <!-- BOTÃO GERAR PIX -->
+            <button type="submit" class="checkout-submit-btn" id="btn-generate-pix">
+              <span>👉 GERAR PIX DE <strong id="btn-price-display">R$ 27,90</strong></span>
+            </button>
+
+            <div class="checkout-security-seals">
+              <span>🔒 256-bit SSL</span>
+              <span>⚡ Acesso Imediato</span>
+              <span>🛡️ 15 Dias de Garantia</span>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- ETAPA 2: EXIBIÇÃO DO QR CODE E CHAVE PIX -->
+        <div class="pix-screen" id="checkout-step-pix">
+          <h3 style="font-size: 1.15rem; color: var(--navy-900); font-weight: 800; margin-bottom: 4px;">
+            Quase lá! Pague via PIX para liberar agora:
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--ink-secondary); margin-bottom: 12px;">
+            Abra o app do seu banco e escaneie o QR Code ou copie o código abaixo:
+          </p>
+
+          <div class="pix-qr-container">
+            <img id="pix-qr-image" src="" alt="QR Code PIX">
+          </div>
+
+          <div class="pix-copy-box">
+            <input type="text" class="pix-code-input" id="pix-copy-paste" readonly>
+            <button type="button" class="btn-copy-pix" id="btn-copy-pix">
+              <span>📋 COPIAR CÓDIGO PIX COPIA E COLA</span>
+            </button>
+            <div id="copy-feedback" style="display:none; color: #15803d; font-size: 0.82rem; font-weight: 800; margin-top: 6px;">
+              ✓ Código PIX copiado com sucesso! Abra o app do seu banco e cole na opção Pix Copia e Cola.
+            </div>
+          </div>
+
+          <div class="pix-waiting-box">
+            <div class="pix-pulse-dot"></div>
+            <span>Aguardando pagamento... Liberando em tempo real</span>
+          </div>
+
+          <p style="font-size: 0.74rem; color: #64748b; margin-top: 10px;">
+            Assim que você concluir no aplicativo do seu banco, o sistema reconhecerá automaticamente e liberará o download.
+          </p>
+        </div>
+
+        <!-- ETAPA 3: SUCESSO E DOWNLOADS -->
+        <div class="success-screen" id="checkout-step-success">
+          <div class="success-check-icon">✓</div>
+          <h3 style="font-size: 1.35rem; color: #15803d; font-weight: 900; margin-bottom: 6px;">
+            PAGAMENTO CONFIRMADO! 🙏
+          </h3>
+          <p style="font-size: 0.92rem; color: var(--ink-secondary); margin-bottom: 18px;">
+            Sua <strong>Agenda Católica 2027</strong> está liberada! Enviamos todos os detalhes para o seu e-mail e você já pode acessar tudo agora mesmo:
+          </p>
+
+          <a href="#" class="checkout-submit-btn" id="btn-go-to-downloads" target="_blank" style="text-decoration:none;">
+            📥 BAIXAR MEUS ARQUIVOS AGORA
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <div class="wrap">
@@ -2622,43 +3155,296 @@
         observer.observe(pricingSection);
       }
 
+      // ─── CHECKOUT PRÓPRIO NATIVO ───────────────────────
+      var SUPABASE_FUNCTIONS_URL = 'https://cittmkbqdzxaexprujyy.supabase.co/functions/v1';
+      var checkoutModal = document.getElementById('checkout-modal');
+      var closeCheckoutBtn = document.getElementById('close-checkout-btn');
+      var stepForm = document.getElementById('checkout-step-form');
+      var stepPix = document.getElementById('checkout-step-pix');
+      var stepSuccess = document.getElementById('checkout-step-success');
+      var optBasico = document.getElementById('opt-plan-basico');
+      var optCompleto = document.getElementById('opt-plan-completo');
+      var btnPriceDisplay = document.getElementById('btn-price-display');
+      var btnGeneratePix = document.getElementById('btn-generate-pix');
+      var checkoutFormError = document.getElementById('checkout-form-error');
+      
+      var inputName = document.getElementById('cust-name');
+      var inputEmail = document.getElementById('cust-email');
+      var inputPhone = document.getElementById('cust-phone');
+      var inputCpf = document.getElementById('cust-cpf');
+
+      var pixQrImage = document.getElementById('pix-qr-image');
+      var pixCopyPaste = document.getElementById('pix-copy-paste');
+      var btnCopyPix = document.getElementById('btn-copy-pix');
+      var copyFeedback = document.getElementById('copy-feedback');
+      var btnGoToDownloads = document.getElementById('btn-go-to-downloads');
+
+      var currentPlan = 'completo';
+      var currentOrderId = null;
+      var pixPollingInterval = null;
+
+      function updatePlanUI(plan) {
+        currentPlan = plan === 'basico' ? 'basico' : 'completo';
+        if (currentPlan === 'basico') {
+          optBasico.classList.add('selected');
+          optCompleto.classList.remove('selected');
+          btnPriceDisplay.textContent = 'R$ 19,90';
+        } else {
+          optCompleto.classList.add('selected');
+          optBasico.classList.remove('selected');
+          btnPriceDisplay.textContent = 'R$ 27,90';
+        }
+      }
+
+      if (optBasico) {
+        optBasico.addEventListener('click', function() { updatePlanUI('basico'); });
+      }
+      if (optCompleto) {
+        optCompleto.addEventListener('click', function() { updatePlanUI('completo'); });
+      }
+
+      // Máscaras de entrada (Telefone e CPF)
+      if (inputPhone) {
+        inputPhone.addEventListener('input', function(e) {
+          var v = e.target.value.replace(/\D/g, '').slice(0, 11);
+          if (v.length > 10) {
+            e.target.value = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+          } else if (v.length > 6) {
+            e.target.value = '(' + v.slice(0,2) + ') ' + v.slice(2,6) + '-' + v.slice(6);
+          } else if (v.length > 2) {
+            e.target.value = '(' + v.slice(0,2) + ') ' + v.slice(2);
+          } else if (v.length > 0) {
+            e.target.value = '(' + v;
+          }
+        });
+      }
+
+      if (inputCpf) {
+        inputCpf.addEventListener('input', function(e) {
+          var v = e.target.value.replace(/\D/g, '').slice(0, 11);
+          if (v.length > 9) {
+            e.target.value = v.slice(0,3) + '.' + v.slice(3,6) + '.' + v.slice(6,9) + '-' + v.slice(9);
+          } else if (v.length > 6) {
+            e.target.value = v.slice(0,3) + '.' + v.slice(3,6) + '.' + v.slice(6);
+          } else if (v.length > 3) {
+            e.target.value = v.slice(0,3) + '.' + v.slice(3);
+          } else {
+            e.target.value = v;
+          }
+        });
+      }
+
+      function openCheckoutModal(plan) {
+        if (!checkoutModal) return;
+        updatePlanUI(plan || 'completo');
+        
+        // Reseta telas
+        stepForm.style.display = 'block';
+        stepPix.classList.remove('active');
+        stepSuccess.classList.remove('active');
+        checkoutFormError.style.display = 'none';
+        btnGeneratePix.disabled = false;
+        btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong id="btn-price-display">' + (currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90') + '</strong></span>';
+        
+        checkoutModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Dispara InitiateCheckout no Pixel
+        var product = PRODUCTS[currentPlan];
+        if (typeof window.fbTrackEvent === 'function' && product) {
+          var eventId = window.fbTrackEvent('InitiateCheckout', {
+            content_name: product.name,
+            content_ids: [product.id],
+            content_type: 'product',
+            content_category: product.category,
+            value: product.value,
+            currency: 'BRL',
+            num_items: 1
+          }, true);
+
+          try {
+            sessionStorage.setItem('_fb_last_checkout_event_id', eventId);
+            sessionStorage.setItem('_fb_last_checkout_plan', currentPlan);
+          } catch(err) {}
+        }
+      }
+
+      function closeCheckoutModal() {
+        if (!checkoutModal) return;
+        checkoutModal.classList.remove('active');
+        document.body.style.overflow = '';
+        if (pixPollingInterval) {
+          clearInterval(pixPollingInterval);
+          pixPollingInterval = null;
+        }
+      }
+
+      if (closeCheckoutBtn) {
+        closeCheckoutBtn.addEventListener('click', closeCheckoutModal);
+      }
+
+      if (checkoutModal) {
+        checkoutModal.addEventListener('click', function(e) {
+          if (e.target === checkoutModal) closeCheckoutModal();
+        });
+      }
+
+      // Copiar código PIX
+      if (btnCopyPix && pixCopyPaste) {
+        btnCopyPix.addEventListener('click', function() {
+          pixCopyPaste.select();
+          pixCopyPaste.setSelectionRange(0, 99999);
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(pixCopyPaste.value);
+          } else {
+            document.execCommand('copy');
+          }
+          if (copyFeedback) {
+            copyFeedback.style.display = 'block';
+            setTimeout(function() { copyFeedback.style.display = 'none'; }, 5000);
+          }
+        });
+      }
+
+      // Iniciar Polling de Verificação do PIX
+      function startPixPolling(orderId) {
+        if (pixPollingInterval) clearInterval(pixPollingInterval);
+
+        pixPollingInterval = setInterval(function() {
+          fetch(SUPABASE_FUNCTIONS_URL + '/check-pix', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ order_id: orderId })
+          })
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            if (data && data.status === 'paid') {
+              clearInterval(pixPollingInterval);
+              pixPollingInterval = null;
+
+              // Dispara Purchase no Pixel
+              var product = PRODUCTS[currentPlan];
+              if (typeof window.fbTrackEvent === 'function' && product) {
+                window.fbTrackEvent('Purchase', {
+                  content_name: product.name,
+                  content_ids: [product.id],
+                  content_type: 'product',
+                  value: product.value,
+                  currency: 'BRL',
+                  num_items: 1
+                }, true);
+              }
+
+              // Transiciona para tela de sucesso
+              stepPix.classList.remove('active');
+              stepSuccess.classList.add('active');
+              if (btnGoToDownloads) {
+                btnGoToDownloads.href = 'sucesso.html?order_id=' + orderId + '&plan=' + currentPlan;
+              }
+            }
+          })
+          .catch(function(err) {
+            console.warn('Polling check-pix:', err);
+          });
+        }, 3500);
+      }
+
+      // Submissão do Formulário de Checkout (Gerar PIX)
+      var checkoutForm = document.getElementById('checkout-native-form');
+      if (checkoutForm) {
+        checkoutForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          var name = inputName ? inputName.value.trim() : '';
+          var email = inputEmail ? inputEmail.value.trim() : '';
+          var phone = inputPhone ? inputPhone.value.trim() : '';
+          var cpf = inputCpf ? inputCpf.value.trim() : '';
+
+          if (!name || !email || !phone) {
+            if (checkoutFormError) {
+              checkoutFormError.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+              checkoutFormError.style.display = 'block';
+            }
+            return;
+          }
+
+          checkoutFormError.style.display = 'none';
+          btnGeneratePix.disabled = true;
+          btnGeneratePix.innerHTML = '<span>⏳ Gerando PIX...</span>';
+
+          var payload = {
+            name: name,
+            email: email,
+            phone: phone,
+            cpf: cpf,
+            plan: currentPlan,
+            tracking: window.fbTrackingData || {}
+          };
+
+          fetch(SUPABASE_FUNCTIONS_URL + '/create-pix', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          })
+          .then(function(res) {
+            return res.json().then(function(data) {
+              return { ok: res.ok, status: res.status, data: data };
+            });
+          })
+          .then(function(result) {
+            btnGeneratePix.disabled = false;
+            btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong>' + (currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90') + '</strong></span>';
+
+            if (!result.ok || !result.data || !result.data.qr_code) {
+              var errorMsg = (result.data && result.data.error) ? result.data.error : 'Erro ao gerar o PIX. Tente novamente.';
+              if (checkoutFormError) {
+                checkoutFormError.textContent = errorMsg;
+                checkoutFormError.style.display = 'block';
+              }
+              return;
+            }
+
+            // Sucesso na geração do PIX
+            currentOrderId = result.data.order_id;
+            stepForm.style.display = 'none';
+            stepPix.classList.add('active');
+
+            // Injeta dados do QR Code
+            if (pixQrImage) {
+              pixQrImage.src = result.data.qr_code_base64.startsWith('data:') 
+                ? result.data.qr_code_base64 
+                : 'data:image/png;base64,' + result.data.qr_code_base64;
+            }
+            if (pixCopyPaste) {
+              pixCopyPaste.value = result.data.qr_code;
+            }
+
+            // Inicia verificação automática
+            startPixPolling(currentOrderId);
+          })
+          .catch(function(err) {
+            console.error('Erro na requisição create-pix:', err);
+            btnGeneratePix.disabled = false;
+            btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong>' + (currentPlan === 'basico' ? 'R$ 19,90' : 'R$ 27,90') + '</strong></span>';
+            if (checkoutFormError) {
+              checkoutFormError.textContent = 'Erro de conexão com o servidor. Verifique sua internet.';
+              checkoutFormError.style.display = 'block';
+            }
+          });
+        });
+      }
+
       // ─── CLIQUE NOS BOTÕES DE COMPRA ────────────────────
       document.querySelectorAll('[data-plan]').forEach(function(el) {
         el.addEventListener('click', function(e) {
-          var plan = this.getAttribute('data-plan');
-          var product = PRODUCTS[plan];
-          if (!product) return;
-
           e.preventDefault();
-
-          // Dispara InitiateCheckout avançado com todos os parâmetros
-          if (typeof window.fbTrackEvent === 'function') {
-            var eventId = window.fbTrackEvent('InitiateCheckout', {
-              content_name: product.name,
-              content_ids: [product.id],
-              content_type: 'product',
-              content_category: product.category,
-              value: product.value,
-              currency: 'BRL',
-              num_items: 1
-            }, true);
-
-            // Armazena event_id para deduplicação com CAPI
-            try {
-              sessionStorage.setItem('_fb_last_checkout_event_id', eventId);
-              sessionStorage.setItem('_fb_last_checkout_plan', plan);
-            } catch(err) {}
-          }
-
-          // Redireciona com parâmetros de rastreamento
-          var finalUrl = buildCheckoutUrl(product.url);
-
-          // Pequeno delay para garantir que o pixel dispare
-          setTimeout(function() {
-            window.location.href = finalUrl;
-          }, 300);
+          var plan = this.getAttribute('data-plan') || 'completo';
+          openCheckoutModal(plan);
         });
       });
+
+      // Abre checkout também ao clicar nos botões com href="#oferta" se o usuário preferir
+      window.openNativeCheckout = openCheckoutModal;
 
       // ─── SCROLL SUAVE PARA ÂNCORAS ──────────────────────
       document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
