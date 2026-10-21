@@ -226,10 +226,10 @@
   /></noscript>
   <!-- End Meta Pixel + Rastreamento Avançado -->
 
-  <!-- Fonte Inter: Extremamente legível, moderna, limpa e com pesos marcantes (Bold / ExtraBold / Black) -->
+  <!-- Fontes: Playfair Display (Serifa editorial nobre para Headlines) + Inter / Plus Jakarta Sans (Alta legibilidade para leitura) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -239,8 +239,8 @@
       --navy-800: #19315f;
       --blue-marian: #1d4d90;
       --blue-accent: #2664be;
-      --blue-soft: #ebf3fd;
-      --blue-canvas: #f4f8fd;
+      --blue-soft: #fbf8f0;
+      --blue-canvas: #faf6ed;
 
       --gold-500: #c99834;
       --gold-400: #dfae47;
@@ -259,7 +259,7 @@
       --ink-muted: #64748b;
 
       --white: #ffffff;
-      --line: #d8e4f2;
+      --line: #e8dfcf;
       
       --radius-sm: 8px;
       --radius-md: 14px;
@@ -401,12 +401,12 @@
 
     /* BARRA SUPERIOR SIMPLES, FINA E RÁPIDA DE LER NO MOBILE */
     .top-bar {
-      background: linear-gradient(90deg, #0c1830 0%, #1d4d90 50%, #0c1830 100%);
+      background: linear-gradient(90deg, #7a1518 0%, #a82025 50%, #7a1518 100%);
       color: #ffffff;
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       font-weight: 800;
       text-align: center;
-      padding: 7px 12px;
+      padding: 9px 14px;
       border-bottom: 2px solid var(--gold-500);
       letter-spacing: 0.02em;
       text-transform: uppercase;
@@ -489,55 +489,80 @@
       text-align: center;
     }
 
-    /* HERO SECTION: MOBILE-FIRST COM IMAGEM ENTRE HEADLINE E SUBHEADLINE */
+    /* HERO SECTION: MOBILE-FIRST COM FUNDO CREME / MARFIM SACRO NOBRE */
     .hero {
-      background: radial-gradient(circle at 50% 15%, #18335d 0%, #0c1830 60%, #070e1c 100%);
-      color: #ffffff;
-      padding: 34px 0 55px;
+      background: linear-gradient(180deg, #fbf7ee 0%, #f4ede0 50%, #eee3cf 100%);
+      color: var(--ink-primary);
+      padding: 38px 0 55px;
       position: relative;
-      border-bottom: 4px solid var(--gold-500);
+      border-bottom: 3px solid var(--gold-500);
       text-align: center;
     }
 
-    .hero-content {
-      max-width: 720px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
+    .hero-pill-badge {
+      display: inline-flex;
       align-items: center;
+      gap: 7px;
+      background: #fdf5df;
+      border: 1.5px solid #dfae47;
+      color: #785208;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 6px 18px;
+      border-radius: var(--radius-full);
+      margin-bottom: 22px;
+      box-shadow: 0 2px 8px rgba(201, 152, 52, 0.12);
     }
 
     .hero-content h1 {
-      color: #ffffff;
-      margin-bottom: 22px;
-      font-weight: 700;
-      line-height: 1.3;
-      letter-spacing: 0.015em;
-      text-transform: uppercase;
+      font-family: 'Playfair Display', Georgia, serif;
+      color: #1a1612;
+      margin-bottom: 18px;
+      font-weight: 800;
+      font-size: 2.35rem;
+      line-height: 1.22;
+      letter-spacing: -0.015em;
+      text-transform: none;
+    }
+
+    @media (min-width: 768px) {
+      .hero-content h1 {
+        font-size: 3.1rem;
+      }
     }
 
     .hero-content h1 em {
-      color: var(--gold-300);
+      color: #922026;
       font-style: normal;
-      background: linear-gradient(135deg, #f7d679 0%, #d8a436 100%);
+      background: linear-gradient(135deg, #a82025 0%, #85161b 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* IMAGEM NO MEIO (ENTRE HEADLINE E SUBHEADLINE) */
+    .hero-content h1 .gold-word {
+      color: #c99834;
+      font-style: normal;
+      background: linear-gradient(135deg, #dfae47 0%, #b8861f 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* IMAGEM NO MEIO (ENTRE HEADLINE E SUBHEADLINE) - MOCKUP COMPLETO DO BUNDLE */
     .hero-mid-image {
       width: 100%;
-      max-width: 440px;
-      margin: 0 auto 24px;
+      max-width: 620px;
+      margin: 0 auto 28px;
       position: relative;
     }
 
     .hero-mid-image img {
       width: 100%;
+      height: auto;
       border-radius: 18px;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65), 0 0 30px rgba(38, 100, 190, 0.35);
-      border: 3px solid rgba(247, 214, 121, 0.45);
+      box-shadow: 0 16px 40px rgba(78, 52, 21, 0.16), 0 0 25px rgba(201, 152, 52, 0.2);
+      border: 3px solid rgba(201, 152, 52, 0.45);
     }
 
     .hero-badge-float {
@@ -546,12 +571,12 @@
       left: 50%;
       transform: translateX(-50%);
       background: var(--gold-gradient);
-      color: #0c1830;
-      padding: 8px 16px;
+      color: #1a1202;
+      padding: 8px 18px;
       border-radius: var(--radius-full);
       font-weight: 900;
-      font-size: 0.78rem;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+      font-size: 0.82rem;
+      box-shadow: 0 6px 18px rgba(78, 52, 21, 0.25);
       display: flex;
       align-items: center;
       gap: 6px;
@@ -562,13 +587,14 @@
     }
 
     .hero-lead {
-      font-size: 1.08rem;
+      font-size: 1.1rem;
       line-height: 1.65;
-      color: #cbd8ef;
-      margin-top: 14px;
-      margin-bottom: 22px;
-      max-width: 620px;
+      color: #423b32;
+      margin: 14px auto 24px;
+      max-width: 660px;
       font-weight: 500;
+      text-align: center;
+      display: block;
     }
 
     .hero-checklist {
@@ -581,15 +607,15 @@
     .hero-checklist li {
       position: relative;
       padding: 6px 0 6px 30px;
-      color: #e2ecf9;
-      font-size: 0.96rem;
+      color: #3b352e;
+      font-size: 0.98rem;
       font-weight: 500;
       line-height: 1.45;
     }
 
     .hero-checklist li strong {
       font-weight: 700;
-      color: #ffffff;
+      color: #1a1612;
     }
 
     .hero-checklist li::before {
@@ -600,13 +626,14 @@
       width: 22px;
       height: 22px;
       background: var(--gold-gradient);
-      color: #0c1830;
+      color: #1a1202;
       border-radius: 50%;
       font-size: 0.78rem;
       font-weight: 900;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     }
 
     .hero-cta-group {
@@ -614,6 +641,15 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
+      margin-bottom: 24px;
+    }
+
+    .hero-checklist {
+      list-style: none;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      display: inline-block;
+      text-align: left;
     }
 
     /* TRUST BAR */
@@ -675,7 +711,7 @@
     /* PAIN & EMPATHY SECTION */
     .section-pain {
       padding: 55px 0;
-      background: #eef4fc;
+      background: #f7f2e7;
     }
 
     .pain-card {
@@ -2534,9 +2570,9 @@
 </head>
 <body>
 
-  <!-- BARRA DE AVISO SUPERIOR FINA E RÁPIDA DE LER -->
+  <!-- BARRA DE AVISO SUPERIOR FINA E RÁPIDA DE LER COM URGÊNCIA DINÂMICA (HORÁRIO DE BRASÍLIA) -->
   <aside class="top-bar" aria-label="Aviso de Lançamento">
-    ⚡ EDIÇÃO 2027 EM PDF · DOWNLOAD IMEDIATO NO SEU E-MAIL E WHATSAPP
+    ⚡ Oferta especial somente hoje <span id="top-bar-date">21/10/2026</span>
   </aside>
 
   <!-- HERO SECTION (MOBILE-FIRST: HEADLINE -> IMAGEM -> SUBHEADLINE) -->
@@ -2544,32 +2580,30 @@
     <div class="wrap">
       <div class="hero-content">
         
-        <!-- 1. HEADLINE PRINCIPAL -->
-        <h1>E SE TODOS OS 365 DIAS DE 2027 COMEÇASSEM COM O <em>EVANGELHO</em> E COM <em>NOSSA SENHORA</em> ABENÇOANDO A SUA ROTINA? ✨</h1>
+        <!-- 0. PILL BADGE SUPERIOR -->
+        <div class="hero-pill-badge">
+          <span>✨</span>
+          <span>Liturgia Diária Completa + 5 Bônus Devocionais Exclusivos</span>
+        </div>
+
+        <!-- 1. HEADLINE PRINCIPAL (INSPIRADA NO MODELO REFERÊNCIA) -->
+        <h1>Viva todos os 365 dias de 2027 com a <span class="gold-word">Liturgia Diária</span> e <span class="gold-word">Nossa Senhora</span> de forma <em>simples, profunda e abençoada</em></h1>
 
         <!-- 2. IMAGEM DA HERO ENTRE A HEADLINE E A SUBHEADLINE (MOBILE-FIRST) -->
         <div class="hero-mid-image">
-          <img src="assets/agenda_hero_mockup.jpg" alt="Agenda Católica 2027 com capa de Nossa Senhora Aparecida aberta com terço e velas" width="560" height="747" fetchpriority="high">
+          <img src="assets/agenda_hero_mockup_completo.jpg" alt="Kit Completo Agenda Católica 2027 com Liturgia Diária, Calendários Litúrgicos e Marcadores Devocionais" width="666" height="618" fetchpriority="high">
           <div class="hero-badge-float">
             <span>⭐</span>
-            <span>Edição 2027 Completa em PDF</span>
+            <span>Edição 2027 Completa</span>
           </div>
         </div>
 
-        <!-- 3. SUBHEADLINE -->
+        <!-- 3. SUBHEADLINE (INSPIRADA NO MODELO REFERÊNCIA) -->
         <p class="hero-lead">
-          Tenha a <strong>Liturgia Diária da Santa Igreja</strong>, seus propósitos espirituais e o manto sagrado de <strong>Nossa Senhora Aparecida</strong> abençoando todos os 365 dias do seu ano em um único material.
+          A <strong>Agenda Católica 2027</strong> reúne o Evangelho de cada dia, reflexões guiadas, o Caminho Quaresmal e calendários litúrgicos ilustrados — para você <strong>conhecer, rezar e santificar a sua rotina</strong> com clareza e devoção.
         </p>
 
-        <!-- 4. BENEFÍCIOS RÁPIDOS -->
-        <ul class="hero-checklist">
-          <li><strong>Liturgia diária 2027:</strong> Evangelho do dia, cor litúrgica e santo padroeiro</li>
-          <li><strong>Caminho Quaresmal exclusivo:</strong> Checklist de Oração, Penitência e Caridade</li>
-          <li><strong>Capa sagrada de Nossa Senhora:</strong> Ilustração delicada, reverente e inspiradora</li>
-          <li><strong>Pronta para imprimir ou usar digital:</strong> Formatos em PDF A4 e A5 em alta resolução</li>
-        </ul>
-
-        <!-- 5. BOTÃO DE AÇÃO HERO -->
+        <!-- 4. BOTÃO DE AÇÃO HERO (ANTES DOS BENEFÍCIOS) -->
         <div class="hero-cta-group">
           <a class="btn btn-gold btn-pulse" href="#oferta" id="cta-hero">
             <span>👉 QUERO MINHA AGENDA CATÓLICA 2027</span>
@@ -2577,41 +2611,73 @@
           <span class="btn-subtext">⚡ Acesso imediato no e-mail e WhatsApp · A partir de apenas R$ 19,90</span>
         </div>
 
+        <!-- 5. BENEFÍCIOS RÁPIDOS -->
+        <ul class="hero-checklist">
+          <li><strong>Liturgia diária 2027:</strong> Evangelho do dia, cor litúrgica e santo padroeiro</li>
+          <li><strong>Caminho Quaresmal exclusivo:</strong> Checklist de Oração, Penitência e Caridade</li>
+          <li><strong>Capa sagrada de Nossa Senhora:</strong> Ilustração delicada, reverente e inspiradora</li>
+          <li><strong>Pronta para imprimir ou usar digital:</strong> Formatos em PDF A4 e A5 em alta resolução</li>
+        </ul>
+
       </div>
     </div>
   </header>
 
-  <!-- TRUST BAR -->
-  <section class="trust-bar">
+  <!-- ===================================================
+       SEÇÃO DE DEPOIMENTOS DO WHATSAPP (LOGO ABAIXO DA HERO)
+       =================================================== -->
+  <section class="section-whatsapp-proof" id="depoimentos-whatsapp">
     <div class="wrap">
-      <div class="trust-grid">
-        <div class="trust-item">
-          <div class="trust-icon">⚡</div>
-          <div class="trust-text">
-            <strong>DOWNLOAD IMEDIATO</strong>
-            <span>Receba direto no e-mail</span>
+      <div style="text-align: center;">
+        <span class="section-tag">DEPOIMENTOS REAIS NO WHATSAPP</span>
+        <h2>QUEM JÁ RECEBEU ESTÁ ENCANTADA</h2>
+        <p class="section-subtitle">
+          Veja mensagens e prints reais enviados por fiéis de todo o Brasil que já garantiram suas edições:
+        </p>
+      </div>
+
+      <div class="testimonials-carousel-container">
+        <div class="carousel-wrapper">
+          <button class="carousel-btn prev" aria-label="Depoimento Anterior" id="carousel-prev">❮</button>
+          <div class="carousel-track" id="carousel-track">
+            
+            <!-- DEPOIMENTO 1 -->
+            <div class="carousel-slide">
+              <div class="slide-card">
+                <img src="assets/depoimento_whatsapp_1.png" alt="Depoimento WhatsApp Mariana Ferreira" width="414" height="820" loading="lazy">
+              </div>
+            </div>
+
+            <!-- DEPOIMENTO 2 -->
+            <div class="carousel-slide">
+              <div class="slide-card">
+                <img src="assets/depoimento_whatsapp_2.png" alt="Depoimento WhatsApp Gabriel" width="414" height="820" loading="lazy">
+              </div>
+            </div>
+
+            <!-- DEPOIMENTO 3 -->
+            <div class="carousel-slide">
+              <div class="slide-card">
+                <img src="assets/depoimento_whatsapp_3.png" alt="Depoimento WhatsApp Dona Teresa" width="414" height="820" loading="lazy">
+              </div>
+            </div>
+
+            <!-- DEPOIMENTO 4 -->
+            <div class="carousel-slide">
+              <div class="slide-card">
+                <img src="assets/depoimento_whatsapp_4.png" alt="Depoimento WhatsApp Fernanda" width="414" height="820" loading="lazy">
+              </div>
+            </div>
+
           </div>
+          <button class="carousel-btn next" aria-label="Próximo Depoimento" id="carousel-next">❯</button>
         </div>
-        <div class="trust-item">
-          <div class="trust-icon">🖨️</div>
-          <div class="trust-text">
-            <strong>FÁCIL DE IMPRIMIR</strong>
-            <span>Margens A4 e A5 prontas</span>
-          </div>
-        </div>
-        <div class="trust-item">
-          <div class="trust-icon">📱</div>
-          <div class="trust-text">
-            <strong>TABLET E CELULAR</strong>
-            <span>Compatível com GoodNotes</span>
-          </div>
-        </div>
-        <div class="trust-item">
-          <div class="trust-icon">🛡️</div>
-          <div class="trust-text">
-            <strong>GARANTIA DE 15 DIAS</strong>
-            <span>Satisfação garantida</span>
-          </div>
+
+        <div class="carousel-dots" id="carousel-dots">
+          <span class="dot active" data-index="0" aria-label="Ir para depoimento 1"></span>
+          <span class="dot" data-index="1" aria-label="Ir para depoimento 2"></span>
+          <span class="dot" data-index="2" aria-label="Ir para depoimento 3"></span>
+          <span class="dot" data-index="3" aria-label="Ir para depoimento 4"></span>
         </div>
       </div>
     </div>
@@ -2845,9 +2911,9 @@
         </p>
       </div>
 
-      <!-- MOCKUP BUNDLE CENTRAL -->
+      <!-- MOCKUP BUNDLE CENTRAL (MAIS QUE UM CALENDÁRIO, UM GUIA PARA VIVER A FÉ) -->
       <div class="bonus-lead-hero">
-        <img src="assets/agenda_bonus_bundle.jpg" alt="Kit completo Agenda Católica 2027 e os 5 bônus em perspectiva 3D" width="680" height="907" loading="lazy">
+        <img src="assets/agenda_bonus_bundle_completo.jpg" alt="Kit completo Agenda Católica 2027 com Calendários Litúrgicos e os 5 Bônus Exclusivos" width="672" height="742" loading="lazy">
       </div>
 
       <!-- CARDS DE BÔNUS COM IMAGENS DEDICADAS -->
@@ -2940,63 +3006,7 @@
     </div>
   </section>
 
-  <!-- SEÇÃO DE DEPOIMENTOS DO WHATSAPP (APÓS OS BÔNUS E ANTES DOS PREÇOS) -->
-  <section class="section-whatsapp-proof" id="depoimentos-whatsapp">
-    <div class="wrap">
-      <div style="text-align: center;">
-        <span class="section-tag">DEPOIMENTOS REAIS NO WHATSAPP</span>
-        <h2>QUEM JÁ RECEBEU ESTÁ ENCANTADA</h2>
-        <p class="section-subtitle">
-          Veja mensagens e prints reais enviados por fiéis de todo o Brasil que já garantiram suas edições:
-        </p>
-      </div>
 
-      <div class="testimonials-carousel-container">
-        <div class="carousel-wrapper">
-          <button class="carousel-btn prev" aria-label="Depoimento Anterior" id="carousel-prev">❮</button>
-          <div class="carousel-track" id="carousel-track">
-            
-            <!-- DEPOIMENTO 1 -->
-            <div class="carousel-slide">
-              <div class="slide-card">
-                <img src="assets/depoimento_whatsapp_1.png" alt="Depoimento WhatsApp Mariana Ferreira" width="414" height="820" loading="lazy">
-              </div>
-            </div>
-
-            <!-- DEPOIMENTO 2 -->
-            <div class="carousel-slide">
-              <div class="slide-card">
-                <img src="assets/depoimento_whatsapp_2.png" alt="Depoimento WhatsApp Gabriel" width="414" height="820" loading="lazy">
-              </div>
-            </div>
-
-            <!-- DEPOIMENTO 3 -->
-            <div class="carousel-slide">
-              <div class="slide-card">
-                <img src="assets/depoimento_whatsapp_3.png" alt="Depoimento WhatsApp Dona Teresa" width="414" height="820" loading="lazy">
-              </div>
-            </div>
-
-            <!-- DEPOIMENTO 4 -->
-            <div class="carousel-slide">
-              <div class="slide-card">
-                <img src="assets/depoimento_whatsapp_4.png" alt="Depoimento WhatsApp Fernanda" width="414" height="820" loading="lazy">
-              </div>
-            </div>
-
-          </div>
-          <button class="carousel-btn next" aria-label="Próximo Depoimento" id="carousel-next">❯</button>
-        </div>
-
-        <div class="carousel-dots" id="carousel-dots">
-          <span class="dot active" data-index="0" aria-label="Ir para depoimento 1"></span>
-          <span class="dot" data-index="1" aria-label="Ir para depoimento 2"></span>
-          <span class="dot" data-index="2" aria-label="Ir para depoimento 3"></span>
-          <span class="dot" data-index="3" aria-label="Ir para depoimento 4"></span>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- =========================================================================
        SEÇÃO DE OFERTAS: CARDS LADO A LADO NO MOBILE (INSPIRADO NO SEU PRINT)
@@ -4151,6 +4161,26 @@
         console.log('UTM Params:', window.fbTrackingData.utmParams);
         console.groupEnd();
       }
+
+      // ─── DATA DINÂMICA DA BARRA SUPERIOR (HORÁRIO DE BRASÍLIA) ───
+      (function updateBrasiliaDate() {
+        try {
+          var dateEl = document.getElementById('top-bar-date');
+          if (dateEl) {
+            var now = new Date();
+            // Formatar no fuso horário de Brasília (America/Sao_Paulo)
+            var formatter = new Intl.DateTimeFormat('pt-BR', {
+              timeZone: 'America/Sao_Paulo',
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+            });
+            dateEl.textContent = formatter.format(now);
+          }
+        } catch (e) {
+          // fallback silencioso
+        }
+      })();
 
     })();
   </script>
