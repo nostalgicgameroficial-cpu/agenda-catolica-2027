@@ -392,38 +392,105 @@ serve(async (req: Request) => {
     }
 
     if (shouldProcessPayment) {
-      // 1. Busca o pedido pelo ID da transação da PushinPay ou pelo ID interno
-      const { data: order, error } = await supabase
+      const cleanTxId = String(transactionId).trim();
+      const txLower = cleanTxId.toLowerCase();
+      const txUpper = cleanTxId.toUpperCase();
+
+      console.log(`Buscando pedido no banco para transactionId: "${cleanTxId}" (lower: "${txLower}", upper: "${txUpper}")`);
+
+      // 1. Busca resiliente e insensível a maiúsculas/minúsculas do pedido
+      let order: any = null;
+
+      // Tentativa A: ilike direto na coluna pushinpay_transaction_id
+      const { data: orderIlike, error: errIlike } = await supabase
         .from('orders')
         .select('*')
-        .or(`pushinpay_transaction_id.eq.${transactionId},id.eq.${transactionId}`)
+        .ilike('pushinpay_transaction_id', cleanTxId)
         .maybeSingle();
 
-      if (error || !order) {
-        console.warn(`Pedido não encontrado no banco para a transação ${transactionId}`);
+      if (orderIlike) {
+        order = orderIlike;
+        console.log(`Pedido encontrado via ilike(pushinpay_transaction_id): ${order.id}`);
+      } else {
+        if (errIlike) console.warn('Erro na busca ilike:', errIlike);
+
+        // Tentativa B: comparação exata com lowercase e uppercase
+        const { data: orderEq } = await supabase
+          .from('orders')
+          .select('*')
+          .or(`pushinpay_transaction_id.eq.${txLower},pushinpay_transaction_id.eq.${txUpper},pushinpay_transaction_id.eq.${cleanTxId}`)
+          .maybeSingle();
+
+        if (orderEq) {
+          order = orderEq;
+          console.log(`Pedido encontrado via or(eq): ${order.id}`);
+        } else {
+          // Tentativa C: se for formato UUID válido, tenta pelo ID interno do pedido
+          const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(cleanTxId);
+          if (isUuid) {
+            const { data: orderById } = await supabase
+              .from('orders')
+              .select('*')
+              .eq('id', txLower)
+              .maybeSingle();
+            if (orderById) {
+              order = orderById;
+              console.log(`Pedido encontrado via id interno: ${order.id}`);
+            }
+          }
+
+          // Tentativa D (Super Fallback de contingência): buscar os pedidos recentes e comparar em memória
+          if (!order) {
+            console.log('Tentando busca de contingência nos últimos 50 pedidos...');
+            const { data: recentOrders } = await supabase
+              .from('orders')
+              .select('*')
+              .order('created_at', { ascending: false })
+              .limit(50);
+
+            if (recentOrders && recentOrders.length > 0) {
+              order = recentOrders.find((o: any) => {
+                const pid = (o.pushinpay_transaction_id || '').trim().toLowerCase();
+                const oid = (o.id || '').trim().toLowerCase();
+                return pid === txLower || oid === txLower;
+              }) || null;
+
+              if (order) {
+                console.log(`Pedido encontrado via varredura recente em memória: ${order.id}`);
+              }
+            }
+          }
+        }
+      }
+
+      if (!order) {
+        console.warn(`Pedido NÃO localizado no banco para transaction_id="${cleanTxId}"`);
         return new Response(JSON.stringify({ 
           received: true, 
           warning: 'Pedido não localizado no banco de dados', 
-          transactionId 
+          transactionId: cleanTxId 
         }), {
           status: 200,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
       }
 
-      // 2. Atualiza pedido para pago
+      // 2. Atualiza pedido para pago imediatamente no banco
+      const paidDate = order.paid_at || new Date().toISOString();
       const { error: updateError } = await supabase
         .from('orders')
         .update({
           status: 'paid',
-          paid_at: new Date().toISOString(),
+          paid_at: paidDate,
         })
         .eq('id', order.id);
 
       if (updateError) {
         console.error(`Erro ao atualizar pedido ${order.id} para paid:`, updateError);
       } else {
-        console.log(`Pedido ${order.id} atualizado com sucesso para PAID!`);
+        console.log(`Pedido ${order.id} confirmado com sucesso como PAID!`);
+        order.status = 'paid';
+        order.paid_at = paidDate;
       }
 
       // 3. Dispara e-mail de entrega via Resend caso ainda não enviado

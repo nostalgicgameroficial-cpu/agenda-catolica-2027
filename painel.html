@@ -7,6 +7,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1133049763020624');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1133049763020624&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
   <style>
     :root {
       --bg-dark: #0b0f19;
@@ -956,7 +974,10 @@
         <div class="bulk-info">
           <span id="bulk-count">0</span> pedido(s) selecionado(s)
         </div>
-        <div style="display: flex; gap: 8px;">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn" style="background: #1877f2; color: #fff; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;" onclick="sendFacebookPurchaseBulk()">
+            <span>⚡ Enviar Purchase p/ Facebook</span> (<span id="bulk-fb-count">0</span>)
+          </button>
           <button class="btn btn-gold" onclick="openBulkRemarketingModal()">
             📢 Disparar E-mail para Selecionados
           </button>
@@ -972,10 +993,13 @@
       <div class="filter-bar">
         <input type="text" id="order-search" class="search-input" placeholder="🔍 Buscar por nome, e-mail, telefone, CPF ou UTM...">
         
-        <div class="filter-group">
+        <div class="filter-group" style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
           <button class="filter-btn active" data-status="all">Todos</button>
           <button class="filter-btn" data-status="paid">🟢 Pagos</button>
           <button class="filter-btn" data-status="pending">🟡 Pendentes</button>
+          <button class="btn" style="background: #1877f2; color: #fff; font-size: 12px; padding: 7px 14px; border-radius: 6px; font-weight: 600; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;" onclick="sendLastSalesToFacebook(3)" title="Dispara o evento Purchase no Facebook para as 3 últimas vendas pagas">
+            ⚡ Enviar 3 Últimas Vendas p/ Facebook
+          </button>
         </div>
       </div>
 
@@ -1611,6 +1635,9 @@
             <td style="font-size: 12px;">${emailSentIcon}</td>
             <td style="text-align: right;">
               <div class="row-actions" style="justify-content: flex-end;">
+                <button class="action-btn" style="background:#1877f2; color:#fff;" title="Disparar evento Purchase deste pedido diretamente para o Facebook" onclick="sendFacebookPurchaseSingle(${safeOrderJson})">
+                  ⚡ FB
+                </button>
                 ${!isPaid ? `
                   <button class="action-btn btn-success" title="Aprovar Compra Manualmente" onclick="manualApprove('${o.id}', '${escapeHtml(o.customer_name)}')">
                     🟢 Aprovar
@@ -1892,12 +1919,196 @@
       const count = selectedOrderIds.size;
       const bar = document.getElementById('bulk-bar');
       document.getElementById('bulk-count').innerText = count;
+      const fbCountEl = document.getElementById('bulk-fb-count');
+      if (fbCountEl) fbCountEl.innerText = count;
       if (count > 0) {
         bar.classList.add('active');
       } else {
         bar.classList.remove('active');
       }
       updateAudienceCounts();
+    }
+
+    // ========================================================
+    // ENVIO DE EVENTOS PURCHASE DIRETO DO SEU DOMÍNIO (META PIXEL + CAPI)
+    // ========================================================
+
+    function normalizePhoneForFb(phone) {
+      if (!phone) return '';
+      let digits = phone.replace(/\D/g, '');
+      if (!digits.startsWith('55') && (digits.length === 10 || digits.length === 11)) {
+        digits = '55' + digits;
+      }
+      return digits;
+    }
+
+    async function sendSinglePurchaseToFacebook(order) {
+      if (!order) return { success: false, error: 'Pedido inválido' };
+
+      const phone = normalizePhoneForFb(order.customer_phone);
+      const email = (order.customer_email || '').trim().toLowerCase();
+      const nameParts = (order.customer_name || '').trim().split(' ');
+      const firstName = (nameParts[0] || '').toLowerCase();
+      const lastName = (nameParts.slice(1).join(' ') || '').toLowerCase();
+      const val = (order.amount_cents || 2790) / 100;
+      const eventId = 'purchase_' + order.id;
+
+      // 1. DISPARO VIA META PIXEL (DIRETO NO NAVEGADOR DO SEU DOMÍNIO)
+      if (window.fbq) {
+        try {
+          const matchData = {};
+          if (email) matchData.em = email;
+          if (phone) matchData.ph = phone;
+          if (firstName) matchData.fn = firstName;
+          if (lastName) matchData.ln = lastName;
+          matchData.external_id = order.id;
+
+          // Atualiza dados de usuário para Advanced Matching
+          fbq('init', '1133049763020624', matchData);
+
+          // Dispara o evento de Purchase com eventID para deduplicação perfeita
+          fbq('track', 'Purchase', {
+            value: val,
+            currency: 'BRL',
+            content_name: order.plan === 'completo' ? 'Agenda Católica 2027 - Completa + Bônus' : 'Agenda Católica 2027 - Básica',
+            content_type: 'product',
+            contents: [{
+              id: order.plan || 'completo',
+              quantity: 1,
+              item_price: val
+            }],
+            order_id: order.id,
+            customer_email: email,
+            customer_phone: phone
+          }, {
+            eventID: eventId
+          });
+          console.log(`[Meta Pixel] Purchase disparado no browser para ${order.customer_name} (ID: ${eventId})`);
+        } catch (err) {
+          console.error('[Meta Pixel] Erro ao disparar no navegador:', err);
+        }
+      } else {
+        console.warn('[Meta Pixel] window.fbq não encontrado no navegador.');
+      }
+
+      // 2. DISPARO CAPI NO SERVIDOR (DEDUPLICAÇÃO E NOTA 10/10 NA META)
+      try {
+        const password = sessionStorage.getItem('painel_pass');
+        await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': ANON_KEY,
+            'Authorization': 'Bearer ' + ANON_KEY,
+            'x-admin-password': password,
+          },
+          body: JSON.stringify({
+            action: 'send_capi_purchase',
+            order_id: order.id,
+            event_id: eventId,
+          })
+        });
+      } catch (err) {
+        console.warn('[Meta CAPI] Erro no envio redundante do servidor:', err);
+      }
+
+      return { success: true };
+    }
+
+    async function sendFacebookPurchaseSingle(orderOrId) {
+      let order = typeof orderOrId === 'string' ? allOrders.find(o => o.id === orderOrId) : orderOrId;
+      if (!order) {
+        showToast('Pedido não encontrado.', true);
+        return;
+      }
+
+      const valFormatted = ((order.amount_cents || 2790) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      const isPaid = order.status === 'paid';
+
+      let confirmPrompt = `Confirmar disparo do evento Purchase para o Facebook?\n\n` +
+        `• Cliente: ${order.customer_name}\n` +
+        `• Valor: ${valFormatted}\n` +
+        `• E-mail: ${order.customer_email || 'Não informado'}\n` +
+        `• Status atual: ${isPaid ? '🟢 PAGO' : '🟡 PENDENTE'}\n\n` +
+        `O evento será transmitido diretamente pelo seu domínio via Meta Pixel + CAPI com deduplicação.`;
+
+      if (!isPaid) {
+        confirmPrompt = `⚠️ ATENÇÃO: Este pedido consta como PENDENTE!\n\n` + confirmPrompt;
+      }
+
+      if (!confirm(confirmPrompt)) {
+        return;
+      }
+
+      showToast(`⚡ Enviando Purchase de ${order.customer_name} para o Facebook...`);
+      const res = await sendSinglePurchaseToFacebook(order);
+      if (res.success) {
+        showToast(`✅ Evento Purchase de "${order.customer_name}" enviado com sucesso!`);
+      } else {
+        showToast(`Erro: ${res.error}`, true);
+      }
+    }
+
+    async function sendFacebookPurchaseBulk() {
+      if (selectedOrderIds.size === 0) {
+        alert('Nenhum pedido foi selecionado. Marque as caixinhas ao lado dos clientes que deseja enviar o evento.');
+        return;
+      }
+
+      const selectedList = allOrders.filter(o => selectedOrderIds.has(o.id));
+      const count = selectedList.length;
+
+      const confirmMsg = `Deseja enviar o evento Purchase para o Facebook para os ${count} pedido(s) selecionado(s)?\n\n` +
+        `O evento será enviado diretamente do seu domínio para alimentar seu Pixel e otimizar suas campanhas.`;
+
+      if (!confirm(confirmMsg)) return;
+
+      showToast(`⚡ Disparando ${count} evento(s) Purchase para o Facebook...`);
+
+      let sent = 0;
+      for (const order of selectedList) {
+        await sendSinglePurchaseToFacebook(order);
+        sent++;
+        if (sent < count) {
+          await new Promise(r => setTimeout(r, 350));
+        }
+      }
+
+      showToast(`✅ ${sent} evento(s) Purchase enviados para o Facebook com sucesso!`);
+    }
+
+    async function sendLastSalesToFacebook(limit = 3) {
+      const paidSales = allOrders
+        .filter(o => o.status === 'paid')
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        .slice(0, limit);
+
+      if (paidSales.length === 0) {
+        alert('Nenhuma venda aprovada encontrada no histórico.');
+        return;
+      }
+
+      const summaryList = paidSales.map((o, idx) => {
+        const val = ((o.amount_cents || 2790) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        return `${idx + 1}. ${o.customer_name} - ${val} (${o.customer_email})`;
+      }).join('\n');
+
+      if (!confirm(`Deseja enviar o evento Purchase para as ${paidSales.length} últimas vendas pagas?\n\n${summaryList}\n\nSerão enviadas diretamente do seu domínio via Meta Pixel.`)) {
+        return;
+      }
+
+      showToast(`⚡ Enviando Purchase das ${paidSales.length} últimas vendas para o Facebook...`);
+
+      let sent = 0;
+      for (const order of paidSales) {
+        await sendSinglePurchaseToFacebook(order);
+        sent++;
+        if (sent < paidSales.length) {
+          await new Promise(r => setTimeout(r, 350));
+        }
+      }
+
+      showToast(`✅ ${sent} vendas enviadas para o Facebook com sucesso!`);
     }
 
     function updateAudienceCounts() {

@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { sendMetaEvent } from '../_shared/meta.ts';
 
 const ADMIN_PASSWORD = 'Guh@150629';
 const PUSHINPAY_FEE_CENTS = 45; // 45 centavos por transação paga
@@ -16,6 +17,7 @@ async function sendDeliveryEmail(order: {
   customer_name: string;
   customer_email: string;
   plan: string;
+  order_bump?: boolean;
 }) {
   const apiKey = Deno.env.get('RESEND_API_KEY') || '';
   if (!apiKey) {
@@ -23,11 +25,26 @@ async function sendDeliveryEmail(order: {
   }
 
   const isCompleto = order.plan === 'completo';
+  const isUpsell = order.plan === 'upsell';
+  const isDownsell = order.plan === 'downsell';
+  const hasOrderBump = !!order.order_bump;
   const firstName = order.customer_name ? order.customer_name.split(' ')[0] : 'Irmão(ã) em Cristo';
-  const packageName = isCompleto ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
-  const driveLink = isCompleto
-    ? 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing'
-    : 'https://drive.google.com/drive/folders/1vstC1uvFR11TZIg5zXpILGT-khchTjJp?usp=sharing';
+  
+  let packageName = isCompleto ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
+  if (isUpsell) {
+    packageName = 'Mega Coleção de 150 Quadros Sacros em Alta Definição';
+  } else if (isDownsell) {
+    packageName = 'Seleção Especial de 50 Quadros Sacros em Alta Definição';
+  } else if (hasOrderBump) {
+    packageName += ' + 50 Histórias dos Santos para Colorir';
+  }
+
+  let driveLink = 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing';
+  if (isUpsell || isDownsell) {
+    driveLink = 'https://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=sharing';
+  } else if (!isCompleto) {
+    driveLink = 'https://drive.google.com/drive/folders/1vstC1uvFR11TZIg5zXpILGT-khchTjJp?usp=sharing';
+  }
 
   const html = `<!DOCTYPE html>
 <html lang="pt-BR">
@@ -463,6 +480,56 @@ serve(async (req) => {
 
       return new Response(
         JSON.stringify({ success: true, message: `${orderIds.length} pedido(s) excluído(s) com sucesso!` }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // 7. AÇÃO: ENVIAR EVENTO PURCHASE VIA META CAPI (SERVER-SIDE DEDUPLICADO)
+    if (action === 'send_capi_purchase') {
+      const { order_id, event_id } = body;
+      if (!order_id) {
+        return new Response(
+          JSON.stringify({ error: 'order_id é obrigatório.' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      const { data: order, error: findError } = await supabase
+        .from('orders')
+        .select('*')
+        .eq('id', order_id)
+        .single();
+
+      if (findError || !order) {
+        return new Response(
+          JSON.stringify({ error: 'Pedido não encontrado.' }),
+          { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      const metaResult = await sendMetaEvent({
+        eventName: 'Purchase',
+        eventId: event_id || `purchase_${order.id}`,
+        eventTime: Math.floor(Date.now() / 1000),
+        eventSourceUrl: 'https://agendanossasenhora.online',
+        userData: {
+          email: order.customer_email,
+          phone: order.customer_phone,
+          name: order.customer_name,
+          externalId: order.id,
+        },
+        customData: {
+          currency: 'BRL',
+          value: (order.amount_cents || 2790) / 100,
+          content_name: order.plan === 'completo' ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica',
+          content_type: 'product',
+          content_ids: [order.plan || 'completo'],
+          order_id: order.id,
+        }
+      });
+
+      return new Response(
+        JSON.stringify({ success: true, meta: metaResult }),
         { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }

@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS public.orders (
     customer_email TEXT NOT NULL,
     customer_phone TEXT NOT NULL,
     customer_cpf TEXT,
-    plan TEXT NOT NULL CHECK (plan IN ('basico', 'completo')),
+    plan TEXT NOT NULL CHECK (plan IN ('basico', 'completo', 'upsell', 'downsell')),
+    order_bump BOOLEAN NOT NULL DEFAULT FALSE,
     amount_cents INTEGER NOT NULL,
     payment_method TEXT NOT NULL DEFAULT 'pix',
     status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'paid', 'expired', 'canceled')),
@@ -42,6 +43,7 @@ CREATE TABLE IF NOT EXISTS public.orders (
 CREATE INDEX IF NOT EXISTS idx_orders_customer_email ON public.orders(customer_email);
 CREATE INDEX IF NOT EXISTS idx_orders_status ON public.orders(status);
 CREATE INDEX IF NOT EXISTS idx_orders_pushinpay_id ON public.orders(pushinpay_transaction_id);
+CREATE INDEX IF NOT EXISTS idx_orders_pushinpay_id_lower ON public.orders(LOWER(pushinpay_transaction_id));
 CREATE INDEX IF NOT EXISTS idx_orders_created_at ON public.orders(created_at DESC);
 
 -- Trigger para atualizar updated_at automaticamente

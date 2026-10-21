@@ -282,7 +282,7 @@ serve(async (req) => {
     await supabase
       .from('orders')
       .update({
-        pushinpay_transaction_id: pushinData.id,
+        pushinpay_transaction_id: String(pushinData.id).trim().toLowerCase(),
         pix_code: pushinData.qr_code,
         pix_qr_code_base64: pushinData.qr_code_base64,
       })
