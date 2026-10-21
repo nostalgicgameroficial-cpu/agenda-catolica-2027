@@ -1963,8 +1963,12 @@
           if (lastName) matchData.ln = lastName;
           matchData.external_id = order.id;
 
-          // Atualiza dados de usuário para Advanced Matching
-          fbq('init', '1133049763020624', matchData);
+          // Atualiza dados de correspondência avançada sem reinicializar pixel duplicado
+          if (typeof fbq.userData === 'function') {
+            fbq.userData(matchData);
+          } else {
+            try { fbq('set', 'userData', matchData); } catch (_) {}
+          }
 
           // Dispara o evento de Purchase com eventID para deduplicação perfeita
           fbq('track', 'Purchase', {
@@ -1992,9 +1996,11 @@
       }
 
       // 2. DISPARO CAPI NO SERVIDOR (DEDUPLICAÇÃO E NOTA 10/10 NA META)
+      let capiSuccess = false;
+      let capiError = null;
       try {
         const password = sessionStorage.getItem('painel_pass');
-        await fetch(API_URL, {
+        const capiRes = await fetch(API_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -2008,11 +2014,20 @@
             event_id: eventId,
           })
         });
+        const capiData = await capiRes.json();
+        console.log('[Meta CAPI resposta do servidor]:', capiData);
+        if (capiRes.ok && capiData.success) {
+          capiSuccess = true;
+        } else {
+          capiError = (capiData.meta && capiData.meta.error) || capiData.error || 'Erro CAPI';
+          console.warn('[Meta CAPI aviso]:', capiError);
+        }
       } catch (err) {
-        console.warn('[Meta CAPI] Erro no envio redundante do servidor:', err);
+        console.warn('[Meta CAPI] Erro na requisição do servidor:', err);
+        capiError = String(err);
       }
 
-      return { success: true };
+      return { success: true, capiSuccess, capiError };
     }
 
     async function sendFacebookPurchaseSingle(orderOrId) {
