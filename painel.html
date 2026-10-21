@@ -8,23 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Meta Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1133049763020624');
-    fbq('track', 'PageView');
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1133049763020624&ev=PageView&noscript=1"/>
-  </noscript>
-  <!-- End Meta Pixel Code -->
+  <!-- Painel Administrativo Seguro (Sem rastreamento Pixel no navegador do administrador) -->
   <style>
     :root {
       --bg-dark: #0b0f19;
@@ -1945,57 +1929,12 @@
     async function sendSinglePurchaseToFacebook(order) {
       if (!order) return { success: false, error: 'Pedido inválido' };
 
-      const phone = normalizePhoneForFb(order.customer_phone);
-      const email = (order.customer_email || '').trim().toLowerCase();
-      const nameParts = (order.customer_name || '').trim().split(' ');
-      const firstName = (nameParts[0] || '').toLowerCase();
-      const lastName = (nameParts.slice(1).join(' ') || '').toLowerCase();
-      const val = (order.amount_cents || 2790) / 100;
       const eventId = 'purchase_' + order.id;
 
-      // 1. DISPARO VIA META PIXEL (DIRETO NO NAVEGADOR DO SEU DOMÍNIO)
-      if (window.fbq) {
-        try {
-          const matchData = {};
-          if (email) matchData.em = email;
-          if (phone) matchData.ph = phone;
-          if (firstName) matchData.fn = firstName;
-          if (lastName) matchData.ln = lastName;
-          matchData.external_id = order.id;
-
-          // Atualiza dados de correspondência avançada sem reinicializar pixel duplicado
-          if (typeof fbq.userData === 'function') {
-            fbq.userData(matchData);
-          } else {
-            try { fbq('set', 'userData', matchData); } catch (_) {}
-          }
-
-          // Dispara o evento de Purchase com eventID para deduplicação perfeita
-          fbq('track', 'Purchase', {
-            value: val,
-            currency: 'BRL',
-            content_name: order.plan === 'completo' ? 'Agenda Católica 2027 - Completa + Bônus' : 'Agenda Católica 2027 - Básica',
-            content_type: 'product',
-            contents: [{
-              id: order.plan || 'completo',
-              quantity: 1,
-              item_price: val
-            }],
-            order_id: order.id,
-            customer_email: email,
-            customer_phone: phone
-          }, {
-            eventID: eventId
-          });
-          console.log(`[Meta Pixel] Purchase disparado no browser para ${order.customer_name} (ID: ${eventId})`);
-        } catch (err) {
-          console.error('[Meta Pixel] Erro ao disparar no navegador:', err);
-        }
-      } else {
-        console.warn('[Meta Pixel] window.fbq não encontrado no navegador.');
-      }
-
-      // 2. DISPARO CAPI NO SERVIDOR (DEDUPLICAÇÃO E NOTA 10/10 NA META)
+      // DISPARO 100% SEGURO VIA META CONVERSIONS API (SERVER-TO-SERVER)
+      // Transmite exclusivamente os dados reais do comprador salvos no banco de dados
+      // (email, telefone, nome, fbc, fbp, IP do cliente e User-Agent do comprador).
+      // Zero interferência de cookies ou IP do navegador do administrador!
       let capiSuccess = false;
       let capiError = null;
       try {
@@ -2015,7 +1954,7 @@
           })
         });
         const capiData = await capiRes.json();
-        console.log('[Meta CAPI resposta do servidor]:', capiData);
+        console.log(`[Meta CAPI Purchase enviado para ${order.customer_name}]:`, capiData);
         if (capiRes.ok && capiData.success) {
           capiSuccess = true;
         } else {
@@ -2027,7 +1966,11 @@
         capiError = String(err);
       }
 
-      return { success: true, capiSuccess, capiError };
+      if (capiSuccess) {
+        return { success: true };
+      } else {
+        return { success: false, error: capiError || 'Falha ao transmitir evento via CAPI' };
+      }
     }
 
     async function sendFacebookPurchaseSingle(orderOrId) {
@@ -2045,7 +1988,7 @@
         `• Valor: ${valFormatted}\n` +
         `• E-mail: ${order.customer_email || 'Não informado'}\n` +
         `• Status atual: ${isPaid ? '🟢 PAGO' : '🟡 PENDENTE'}\n\n` +
-        `O evento será transmitido diretamente pelo seu domínio via Meta Pixel + CAPI com deduplicação.`;
+        `O evento será transmitido via Conversions API (CAPI) do servidor com os dados reais do comprador (IP, e-mail, telefone e cookies salvos no banco).`;
 
       if (!isPaid) {
         confirmPrompt = `⚠️ ATENÇÃO: Este pedido consta como PENDENTE!\n\n` + confirmPrompt;
@@ -2055,10 +1998,10 @@
         return;
       }
 
-      showToast(`⚡ Enviando Purchase de ${order.customer_name} para o Facebook...`);
+      showToast(`⚡ Enviando Purchase de ${order.customer_name} via CAPI...`);
       const res = await sendSinglePurchaseToFacebook(order);
       if (res.success) {
-        showToast(`✅ Evento Purchase de "${order.customer_name}" enviado com sucesso!`);
+        showToast(`✅ Evento Purchase de "${order.customer_name}" transmitido com sucesso via CAPI!`);
       } else {
         showToast(`Erro: ${res.error}`, true);
       }
@@ -2074,7 +2017,7 @@
       const count = selectedList.length;
 
       const confirmMsg = `Deseja enviar o evento Purchase para o Facebook para os ${count} pedido(s) selecionado(s)?\n\n` +
-        `O evento será enviado diretamente do seu domínio para alimentar seu Pixel e otimizar suas campanhas.`;
+        `Os eventos serão transmitidos via Conversions API (CAPI) do servidor usando exclusivamente os dados reais dos compradores (sem interferência de cookies ou IP do administrador).`;
 
       if (!confirm(confirmMsg)) return;
 

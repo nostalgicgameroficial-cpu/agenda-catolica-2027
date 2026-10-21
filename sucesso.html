@@ -367,13 +367,13 @@
         </div>
       </div>
 
-      <!-- SEÇÃO DO DOWNSELL: 50 QUADROS SACROS -->
+      <!-- SEÇÃO DE 50 QUADROS SACROS (ORDER BUMP OU DOWNSELL) -->
       <div id="downsell-download-section" style="display: none; margin-top: 20px; padding-top: 18px; border-top: 2px dashed #f97316;">
         <div style="background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: 12px; padding: 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px;">
           <span style="font-size: 1.4rem;">🖼️</span>
           <div>
-            <strong style="color: #9a3412; font-size: 0.95rem; display: block;">Sua Seleção de 50 Quadros Sacros está liberada!</strong>
-            <span style="color: #c2410c; font-size: 0.82rem;">As 50 artes sacras mais queridas em 300 DPI prontas para impressão.</span>
+            <strong style="color: #9a3412; font-size: 0.95rem; display: block;">Sua Coleção com 50 Quadros Sacros está liberada!</strong>
+            <span style="color: #c2410c; font-size: 0.82rem;">As 50 artes sacras em altíssima definição (300 DPI) prontas para moldura e impressão.</span>
           </div>
         </div>
 
@@ -381,12 +381,12 @@
           <div class="file-info">
             <div class="file-icon gold">🖼️</div>
             <div class="file-text">
-              <h4>Seleção Especial: 50 Quadros Sacros em Alta Definição</h4>
-              <span>Pasta no Google Drive com as artes prontas para imprimir</span>
+              <h4>Coleção Especial: 50 Quadros Sacros em Alta Definição</h4>
+              <span>Pasta no Google Drive com todas as artes em alta qualidade prontas para imprimir</span>
             </div>
           </div>
-          <a class="btn-download" href="https://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=sharing" target="_blank">
-            ⬇ ACESSAR QUADROS NO DRIVE
+          <a class="btn-download" href="https://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=drive_link" target="_blank">
+            ⬇ ACESSAR 50 QUADROS NO DRIVE
           </a>
         </div>
       </div>
@@ -444,14 +444,15 @@
       if (bumpSection) bumpSection.style.display = 'block';
     }
 
+    var hasOrderBumpQuadrosParam = params.get('order_bump_quadros') === '1' || params.get('order_bump_quadros') === 'true';
+    if (hasOrderBumpQuadrosParam || hasDownsell) {
+      var downSection = document.getElementById('downsell-download-section');
+      if (downSection) downSection.style.display = 'block';
+    }
+
     if (hasUpsell) {
       var upSection = document.getElementById('upsell-download-section');
       if (upSection) upSection.style.display = 'block';
-    }
-
-    if (hasDownsell) {
-      var downSection = document.getElementById('downsell-download-section');
-      if (downSection) downSection.style.display = 'block';
     }
 
     // Dispara Purchase via Pixel com deduplicação segura (eventID: purchase_orderId)
@@ -460,30 +461,38 @@
     var purchaseEventId = orderId ? ('purchase_' + orderId) : ('eid_pur_' + Date.now());
     var baseValue = plan === 'basico' ? 19.90 : 27.90;
     var amountValue = hasOrderBumpParam ? (baseValue + 7.90) : baseValue;
+    if (hasOrderBumpQuadrosParam) amountValue += 14.50;
     if (hasUpsell) amountValue += 67.90;
-    if (hasDownsell) amountValue += 29.90;
+    if (hasDownsell && !hasOrderBumpQuadrosParam) amountValue += 29.90;
 
     var basePackageName = plan === 'basico' ? 'Agenda Católica 2027 Básica' : 'Agenda Católica 2027 + 5 Bônus Exclusivos';
     var packageName = hasOrderBumpParam ? (basePackageName + ' + Caderno de Colorir dos Santos') : basePackageName;
+    if (hasOrderBumpQuadrosParam) packageName += ' + 50 Quadros Sacros';
     if (hasUpsell) packageName += ' + 150 Quadros Sacros';
-    if (hasDownsell) packageName += ' + 50 Quadros Sacros';
+    if (hasDownsell && !hasOrderBumpQuadrosParam) packageName += ' + 50 Quadros Sacros';
 
     var contentIds = [plan === 'basico' ? 'agenda-catolica-2027-basica' : 'agenda-catolica-2027-completa'];
     if (hasOrderBumpParam) contentIds.push('caderno-colorir-santos');
+    if (hasOrderBumpQuadrosParam) contentIds.push('quadros-sacros-50');
     if (hasUpsell) contentIds.push('quadros-sacros-150');
-    if (hasDownsell) contentIds.push('quadros-sacros-50');
+    if (hasDownsell && !hasOrderBumpQuadrosParam) contentIds.push('quadros-sacros-50');
 
-    if (typeof fbq === 'function') {
-      fbq('track', 'Purchase', {
-        content_name: packageName,
-        content_ids: contentIds,
-        content_type: 'product',
-        content_category: 'Produtos Digitais > Agenda Católica',
-        value: amountValue,
-        currency: 'BRL',
-        num_items: contentIds.length,
-        order_id: orderId || ''
-      }, { eventID: purchaseEventId });
+    if (typeof fbq === 'function' && orderId) {
+      // Dispara apenas com pedido válido e evita duplicação ao recarregar
+      var purchaseKey = 'fb_purchase_sent_' + orderId;
+      if (!sessionStorage.getItem(purchaseKey)) {
+        sessionStorage.setItem(purchaseKey, 'true');
+        fbq('track', 'Purchase', {
+          content_name: packageName,
+          content_ids: contentIds,
+          content_type: 'product',
+          content_category: 'Produtos Digitais > Agenda Católica',
+          value: amountValue,
+          currency: 'BRL',
+          num_items: contentIds.length,
+          order_id: orderId
+        }, { eventID: purchaseEventId });
+      }
     }
   </script>
 </body>

@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { sendMetaEvent } from '../_shared/meta.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -9,11 +8,108 @@ const corsHeaders = {
   'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
 };
 
+// ========================================================
+// META CONVERSIONS API (CAPI) SELF-CONTAINED
+// ========================================================
+async function sha256(str: string): Promise<string> {
+  if (!str) return '';
+  const clean = str.trim().toLowerCase();
+  const encoder = new TextEncoder();
+  const data = encoder.encode(clean);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function normalizePhone(phone: string): string {
+  if (!phone) return '';
+  let digits = phone.replace(/\D/g, '');
+  if (!digits.startsWith('55') && (digits.length === 10 || digits.length === 11)) {
+    digits = '55' + digits;
+  }
+  return digits;
+}
+
+async function sendMetaEvent(payload: any) {
+  const META_PIXEL_ID = Deno.env.get('META_PIXEL_ID') || '1133049763020624';
+  const META_ACCESS_TOKEN = Deno.env.get('META_ACCESS_TOKEN') || '';
+  const META_TEST_EVENT_CODE = Deno.env.get('META_TEST_EVENT_CODE') || '';
+
+  if (!META_ACCESS_TOKEN || !META_PIXEL_ID) {
+    return { success: false, error: 'Credenciais CAPI ausentes' };
+  }
+
+  try {
+    const { eventName, eventId, eventTime, eventSourceUrl, userData, customData } = payload;
+
+    const [hashedEmail, hashedPhone, hashedFirstName, hashedLastName] = await Promise.all([
+      userData.email ? sha256(userData.email) : '',
+      userData.phone ? sha256(normalizePhone(userData.phone)) : '',
+      userData.name ? sha256(userData.name.trim().split(' ')[0]) : '',
+      userData.name && userData.name.trim().includes(' ') 
+        ? sha256(userData.name.trim().split(' ').slice(1).join(' ')) 
+        : ''
+    ]);
+
+    const formattedUserData: Record<string, any> = {};
+    if (hashedEmail) formattedUserData.em = [hashedEmail];
+    if (hashedPhone) formattedUserData.ph = [hashedPhone];
+    if (hashedFirstName) formattedUserData.fn = [hashedFirstName];
+    if (hashedLastName) formattedUserData.ln = [hashedLastName];
+    if (userData.clientIp) formattedUserData.client_ip_address = userData.clientIp;
+    if (userData.clientUserAgent) formattedUserData.client_user_agent = userData.clientUserAgent;
+    if (userData.fbc) formattedUserData.fbc = userData.fbc;
+    if (userData.fbp) formattedUserData.fbp = userData.fbp;
+    if (userData.externalId) {
+      formattedUserData.external_id = [await sha256(userData.externalId)];
+    }
+
+    const eventData: Record<string, any> = {
+      event_name: eventName,
+      event_time: eventTime || Math.floor(Date.now() / 1000),
+      event_id: eventId,
+      action_source: 'website',
+      event_source_url: eventSourceUrl || 'https://agendanossasenhora.online',
+      user_data: formattedUserData,
+      custom_data: {
+        currency: customData.currency || 'BRL',
+        value: typeof customData.value === 'number' ? customData.value : parseFloat(String(customData.value || 0)),
+        content_name: customData.content_name,
+        content_category: customData.content_category || 'Produtos Digitais > Agenda Católica',
+        content_ids: customData.content_ids || ['agenda-catolica-2027'],
+        content_type: customData.content_type || 'product',
+        num_items: customData.num_items || 1,
+        ...(customData.order_id ? { order_id: customData.order_id } : {})
+      }
+    };
+
+    const requestBody: Record<string, any> = {
+      data: [eventData]
+    };
+    if (META_TEST_EVENT_CODE) {
+      requestBody.test_event_code = META_TEST_EVENT_CODE;
+    }
+
+    const apiUrl = `https://graph.facebook.com/v19.0/${META_PIXEL_ID}/events?access_token=${encodeURIComponent(META_ACCESS_TOKEN)}`;
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestBody),
+    });
+    const result = await response.json();
+    return { success: response.ok, data: result };
+  } catch (err) {
+    console.error('[Meta CAPI] Erro ao disparar evento:', err);
+    return { success: false, error: err };
+  }
+}
+
 async function sendPixPendingEmail(order: {
   customer_name: string;
   customer_email: string;
   plan: string;
   order_bump?: boolean;
+  order_bump_quadros?: boolean;
   amount_cents: number;
   pix_code: string;
 }) {
@@ -32,7 +128,9 @@ async function sendPixPendingEmail(order: {
   } else if (order.plan === 'downsell') {
     baseName = 'Seleção 50 Quadros Sacros em Alta Definição';
   }
-  const packageName = order.order_bump ? `${baseName} + Caderno de Colorir dos Santos` : baseName;
+  let packageName = baseName;
+  if (order.order_bump) packageName += ' + Caderno de Colorir dos Santos';
+  if (order.order_bump_quadros) packageName += ' + 50 Quadros Sacros';
   const valorFormatado = (order.amount_cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
   const html = `<!DOCTYPE html>
@@ -158,7 +256,7 @@ serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     const body = await req.json();
-    const { name, email, phone, cpf, plan, order_bump, tracking, event_id, event_source_url } = body;
+    const { name, email, phone, cpf, plan, order_bump, order_bump_quadros, tracking, event_id, event_source_url } = body;
 
     const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 
                      req.headers.get('cf-connecting-ip') || 
@@ -196,11 +294,21 @@ serve(async (req) => {
 
     const hasOrderBump = (selectedPlan === 'basico' || selectedPlan === 'completo') && 
       (order_bump === true || order_bump === 'true' || order_bump === 1 || order_bump === '1');
-    const amountCents = hasOrderBump ? (baseCents + 790) : baseCents;
+    const hasOrderBumpQuadros = (selectedPlan === 'basico' || selectedPlan === 'completo') && 
+      (order_bump_quadros === true || order_bump_quadros === 'true' || order_bump_quadros === 1 || order_bump_quadros === '1');
+
+    let amountCents = baseCents;
     if (hasOrderBump) {
+      amountCents += 790;
       contentName += ' + Caderno de Colorir dos Santos';
       contentIds.push('caderno-colorir-santos');
     }
+    if (hasOrderBumpQuadros) {
+      amountCents += 1450;
+      contentName += ' + 50 Quadros Sacros em Alta Definição';
+      contentIds.push('quadros-sacros-50');
+    }
+
     const finalEventId = event_id || `eid_ic_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
     const resolvedFbc = tracking?.fbc || (tracking?.fbclid ? `fb.1.${Date.now()}.${tracking.fbclid}` : null);
@@ -215,6 +323,7 @@ serve(async (req) => {
         customer_cpf: cpf || null,
         plan: selectedPlan,
         order_bump: hasOrderBump,
+        order_bump_quadros: hasOrderBumpQuadros,
         amount_cents: amountCents,
         status: 'pending',
         utm_source: tracking?.utm_source || null,
@@ -225,6 +334,8 @@ serve(async (req) => {
         fbclid: tracking?.fbclid || null,
         fbc: resolvedFbc,
         fbp: tracking?.fbp || null,
+        client_ip: clientIp || null,
+        client_user_agent: clientUserAgent || null,
       })
       .select()
       .single();
@@ -295,6 +406,7 @@ serve(async (req) => {
         customer_email: email,
         plan: selectedPlan,
         order_bump: hasOrderBump,
+        order_bump_quadros: hasOrderBumpQuadros,
         amount_cents: amountCents,
         pix_code: pushinData.qr_code,
       }).catch(e => console.error('Falha assíncrona ao enviar PIX por email:', e));

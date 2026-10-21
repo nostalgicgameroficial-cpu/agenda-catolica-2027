@@ -115,6 +115,7 @@ async function sendDeliveryEmail(order: {
   customer_email: string;
   plan: string;
   order_bump?: boolean;
+  order_bump_quadros?: boolean;
 }) {
   const apiKey = Deno.env.get('RESEND_API_KEY') || '';
   if (!apiKey) {
@@ -125,6 +126,7 @@ async function sendDeliveryEmail(order: {
   const isUpsell = order.plan === 'upsell';
   const isDownsell = order.plan === 'downsell';
   const hasOrderBump = !!order.order_bump;
+  const hasOrderBumpQuadros = !!order.order_bump_quadros;
   const firstName = order.customer_name ? order.customer_name.split(' ')[0] : 'Irmão(ã) em Cristo';
   
   let packageName = isCompleto ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
@@ -132,8 +134,12 @@ async function sendDeliveryEmail(order: {
     packageName = 'Mega Coleção de 150 Quadros Sacros em Alta Definição';
   } else if (isDownsell) {
     packageName = 'Seleção Especial de 50 Quadros Sacros em Alta Definição';
-  } else if (hasOrderBump) {
+  }
+  if (hasOrderBump) {
     packageName += ' + 50 Histórias dos Santos para Colorir';
+  }
+  if (hasOrderBumpQuadros) {
+    packageName += ' + 50 Quadros Sacros em Alta Definição';
   }
 
   let driveLink = 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing';
@@ -177,6 +183,23 @@ async function sendDeliveryEmail(order: {
                 <a href="${driveLink}" target="_blank" style="color: #1d4d90; font-size: 13px; text-decoration: underline;">${driveLink}</a>
               </div>
 
+              ${hasOrderBump ? `
+              <div style="background-color: #fefce8; border: 1px solid #fef08a; border-left: 4px solid #ca8a04; border-radius: 6px; padding: 14px; margin: 20px 0;">
+                <p style="margin: 0 0 4px; color: #854d0e; font-size: 14px; font-weight: 700;">🎨 Bônus Incluso: 50 Histórias dos Santos para Crianças Colorir</p>
+                <p style="margin: 0; font-size: 13px; color: #713f12; line-height: 1.5;">O seu caderno infantil com mais de 50 páginas de desenhos e histórias para colorir já está liberado dentro da sua pasta no Google Drive!</p>
+              </div>
+              ` : ''}
+
+              ${hasOrderBumpQuadros ? `
+              <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #2563eb; border-radius: 6px; padding: 14px; margin: 20px 0;">
+                <p style="margin: 0 0 4px; color: #1e40af; font-size: 14px; font-weight: 700;">🖼️ Bônus Incluso: 50 Quadros Sacros em Alta Definição</p>
+                <p style="margin: 0 0 10px; font-size: 13px; color: #1e3a8a; line-height: 1.5;">A sua coleção com 50 Quadros Sacros em altíssima resolução (300 DPI) para impressão e oratório já está liberada no seu Google Drive:</p>
+                <a href="https://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=drive_link" target="_blank" style="background-color: #2563eb; color: #ffffff; text-decoration: none; padding: 8px 16px; border-radius: 4px; font-weight: 600; font-size: 13px; display: inline-block;">
+                  Acessar 50 Quadros no Google Drive
+                </a>
+              </div>
+              ` : ''}
+
               <p style="font-size: 13px; color: #475569; line-height: 1.6; margin: 16px 0;">
                 <strong>Instruções de uso:</strong> Os arquivos estão organizados em alta definição para impressão (formatos A4 e A5) e também prontos para leitura no celular, tablet ou computador. Você pode salvar a pasta no seu próprio Google Drive para ter acesso permanente.
               </p>
@@ -206,7 +229,7 @@ Confirmamos o seu pagamento da ${packageName}. Seus arquivos digitais já estão
 Link direto de acesso:
 ${driveLink}
 
-Instruções de uso:
+` + (hasOrderBump ? '🎨 Bônus Especial: 50 Histórias dos Santos para Colorir incluso na sua pasta do Google Drive!\n\n' : '') + (hasOrderBumpQuadros ? '🖼️ Bônus Especial: 50 Quadros Sacros em Alta Definição incluso no Google Drive:\nhttps://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=drive_link\n\n' : '') + `Instruções de uso:
 Os arquivos estão organizados em alta definição para impressão (formatos A4 e A5) e também prontos para leitura no celular, tablet ou computador. Você pode salvar a pasta no seu próprio Google Drive para ter acesso permanente.
 
 Se precisar de qualquer apoio ou tiver dúvidas, basta responder diretamente a este e-mail.
@@ -608,11 +631,13 @@ serve(async (req) => {
       const isDownsell = order.plan === 'downsell';
       const isCompleto = order.plan === 'completo';
       const hasOrderBump = !!order.order_bump;
+      const hasOrderBumpQuadros = !!order.order_bump_quadros;
       const baseAmount = order.plan === 'basico' ? 19.90 : (isUpsell ? 67.90 : (isDownsell ? 29.90 : 27.90));
-      const amount = order.amount_cents ? (order.amount_cents / 100) : (baseAmount + (hasOrderBump ? 7.90 : 0));
+      const amount = order.amount_cents ? (order.amount_cents / 100) : (baseAmount + (hasOrderBump ? 7.90 : 0) + (hasOrderBumpQuadros ? 14.50 : 0));
 
       let contentIds = [isCompleto ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'];
       let contentName = isCompleto ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
+      let numItems = 1;
 
       if (isUpsell) {
         contentIds = ['quadros-sacros-150'];
@@ -620,9 +645,17 @@ serve(async (req) => {
       } else if (isDownsell) {
         contentIds = ['quadros-sacros-50'];
         contentName = 'Seleção 50 Quadros Sacros em Alta Definição';
-      } else if (hasOrderBump) {
-        contentIds.push('caderno-colorir-santos');
-        contentName += ' + 50 Histórias dos Santos para Colorir';
+      } else {
+        if (hasOrderBump) {
+          contentIds.push('caderno-colorir-santos');
+          contentName += ' + 50 Histórias dos Santos para Colorir';
+          numItems++;
+        }
+        if (hasOrderBumpQuadros) {
+          contentIds.push('quadros-sacros-50-bump');
+          contentName += ' + 50 Quadros Sacros em Alta Definição';
+          numItems++;
+        }
       }
 
       const finalFbc = order.fbc || (order.fbclid ? `fb.1.${new Date(order.created_at || Date.now()).getTime()}.${order.fbclid}` : undefined);
@@ -636,6 +669,8 @@ serve(async (req) => {
           email: order.customer_email,
           phone: order.customer_phone,
           name: order.customer_name,
+          clientIp: order.client_ip || undefined,
+          clientUserAgent: order.client_user_agent || undefined,
           fbc: finalFbc,
           fbp: order.fbp || undefined,
           externalId: order.id,
@@ -646,7 +681,7 @@ serve(async (req) => {
           content_name: contentName,
           content_type: 'product',
           content_ids: contentIds,
-          num_items: hasOrderBump ? 2 : 1,
+          num_items: numItems,
           order_id: order.id,
         }
       });
