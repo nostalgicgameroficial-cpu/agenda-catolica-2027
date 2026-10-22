@@ -546,12 +546,21 @@ serve(async (req) => {
       );
     }
 
-    // 5. AÇÃO: APAGAR PEDIDO (DELETE)
-    if (action === 'delete_order') {
-      const orderId = body.order_id;
+    const isUuid = (id: any) => typeof id === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+
+    // 5. AÇÃO: APAGAR PEDIDO (DELETE INDIVIDUAL)
+    if (action === 'delete_order' || action === 'delete') {
+      const orderId = body.order_id || body.orderId || body.id;
       if (!orderId) {
         return new Response(
           JSON.stringify({ error: 'order_id é obrigatório.' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      if (!isUuid(orderId)) {
+        return new Response(
+          JSON.stringify({ error: 'ID de pedido inválido (formato UUID esperado).' }),
           { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
@@ -564,7 +573,7 @@ serve(async (req) => {
       if (delError) {
         console.error('Erro ao excluir pedido:', delError);
         return new Response(
-          JSON.stringify({ error: 'Erro ao excluir pedido no banco de dados.' }),
+          JSON.stringify({ error: 'Erro ao excluir pedido no banco de dados: ' + delError.message }),
           { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
@@ -576,11 +585,36 @@ serve(async (req) => {
     }
 
     // 6. AÇÃO: APAGAR MÚLTIPLOS PEDIDOS (BULK DELETE)
-    if (action === 'delete_bulk_orders') {
-      const orderIds = body.order_ids;
+    if (action === 'delete_bulk_orders' || action === 'delete_bulk') {
+      let orderIds = body.order_ids || body.orderIds || body.ids || [];
+
+      if (body.delete_all_pending) {
+        const { data: pendings, error: fetchErr } = await supabase
+          .from('orders')
+          .select('id')
+          .eq('status', 'pending');
+
+        if (fetchErr) {
+          return new Response(
+            JSON.stringify({ error: 'Erro ao buscar pedidos pendentes: ' + fetchErr.message }),
+            { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
+        orderIds = (pendings || []).map((p: any) => p.id);
+      }
+
       if (!Array.isArray(orderIds) || orderIds.length === 0) {
         return new Response(
-          JSON.stringify({ error: 'order_ids inválido ou vazio.' }),
+          JSON.stringify({ error: 'Nenhum pedido selecionado para exclusão.' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      const validIds = orderIds.filter((id: any) => isUuid(id));
+      if (validIds.length === 0) {
+        return new Response(
+          JSON.stringify({ error: 'Nenhum ID de pedido válido fornecido para exclusão.' }),
           { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
@@ -588,18 +622,18 @@ serve(async (req) => {
       const { error: delError } = await supabase
         .from('orders')
         .delete()
-        .in('id', orderIds);
+        .in('id', validIds);
 
       if (delError) {
         console.error('Erro ao excluir pedidos em massa:', delError);
         return new Response(
-          JSON.stringify({ error: 'Erro ao excluir pedidos selecionados.' }),
+          JSON.stringify({ error: 'Erro ao excluir pedidos selecionados: ' + delError.message }),
           { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
 
       return new Response(
-        JSON.stringify({ success: true, message: `${orderIds.length} pedido(s) excluído(s) com sucesso!` }),
+        JSON.stringify({ success: true, message: `${validIds.length} pedido(s) excluído(s) com sucesso!` }),
         { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
