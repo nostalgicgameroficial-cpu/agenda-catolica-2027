@@ -461,13 +461,13 @@
     var purchaseEventId = orderId ? ('purchase_' + orderId) : ('eid_pur_' + Date.now());
     var baseValue = plan === 'basico' ? 19.90 : 27.90;
     var amountValue = hasOrderBumpParam ? (baseValue + 7.90) : baseValue;
-    if (hasOrderBumpQuadrosParam) amountValue += 14.50;
+    if (hasOrderBumpQuadrosParam) amountValue += 7.50;
     if (hasUpsell) amountValue += 67.90;
     if (hasDownsell && !hasOrderBumpQuadrosParam) amountValue += 29.90;
 
     var basePackageName = plan === 'basico' ? 'Agenda Católica 2027 Básica' : 'Agenda Católica 2027 + 5 Bônus Exclusivos';
     var packageName = hasOrderBumpParam ? (basePackageName + ' + Caderno de Colorir dos Santos') : basePackageName;
-    if (hasOrderBumpQuadrosParam) packageName += ' + 50 Quadros Sacros';
+    if (hasOrderBumpQuadrosParam) packageName += ' + 90 Quadros Sacros';
     if (hasUpsell) packageName += ' + 150 Quadros Sacros';
     if (hasDownsell && !hasOrderBumpQuadrosParam) packageName += ' + 50 Quadros Sacros';
 

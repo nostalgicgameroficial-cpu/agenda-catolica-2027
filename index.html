@@ -3763,7 +3763,7 @@
                 </ul>
               </div>
               <button type="button" class="order-bump-btn" id="btn-toggle-bump-2" aria-label="Adicionar Quadros Sacros">
-                <span>👉 Sim! Adicionar (+ R$ 14,50)</span>
+                <span>👉 Sim! Adicionar (+ R$ 7,50)</span>
               </button>
             </div>
 
@@ -3880,7 +3880,7 @@
     </div>
   </div>
 
-  <!-- MODAL DE INTERCEPTAÇÃO: OFERTA +90 QUADROS SACROS (+R$ 14,50) -->
+  <!-- MODAL DE INTERCEPTAÇÃO: OFERTA +90 QUADROS SACROS (+R$ 7,50) -->
   <div class="modal-offer-backdrop" id="modal-offer-quadros">
     <div class="modal-offer-card">
       <div class="modal-offer-header">
@@ -3909,12 +3909,12 @@
         <div class="modal-offer-price-box">
           <span class="modal-offer-price-old">De R$ 47,00</span>
           <span>por apenas</span>
-          <span class="modal-offer-price-new">+ R$ 14,50</span>
+          <span class="modal-offer-price-new">+ R$ 7,50</span>
           <span style="font-size: 0.78rem; color: #166534; font-weight: 700;">(Preço Único de Checkout)</span>
         </div>
 
         <button type="button" class="btn-green-accept" id="btn-accept-quadros-modal">
-          <span>🟢 ADICIONAR AO MEU PEDIDO (+ R$ 14,50)</span>
+          <span>🟢 ADICIONAR AO MEU PEDIDO (+ R$ 7,50)</span>
           <small>Sim! Quero os 90 Quadros Sacros e gerar meu PIX agora</small>
         </button>
 
@@ -4056,10 +4056,10 @@
       function calculateTotal() {
         var base = currentPlan === 'basico' ? 19.90 : 27.90;
         var bump1 = hasOrderBump ? 7.90 : 0;
-        var bump2 = hasOrderBumpQuadros ? 14.50 : 0;
+        var bump2 = hasOrderBumpQuadros ? 7.50 : 0;
         var total = Math.round((base + bump1 + bump2) * 100) / 100;
         var baseCents = currentPlan === 'basico' ? 1990 : 2790;
-        var totalCents = baseCents + (hasOrderBump ? 790 : 0) + (hasOrderBumpQuadros ? 1450 : 0);
+        var totalCents = baseCents + (hasOrderBump ? 790 : 0) + (hasOrderBumpQuadros ? 750 : 0);
         var formatted = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         return { base: base, total: total, totalCents: totalCents, formatted: formatted };
       }
@@ -4095,17 +4095,17 @@
           }
         }
 
-        // Atualiza estado visual do Order Bump 2 (50 Quadros Sacros)
+        // Atualiza estado visual do Order Bump 2 (+90 Quadros Sacros)
         if (orderBumpQuadrosBox) {
           var btnBump2 = document.getElementById('btn-toggle-bump-2');
           if (hasOrderBumpQuadros) {
             orderBumpQuadrosBox.classList.add('selected');
             if (orderBumpQuadrosCheckIcon) orderBumpQuadrosCheckIcon.textContent = '✓';
-            if (btnBump2) btnBump2.innerHTML = '<span>✓ Sim! Adicionado (+ R$ 14,50)</span>';
+            if (btnBump2) btnBump2.innerHTML = '<span>✓ Sim! Adicionado (+ R$ 7,50)</span>';
           } else {
             orderBumpQuadrosBox.classList.remove('selected');
             if (orderBumpQuadrosCheckIcon) orderBumpQuadrosCheckIcon.textContent = '';
-            if (btnBump2) btnBump2.innerHTML = '<span>👉 Sim! Adicionar (+ R$ 14,50)</span>';
+            if (btnBump2) btnBump2.innerHTML = '<span>👉 Sim! Adicionar (+ R$ 7,50)</span>';
           }
         }
 

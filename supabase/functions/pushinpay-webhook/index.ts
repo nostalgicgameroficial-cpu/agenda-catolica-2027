@@ -537,7 +537,7 @@ serve(async (req: Request) => {
         const isUpsell = order.plan === 'upsell';
         const isDownsell = order.plan === 'downsell';
         const baseAmount = order.plan === 'basico' ? 19.90 : (isUpsell ? 67.90 : (isDownsell ? 29.90 : 27.90));
-        const amount = order.amount_cents ? (order.amount_cents / 100) : (baseAmount + (hasOrderBump ? 7.90 : 0) + (hasOrderBumpQuadros ? 14.50 : 0));
+        const amount = order.amount_cents ? (order.amount_cents / 100) : (baseAmount + (hasOrderBump ? 7.90 : 0) + (hasOrderBumpQuadros ? 7.50 : 0));
 
         let contentIds = [order.plan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'];
         let contentName = order.plan === 'completo' ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
@@ -554,8 +554,8 @@ serve(async (req: Request) => {
           contentName += ' + 50 Histórias dos Santos para Colorir';
         }
         if (hasOrderBumpQuadros) {
-          contentIds.push('quadros-sacros-50');
-          contentName += ' + 50 Quadros Sacros em Alta Definição';
+          contentIds.push('quadros-sacros-90');
+          contentName += ' + 90 Quadros Sacros em Alta Definição';
         }
 
         const finalFbc = order.fbc || (order.fbclid ? `fb.1.${new Date(order.created_at || Date.now()).getTime()}.${order.fbclid}` : undefined);

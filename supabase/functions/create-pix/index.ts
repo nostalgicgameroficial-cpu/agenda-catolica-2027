@@ -304,9 +304,9 @@ serve(async (req) => {
       contentIds.push('caderno-colorir-santos');
     }
     if (hasOrderBumpQuadros) {
-      amountCents += 1450;
-      contentName += ' + 50 Quadros Sacros em Alta Definição';
-      contentIds.push('quadros-sacros-50');
+      amountCents += 750;
+      contentName += ' + 90 Quadros Sacros em Alta Definição';
+      contentIds.push('quadros-sacros-90');
     }
 
     const finalEventId = event_id || `eid_ic_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;

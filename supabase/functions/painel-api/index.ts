@@ -633,7 +633,7 @@ serve(async (req) => {
       const hasOrderBump = !!order.order_bump;
       const hasOrderBumpQuadros = !!order.order_bump_quadros;
       const baseAmount = order.plan === 'basico' ? 19.90 : (isUpsell ? 67.90 : (isDownsell ? 29.90 : 27.90));
-      const amount = order.amount_cents ? (order.amount_cents / 100) : (baseAmount + (hasOrderBump ? 7.90 : 0) + (hasOrderBumpQuadros ? 14.50 : 0));
+      const amount = order.amount_cents ? (order.amount_cents / 100) : (baseAmount + (hasOrderBump ? 7.90 : 0) + (hasOrderBumpQuadros ? 7.50 : 0));
 
       let contentIds = [isCompleto ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'];
       let contentName = isCompleto ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
@@ -652,8 +652,8 @@ serve(async (req) => {
           numItems++;
         }
         if (hasOrderBumpQuadros) {
-          contentIds.push('quadros-sacros-50-bump');
-          contentName += ' + 50 Quadros Sacros em Alta Definição';
+          contentIds.push('quadros-sacros-90-bump');
+          contentName += ' + 90 Quadros Sacros em Alta Definição';
           numItems++;
         }
       }

@@ -2307,7 +2307,59 @@
     }
 
     .bump-quadros-img {
+      width: 96px;
       border-color: #bfdbfe;
+    }
+
+    .order-bump-btn {
+      width: 100%;
+      margin-top: 10px;
+      padding: 9px 14px;
+      border-radius: 9px;
+      border: 1.5px solid #d97706;
+      background: #ffffff;
+      color: #b45309;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+    }
+
+    .order-bump-btn:hover {
+      background: #fef3c7;
+      border-color: #b45309;
+      transform: translateY(-1px);
+    }
+
+    .checkout-order-bump.selected .order-bump-btn {
+      background: #16a34a;
+      border-color: #15803d;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+    }
+
+    .checkout-order-bump.bump-quadros .order-bump-btn {
+      border-color: #2563eb;
+      background: #ffffff;
+      color: #1d4ed8;
+    }
+
+    .checkout-order-bump.bump-quadros .order-bump-btn:hover {
+      background: #dbeafe;
+      border-color: #1d4ed8;
+    }
+
+    .checkout-order-bump.bump-quadros.selected .order-bump-btn {
+      background: #16a34a;
+      border-color: #15803d;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
     }
 
     /* MODAL DE INTERCEPTAÇÃO: OFERTA DOS 50 QUADROS SACROS */
@@ -2315,12 +2367,12 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(7, 14, 28, 0.82);
+      background: rgba(7, 14, 28, 0.85);
       backdrop-filter: blur(6px);
       z-index: 100000;
       align-items: center;
       justify-content: center;
-      padding: 14px;
+      padding: 10px;
       overflow-y: auto;
     }
 
@@ -2331,34 +2383,38 @@
     .modal-offer-card {
       background: #ffffff;
       width: 100%;
-      max-width: 490px;
-      border-radius: 20px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+      max-width: 440px;
+      max-height: 92vh;
+      border-radius: 18px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
       overflow: hidden;
       position: relative;
       border: 2px solid #e2e8f0;
-      animation: modalFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       margin: auto;
+      display: flex;
+      flex-direction: column;
     }
 
     .modal-offer-header {
       background: linear-gradient(135deg, #0c1830 0%, #1d4d90 100%);
       color: #ffffff;
-      padding: 14px 18px;
+      padding: 10px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 2px solid var(--gold-500);
+      flex-shrink: 0;
     }
 
     .modal-offer-header-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       color: var(--gold-300);
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 800;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
     }
 
@@ -2366,14 +2422,14 @@
       background: rgba(255, 255, 255, 0.15);
       border: none;
       color: #ffffff;
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 700;
       transition: background 0.2s;
     }
@@ -2383,16 +2439,19 @@
     }
 
     .modal-offer-body {
-      padding: 18px 20px 22px;
+      padding: 12px 16px 14px;
       text-align: center;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
     }
 
     .modal-offer-title {
-      font-size: 1.22rem;
+      font-size: 1.08rem;
       font-weight: 900;
       color: var(--navy-900);
-      line-height: 1.3;
-      margin-bottom: 6px;
+      line-height: 1.25;
+      margin-bottom: 4px;
     }
 
     .modal-offer-title span {
@@ -2400,25 +2459,30 @@
     }
 
     .modal-offer-subtitle {
-      font-size: 0.88rem;
+      font-size: 0.78rem;
       color: var(--ink-secondary);
-      line-height: 1.45;
-      margin-bottom: 14px;
+      line-height: 1.35;
+      margin-bottom: 8px;
     }
 
     .modal-offer-img-box {
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 8px 20px rgba(12, 24, 48, 0.12);
+      box-shadow: 0 4px 14px rgba(12, 24, 48, 0.12);
       border: 1.5px solid #dce7f5;
-      margin-bottom: 14px;
+      margin-bottom: 8px;
       line-height: 0;
       background: #000;
+      max-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .modal-offer-img-box img {
       width: 100%;
-      height: auto;
+      height: 140px;
+      object-fit: cover;
       display: block;
     }
 
@@ -2426,21 +2490,21 @@
       list-style: none;
       text-align: left;
       display: grid;
-      gap: 6px;
+      gap: 4px;
       background: #f8fafd;
       border: 1px solid #dce7f5;
-      border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 14px;
+      border-radius: 10px;
+      padding: 8px 12px;
+      margin-bottom: 8px;
     }
 
     .modal-offer-bullets li {
-      font-size: 0.8rem;
+      font-size: 0.74rem;
       color: var(--ink-primary);
       display: flex;
       align-items: flex-start;
-      gap: 8px;
-      line-height: 1.35;
+      gap: 6px;
+      line-height: 1.3;
     }
 
     .modal-offer-bullets li strong {
@@ -2451,22 +2515,22 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       background: #fefce8;
       border: 1.5px solid #fde047;
-      border-radius: 10px;
-      padding: 8px 12px;
-      margin-bottom: 14px;
+      border-radius: 8px;
+      padding: 6px 10px;
+      margin-bottom: 10px;
     }
 
     .modal-offer-price-old {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #94a3b8;
       text-decoration: line-through;
     }
 
     .modal-offer-price-new {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 900;
       color: #15803d;
     }
@@ -2476,9 +2540,9 @@
       background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
       color: #ffffff;
       border: none;
-      padding: 15px 18px;
-      border-radius: var(--radius-full);
-      font-size: 1.02rem;
+      padding: 11px 14px;
+      border-radius: 10px;
+      font-size: 0.95rem;
       font-weight: 900;
       cursor: pointer;
       display: flex;
@@ -2486,36 +2550,101 @@
       align-items: center;
       justify-content: center;
       gap: 2px;
-      box-shadow: 0 6px 20px rgba(22, 163, 74, 0.38);
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
       transition: transform 0.2s, box-shadow 0.2s;
+      margin-bottom: 8px;
     }
 
     .btn-green-accept:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(22, 163, 74, 0.5);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(22, 163, 74, 0.45);
     }
 
     .btn-green-accept small {
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 600;
-      opacity: 0.92;
+      opacity: 0.95;
     }
 
+    /* BOTÃO DE RECUSA COM COR E DESTAQUE NÍTIDO */
     .btn-decline-link {
-      background: none;
-      border: none;
-      color: #64748b;
-      font-size: 0.82rem;
-      font-weight: 500;
+      width: 100%;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      color: #334155;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 800;
       cursor: pointer;
-      text-decoration: underline;
-      margin-top: 10px;
-      display: inline-block;
-      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
     .btn-decline-link:hover {
-      color: #334155;
+      background: #f1f5f9;
+      border-color: #94a3b8;
+      color: #0f172a;
+    }
+
+    @media (max-width: 480px) {
+      .modal-offer-backdrop {
+        padding: 6px;
+      }
+      .modal-offer-card {
+        max-width: 98vw;
+        max-height: 94vh;
+        border-radius: 14px;
+      }
+      .modal-offer-header {
+        padding: 8px 12px;
+      }
+      .modal-offer-body {
+        padding: 10px 12px 12px;
+      }
+      .modal-offer-title {
+        font-size: 0.98rem;
+      }
+      .modal-offer-subtitle {
+        font-size: 0.74rem;
+        margin-bottom: 6px;
+      }
+      .modal-offer-img-box {
+        max-height: 115px;
+        margin-bottom: 6px;
+      }
+      .modal-offer-img-box img {
+        height: 115px;
+      }
+      .modal-offer-bullets {
+        padding: 6px 10px;
+        margin-bottom: 6px;
+        gap: 3px;
+      }
+      .modal-offer-bullets li {
+        font-size: 0.7rem;
+      }
+      .modal-offer-price-box {
+        padding: 4px 8px;
+        margin-bottom: 8px;
+      }
+      .modal-offer-price-new {
+        font-size: 0.98rem;
+      }
+      .btn-green-accept {
+        padding: 10px 12px;
+        font-size: 0.88rem;
+        margin-bottom: 6px;
+      }
+      .btn-decline-link {
+        padding: 8px 10px;
+        font-size: 0.78rem;
+      }
     }
 
     /* BOTÃO SUBMIT */
@@ -3594,12 +3723,11 @@
 
             <!-- ORDER BUMP: CADERNO CATÓLICO DE COLORIR E HISTÓRIAS DOS SANTOS -->
             <div class="checkout-order-bump" id="order-bump-box">
-              <span class="order-bump-badge">⚡ Oportunidade Única no Checkout</span>
               <div class="order-bump-header">
                 <div class="order-bump-checkbox-custom" id="order-bump-check-icon">✓</div>
                 <div>
                   <div class="order-bump-title">
-                    Sim! Adicionar o <strong>Caderno de Colorir dos Santos</strong> por apenas <span class="order-bump-price-tag">+ R$ 7,90</span>
+                    <strong>+50 Cadernos de Colorir dos Santos Católicos</strong>
                   </div>
                 </div>
               </div>
@@ -3611,27 +3739,32 @@
                   <li><span>🙏</span> <span>Incentivo à fé e aos <strong>valores cristãos</strong></span></li>
                 </ul>
               </div>
+              <button type="button" class="order-bump-btn" id="btn-toggle-bump-1" aria-label="Adicionar Caderno de Colorir">
+                <span>👉 Sim! Adicionar (+ R$ 7,90)</span>
+              </button>
             </div>
 
-            <!-- ORDER BUMP 2: 50 QUADROS SACROS EM ALTA RESOLUÇÃO -->
+            <!-- ORDER BUMP 2: +90 QUADROS SACROS EM ALTA RESOLUÇÃO -->
             <div class="checkout-order-bump bump-quadros" id="order-bump-quadros-box">
-              <span class="order-bump-badge badge-quadros">🖼️ Oferta Especial no Checkout</span>
               <div class="order-bump-header">
                 <div class="order-bump-checkbox-custom" id="order-bump-quadros-check-icon"></div>
                 <div>
                   <div class="order-bump-title">
-                    Sim! Adicionar <strong>+50 Quadros Sacros Prontos para Imprimir</strong> por apenas <span class="order-bump-price-tag">+ R$ 14,50</span>
+                    <strong>+90 Quadros Sacros Prontos para Imprimir</strong>
                   </div>
                 </div>
               </div>
               <div class="order-bump-content-row">
-                <img src="assets/order_bump_quadros_sacros.jpg" alt="50 Quadros Sacros em Alta Definição" class="order-bump-img bump-quadros-img" width="160" height="90" loading="lazy">
+                <img src="assets/order_bump_quadros_sacros.jpg" alt="90 Quadros Sacros em Alta Definição" class="order-bump-img bump-quadros-img" width="160" height="90" loading="lazy">
                 <ul class="order-bump-bullets">
-                  <li><span>🖼️</span> <span><strong>50 Obras Sacras em 300 DPI:</strong> Cristo Rei, Ostensório, N. Sra. Aparecida e Santos</span></li>
+                  <li><span>🖼️</span> <span><strong>90 Obras Sacras em 300 DPI:</strong> Sagrado Coração, N. Sra. Aparecida, Santos e Arcanjos</span></li>
                   <li><span>🖨️</span> <span><strong>Prontos para Imprimir:</strong> perfeitos para quadros, altar pessoal ou presentear</span></li>
                   <li><span>📁</span> <span><strong>Acesso Vitalício:</strong> pasta oficial organizada no Google Drive</span></li>
                 </ul>
               </div>
+              <button type="button" class="order-bump-btn" id="btn-toggle-bump-2" aria-label="Adicionar Quadros Sacros">
+                <span>👉 Sim! Adicionar (+ R$ 7,50)</span>
+              </button>
             </div>
 
             <div id="checkout-form-error" style="display:none; color: #dc2626; font-size: 0.85rem; font-weight: 700; margin: 10px 0 12px; text-align: center;"></div>
@@ -3747,7 +3880,7 @@
     </div>
   </div>
 
-  <!-- MODAL DE INTERCEPTAÇÃO: OFERTA 50 QUADROS SACROS (+R$ 14,50) -->
+  <!-- MODAL DE INTERCEPTAÇÃO: OFERTA +90 QUADROS SACROS (+R$ 7,50) -->
   <div class="modal-offer-backdrop" id="modal-offer-quadros">
     <div class="modal-offer-card">
       <div class="modal-offer-header">
@@ -3757,37 +3890,36 @@
       <div class="modal-offer-body">
         <h3 class="modal-offer-title">
           Aproveite e adicione à sua compra:<br>
-          <span>+50 Quadros Sacros em Alta Qualidade</span>
+          <span>+90 Quadros Sacros em Alta Qualidade</span>
         </h3>
         <p class="modal-offer-subtitle">
           Leve agora uma coleção completa de obras sacras prontas para imprimir e emoldurar no seu lar, altar de oração ou presentear quem você ama!
         </p>
 
         <div class="modal-offer-img-box">
-          <img src="assets/order_bump_quadros_sacros.jpg" alt="50 Quadros Sacros Prontos para Imprimir">
+          <img src="assets/order_bump_quadros_sacros.jpg" alt="90 Quadros Sacros Prontos para Imprimir">
         </div>
 
         <ul class="modal-offer-bullets">
-          <li><span>🖼️</span> <span><strong>50 Obras em Altíssima Definição (300 DPI):</strong> qualidade de galeria nos formatos A3, A4, A5 e 10x15cm.</span></li>
-          <li><span>✨</span> <span><strong>Imagens Ricas e Inspiradoras:</strong> Cristo Rei, Santíssimo Sacramento, N. Sra. Aparecida e grandes Santos da Igreja.</span></li>
-          <li><span>🖨️</span> <span><strong>Prontos para Imprimir:</strong> economize fazendo lindos quadros católicos na sua gráfica de preferência.</span></li>
-          <li><span>📁</span> <span><strong>Acesso Imediato no Google Drive:</strong> baixe quando quiser com acesso vitalício.</span></li>
+          <li><span>🖼️</span> <span><strong>90 Obras em Alta Definição (300 DPI):</strong> qualidade de galeria para molduras.</span></li>
+          <li><span>✨</span> <span><strong>Artes Sagradas Ricas:</strong> Sagrado Coração, N. Sra. Aparecida, Santos e Arcanjos.</span></li>
+          <li><span>📁</span> <span><strong>Acesso Imediato e Vitalício:</strong> pasta oficial organizada no Google Drive.</span></li>
         </ul>
 
         <div class="modal-offer-price-box">
           <span class="modal-offer-price-old">De R$ 47,00</span>
           <span>por apenas</span>
-          <span class="modal-offer-price-new">+ R$ 14,50</span>
+          <span class="modal-offer-price-new">+ R$ 7,50</span>
           <span style="font-size: 0.78rem; color: #166534; font-weight: 700;">(Preço Único de Checkout)</span>
         </div>
 
         <button type="button" class="btn-green-accept" id="btn-accept-quadros-modal">
-          <span>🟢 ADICIONAR AO MEU PEDIDO (+ R$ 14,50)</span>
-          <small>Sim! Quero os 50 Quadros Sacros e gerar meu PIX agora</small>
+          <span>🟢 ADICIONAR AO MEU PEDIDO (+ R$ 7,50)</span>
+          <small>Sim! Quero os 90 Quadros Sacros e gerar meu PIX agora</small>
         </button>
 
         <button type="button" class="btn-decline-link" id="btn-decline-quadros-modal">
-          Não, obrigado. Quero continuar o pedido sem os quadros sacros.
+          <span>Não adicionar</span>
         </button>
       </div>
     </div>
@@ -3924,10 +4056,10 @@
       function calculateTotal() {
         var base = currentPlan === 'basico' ? 19.90 : 27.90;
         var bump1 = hasOrderBump ? 7.90 : 0;
-        var bump2 = hasOrderBumpQuadros ? 14.50 : 0;
+        var bump2 = hasOrderBumpQuadros ? 7.50 : 0;
         var total = Math.round((base + bump1 + bump2) * 100) / 100;
         var baseCents = currentPlan === 'basico' ? 1990 : 2790;
-        var totalCents = baseCents + (hasOrderBump ? 790 : 0) + (hasOrderBumpQuadros ? 1450 : 0);
+        var totalCents = baseCents + (hasOrderBump ? 790 : 0) + (hasOrderBumpQuadros ? 750 : 0);
         var formatted = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         return { base: base, total: total, totalCents: totalCents, formatted: formatted };
       }
@@ -3951,23 +4083,29 @@
 
         // Atualiza estado visual do Order Bump 1 (Caderno de Colorir dos Santos)
         if (orderBumpBox) {
+          var btnBump1 = document.getElementById('btn-toggle-bump-1');
           if (hasOrderBump) {
             orderBumpBox.classList.add('selected');
             if (orderBumpCheckIcon) orderBumpCheckIcon.textContent = '✓';
+            if (btnBump1) btnBump1.innerHTML = '<span>✓ Sim! Adicionado (+ R$ 7,90)</span>';
           } else {
             orderBumpBox.classList.remove('selected');
             if (orderBumpCheckIcon) orderBumpCheckIcon.textContent = '';
+            if (btnBump1) btnBump1.innerHTML = '<span>👉 Sim! Adicionar (+ R$ 7,90)</span>';
           }
         }
 
-        // Atualiza estado visual do Order Bump 2 (50 Quadros Sacros)
+        // Atualiza estado visual do Order Bump 2 (+90 Quadros Sacros)
         if (orderBumpQuadrosBox) {
+          var btnBump2 = document.getElementById('btn-toggle-bump-2');
           if (hasOrderBumpQuadros) {
             orderBumpQuadrosBox.classList.add('selected');
             if (orderBumpQuadrosCheckIcon) orderBumpQuadrosCheckIcon.textContent = '✓';
+            if (btnBump2) btnBump2.innerHTML = '<span>✓ Sim! Adicionado (+ R$ 7,50)</span>';
           } else {
             orderBumpQuadrosBox.classList.remove('selected');
             if (orderBumpQuadrosCheckIcon) orderBumpQuadrosCheckIcon.textContent = '';
+            if (btnBump2) btnBump2.innerHTML = '<span>👉 Sim! Adicionar (+ R$ 7,50)</span>';
           }
         }
 
@@ -4115,10 +4253,10 @@
         if (typeof window.fbTrackEvent === 'function' && product) {
           var contentName = product.name +
             (hasOrderBump ? ' + Caderno de Colorir dos Santos' : '') +
-            (hasOrderBumpQuadros ? ' + 50 Quadros Sacros' : '');
+            (hasOrderBumpQuadros ? ' + 90 Quadros Sacros' : '');
           var contentIds = [product.id];
           if (hasOrderBump) contentIds.push('caderno-colorir-santos');
-          if (hasOrderBumpQuadros) contentIds.push('quadros-sacros-50');
+          if (hasOrderBumpQuadros) contentIds.push('quadros-sacros-90');
           var numItems = 1 + (hasOrderBump ? 1 : 0) + (hasOrderBumpQuadros ? 1 : 0);
 
           window.fbTrackEvent('Purchase', {
@@ -4294,10 +4432,10 @@
         if (typeof window.fbTrackEvent === 'function' && product) {
           var contentName = product.name +
             (hasOrderBump ? ' + Caderno de Colorir dos Santos' : '') +
-            (hasOrderBumpQuadros ? ' + 50 Quadros Sacros' : '');
+            (hasOrderBumpQuadros ? ' + 90 Quadros Sacros' : '');
           var contentIds = [product.id];
           if (hasOrderBump) contentIds.push('caderno-colorir-santos');
-          if (hasOrderBumpQuadros) contentIds.push('quadros-sacros-50');
+          if (hasOrderBumpQuadros) contentIds.push('quadros-sacros-90');
           var numItems = 1 + (hasOrderBump ? 1 : 0) + (hasOrderBumpQuadros ? 1 : 0);
 
           window.fbTrackEvent('InitiateCheckout', {
