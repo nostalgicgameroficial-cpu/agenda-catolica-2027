@@ -4525,7 +4525,15 @@
             pixCopyPaste.value = pixData.qr_code;
           }
           if (pixVerifyMsg) {
-            pixVerifyMsg.style.display = 'none';
+            if (pixData.reused) {
+              pixVerifyMsg.textContent = 'ℹ️ Identificamos o seu código Pix recente ainda disponível para pagamento:';
+              pixVerifyMsg.style.display = 'block';
+              pixVerifyMsg.style.backgroundColor = '#f0f9ff';
+              pixVerifyMsg.style.color = '#0369a1';
+              pixVerifyMsg.style.border = '1px solid #bae6fd';
+            } else {
+              pixVerifyMsg.style.display = 'none';
+            }
           }
         })
         .catch(function(err) {

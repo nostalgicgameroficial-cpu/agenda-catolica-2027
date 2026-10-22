@@ -312,13 +312,54 @@ serve(async (req) => {
     const finalEventId = event_id || `eid_ic_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
     const resolvedFbc = tracking?.fbc || (tracking?.fbclid ? `fb.1.${Date.now()}.${tracking.fbclid}` : null);
+    const normalizedEmail = email.trim().toLowerCase();
+
+    // 0. Proteção Anti-Abuso / Idempotência:
+    // Se o cliente já gerou um Pix com o mesmo e-mail e valor nos últimos 10 minutos que ainda está 'pending',
+    // reutiliza o QR Code já gerado. Não gasta chamada na PushinPay, não envia e-mails repetidos e não duplica pedidos.
+    const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+    try {
+      const { data: existingOrders, error: searchError } = await supabase
+        .from('orders')
+        .select('id, pushinpay_transaction_id, pix_code, pix_qr_code_base64, amount_cents, status, created_at')
+        .ilike('customer_email', normalizedEmail)
+        .eq('status', 'pending')
+        .eq('amount_cents', amountCents)
+        .gte('created_at', tenMinutesAgo)
+        .not('pix_code', 'is', null)
+        .not('pushinpay_transaction_id', 'is', null)
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      if (!searchError && existingOrders && existingOrders.length > 0) {
+        const existingOrder = existingOrders[0];
+        console.log(`[create-pix] Pix recente reutilizado para ${normalizedEmail} (Order: ${existingOrder.id})`);
+        return new Response(
+          JSON.stringify({
+            success: true,
+            order_id: existingOrder.id,
+            transaction_id: existingOrder.pushinpay_transaction_id,
+            qr_code: existingOrder.pix_code,
+            qr_code_base64: existingOrder.pix_qr_code_base64,
+            amount_cents: existingOrder.amount_cents,
+            status: 'pending',
+            event_id: finalEventId,
+            reused: true,
+            message: 'Pix recente reutilizado com sucesso.'
+          }),
+          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+    } catch (checkErr) {
+      console.warn('[create-pix] Falha ao verificar Pix recente, prosseguindo com criação normal:', checkErr);
+    }
 
     // 1. Cria o registro inicial do pedido no Supabase
     const { data: order, error: insertError } = await supabase
       .from('orders')
       .insert({
         customer_name: name,
-        customer_email: email,
+        customer_email: normalizedEmail,
         customer_phone: phone,
         customer_cpf: cpf || null,
         plan: selectedPlan,
