@@ -1403,7 +1403,7 @@
             'Authorization': 'Bearer ' + ANON_KEY,
             'x-admin-password': password,
           },
-          body: JSON.stringify({ action: 'list' }),
+          body: JSON.stringify({ action: 'list', password: password }),
         });
 
         if (response.status === 401) {
@@ -1816,7 +1816,7 @@
             'Authorization': 'Bearer ' + ANON_KEY,
             'x-admin-password': password,
           },
-          body: JSON.stringify({ action: 'delete_order', order_id: orderId }),
+          body: JSON.stringify({ action: 'delete_order', order_id: orderId, password: password }),
         });
 
         const data = await res.json();
@@ -1855,6 +1855,7 @@
           body: JSON.stringify({
             action: 'delete_bulk_orders',
             order_ids: Array.from(selectedOrderIds),
+            password: password,
           }),
         });
 
@@ -1951,6 +1952,7 @@
             action: 'send_capi_purchase',
             order_id: order.id,
             event_id: eventId,
+            password: password,
           })
         });
         const capiData = await capiRes.json();
@@ -2115,7 +2117,7 @@
             'Authorization': 'Bearer ' + ANON_KEY,
             'x-admin-password': password,
           },
-          body: JSON.stringify({ action: 'approve', order_id: orderId }),
+          body: JSON.stringify({ action: 'approve', order_id: orderId, password: password }),
         });
 
         const data = await res.json();
@@ -2148,7 +2150,7 @@
             'Authorization': 'Bearer ' + ANON_KEY,
             'x-admin-password': password,
           },
-          body: JSON.stringify({ action: 'resend_access', order_id: orderId }),
+          body: JSON.stringify({ action: 'resend_access', order_id: orderId, password: password }),
         });
 
         const data = await res.json();
@@ -2502,6 +2504,7 @@
               to: contact.customer_email,
               subject: subject,
               html_content: personalizedHtml,
+              password: password,
             }),
           });
 

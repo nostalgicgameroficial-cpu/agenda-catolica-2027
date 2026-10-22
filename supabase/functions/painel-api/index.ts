@@ -105,7 +105,7 @@ const PUSHINPAY_FEE_CENTS = 45; // 45 centavos por transação paga
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-admin-password',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-admin-password, *',
   'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
 };
 
@@ -139,7 +139,7 @@ async function sendDeliveryEmail(order: {
     packageName += ' + 50 Histórias dos Santos para Colorir';
   }
   if (hasOrderBumpQuadros) {
-    packageName += ' + 50 Quadros Sacros em Alta Definição';
+    packageName += ' + 90 Quadros Sacros em Alta Definição';
   }
 
   let driveLink = 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing';
@@ -192,10 +192,10 @@ async function sendDeliveryEmail(order: {
 
               ${hasOrderBumpQuadros ? `
               <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #2563eb; border-radius: 6px; padding: 14px; margin: 20px 0;">
-                <p style="margin: 0 0 4px; color: #1e40af; font-size: 14px; font-weight: 700;">🖼️ Bônus Incluso: 50 Quadros Sacros em Alta Definição</p>
-                <p style="margin: 0 0 10px; font-size: 13px; color: #1e3a8a; line-height: 1.5;">A sua coleção com 50 Quadros Sacros em altíssima resolução (300 DPI) para impressão e oratório já está liberada no seu Google Drive:</p>
+                <p style="margin: 0 0 4px; color: #1e40af; font-size: 14px; font-weight: 700;">🖼️ Bônus Incluso: 90 Quadros Sacros em Alta Definição</p>
+                <p style="margin: 0 0 10px; font-size: 13px; color: #1e3a8a; line-height: 1.5;">A sua coleção com +90 Quadros Sacros em altíssima resolução (300 DPI) para impressão e oratório já está liberada no seu Google Drive:</p>
                 <a href="https://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=drive_link" target="_blank" style="background-color: #2563eb; color: #ffffff; text-decoration: none; padding: 8px 16px; border-radius: 4px; font-weight: 600; font-size: 13px; display: inline-block;">
-                  Acessar 50 Quadros no Google Drive
+                  Acessar 90 Quadros no Google Drive
                 </a>
               </div>
               ` : ''}

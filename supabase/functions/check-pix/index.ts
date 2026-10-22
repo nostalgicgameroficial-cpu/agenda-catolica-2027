@@ -138,7 +138,7 @@ async function sendDeliveryEmail(order: {
     packageName += ' + 50 Histórias dos Santos para Colorir';
   }
   if (hasOrderBumpQuadros) {
-    packageName += ' + 50 Quadros Sacros em Alta Definição';
+    packageName += ' + 90 Quadros Sacros em Alta Definição';
   }
 
   let driveLink = 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing';
@@ -191,10 +191,10 @@ async function sendDeliveryEmail(order: {
 
               ${hasOrderBumpQuadros ? `
               <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #2563eb; border-radius: 6px; padding: 14px; margin: 20px 0;">
-                <p style="margin: 0 0 4px; color: #1e40af; font-size: 14px; font-weight: 700;">🖼️ Bônus Incluso: 50 Quadros Sacros em Alta Definição</p>
-                <p style="margin: 0 0 10px; font-size: 13px; color: #1e3a8a; line-height: 1.5;">A sua coleção com 50 Quadros Sacros em altíssima resolução (300 DPI) para impressão e oratório já está liberada no seu Google Drive:</p>
+                <p style="margin: 0 0 4px; color: #1e40af; font-size: 14px; font-weight: 700;">🖼️ Bônus Incluso: 90 Quadros Sacros em Alta Definição</p>
+                <p style="margin: 0 0 10px; font-size: 13px; color: #1e3a8a; line-height: 1.5;">A sua coleção com +90 Quadros Sacros em altíssima resolução (300 DPI) para impressão e oratório já está liberada no seu Google Drive:</p>
                 <a href="https://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=drive_link" target="_blank" style="background-color: #2563eb; color: #ffffff; text-decoration: none; padding: 8px 16px; border-radius: 4px; font-weight: 600; font-size: 13px; display: inline-block;">
-                  Acessar 50 Quadros no Google Drive
+                  Acessar 90 Quadros no Google Drive
                 </a>
               </div>
               ` : ''}
@@ -228,7 +228,7 @@ Confirmamos o seu pagamento da ${packageName}. Seus arquivos digitais já estão
 Link direto de acesso:
 ${driveLink}
 
-` + (hasOrderBump ? '🎨 Bônus Especial: 50 Histórias dos Santos para Colorir incluso na sua pasta do Google Drive!\n\n' : '') + (hasOrderBumpQuadros ? '🖼️ Bônus Especial: 50 Quadros Sacros em Alta Definição incluso no Google Drive:\nhttps://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=drive_link\n\n' : '') + `Instruções de uso:
+` + (hasOrderBump ? '🎨 Bônus Especial: 50 Histórias dos Santos para Colorir incluso na sua pasta do Google Drive!\n\n' : '') + (hasOrderBumpQuadros ? '🖼️ Bônus Especial: 90 Quadros Sacros em Alta Definição incluso no Google Drive:\nhttps://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=drive_link\n\n' : '') + `Instruções de uso:
 Os arquivos estão organizados em alta definição para impressão (formatos A4 e A5) e também prontos para leitura no celular, tablet ou computador. Você pode salvar a pasta no seu próprio Google Drive para ter acesso permanente.
 
 Se precisar de qualquer apoio ou tiver dúvidas, basta responder diretamente a este e-mail.
