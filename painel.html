@@ -514,6 +514,25 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
     }
 
+    /* Toggle switch slider para o Webhook */
+    #webhook-enabled-toggle:checked + #webhook-slider {
+      background-color: #10b981 !important;
+    }
+    #webhook-slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    #webhook-enabled-toggle:checked + #webhook-slider:before {
+      transform: translateX(24px);
+    }
+
     /* Barra de Filtros e Busca */
     .filter-bar {
       display: flex;
@@ -948,6 +967,7 @@
       <button class="tab-btn" data-tab="daily">📅 Faturamento Real por Dia</button>
       <button class="tab-btn" data-tab="campaigns">🎯 Desempenho de Campanhas (UTMs)</button>
       <button class="tab-btn" data-tab="sources">🌐 Origens de Tráfego</button>
+      <button class="tab-btn" data-tab="webhook">🔗 Webhook & Traqueamento</button>
     </div>
 
     <!-- ABA 1: PEDIDOS & CLIENTES -->
@@ -1109,6 +1129,129 @@
               <!-- Preenchido via JS -->
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 5: CONFIGURAÇÃO DE WEBHOOK (TRAQUEAMENTO & CAMPANHAS) -->
+    <div id="tab-webhook" class="tab-content" style="display: none;">
+      <div class="campaigns-container">
+        <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div class="section-title">🔗 Webhook de Traqueamento Externo</div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+              Repasse automaticamente as vendas confirmadas da Pushin Pay para o webhook da sua ferramenta externa de campanhas e traqueamento do Facebook.
+            </p>
+          </div>
+          <div id="webhook-badge-container">
+            <span class="badge" id="webhook-status-badge" style="font-size: 13px; padding: 6px 14px; background: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid #475569;">
+              ⚪ Carregando status...
+            </span>
+          </div>
+        </div>
+
+        <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 24px; margin-top: 16px;">
+          
+          <!-- Ativação / Toggle -->
+          <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid var(--card-border); margin-bottom: 20px;">
+            <div>
+              <div style="font-weight: 700; font-size: 15px; color: #fff;">Ativar Repasse Automático de Vendas</div>
+              <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
+                Quando ativado, cada venda paga da Pushin Pay dispara instantaneamente um POST com todos os dados da venda, dados do comprador e parâmetros de UTM/Pixel para a sua ferramenta.
+              </div>
+            </div>
+            <label style="position: relative; display: inline-block; width: 52px; height: 28px; cursor: pointer; flex-shrink: 0; margin-left: 16px;">
+              <input type="checkbox" id="webhook-enabled-toggle" style="opacity: 0; width: 0; height: 0;" onchange="updateWebhookStatusUI()">
+              <span id="webhook-slider" style="position: absolute; cursor: pointer; inset: 0; background-color: #374151; transition: .3s; border-radius: 28px;"></span>
+            </label>
+          </div>
+
+          <!-- URL do Webhook -->
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>🌐 URL do Webhook da sua Ferramenta:</span>
+              <span style="font-size: 11px; color: var(--gold);">* Endpoint HTTPS público</span>
+            </label>
+            <input 
+              type="url" 
+              id="webhook-url-input" 
+              class="form-input" 
+              placeholder="Cole aqui o link do webhook gerado na sua ferramenta (ex: https://app.suaferramenta.com/api/webhook/...)" 
+              style="width: 100%; padding: 12px 14px; font-size: 14px; font-family: monospace;"
+            >
+          </div>
+
+          <!-- Eventos para encaminhar -->
+          <div class="form-group" style="margin-bottom: 24px;">
+            <label class="form-label">Eventos a Encaminhar:</label>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; color: #fff; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 8px 14px; border-radius: 6px;">
+                <input type="checkbox" id="webhook-event-paid" checked disabled style="cursor: pointer;">
+                <span>🟢 <strong>Vendas Pagas / Confirmadas</strong> (Recomendado para otimização de campanhas e ROAS)</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; color: var(--text-muted); background: rgba(30, 41, 59, 0.5); border: 1px solid var(--card-border); padding: 8px 14px; border-radius: 6px;">
+                <input type="checkbox" id="webhook-event-pending" style="cursor: pointer;">
+                <span>🟡 PIX Gerados / Pendentes</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Botões de Ação -->
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+            <button class="btn btn-gold" id="btn-save-webhook" style="padding: 12px 24px; font-size: 14px; font-weight: 700;" onclick="saveWebhookSettings()">
+              💾 Salvar Configurações
+            </button>
+            <button class="btn btn-secondary" id="btn-test-webhook" style="padding: 12px 20px; font-size: 14px;" onclick="testWebhookTrigger()">
+              🧪 Testar Disparo Agora (Simulação)
+            </button>
+          </div>
+
+          <!-- Resultado do Teste ao Vivo -->
+          <div id="webhook-test-result" style="display: none; margin-top: 20px; padding: 16px; border-radius: 8px; font-size: 13px;">
+          </div>
+
+          <!-- Exemplo do Payload Enviado (Documentação Prática) -->
+          <div style="margin-top: 28px; border-top: 1px solid var(--card-border); padding-top: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="togglePayloadDocs()">
+              <div style="font-weight: 600; font-size: 14px; color: #cbd5e1;">
+                📦 Ver parâmetros enviados no Webhook (UTMs, FBC, FBP, Dados do Cliente e Venda)
+              </div>
+              <span id="payload-docs-arrow" style="font-size: 12px; color: var(--gold); font-weight: 600;">▼ Ver JSON de Exemplo</span>
+            </div>
+            
+            <div id="payload-docs-content" style="display: none; margin-top: 14px;">
+              <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">
+                Sua ferramenta receberá um <strong>POST HTTP</strong> com <code>Content-Type: application/json</code> contendo todas as variáveis necessárias para atribuição precisa no Facebook:
+              </p>
+              <pre style="background: #070b13; border: 1px solid var(--card-border); border-radius: 8px; padding: 16px; font-family: monospace; font-size: 12px; color: #a5f3fc; overflow-x: auto; line-height: 1.5;">{
+  "event": "order.paid",
+  "status": "paid",
+  "order_id": "8f2b34a1-7c9e-4b3f-8e4a-9b12c3d4e5f6",
+  "amount": 27.90,
+  "amount_cents": 2790,
+  "plan": "completo",
+  "customer": {
+    "name": "Maria Silva",
+    "email": "maria@exemplo.com",
+    "phone": "5511999998888",
+    "cpf": "123.456.789-00"
+  },
+  "tracking": {
+    "utm_source": "facebook",
+    "utm_medium": "cpc",
+    "utm_campaign": "Campanha_Conversao_Escala",
+    "utm_content": "Anuncio_Video_01",
+    "utm_term": "publico_catolico",
+    "fbc": "fb.1.1729630000.IwAR2yZ...",
+    "fbp": "fb.1.1729630000.123456789",
+    "fbclid": "IwAR2yZ..."
+  },
+  "pushinpay_transaction_id": "4839201",
+  "sent_at": "2026-10-22T23:30:00.000Z"
+}</pre>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -1361,6 +1504,11 @@
         document.getElementById('tab-daily').style.display = tab === 'daily' ? 'block' : 'none';
         document.getElementById('tab-campaigns').style.display = tab === 'campaigns' ? 'block' : 'none';
         document.getElementById('tab-sources').style.display = tab === 'sources' ? 'block' : 'none';
+        const tabWebhook = document.getElementById('tab-webhook');
+        if (tabWebhook) {
+          tabWebhook.style.display = tab === 'webhook' ? 'block' : 'none';
+          if (tab === 'webhook') loadWebhookSettings();
+        }
       });
     });
 
@@ -1417,6 +1565,7 @@
         if (data.success) {
           allOrders = data.orders || [];
           recalculateAndRender();
+          loadWebhookSettings();
         } else {
           showToast(data.error || 'Erro ao carregar dados.', true);
         }
@@ -1431,31 +1580,56 @@
 
     document.getElementById('btn-refresh').addEventListener('click', loadDashboardData);
 
-    // FILTRA PEDIDOS PELA DATA SELECIONADA
+    // ========================================================
+    // AJUSTE DE FUSO HORÁRIO BRASIL (UTC-3 - America/Sao_Paulo)
+    // Garante que vendas após as 21h permaneçam contabilizadas no mesmo dia!
+    // ========================================================
+    function getBrDateStr(dateInput) {
+      if (!dateInput) return '';
+      const d = new Date(dateInput);
+      return new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/Sao_Paulo',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      }).format(d);
+    }
+
+    function getBrDateTimeFormatted(dateInput) {
+      if (!dateInput) return '';
+      const d = new Date(dateInput);
+      const datePart = d.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+      const timePart = d.toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit' });
+      return `${datePart} ${timePart}`;
+    }
+
+    // FILTRA PEDIDOS PELA DATA SELECIONADA (FUSO HORÁRIO BRASIL)
     function getOrdersFilteredByDate() {
       if (currentDateRange === 'all') {
         return allOrders;
       }
 
       const now = new Date();
-      const todayStr = now.toISOString().slice(0, 10);
+      const todayStr = getBrDateStr(now);
 
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      const yesterdayStr = yesterday.toISOString().slice(0, 10);
+      const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+      const yesterdayStr = getBrDateStr(yesterday);
 
-      const sevenDaysAgo = new Date();
-      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      const sevenDaysAgoStr = getBrDateStr(new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000));
+      const thirtyDaysAgoStr = getBrDateStr(new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000));
 
-      const thirtyDaysAgo = new Date();
-      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
-      const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Sao_Paulo',
+        year: 'numeric',
+        month: '2-digit'
+      }).formatToParts(now);
+      const p = {};
+      parts.forEach(({ type, value }) => p[type] = value);
+      const startOfMonthStr = `${p.year}-${p.month}-01`;
 
       return allOrders.filter(o => {
         if (!o.created_at) return false;
-        const orderDate = new Date(o.created_at);
-        const orderDateStr = orderDate.toISOString().slice(0, 10);
+        const orderDateStr = getBrDateStr(o.created_at);
 
         if (currentDateRange === 'today') {
           return orderDateStr === todayStr;
@@ -1464,13 +1638,13 @@
           return orderDateStr === yesterdayStr;
         }
         if (currentDateRange === '7days') {
-          return orderDate >= sevenDaysAgo;
+          return orderDateStr >= sevenDaysAgoStr;
         }
         if (currentDateRange === '30days') {
-          return orderDate >= thirtyDaysAgo;
+          return orderDateStr >= thirtyDaysAgoStr;
         }
         if (currentDateRange === 'this_month') {
-          return orderDate >= startOfMonth;
+          return orderDateStr >= startOfMonthStr;
         }
         if (currentDateRange === 'custom') {
           const s = document.getElementById('date-start').value;
@@ -1568,8 +1742,7 @@
       }
 
       tbody.innerHTML = filtered.map(o => {
-        const date = new Date(o.created_at);
-        const dateStr = date.toLocaleDateString('pt-BR') + ' ' + date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        const dateStr = getBrDateTimeFormatted(o.created_at);
         const brutoFormatted = ((o.amount_cents || 0) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         
         const isPaid = o.status === 'paid';
@@ -1580,11 +1753,23 @@
           ? `<span class="badge badge-paid">🟢 PAGO</span>`
           : `<span class="badge badge-pending">🟡 PENDENTE</span>`;
         
-        const planName = o.plan === 'completo' ? 'Completo + Bônus' : 'Básico';
+        let planName = 'Básico';
+        if (o.plan === 'fisica') planName = '📦 Física';
+        else if (o.plan === 'digital_promo' || o.plan === 'pdf') planName = '📱 PDF Promo';
+        else if (o.plan === 'completo') planName = 'Completo + Bônus';
+        else if (o.plan === 'upsell') planName = '150 Quadros';
+        else if (o.plan === 'downsell') planName = '50 Quadros';
+
         const emailSentIcon = o.email_sent ? '✅ Entregue' : '⏳ Pendente';
 
         const safeOrderJson = JSON.stringify(o).replace(/"/g, '&quot;');
         const isChecked = selectedOrderIds.has(o.id) ? 'checked' : '';
+
+        const addressHtml = o.shipping_street ? `
+          <div style="font-size: 11px; color: #93c5fd; background: rgba(59, 130, 246, 0.1); border-radius: 4px; padding: 3px 6px; margin-top: 4px;">
+            📦 <strong>Envio:</strong> ${escapeHtml(o.shipping_street)}, ${escapeHtml(o.shipping_number || 'S/N')}${o.shipping_complement ? ' (' + escapeHtml(o.shipping_complement) + ')' : ''} - ${escapeHtml(o.shipping_neighborhood || '')}, ${escapeHtml(o.shipping_city || '')}/${escapeHtml(o.shipping_state || '')} - CEP: ${escapeHtml(o.shipping_cep || '')}
+          </div>
+        ` : '';
 
         return `
           <tr>
@@ -1595,13 +1780,14 @@
             <td>
               <div style="font-weight: 600; color: #fff;">${escapeHtml(o.customer_name || 'Sem Nome')}</div>
               <div style="font-size: 11px; color: var(--text-muted);">CPF: ${escapeHtml(o.customer_cpf || 'Não informado')}</div>
+              ${addressHtml}
             </td>
             <td>
               <div style="font-size: 12px;">${escapeHtml(o.customer_email || '')}</div>
               <div style="font-size: 11px; color: var(--text-muted);">${escapeHtml(o.customer_phone || '')}</div>
             </td>
             <td>
-              <span class="badge badge-plan">${planName}</span>
+              <span class="badge badge-plan" style="${o.plan === 'fisica' ? 'background:#1d4ed8; color:#fff;' : ''}">${planName}</span>
             </td>
             <td>
               <div style="font-weight: 700; color: #fff;">${brutoFormatted}</div>
@@ -1665,19 +1851,21 @@
         return;
       }
 
-      // Agrupa pedidos por data local (YYYY-MM-DD)
+      // Agrupa pedidos por data local do Brasil (YYYY-MM-DD em America/Sao_Paulo)
       const dayMap = {};
 
       ordersList.forEach(o => {
         const d = new Date(o.created_at);
-        const dayKey = d.toLocaleDateString('pt-BR'); // Ex: 20/10/2026
+        const dayFormatted = d.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }); // Ex: 22/10/2026
+        const dayKey = getBrDateStr(o.created_at); // Ex: 2026-10-22
         
         if (!dayMap[dayKey]) {
           dayMap[dayKey] = {
+            dayFormatted,
+            dayKey,
             totalPix: 0,
             paidCount: 0,
             grossCents: 0,
-            rawDate: d,
           };
         }
 
@@ -1688,10 +1876,10 @@
         }
       });
 
-      // Ordena dias do mais recente ao mais antigo
-      const sortedDays = Object.entries(dayMap).sort((a, b) => b[1].rawDate - a[1].rawDate);
+      // Ordena dias do mais recente ao mais antigo pelo dayKey (YYYY-MM-DD)
+      const sortedDays = Object.values(dayMap).sort((a, b) => b.dayKey.localeCompare(a.dayKey));
 
-      tbody.innerHTML = sortedDays.map(([dayStr, stat]) => {
+      tbody.innerHTML = sortedDays.map((stat) => {
         const feeCents = stat.paidCount * PUSHINPAY_FEE_CENTS;
         const netCents = stat.grossCents - feeCents;
 
@@ -1702,7 +1890,7 @@
 
         return `
           <tr>
-            <td style="font-weight: 700; color: #fff;">📅 ${dayStr}</td>
+            <td style="font-weight: 700; color: #fff;">📅 ${stat.dayFormatted}</td>
             <td style="color: #34d399; font-weight: 700;">${stat.paidCount}</td>
             <td style="font-weight: 600;">${grossFormatted}</td>
             <td style="color: #f87171;">- ${feeFormatted}</td>
@@ -2580,6 +2768,212 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+    }
+
+    // ========================================================
+    // GERENCIAMENTO DA ABA WEBHOOK & TRAQUEAMENTO
+    // ========================================================
+    let webhookSettingsLoaded = false;
+
+    function updateWebhookStatusUI() {
+      const toggle = document.getElementById('webhook-enabled-toggle');
+      const badge = document.getElementById('webhook-status-badge');
+      if (!toggle || !badge) return;
+      const enabled = toggle.checked;
+      if (enabled) {
+        badge.innerHTML = '🟢 Encaminhamento ATIVO';
+        badge.style.background = 'rgba(16, 185, 129, 0.2)';
+        badge.style.color = '#34d399';
+        badge.style.border = '1px solid #059669';
+      } else {
+        badge.innerHTML = '⚪ Encaminhamento INATIVO';
+        badge.style.background = 'rgba(100, 116, 139, 0.2)';
+        badge.style.color = '#94a3b8';
+        badge.style.border = '1px solid #475569';
+      }
+    }
+
+    function togglePayloadDocs() {
+      const content = document.getElementById('payload-docs-content');
+      const arrow = document.getElementById('payload-docs-arrow');
+      if (!content || !arrow) return;
+      if (content.style.display === 'none') {
+        content.style.display = 'block';
+        arrow.innerText = '▲ Ocultar JSON de Exemplo';
+      } else {
+        content.style.display = 'none';
+        arrow.innerText = '▼ Ver JSON de Exemplo';
+      }
+    }
+
+    async function loadWebhookSettings() {
+      const password = sessionStorage.getItem('painel_pass');
+      if (!password) return;
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': ANON_KEY,
+            'Authorization': 'Bearer ' + ANON_KEY,
+            'x-admin-password': password,
+          },
+          body: JSON.stringify({ action: 'get_webhook_settings', password }),
+        });
+
+        const data = await res.json();
+        if (data.success && data.settings) {
+          const s = data.settings;
+          const urlInput = document.getElementById('webhook-url-input');
+          const toggle = document.getElementById('webhook-enabled-toggle');
+          const pendingCheck = document.getElementById('webhook-event-pending');
+
+          if (urlInput) urlInput.value = s.url || '';
+          if (toggle) toggle.checked = !!s.enabled;
+          if (pendingCheck) pendingCheck.checked = Array.isArray(s.events) && s.events.includes('pending');
+          updateWebhookStatusUI();
+          webhookSettingsLoaded = true;
+        }
+      } catch (err) {
+        console.error('Erro ao carregar webhook_settings:', err);
+      }
+    }
+
+    async function saveWebhookSettings() {
+      const password = sessionStorage.getItem('painel_pass');
+      if (!password) return;
+
+      const urlInput = document.getElementById('webhook-url-input').value.trim();
+      const enabled = document.getElementById('webhook-enabled-toggle').checked;
+      const includePending = document.getElementById('webhook-event-pending').checked;
+      
+      const events = ['paid'];
+      if (includePending) events.push('pending');
+
+      if (enabled && !urlInput) {
+        alert('Por favor, digite a URL do Webhook da sua ferramenta antes de ativar.');
+        return;
+      }
+
+      if (urlInput && !/^https?:\/\//i.test(urlInput)) {
+        alert('A URL deve iniciar com http:// ou https://');
+        return;
+      }
+
+      const saveBtn = document.getElementById('btn-save-webhook');
+      saveBtn.disabled = true;
+      saveBtn.innerText = '⏳ Salvando...';
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': ANON_KEY,
+            'Authorization': 'Bearer ' + ANON_KEY,
+            'x-admin-password': password,
+          },
+          body: JSON.stringify({
+            action: 'save_webhook_settings',
+            password,
+            settings: {
+              url: urlInput,
+              enabled,
+              events
+            }
+          }),
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          showToast('✅ Configurações de Webhook salvas com sucesso!');
+          updateWebhookStatusUI();
+        } else {
+          showToast(data.error || 'Erro ao salvar configurações.', true);
+        }
+      } catch (err) {
+        console.error('Erro ao salvar webhook settings:', err);
+        showToast('Erro de conexão ao salvar.', true);
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerText = '💾 Salvar Configurações';
+      }
+    }
+
+    async function testWebhookTrigger() {
+      const password = sessionStorage.getItem('painel_pass');
+      if (!password) return;
+
+      const urlInput = document.getElementById('webhook-url-input').value.trim();
+      if (!urlInput || !/^https?:\/\//i.test(urlInput)) {
+        alert('Digite uma URL válida de webhook (https://...) para realizar o teste.');
+        return;
+      }
+
+      const testBtn = document.getElementById('btn-test-webhook');
+      testBtn.disabled = true;
+      testBtn.innerText = '⏳ Enviando Teste...';
+
+      const resultBox = document.getElementById('webhook-test-result');
+      resultBox.style.display = 'block';
+      resultBox.style.background = 'rgba(59, 130, 246, 0.1)';
+      resultBox.style.border = '1px solid rgba(59, 130, 246, 0.3)';
+      resultBox.style.color = '#93c5fd';
+      resultBox.innerHTML = `🚀 Disparando evento de teste para <strong>${escapeHtml(urlInput)}</strong>...`;
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': ANON_KEY,
+            'Authorization': 'Bearer ' + ANON_KEY,
+            'x-admin-password': password,
+          },
+          body: JSON.stringify({
+            action: 'test_webhook',
+            password,
+            url: urlInput
+          }),
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          resultBox.style.background = 'rgba(16, 185, 129, 0.15)';
+          resultBox.style.border = '1px solid #10b981';
+          resultBox.style.color = '#34d399';
+          resultBox.innerHTML = `
+            <div style="font-weight: 700; margin-bottom: 6px;">
+              🎉 Sucesso! A sua ferramenta de traqueamento recebeu o evento com êxito!
+            </div>
+            <div><strong>Status HTTP:</strong> ${data.status} ${data.statusText || 'OK'} | <strong>Tempo de resposta:</strong> ${data.durationMs}ms</div>
+            ${data.responseBody ? `<div style="margin-top: 8px; font-size: 11px; opacity: 0.8; font-family: monospace; word-break: break-all;">Resposta da ferramenta: ${escapeHtml(data.responseBody)}</div>` : ''}
+          `;
+          showToast('✅ Webhook de teste entregue com sucesso!');
+        } else {
+          resultBox.style.background = 'rgba(239, 68, 68, 0.15)';
+          resultBox.style.border = '1px solid #ef4444';
+          resultBox.style.color = '#f87171';
+          resultBox.innerHTML = `
+            <div style="font-weight: 700; margin-bottom: 6px;">❌ Falha na resposta da ferramenta de destino:</div>
+            <div>${escapeHtml(data.error || data.message || 'Erro desconhecido')}</div>
+            ${data.status ? `<div><strong>Status HTTP retornado:</strong> ${data.status}</div>` : ''}
+            ${data.durationMs ? `<div><strong>Tempo de resposta:</strong> ${data.durationMs}ms</div>` : ''}
+            ${data.responseBody ? `<div style="margin-top: 8px; font-size: 11px; font-family: monospace;">${escapeHtml(data.responseBody)}</div>` : ''}
+          `;
+          showToast('Erro no teste de Webhook.', true);
+        }
+      } catch (err) {
+        resultBox.style.background = 'rgba(239, 68, 68, 0.15)';
+        resultBox.style.border = '1px solid #ef4444';
+        resultBox.style.color = '#f87171';
+        resultBox.innerHTML = `❌ Erro de conexão ao testar webhook: ${escapeHtml(String(err))}`;
+        showToast('Erro ao disparar teste.', true);
+      } finally {
+        testBtn.disabled = false;
+        testBtn.innerText = '🧪 Testar Disparo Agora (Simulação)';
+      }
     }
 
     // Inicialização ao carregar a página

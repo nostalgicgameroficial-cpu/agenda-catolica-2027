@@ -730,6 +730,168 @@ serve(async (req) => {
       );
     }
 
+    // 8. AÇÃO: OBTER CONFIGURAÇÕES DE WEBHOOK
+    if (action === 'get_webhook_settings') {
+      const { data: row, error } = await supabase
+        .from('app_settings')
+        .select('*')
+        .eq('key', 'webhook_settings')
+        .maybeSingle();
+
+      if (error) {
+        console.error('Erro ao buscar webhook_settings:', error);
+        return new Response(
+          JSON.stringify({ error: 'Erro ao buscar configurações: ' + error.message }),
+          { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      const settings = (row && row.value) || { url: '', enabled: false, events: ['paid'] };
+      return new Response(
+        JSON.stringify({ success: true, settings }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // 9. AÇÃO: SALVAR CONFIGURAÇÕES DE WEBHOOK
+    if (action === 'save_webhook_settings') {
+      const settings = body.settings || {};
+      const url = typeof settings.url === 'string' ? settings.url.trim() : '';
+      const enabled = !!settings.enabled;
+      const events = Array.isArray(settings.events) ? settings.events : ['paid'];
+
+      if (enabled && url && !/^https?:\/\//i.test(url)) {
+        return new Response(
+          JSON.stringify({ error: 'A URL do Webhook deve começar com http:// ou https://' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      const valueToSave = {
+        url,
+        enabled,
+        events,
+        updated_at: new Date().toISOString()
+      };
+
+      const { error: upsertErr } = await supabase
+        .from('app_settings')
+        .upsert({
+          key: 'webhook_settings',
+          value: valueToSave,
+          updated_at: new Date().toISOString()
+        });
+
+      if (upsertErr) {
+        console.error('Erro ao salvar webhook_settings:', upsertErr);
+        return new Response(
+          JSON.stringify({ error: 'Erro ao salvar configurações no banco: ' + upsertErr.message }),
+          { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({ success: true, message: 'Configurações de Webhook salvas com sucesso!', settings: valueToSave }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // 10. AÇÃO: TESTAR ENVIO DE WEBHOOK
+    if (action === 'test_webhook') {
+      let targetUrl = (body.url || '').trim();
+
+      if (!targetUrl) {
+        const { data: row } = await supabase
+          .from('app_settings')
+          .select('value')
+          .eq('key', 'webhook_settings')
+          .maybeSingle();
+        targetUrl = (row && row.value && row.value.url) ? row.value.url.trim() : '';
+      }
+
+      if (!targetUrl || !/^https?:\/\//i.test(targetUrl)) {
+        return new Response(
+          JSON.stringify({ error: 'URL do Webhook inválida ou não informada.' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      const testPayload = {
+        platform: 'pushinpay',
+        status: 'approved',
+        external_id: 'test_pix_' + Date.now(),
+        amount: 27.90,
+        product_name: 'Agenda Católica 2027 + 5 Bônus Exclusivos',
+        customer_name: 'Cliente Teste Track Go',
+        customer_email: 'teste.trackgo@exemplo.com',
+        customer_phone: '11999999999',
+        utm_source: 'facebook',
+        utm_campaign: 'Campanha Teste Webhook',
+        utm_medium: 'cpc',
+        utm_content: 'Criativo_01',
+        utm_term: 'publico_catolico',
+        src: 'Campanha Teste Webhook|Criativo_01',
+        fbc: 'fb.1.1729630000.IwARtest123',
+        fbp: 'fb.1.1729630000.987654321',
+        simulated: true,
+        order_id: 'test_ord_' + Date.now(),
+        sent_at: new Date().toISOString()
+      };
+
+      const startTime = Date.now();
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+        const resp = await fetch(targetUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'User-Agent': 'AgendaCatolica-WebhookTest/1.0',
+            'X-Relay-Event': 'order.paid',
+            'X-Simulation': 'true'
+          },
+          body: JSON.stringify(testPayload),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        const durationMs = Date.now() - startTime;
+        let responseBody = '';
+        try {
+          responseBody = await resp.text();
+          if (responseBody.length > 500) {
+            responseBody = responseBody.slice(0, 500) + '... (truncado)';
+          }
+        } catch (_) {}
+
+        return new Response(
+          JSON.stringify({
+            success: resp.ok,
+            status: resp.status,
+            statusText: resp.statusText,
+            durationMs,
+            responseBody,
+            message: resp.ok
+              ? `Webhook disparado com sucesso! Resposta da ferramenta: ${resp.status} ${resp.statusText} (${durationMs}ms)`
+              : `A ferramenta respondeu com status: ${resp.status} ${resp.statusText}`
+          }),
+          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      } catch (testErr: any) {
+        const durationMs = Date.now() - startTime;
+        const isAbort = testErr && testErr.name === 'AbortError';
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: isAbort ? 'Tempo limite esgotado (timeout de 10 segundos) ao conectar à ferramenta.' : String(testErr.message || testErr),
+            durationMs
+          }),
+          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+    }
+
     return new Response(
       JSON.stringify({ error: 'Ação desconhecida.' }),
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }

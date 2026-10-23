@@ -1,0 +1,4939 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Agenda Católica 2027 com Liturgia Diária | Edição Física Impressa & Encadernada</title>
+  <meta name="description" content="Receba em casa a sua Agenda Católica 2027 Física Impressa e Encadernada com Liturgia Diária completa, Caminho Quaresmal e 5 Bônus Exclusivos. Envio para todo o Brasil.">
+  <meta name="facebook-domain-verification" content="3qnjbbunfxbuv0akbaodi4rwws60fa" />
+
+  <!-- =============================================
+       META PIXEL + RASTREAMENTO AVANÇADO
+       - Captura fbclid da URL e armazena cookie _fbc
+       - Gera/gerencia cookie _fbp (browser ID)
+       - Passa fbc, fbp, external_id em todos os eventos
+       - Event ID para deduplicação com CAPI
+       - Eventos: PageView, ViewContent, ScrollDepth, InitiateCheckout
+       - Repassa UTM + fbclid para links de checkout
+       ============================================= -->
+  <script>
+  (function() {
+    'use strict';
+
+    // ─── CONFIGURAÇÃO ───────────────────────────────────
+    var PIXEL_ID = '1133049763020624';
+    var COOKIE_EXPIRY_DAYS = 90;
+    var DOMAIN = location.hostname; // auto-detecta domínio
+
+    // ─── UTILITÁRIOS DE COOKIE ──────────────────────────
+    function setCookie(name, value, days) {
+      var d = new Date();
+      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+      var domainStr = DOMAIN ? '; domain=.' + DOMAIN : '';
+      document.cookie = name + '=' + encodeURIComponent(value) +
+        '; expires=' + d.toUTCString() +
+        '; path=/' + domainStr + '; SameSite=Lax';
+    }
+
+    function getCookie(name) {
+      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      return match ? decodeURIComponent(match[2]) : null;
+    }
+
+    // ─── GERAR IDs ÚNICOS ───────────────────────────────
+    function generateEventId() {
+      return 'eid_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    function generateExternalId() {
+      var stored = getCookie('_fbeid');
+      if (stored) return stored;
+      var eid = 'ext_' + Date.now() + '_' + Math.random().toString(36).substr(2, 12);
+      setCookie('_fbeid', eid, 365);
+      return eid;
+    }
+
+    // ─── CAPTURAR fbclid DA URL ─────────────────────────
+    function getUrlParam(param) {
+      var urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // ─── GERENCIAR COOKIE _fbc ──────────────────────────
+    // Formato: fb.{subdomainIndex}.{creationTime}.{fbclid}
+    function manageFbc() {
+      var fbclid = getUrlParam('fbclid');
+      var existingFbc = getCookie('_fbc');
+
+      if (fbclid) {
+        // Verifica se o fbclid mudou
+        var existingFbclid = '';
+        if (existingFbc) {
+          var parts = existingFbc.split('.');
+          existingFbclid = parts.slice(3).join('.');
+        }
+        if (fbclid !== existingFbclid) {
+          var newFbc = 'fb.1.' + Date.now() + '.' + fbclid;
+          setCookie('_fbc', newFbc, COOKIE_EXPIRY_DAYS);
+          return newFbc;
+        }
+      }
+      return existingFbc;
+    }
+
+    // ─── GERENCIAR COOKIE _fbp ──────────────────────────
+    // Formato: fb.{subdomainIndex}.{creationTime}.{randomNumber}
+    function manageFbp() {
+      var existingFbp = getCookie('_fbp');
+      if (existingFbp) return existingFbp;
+      var randomNum = Math.floor(Math.random() * 2147483647) + 1000000000;
+      var newFbp = 'fb.1.' + Date.now() + '.' + randomNum;
+      setCookie('_fbp', newFbp, COOKIE_EXPIRY_DAYS);
+      return newFbp;
+    }
+
+    // ─── CAPTURAR PARÂMETROS UTM ────────────────────────
+    function captureUtmParams() {
+      var params = {};
+      var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid'];
+      utmKeys.forEach(function(key) {
+        var val = getUrlParam(key);
+        if (val) params[key] = val;
+      });
+      if (Object.keys(params).length > 0) {
+        sessionStorage.setItem('_fb_utm_params', JSON.stringify(params));
+      }
+      var stored = sessionStorage.getItem('_fb_utm_params');
+      return stored ? JSON.parse(stored) : {};
+    }
+
+    // ─── INICIALIZAR VALORES ────────────────────────────
+    var fbc = manageFbc();
+    var fbp = manageFbp();
+    var externalId = generateExternalId();
+    var utmParams = captureUtmParams();
+
+    // ─── EXPOR DATA LAYER GLOBAL ────────────────────────
+    window.fbTrackingData = {
+      fbc: fbc,
+      fbp: fbp,
+      externalId: externalId,
+      utmParams: utmParams,
+      pixelId: PIXEL_ID
+    };
+
+    // ─── INICIAR META PIXEL ─────────────────────────────
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+
+    // Init com dados avançados do usuário
+    var initData = {};
+    if (externalId) initData.external_id = externalId;
+    if (fbc) initData.fbc = fbc;
+    if (fbp) initData.fbp = fbp;
+
+    fbq('init', PIXEL_ID, initData);
+
+    // ─── PAGEVIEW COM EVENT_ID ──────────────────────────
+    var pageViewEventId = generateEventId();
+    fbq('track', 'PageView', {}, { eventID: pageViewEventId });
+
+    // Armazenar event_id para possível CAPI deduplicação
+    window.fbTrackingData.lastPageViewEventId = pageViewEventId;
+
+    // ─── VIEWCONTENT (detalhes do produto) ───────────────
+    // Dispara ao carregar a página pois é uma landing page de produto
+    var viewContentEventId = generateEventId();
+    fbq('track', 'ViewContent', {
+      content_name: 'Agenda Católica 2027 Física Impressa & Encadernada',
+      content_category: 'Livros e Agendas > Agenda Católica',
+      content_type: 'product_group',
+      content_ids: ['agenda-catolica-2027-fisica', 'agenda-catolica-2027-pdf-promo'],
+      value: 67.90,
+      currency: 'BRL'
+    }, { eventID: viewContentEventId });
+
+    // ─── RASTREAMENTO DE SCROLL DEPTH ───────────────────
+    var scrollMilestones = { 25: false, 50: false, 75: false, 90: false };
+
+    function getScrollPercent() {
+      var h = document.documentElement;
+      var b = document.body;
+      var st = 'scrollTop';
+      var sh = 'scrollHeight';
+      return Math.round((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight) * 100);
+    }
+
+    var scrollThrottle = null;
+    window.addEventListener('scroll', function() {
+      if (scrollThrottle) return;
+      scrollThrottle = setTimeout(function() {
+        scrollThrottle = null;
+        var pct = getScrollPercent();
+        [25, 50, 75, 90].forEach(function(milestone) {
+          if (pct >= milestone && !scrollMilestones[milestone]) {
+            scrollMilestones[milestone] = true;
+            if (typeof fbq === 'function') {
+              fbq('trackCustom', 'ScrollDepth', {
+                percent: milestone,
+                page_title: document.title
+              }, { eventID: generateEventId() });
+            }
+          }
+        });
+      }, 200);
+    }, { passive: true });
+
+    // ─── RASTREAMENTO DE TEMPO NA PÁGINA ─────────────────
+    var pageLoadTime = Date.now();
+    var engagementMilestones = { 30: false, 60: false, 120: false, 300: false };
+
+    setInterval(function() {
+      var seconds = Math.floor((Date.now() - pageLoadTime) / 1000);
+      [30, 60, 120, 300].forEach(function(sec) {
+        if (seconds >= sec && !engagementMilestones[sec]) {
+          engagementMilestones[sec] = true;
+          if (typeof fbq === 'function') {
+            fbq('trackCustom', 'TimeOnPage', {
+              seconds: sec,
+              page_title: document.title
+            }, { eventID: generateEventId() });
+          }
+        }
+      });
+    }, 5000);
+
+    // ─── FUNÇÃO GLOBAL PARA DISPARAR EVENTOS COM DEDUPLICAÇÃO ───
+    window.fbTrackEvent = function(eventName, data, isStandard, customEventId) {
+      if (typeof fbq !== 'function') return null;
+      var eventId = customEventId || generateEventId();
+      var method = isStandard ? 'track' : 'trackCustom';
+      fbq(method, eventName, data || {}, { eventID: eventId });
+      return eventId;
+    };
+    window.generateEventId = generateEventId;
+
+  })();
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1133049763020624&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel + Rastreamento Avançado -->
+
+  <!-- Fontes: Playfair Display (Serifa editorial nobre para Headlines) + Inter / Plus Jakarta Sans (Alta legibilidade para leitura) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy-950: #070e1c;
+      --navy-900: #0c1830;
+      --navy-850: #122244;
+      --navy-800: #19315f;
+      --blue-marian: #1d4d90;
+      --blue-accent: #2664be;
+      --blue-soft: #fbf8f0;
+      --blue-canvas: #faf6ed;
+
+      --gold-500: #c99834;
+      --gold-400: #dfae47;
+      --gold-300: #f4cc6e;
+      --gold-light: #fef8eb;
+      --gold-gradient: linear-gradient(135deg, #f7d679 0%, #d8a436 45%, #b3801f 100%);
+      --gold-shadow: 0 8px 24px rgba(201, 152, 52, 0.42);
+
+      --green-btn: #16a34a;
+      --green-btn-hover: #15803d;
+      --green-light: #22c55e;
+      --green-price: #15803d;
+
+      --ink-primary: #181f2c;
+      --ink-secondary: #42526e;
+      --ink-muted: #64748b;
+
+      --white: #ffffff;
+      --line: #e8dfcf;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+
+      --shadow-card: 0 6px 20px rgba(12, 24, 48, 0.06);
+      --shadow-hover: 0 14px 32px rgba(12, 24, 48, 0.12);
+    }
+
+    /* RESET & BASE */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--blue-canvas);
+      color: var(--ink-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* CONTAINER COM RESPIRO LATERAL */
+    .wrap {
+      width: 100%;
+      max-width: 1060px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .wrap {
+        padding-left: 28px;
+        padding-right: 28px;
+      }
+    }
+
+    .narrow {
+      max-width: 780px;
+    }
+
+    /* TIPOGRAFIA ULTRA-LEGÍVEL SANS-SERIF */
+    h1, h2, h3, h4 {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.26;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      font-size: clamp(1.6rem, 4.4vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.28;
+      letter-spacing: 0.01em;
+    }
+
+    h2 {
+      font-size: clamp(1.4rem, 3.6vw, 2.15rem);
+      font-weight: 800;
+      color: var(--navy-900);
+      text-align: center;
+      line-height: 1.28;
+      letter-spacing: 0.01em;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    h2.dark-title {
+      color: var(--white);
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      letter-spacing: 0;
+      margin-bottom: 6px;
+    }
+
+    /* TAGS & BADGES */
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: var(--gold-500);
+      background: var(--gold-light);
+      border: 1px solid rgba(201, 152, 52, 0.4);
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      margin-bottom: 12px;
+    }
+
+    .section-tag.dark {
+      background: rgba(247, 214, 121, 0.14);
+      border-color: rgba(247, 214, 121, 0.4);
+      color: var(--gold-300);
+    }
+
+    .section-subtitle {
+      font-size: 1.02rem;
+      color: var(--ink-secondary);
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 34px;
+      line-height: 1.58;
+      font-weight: 500;
+    }
+
+    .section-subtitle.dark {
+      color: #cbd8ef;
+    }
+
+    /* BARRA SUPERIOR SIMPLES, FINA E RÁPIDA DE LER NO MOBILE */
+    .top-bar {
+      background: linear-gradient(90deg, #7a1518 0%, #a82025 50%, #7a1518 100%);
+      color: #ffffff;
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-align: center;
+      padding: 9px 14px;
+      border-bottom: 2px solid var(--gold-500);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    /* BOTÕES */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 28px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+      text-align: center;
+      max-width: 100%;
+      word-break: break-word;
+    }
+
+    .btn-gold {
+      background: var(--gold-gradient);
+      color: #1a1202;
+      box-shadow: var(--gold-shadow);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(201, 152, 52, 0.55);
+      filter: brightness(1.05);
+    }
+
+    .btn-blue {
+      background: linear-gradient(135deg, #2664be 0%, #1d4d90 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(29, 77, 144, 0.35);
+    }
+
+    .btn-blue:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(29, 77, 144, 0.5);
+      filter: brightness(1.08);
+    }
+
+    .btn-green-buy {
+      background: var(--green-btn);
+      color: #ffffff;
+      box-shadow: 0 6px 16px rgba(22, 163, 74, 0.35);
+    }
+
+    .btn-green-buy:hover {
+      background: var(--green-btn-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(22, 163, 74, 0.5);
+    }
+
+    .btn-pulse {
+      animation: pulse-glow 2.5s infinite;
+    }
+
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 0 0 rgba(201, 152, 52, 0.65); }
+      70% { box-shadow: 0 0 0 16px rgba(201, 152, 52, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(201, 152, 52, 0); }
+    }
+
+    .btn-subtext {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #9cb2d4;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    /* HERO SECTION: MOBILE-FIRST COM FUNDO CREME / MARFIM SACRO NOBRE */
+    .hero {
+      background: linear-gradient(180deg, #fbf7ee 0%, #f4ede0 50%, #eee3cf 100%);
+      color: var(--ink-primary);
+      padding: 38px 0 55px;
+      position: relative;
+      border-bottom: 3px solid var(--gold-500);
+      text-align: center;
+    }
+
+    .hero-pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #fdf5df;
+      border: 1.5px solid #dfae47;
+      color: #785208;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 6px 18px;
+      border-radius: var(--radius-full);
+      margin-bottom: 22px;
+      box-shadow: 0 2px 8px rgba(201, 152, 52, 0.12);
+    }
+
+    .hero-content h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: #1a1612;
+      margin-bottom: 18px;
+      font-weight: 800;
+      font-size: 2.35rem;
+      line-height: 1.22;
+      letter-spacing: -0.015em;
+      text-transform: none;
+    }
+
+    @media (min-width: 768px) {
+      .hero-content h1 {
+        font-size: 3.1rem;
+      }
+    }
+
+    .hero-content h1 em {
+      color: #922026;
+      font-style: normal;
+      background: linear-gradient(135deg, #a82025 0%, #85161b 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-content h1 .gold-word {
+      color: #c99834;
+      font-style: normal;
+      background: linear-gradient(135deg, #dfae47 0%, #b8861f 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* IMAGEM NO MEIO (ENTRE HEADLINE E SUBHEADLINE) - MOCKUP COMPLETO DO BUNDLE */
+    .hero-mid-image {
+      width: 100%;
+      max-width: 620px;
+      margin: 0 auto 28px;
+      position: relative;
+    }
+
+    .hero-mid-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      box-shadow: 0 16px 40px rgba(78, 52, 21, 0.16), 0 0 25px rgba(201, 152, 52, 0.2);
+      border: 3px solid rgba(201, 152, 52, 0.45);
+    }
+
+    .hero-badge-float {
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold-gradient);
+      color: #1a1202;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      font-weight: 900;
+      font-size: 0.82rem;
+      box-shadow: 0 6px 18px rgba(78, 52, 21, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 2px solid #ffffff;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-lead {
+      font-size: 1.1rem;
+      line-height: 1.65;
+      color: #423b32;
+      margin: 14px auto 24px;
+      max-width: 660px;
+      font-weight: 500;
+      text-align: center;
+      display: block;
+    }
+
+    .hero-checklist {
+      list-style: none;
+      margin-bottom: 28px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    .hero-checklist li {
+      position: relative;
+      padding: 6px 0 6px 30px;
+      color: #3b352e;
+      font-size: 0.98rem;
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .hero-checklist li strong {
+      font-weight: 700;
+      color: #1a1612;
+    }
+
+    .hero-checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 22px;
+      height: 22px;
+      background: var(--gold-gradient);
+      color: #1a1202;
+      border-radius: 50%;
+      font-size: 0.78rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+
+    .hero-checklist {
+      list-style: none;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    /* TRUST BAR */
+    .trust-bar {
+      background: #ffffff;
+      padding: 18px 0;
+      box-shadow: var(--shadow-card);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .trust-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      text-align: left;
+    }
+
+    .trust-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--blue-soft);
+      color: var(--blue-marian);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+
+    .trust-text strong {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      line-height: 1.2;
+    }
+
+    .trust-text span {
+      font-size: 0.74rem;
+      color: var(--ink-secondary);
+      font-weight: 500;
+    }
+
+    /* PAIN & EMPATHY SECTION */
+    .section-pain {
+      padding: 55px 0;
+      background: #f7f2e7;
+    }
+
+    .pain-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 26px 18px;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+    }
+
+    @media (min-width: 640px) {
+      .pain-card {
+        padding: 40px 32px;
+      }
+    }
+
+    .pain-list {
+      list-style: none;
+      margin: 24px 0;
+      display: grid;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .pain-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #fdf3f3;
+      border-left: 4px solid #dc3545;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+
+    .pain-item .icon {
+      font-size: 1.1rem;
+      color: #dc3545;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-weight: 900;
+    }
+
+    .pain-item p {
+      font-size: 0.95rem;
+      color: #492525;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .pain-item strong {
+      font-weight: 800;
+    }
+
+    .punch-box {
+      margin-top: 28px;
+      padding: 22px 18px;
+      background: linear-gradient(135deg, #0c1830 0%, #173260 100%);
+      border-radius: var(--radius-md);
+      color: #ffffff;
+      text-align: center;
+      border: 2px solid var(--gold-500);
+    }
+
+    .punch-box p.lead-quote {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      color: var(--gold-300);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .punch-box p.lead-sub {
+      font-size: 0.95rem;
+      color: #d6e2f5;
+      font-weight: 500;
+    }
+
+    /* HOW TO USE - 4 STEPS */
+    .section-how-to-use {
+      padding: 60px 0;
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+    }
+
+    .how-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+    }
+
+    @media (min-width: 860px) {
+      .how-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 45px;
+      }
+    }
+
+    .how-media {
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+    }
+
+    .how-media img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: var(--shadow-card);
+      border: 2px solid var(--line);
+    }
+
+    .steps-container {
+      display: grid;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .step-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--blue-canvas);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      text-align: left;
+    }
+
+    .step-number {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--navy-900);
+      color: var(--gold-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      font-weight: 900;
+      flex-shrink: 0;
+      border: 2px solid var(--gold-500);
+    }
+
+    .step-text h4 {
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--navy-900);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .step-text p {
+      font-size: 0.92rem;
+      color: var(--ink-secondary);
+      line-height: 1.48;
+      font-weight: 500;
+    }
+
+    /* FEATURES GRID */
+    .section-features {
+      padding: 60px 0;
+      background: var(--blue-canvas);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    @media (min-width: 620px) {
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 960px) {
+      .feature-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .feature-box {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 22px 18px;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+      transition: all 0.25s ease;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold-400);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .feature-icon-wrapper {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: var(--blue-soft);
+      border: 1px solid var(--line);
+      color: var(--blue-marian);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin: 0 auto 12px;
+    }
+
+    .feature-box h3 {
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--navy-900);
+      text-transform: uppercase;
+    }
+
+    .feature-box p {
+      color: var(--ink-secondary);
+      font-size: 0.92rem;
+      line-height: 1.48;
+      font-weight: 500;
+    }
+
+    /* SHOWCASE */
+    .section-showcase {
+      padding: 60px 0;
+      background: #ffffff;
+    }
+
+    .showcase-row {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+      margin-bottom: 50px;
+    }
+
+    @media (min-width: 860px) {
+      .showcase-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 45px;
+      }
+      .showcase-row.reverse .showcase-media {
+        order: 2;
+      }
+      .showcase-row.reverse .showcase-text {
+        order: 1;
+      }
+    }
+
+    .showcase-media {
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .showcase-media img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--line);
+    }
+
+    .showcase-text {
+      text-align: center;
+    }
+
+    @media (min-width: 860px) {
+      .showcase-text {
+        text-align: left;
+      }
+      .showcase-text h2 {
+        text-align: left;
+      }
+    }
+
+    .showcase-text p {
+      font-size: 1.02rem;
+      color: var(--ink-secondary);
+      margin-bottom: 18px;
+      line-height: 1.58;
+      font-weight: 500;
+    }
+
+    .showcase-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+      margin: 22px 0 26px;
+      padding: 0;
+    }
+
+    .showcase-bullets li,
+    .showcase-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 13px 16px;
+      box-shadow: 0 2px 6px rgba(10, 25, 47, 0.04);
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .showcase-bullets li:hover,
+    .showcase-card:hover {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      box-shadow: 0 4px 12px rgba(10, 25, 47, 0.07);
+    }
+
+    .showcase-bullets .showcase-icon,
+    .showcase-bullets li span.star {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: rgba(212, 175, 55, 0.16);
+      color: #996515;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      font-weight: 900;
+      margin-top: 1px;
+      line-height: 1;
+    }
+
+    .showcase-content,
+    .showcase-bullets li .bullet-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .showcase-content strong,
+    .showcase-bullets li strong {
+      font-size: 0.98rem;
+      color: var(--navy-900);
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .showcase-content p,
+    .showcase-bullets li p,
+    .showcase-bullets li .bullet-desc {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--ink-secondary);
+      line-height: 1.45;
+      font-weight: 500;
+    }
+
+    @media (max-width: 640px) {
+      .showcase-text .btn {
+        width: 100%;
+        max-width: 380px;
+      }
+    }
+
+    /* BÔNUS COM IMAGENS */
+    .section-bonuses {
+      background: radial-gradient(circle at 50% 15%, #152d56 0%, #0c1830 65%, #050a14 100%);
+      color: #ffffff;
+      padding: 65px 0 75px;
+      position: relative;
+      border-top: 3px solid var(--gold-500);
+    }
+
+    .bonus-lead-hero {
+      width: 100%;
+      max-width: 540px;
+      margin: 0 auto 38px;
+      text-align: center;
+    }
+
+    .bonus-lead-hero img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
+      border: 2px solid rgba(247, 214, 121, 0.4);
+    }
+
+    .bonus-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    @media (min-width: 620px) {
+      .bonus-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 980px) {
+      .bonus-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .bonus-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(247, 214, 121, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .bonus-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold-400);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .bonus-card-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background: #070e1c;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .bonus-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .bonus-card:hover .bonus-card-img img {
+      transform: scale(1.04);
+    }
+
+    .bonus-tag {
+      display: inline-block;
+      align-self: center;
+      background: var(--gold-gradient);
+      color: #0c1830;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 12px;
+      border-radius: var(--radius-full);
+      margin-bottom: 10px;
+    }
+
+    .bonus-card h3 {
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    .bonus-card p {
+      color: #cbd8ef;
+      font-size: 0.9rem;
+      line-height: 1.48;
+      font-weight: 500;
+      flex: 1;
+      margin-bottom: 14px;
+    }
+
+    .bonus-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 10px;
+      font-size: 0.85rem;
+    }
+
+    .bonus-price-row .cross {
+      color: #ea8d8d;
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+
+    .bonus-price-row .free {
+      color: var(--gold-300);
+      font-weight: 900;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    .bonus-card.economy-highlight {
+      background: linear-gradient(135deg, rgba(201, 152, 52, 0.22) 0%, rgba(12, 24, 48, 0.7) 100%);
+      border: 2px solid var(--gold-400);
+      justify-content: center;
+      padding: 26px 20px;
+    }
+
+    .bonus-card.economy-highlight h3 {
+      font-size: 1.65rem;
+      color: var(--gold-300);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    /* =========================================================================
+       PRICING SECTION: CARDS LADO A LADO NO MOBILE (ESTILO DO PRINT DE REFERÊNCIA)
+       ========================================================================= */
+    .section-pricing {
+      padding: 65px 0 75px;
+      background: var(--blue-canvas);
+      border-top: 1px solid var(--line);
+    }
+
+    /* GRID LADO A LADO NO MOBILE (2 COLUNAS COMPACTAS) */
+    .pricing-grid-side-by-side {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      max-width: 820px;
+      margin: 0 auto;
+      align-items: stretch;
+    }
+
+    @media (max-width: 380px) {
+      .pricing-grid-side-by-side {
+        gap: 6px;
+      }
+    }
+
+    @media (min-width: 640px) {
+      .pricing-grid-side-by-side {
+        gap: 18px;
+      }
+    }
+
+    .pricing-col {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .p-card {
+      background: #ffffff;
+      border: 2px solid #f0d5cc;
+      border-radius: 18px;
+      padding: 16px 8px 16px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      height: 100%;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      transition: all 0.25s ease;
+    }
+
+    @media (min-width: 500px) {
+      .p-card {
+        padding: 20px 14px 20px;
+        border-radius: 22px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .p-card {
+        padding: 26px 20px 24px;
+      }
+    }
+
+    /* CARD MAIS VENDIDO (BORDA VERDE / DESTAQUE) */
+    .p-card.featured-card {
+      border: 3px solid #16a34a;
+      box-shadow: 0 10px 28px rgba(22, 163, 74, 0.18);
+    }
+
+    /* PÍLULA DE TOPO ESTILO PRINT */
+    .p-pill-top {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: clamp(0.66rem, 2vw, 0.8rem);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 5px 8px;
+      border-radius: var(--radius-full);
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .p-pill-basic {
+      background: #fdf1ed;
+      color: #c84022;
+      border: 1px solid #ffd5c9;
+    }
+
+    .p-pill-super {
+      background: #ea580c;
+      color: #ffffff;
+      box-shadow: 0 3px 8px rgba(234, 88, 12, 0.3);
+    }
+
+    /* SELO MAIS VENDIDA NO TOPO DO CARD DIREITO */
+    .p-badge-seller {
+      position: absolute;
+      top: -12px;
+      right: 8px;
+      background: #16a34a;
+      color: #ffffff;
+      font-size: clamp(0.62rem, 1.8vw, 0.72rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 3px 8px rgba(22, 163, 74, 0.35);
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* TÍTULO VERMELHO/ESCURO DO PRODUTO */
+    .p-title-red {
+      color: #c22919;
+      font-size: clamp(0.95rem, 3.2vw, 1.45rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.18;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    /* LISTA DE BENEFÍCIOS COM CHECKMARKS VERDES */
+    .p-check-list {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 14px;
+      display: grid;
+      gap: 7px;
+      flex: 1;
+    }
+
+    .p-check-list li {
+      position: relative;
+      padding-left: 18px;
+      font-size: clamp(0.72rem, 2.3vw, 0.88rem);
+      color: #334155;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    @media (min-width: 500px) {
+      .p-check-list li {
+        padding-left: 22px;
+      }
+    }
+
+    .p-check-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #16a34a;
+      font-weight: 900;
+      font-size: clamp(0.8rem, 2.6vw, 1rem);
+      line-height: 1.2;
+    }
+
+    /* CAIXINHA DE BÔNUS EXCLUSIVOS NO PACOTE COMPLETO */
+    .p-bonus-box {
+      background: #fff6f3;
+      border: 1px dashed #f97316;
+      border-radius: 10px;
+      padding: 8px 6px;
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    @media (min-width: 500px) {
+      .p-bonus-box {
+        padding: 10px 10px;
+      }
+    }
+
+    .p-bonus-header {
+      color: #c22919;
+      font-size: clamp(0.7rem, 2.1vw, 0.82rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+      text-align: center;
+      display: block;
+    }
+
+    .p-bonus-items {
+      list-style: none;
+      display: grid;
+      gap: 5px;
+    }
+
+    .p-bonus-items li {
+      font-size: clamp(0.68rem, 2vw, 0.8rem);
+      color: #475569;
+      line-height: 1.3;
+      font-weight: 600;
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .p-bonus-items li .b-ico {
+      flex-shrink: 0;
+      font-size: 0.8rem;
+    }
+
+    /* PREÇOS (DE X POR APENAS R$ Y) */
+    .p-pricing-bottom {
+      border-top: 1px solid #f1f5f9;
+      padding-top: 10px;
+      margin-top: auto;
+    }
+
+    .p-strike {
+      font-size: clamp(0.68rem, 2.2vw, 0.82rem);
+      color: #c22919;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .p-strike s {
+      color: #c22919;
+    }
+
+    .p-big-price {
+      font-size: clamp(1.75rem, 6.2vw, 2.8rem);
+      font-weight: 900;
+      color: var(--green-price);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    /* BOTÃO COMPRAR AGORA VERDE ESTILO DO PRINT */
+    .p-btn-buy {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--green-btn);
+      color: #ffffff;
+      font-size: clamp(0.74rem, 2.5vw, 0.96rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 12px 6px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
+      transition: all 0.2s ease;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .p-btn-buy:hover {
+      background: var(--green-btn-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(22, 163, 74, 0.5);
+    }
+
+    /* GUARANTEE SECTION */
+    .section-guarantee {
+      padding: 60px 0;
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+    }
+
+    .guarantee-box {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      text-align: center;
+      background: var(--gold-light);
+      border: 2px solid rgba(201, 152, 52, 0.4);
+      border-radius: var(--radius-xl);
+      padding: 30px 18px;
+    }
+
+    @media (min-width: 720px) {
+      .guarantee-box {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        text-align: left;
+        padding: 36px 32px;
+        gap: 32px;
+      }
+      .guarantee-text h2 {
+        text-align: left;
+      }
+    }
+
+    .guarantee-seal img {
+      max-width: 150px;
+      margin: 0 auto;
+      filter: drop-shadow(0 8px 18px rgba(201, 152, 52, 0.35));
+    }
+
+    .guarantee-text p {
+      font-size: 0.98rem;
+      color: var(--ink-secondary);
+      line-height: 1.62;
+      font-weight: 500;
+    }
+
+    .guarantee-text strong {
+      font-weight: 800;
+      color: var(--ink-primary);
+    }
+
+    /* TESTIMONIALS */
+    .section-testimonials {
+      padding: 60px 0;
+      background: var(--blue-canvas);
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    @media (min-width: 720px) {
+      .testi-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .testi-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 22px 18px;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stars {
+      color: #f1b32d;
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    .testi-card p {
+      color: var(--ink-primary);
+      font-size: 0.94rem;
+      line-height: 1.58;
+      font-weight: 500;
+      flex: 1;
+      margin-bottom: 14px;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    .author-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      color: var(--blue-marian);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.95rem;
+    }
+
+    .author-info {
+      text-align: left;
+    }
+
+    .author-info strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--navy-900);
+    }
+
+    .author-info span {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+
+    /* FAQ */
+    .section-faq {
+      padding: 60px 0;
+      background: #ffffff;
+    }
+
+    .faq-accordion {
+      display: grid;
+      gap: 12px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    details.faq-item {
+      background: var(--blue-canvas);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    details.faq-item[open] {
+      background: #ffffff;
+      border-color: var(--blue-accent);
+      box-shadow: var(--shadow-card);
+    }
+
+    summary.faq-question {
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--navy-900);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    summary.faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    summary.faq-question::after {
+      content: "+";
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--blue-marian);
+    }
+
+    details[open] summary.faq-question::after {
+      content: "−";
+      color: var(--gold-500);
+    }
+
+    .faq-answer {
+      margin-top: 10px;
+      color: var(--ink-secondary);
+      font-size: 0.94rem;
+      line-height: 1.58;
+      font-weight: 500;
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+
+    .faq-answer strong {
+      font-weight: 800;
+      color: var(--ink-primary);
+    }
+
+    /* FINAL CTA */
+    .section-final-cta {
+      background: radial-gradient(circle at 50% 20%, #152d56 0%, #0c1830 70%, #050a14 100%);
+      color: #ffffff;
+      padding: 65px 0;
+      text-align: center;
+      border-top: 3px solid var(--gold-500);
+    }
+
+    .section-final-cta h2 {
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .section-final-cta p {
+      color: #cbd8ef;
+      font-size: 1.05rem;
+      max-width: 620px;
+      margin: 0 auto 26px;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #040810;
+      color: #8c9bb4;
+      font-size: 0.82rem;
+      padding: 30px 16px 40px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* ===================================================
+       SEÇÃO DE DEPOIMENTOS DO WHATSAPP (APÓS BÔNUS E ANTES DE PREÇOS)
+       =================================================== */
+    .section-whatsapp-proof {
+      padding: 60px 0 65px;
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+      position: relative;
+    }
+
+    .testimonials-carousel-container {
+      width: 100%;
+      max-width: 720px;
+      margin: 16px auto 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding: 12px 6px 20px;
+      scrollbar-width: none;
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-slide {
+      flex: 0 0 280px;
+      scroll-snap-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    @media (min-width: 480px) {
+      .carousel-slide {
+        flex: 0 0 310px;
+      }
+    }
+
+    .slide-card {
+      background: #0b141a;
+      border: 2px solid rgba(201, 152, 52, 0.45);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(12, 24, 48, 0.16), 0 0 18px rgba(201, 152, 52, 0.12);
+      transition: all 0.25s ease;
+      display: block;
+      line-height: 0;
+    }
+
+    .slide-card:hover {
+      border-color: var(--gold-500);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 42px rgba(12, 24, 48, 0.25), 0 0 26px rgba(201, 152, 52, 0.28);
+    }
+
+    .slide-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 18px;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid var(--gold-500);
+      color: var(--navy-900);
+      font-size: 1.25rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      box-shadow: 0 4px 16px rgba(12, 24, 48, 0.18);
+      transition: all 0.2s ease;
+    }
+
+    .carousel-btn:hover {
+      background: var(--gold-gradient);
+      color: #0c1830;
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .carousel-btn.prev {
+      left: -16px;
+    }
+
+    .carousel-btn.next {
+      right: -16px;
+    }
+
+    @media (max-width: 540px) {
+      .carousel-btn {
+        display: none; /* No mobile o swipe natural pelo toque é mais fluido */
+      }
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .carousel-dots .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(12, 24, 48, 0.22);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .carousel-dots .dot.active {
+      width: 28px;
+      border-radius: 10px;
+      background: var(--gold-gradient);
+    }
+
+    /* ===================================================
+       CHECKOUT PRÓPRIO NATIVO (MODAL DE ALTA CONVERSÃO)
+       =================================================== */
+    .checkout-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(7, 14, 28, 0.78);
+      backdrop-filter: blur(6px);
+      z-index: 10000;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 18px 12px 60px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .checkout-modal.active {
+      display: flex;
+    }
+
+    .checkout-dialog {
+      background: #ffffff;
+      width: 100%;
+      max-width: 520px;
+      border-radius: 22px;
+      box-shadow: 0 25px 60px rgba(7, 14, 28, 0.45);
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--line);
+      animation: modalFadeIn 0.28s ease-out;
+      margin: 10px auto;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .checkout-header {
+      background: linear-gradient(135deg, #0c1830 0%, #1d4d90 100%);
+      color: #ffffff;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--gold-500);
+    }
+
+    .checkout-header-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .checkout-close-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #ffffff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+
+    .checkout-close-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .checkout-banner-wrap {
+      width: 100%;
+      line-height: 0;
+      border-bottom: 1px solid var(--line);
+      background: #fdfaf3;
+      position: relative;
+    }
+
+    .checkout-banner-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .checkout-body {
+      padding: 18px 20px 24px;
+    }
+
+    /* SELETOR DE PLANOS NO CHECKOUT */
+    .checkout-plans-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    /* DESCRIÇÃO DO QUE A PESSOA VAI RECEBER */
+    .checkout-plan-details {
+      background: #f8fafd;
+      border: 1.5px solid #dce7f5;
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .plan-details-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .plan-details-header.vip {
+      color: #b45309;
+    }
+
+    .plan-details-bullets {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+
+    .plan-details-bullets li {
+      font-size: 0.79rem;
+      color: var(--ink-secondary);
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+    }
+
+    .plan-details-bullets li strong {
+      color: var(--ink-primary);
+      font-weight: 700;
+    }
+
+    .plan-details-bullets .chk {
+      color: #16a34a;
+      font-weight: 900;
+      font-size: 0.82rem;
+      flex-shrink: 0;
+      line-height: 1.2;
+    }
+
+    .plan-details-bullets .chk-gold {
+      color: #d97706;
+      font-weight: 900;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      line-height: 1.2;
+    }
+
+    .checkout-plan-opt {
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 10px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .checkout-plan-opt.selected {
+      border-color: #16a34a;
+      background: #f0fdf4;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.15);
+    }
+
+    .checkout-plan-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ea580c;
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .checkout-plan-name {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 4px;
+    }
+
+    .checkout-plan-price {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #15803d;
+    }
+
+    /* FORMULÁRIO DE DADOS */
+    .checkout-field {
+      margin-bottom: 14px;
+    }
+
+    .checkout-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 6px;
+    }
+
+    .checkout-input {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--ink-primary);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #ffffff;
+    }
+
+    .checkout-input:focus {
+      outline: none;
+      border-color: var(--blue-accent);
+      box-shadow: 0 0 0 3px rgba(38, 100, 190, 0.15);
+    }
+
+    .checkout-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .checkout-field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .checkout-field-row-3 {
+      display: grid;
+      grid-template-columns: 1.2fr 1.2fr 80px;
+      gap: 10px;
+    }
+
+    .checkout-shipping-box {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 14px 14px 4px;
+      margin: 14px 0 16px;
+    }
+
+    .checkout-shipping-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .checkout-digital-notice-box {
+      background: #f0fdf4;
+      border: 1.5px solid #bbf7d0;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 14px 0 16px;
+      color: #166534;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 600px) {
+      .checkout-field-row-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* MÉTODOS DE PAGAMENTO */
+    .checkout-payment-tabs {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0 14px;
+    }
+
+    .checkout-pay-tab {
+      flex: 1;
+      padding: 10px 8px;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: #f8fafc;
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .checkout-pay-tab.active {
+      border-color: #16a34a;
+      background: #f0fdf4;
+      color: #15803d;
+    }
+
+    .checkout-pay-tab .tag-fast {
+      font-size: 0.62rem;
+      background: #22c55e;
+      color: #ffffff;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    /* ORDER BUMP (OFERTA COMPLEMENTAR NO CHECKOUT) */
+    .checkout-order-bump {
+      background: #fffdf5;
+      border: 2px dashed #f59e0b;
+      border-radius: 14px;
+      padding: 14px;
+      margin: 16px 0 16px;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .checkout-order-bump:hover {
+      background: #fffbeb;
+      border-color: #d97706;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.15);
+    }
+
+    .checkout-order-bump.selected {
+      background: #fefce8;
+      border: 2px solid #16a34a;
+      box-shadow: 0 4px 16px rgba(22, 163, 74, 0.18);
+    }
+
+    .order-bump-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #ea580c;
+      color: #ffffff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 8px;
+    }
+
+    .order-bump-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .order-bump-checkbox-custom {
+      margin-top: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      background: #ffffff;
+      transition: all 0.2s ease;
+    }
+
+    .checkout-order-bump.selected .order-bump-checkbox-custom {
+      background: #16a34a;
+      border-color: #16a34a;
+      color: #ffffff;
+    }
+
+    .order-bump-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    .order-bump-price-tag {
+      color: #15803d;
+      font-weight: 900;
+    }
+
+    .order-bump-content-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .order-bump-img {
+      width: 82px;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid #fed7aa;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      flex-shrink: 0;
+    }
+
+    .order-bump-bullets {
+      list-style: none;
+      font-size: 0.76rem;
+      color: var(--ink-secondary);
+      display: grid;
+      gap: 4px;
+      line-height: 1.35;
+    }
+
+    .order-bump-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    /* SEGUNDO ORDER BUMP (50 QUADROS SACROS) */
+    .checkout-order-bump.bump-quadros {
+      margin-top: -4px;
+      margin-bottom: 14px;
+      border-color: #3b82f6;
+      background: #f8fbff;
+    }
+
+    .checkout-order-bump.bump-quadros:hover {
+      background: #eff6ff;
+      border-color: #2563eb;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.15);
+    }
+
+    .checkout-order-bump.bump-quadros.selected {
+      background: #f0fdf4;
+      border: 2px solid #16a34a;
+      box-shadow: 0 4px 16px rgba(22, 163, 74, 0.18);
+    }
+
+    .order-bump-badge.badge-quadros {
+      background: linear-gradient(135deg, #1d4d90 0%, #2563eb 100%);
+    }
+
+    .bump-quadros-img {
+      width: 96px;
+      border-color: #bfdbfe;
+    }
+
+    .order-bump-btn {
+      width: 100%;
+      margin-top: 10px;
+      padding: 9px 14px;
+      border-radius: 9px;
+      border: 1.5px solid #d97706;
+      background: #ffffff;
+      color: #b45309;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+    }
+
+    .order-bump-btn:hover {
+      background: #fef3c7;
+      border-color: #b45309;
+      transform: translateY(-1px);
+    }
+
+    .checkout-order-bump.selected .order-bump-btn {
+      background: #16a34a;
+      border-color: #15803d;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+    }
+
+    .checkout-order-bump.bump-quadros .order-bump-btn {
+      border-color: #2563eb;
+      background: #ffffff;
+      color: #1d4ed8;
+    }
+
+    .checkout-order-bump.bump-quadros .order-bump-btn:hover {
+      background: #dbeafe;
+      border-color: #1d4ed8;
+    }
+
+    .checkout-order-bump.bump-quadros.selected .order-bump-btn {
+      background: #16a34a;
+      border-color: #15803d;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+    }
+
+    /* MODAL DE INTERCEPTAÇÃO: OFERTA DOS 50 QUADROS SACROS */
+    .modal-offer-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 14, 28, 0.85);
+      backdrop-filter: blur(6px);
+      z-index: 100000;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    .modal-offer-backdrop.active {
+      display: flex;
+    }
+
+    .modal-offer-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 440px;
+      max-height: 92vh;
+      border-radius: 18px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
+      overflow: hidden;
+      position: relative;
+      border: 2px solid #e2e8f0;
+      animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-offer-header {
+      background: linear-gradient(135deg, #0c1830 0%, #1d4d90 100%);
+      color: #ffffff;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--gold-500);
+      flex-shrink: 0;
+    }
+
+    .modal-offer-header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--gold-300);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .modal-offer-close {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #ffffff;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+
+    .modal-offer-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .modal-offer-body {
+      padding: 12px 16px 14px;
+      text-align: center;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-offer-title {
+      font-size: 1.08rem;
+      font-weight: 900;
+      color: var(--navy-900);
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .modal-offer-title span {
+      color: #b45309;
+    }
+
+    .modal-offer-subtitle {
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .modal-offer-img-box {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(12, 24, 48, 0.12);
+      border: 1.5px solid #dce7f5;
+      margin-bottom: 8px;
+      line-height: 0;
+      background: #000;
+      max-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-offer-img-box img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-offer-bullets {
+      list-style: none;
+      text-align: left;
+      display: grid;
+      gap: 4px;
+      background: #f8fafd;
+      border: 1px solid #dce7f5;
+      border-radius: 10px;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+    }
+
+    .modal-offer-bullets li {
+      font-size: 0.74rem;
+      color: var(--ink-primary);
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      line-height: 1.3;
+    }
+
+    .modal-offer-bullets li strong {
+      color: var(--navy-900);
+    }
+
+    .modal-offer-price-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #fefce8;
+      border: 1.5px solid #fde047;
+      border-radius: 8px;
+      padding: 6px 10px;
+      margin-bottom: 10px;
+    }
+
+    .modal-offer-price-old {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      text-decoration: line-through;
+    }
+
+    .modal-offer-price-new {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #15803d;
+    }
+
+    .btn-green-accept {
+      width: 100%;
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      color: #ffffff;
+      border: none;
+      padding: 11px 14px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-bottom: 8px;
+    }
+
+    .btn-green-accept:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(22, 163, 74, 0.45);
+    }
+
+    .btn-green-accept small {
+      font-size: 0.72rem;
+      font-weight: 600;
+      opacity: 0.95;
+    }
+
+    /* BOTÃO DE RECUSA COM COR E DESTAQUE NÍTIDO */
+    .btn-decline-link {
+      width: 100%;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      color: #334155;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .btn-decline-link:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+      color: #0f172a;
+    }
+
+    @media (max-width: 480px) {
+      .modal-offer-backdrop {
+        padding: 6px;
+      }
+      .modal-offer-card {
+        max-width: 98vw;
+        max-height: 94vh;
+        border-radius: 14px;
+      }
+      .modal-offer-header {
+        padding: 8px 12px;
+      }
+      .modal-offer-body {
+        padding: 10px 12px 12px;
+      }
+      .modal-offer-title {
+        font-size: 0.98rem;
+      }
+      .modal-offer-subtitle {
+        font-size: 0.74rem;
+        margin-bottom: 6px;
+      }
+      .modal-offer-img-box {
+        max-height: 115px;
+        margin-bottom: 6px;
+      }
+      .modal-offer-img-box img {
+        height: 115px;
+      }
+      .modal-offer-bullets {
+        padding: 6px 10px;
+        margin-bottom: 6px;
+        gap: 3px;
+      }
+      .modal-offer-bullets li {
+        font-size: 0.7rem;
+      }
+      .modal-offer-price-box {
+        padding: 4px 8px;
+        margin-bottom: 8px;
+      }
+      .modal-offer-price-new {
+        font-size: 0.98rem;
+      }
+      .btn-green-accept {
+        padding: 10px 12px;
+        font-size: 0.88rem;
+        margin-bottom: 6px;
+      }
+      .btn-decline-link {
+        padding: 8px 10px;
+        font-size: 0.78rem;
+      }
+    }
+
+    /* BOTÃO SUBMIT */
+    .checkout-submit-btn {
+      width: 100%;
+      background: var(--green-btn);
+      color: #ffffff;
+      border: none;
+      padding: 16px 20px;
+      border-radius: var(--radius-full);
+      font-size: 1.05rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 6px 18px rgba(22, 163, 74, 0.35);
+      transition: all 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .checkout-submit-btn:hover {
+      background: var(--green-btn-hover);
+      transform: translateY(-2px);
+    }
+
+    .checkout-submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .checkout-security-seals {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      font-size: 0.74rem;
+      color: var(--ink-muted);
+      font-weight: 600;
+      margin-top: 12px;
+    }
+
+    /* TELA DO PIX (QR CODE) */
+    .pix-screen {
+      display: none;
+      text-align: center;
+      padding: 8px 0;
+    }
+
+    .pix-screen.active {
+      display: block;
+    }
+
+    .pix-qr-container {
+      background: #ffffff;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      display: inline-block;
+      margin: 12px auto 14px;
+      box-shadow: 0 8px 24px rgba(12, 24, 48, 0.06);
+    }
+
+    .pix-qr-container img {
+      width: 220px;
+      height: 220px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .pix-copy-box {
+      margin: 14px 0;
+    }
+
+    .pix-code-input {
+      width: 100%;
+      background: #f1f5f9;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 0.78rem;
+      font-family: monospace;
+      color: #334155;
+      margin-bottom: 8px;
+      cursor: text;
+    }
+
+    .btn-copy-pix {
+      width: 100%;
+      background: linear-gradient(135deg, #1d4d90 0%, #0c1830 100%);
+      color: #ffffff;
+      border: 2px solid var(--gold-500);
+      padding: 13px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy-pix:hover {
+      background: var(--gold-gradient);
+      color: #0c1830;
+    }
+
+    .pix-waiting-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--navy-900);
+      font-weight: 700;
+    }
+
+    .pix-pulse-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pixPulse 1.4s infinite;
+    }
+
+    /* ALERTA DE NÃO FECHAR A PÁGINA */
+    .pix-dont-close-alert {
+      background: #fef3c7;
+      border: 1.5px solid #f59e0b;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 14px 0 16px;
+      text-align: left;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .pix-dont-close-alert .alert-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .pix-dont-close-alert .alert-text {
+      font-size: 0.82rem;
+      color: #78350f;
+      line-height: 1.45;
+    }
+
+    .pix-dont-close-alert .alert-text strong {
+      color: #92400e;
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.86rem;
+    }
+
+    /* INSTRUÇÕES PASSO A PASSO DE COMO PAGAR */
+    .pix-instructions-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px;
+      margin: 14px 0;
+      text-align: left;
+    }
+
+    .pix-instructions-title {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pix-steps-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .pix-steps-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: #334155;
+      line-height: 1.4;
+    }
+
+    .pix-step-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--navy-900);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* BOTÃO JÁ REALIZEI O PAGAMENTO */
+    .btn-verify-pix {
+      width: 100%;
+      background: #16a34a;
+      color: #ffffff;
+      border: none;
+      padding: 14px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn-verify-pix:hover {
+      background: #15803d;
+      transform: translateY(-1px);
+    }
+
+    .btn-verify-pix:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .pix-verify-feedback {
+      font-size: 0.82rem;
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-align: center;
+      display: none;
+    }
+
+    .pix-verify-feedback.info {
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+    }
+
+    /* TELA DE SUCESSO DO CHECKOUT */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 16px 0;
+    }
+
+    .success-screen.active {
+      display: block;
+    }
+
+    .success-check-icon {
+      width: 70px;
+      height: 70px;
+      background: #dcfce7;
+      color: #16a34a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: 900;
+      margin: 0 auto 16px;
+      border: 3px solid #86efac;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE AVISO SUPERIOR FINA E RÁPIDA DE LER COM URGÊNCIA DINÂMICA (HORÁRIO DE BRASÍLIA) -->
+  <aside class="top-bar" aria-label="Aviso de Lançamento">
+    📦 Lançamento da Edição Física com Frete para todo o Brasil · Oferta especial hoje <span id="top-bar-date"></span>
+  </aside>
+
+  <!-- HERO SECTION (EDIÇÃO FÍSICA) -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-content">
+        <!-- 0. PILL BADGE SUPERIOR -->
+        <div class="hero-pill-badge">
+          <span>📦</span>
+          <span>Edição Física Impressa & Encadernada + 5 Bônus Exclusivos</span>
+        </div>
+
+        <!-- 1. HEADLINE PRINCIPAL -->
+        <h1>Receba em sua casa a <span class="gold-word">Agenda Católica 2027</span> impressa com a <span class="gold-word">Liturgia Diária</span> para santificar todos os 365 dias do ano</h1>
+
+        <!-- 2. IMAGEM DA HERO ENTRE A HEADLINE E A SUBHEADLINE (MOBILE-FIRST) -->
+        <div class="hero-mid-image">
+          <img src="assets/agenda_hero_mockup_completo.jpg" alt="Agenda Católica 2027 Física Impressa e Encadernada com Liturgia Diária, Calendários e Marcadores" width="666" height="618" fetchpriority="high">
+          <div class="hero-badge-float">
+            <span>⭐</span>
+            <span>Edição Física Impressa</span>
+          </div>
+        </div>
+
+        <!-- 3. SUBHEADLINE -->
+        <p class="hero-lead">
+          A <strong>Agenda Católica 2027 Física</strong> é impressa com acabamento nobre, capa protetora de Nossa Senhora Aparecida, encadernação em espiral resistente e papel de alta gramatura. Reúne o Evangelho diário, reflexões guiadas, o Caminho Quaresmal e calendários litúrgicos para você <strong>tocar, anotar e viver sua devoção diariamente sem distrações de telas</strong>.
+        </p>
+
+        <!-- 4. BOTÃO DE AÇÃO HERO -->
+        <div class="hero-cta-group">
+          <a class="btn btn-gold btn-pulse" href="#oferta" id="cta-hero">
+            <span>👉 QUERO MINHA AGENDA FÍSICA 2027</span>
+          </a>
+          <span class="btn-subtext">📦 Envio para todo o Brasil · De R$ 147,00 por apenas R$ 67,90 ou Versão em PDF por R$ 19,90</span>
+        </div>
+
+        <!-- 5. BENEFÍCIOS RÁPIDOS -->
+        <ul class="hero-checklist">
+          <li><strong>Livro físico impresso e encadernado:</strong> folheie, anote e reze todos os dias sem distrações</li>
+          <li><strong>Liturgia diária 2027 completa:</strong> Evangelho do dia, cor litúrgica e santo padroeiro</li>
+          <li><strong>Caminho Quaresmal exclusivo:</strong> Checklist de Oração, Penitência e Caridade</li>
+          <li><strong>Entrega garantida no seu endereço:</strong> Frete para todo o Brasil com rastreamento no WhatsApp</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================
+       SEÇÃO DE DEPOIMENTOS DO WHATSAPP (LOGO ABAIXO DA HERO)
+       =================================================== -->
+  <section class="section-whatsapp-proof" id="depoimentos-whatsapp">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">DEPOIMENTOS REAIS NO WHATSAPP</span>
+        <h2>QUEM JÁ RECEBEU ESTÁ ENCANTADA</h2>
+        <p class="section-subtitle">
+          Veja mensagens e prints reais enviados por fiéis de todo o Brasil que já garantiram suas edições:
+        </p>
+      </div>
+
+      <div class="testimonials-carousel-container">
+        <div class="carousel-wrapper">
+          <button class="carousel-btn prev" aria-label="Depoimento Anterior" id="carousel-prev">❮</button>
+          <div class="carousel-track" id="carousel-track">
+            
+            <!-- DEPOIMENTO 1 -->
+            <div class="carousel-slide">
+              <div class="slide-card">
+                <img src="assets/depoimento_whatsapp_1.png" alt="Depoimento WhatsApp Mariana Ferreira" width="414" height="820" loading="lazy">
+              </div>
+            </div>
+
+            <!-- DEPOIMENTO 2 -->
+            <div class="carousel-slide">
+              <div class="slide-card">
+                <img src="assets/depoimento_whatsapp_2.png" alt="Depoimento WhatsApp Gabriel" width="414" height="820" loading="lazy">
+              </div>
+            </div>
+
+            <!-- DEPOIMENTO 3 -->
+            <div class="carousel-slide">
+              <div class="slide-card">
+                <img src="assets/depoimento_whatsapp_3.png" alt="Depoimento WhatsApp Dona Teresa" width="414" height="820" loading="lazy">
+              </div>
+            </div>
+
+            <!-- DEPOIMENTO 4 -->
+            <div class="carousel-slide">
+              <div class="slide-card">
+                <img src="assets/depoimento_whatsapp_4.png" alt="Depoimento WhatsApp Fernanda" width="414" height="820" loading="lazy">
+              </div>
+            </div>
+
+          </div>
+          <button class="carousel-btn next" aria-label="Próximo Depoimento" id="carousel-next">❯</button>
+        </div>
+
+        <div class="carousel-dots" id="carousel-dots">
+          <span class="dot active" data-index="0" aria-label="Ir para depoimento 1"></span>
+          <span class="dot" data-index="1" aria-label="Ir para depoimento 2"></span>
+          <span class="dot" data-index="2" aria-label="Ir para depoimento 3"></span>
+          <span class="dot" data-index="3" aria-label="Ir para depoimento 4"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN & EMPATHY SECTION -->
+    <section class="section-pain">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">REFLEXÃO ESPIRITUAL</span>
+        <h2>POR QUE UMA AGENDA FÍSICA NO SEU ALTAR FAZ TODA A DIFERENÇA?</h2>
+        <p class="section-subtitle" style="margin-bottom: 20px;">
+          No meio de um mundo acelerado e cheio de notificações, rezar no papel é um refúgio sagrado.
+        </p>
+      </div>
+
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="pain-icon">📵</div>
+          <div class="pain-title">Sem Distrações de Telas</div>
+          <div class="pain-text">
+            Ao abrir o celular para ler a liturgia, logo surgem notificações, mensagens e redes sociais que roubam a sua paz. Com a <strong>Agenda Física</strong>, seu momento com Deus é 100% puro, íntimo e focado.
+          </div>
+        </div>
+
+        <div class="pain-card">
+          <div class="pain-icon">✍️</div>
+          <div class="pain-title">Escrever à Mão Grava na Alma</div>
+          <div class="pain-text">
+            Anotar suas intenções de oração, bênçãos recebidas e propósitos diários com caneta ajuda a fixar os ensinamentos no coração e cria um diário espiritual inesquecível para todo o seu 2027.
+          </div>
+        </div>
+
+        <div class="pain-card">
+          <div class="pain-icon">🕯️</div>
+          <div class="pain-title">Presença Viva no Seu Lar</div>
+          <div class="pain-text">
+            Deixar a sua agenda física aberta no oratório da sua casa, mesa de cabeceira ou estante convida a família inteira para a oração e torna a presença de Nossa Senhora visível no cotidiano.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO USE SECTION -->
+    <section class="section-how-to-use" id="qualidade-fisica">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">ACABAMENTO NOBRE</span>
+        <h2>PROJETADA EM CADA DETALHE PARA DURAR O ANO TODO</h2>
+        <p class="section-subtitle">Conheça os detalhes de impressão, encadernação e acabamento da sua Agenda 2027:</p>
+      </div>
+
+      <div class="features-grid" style="margin-top: 32px;">
+        <div class="feat-card">
+          <div class="feat-icon">🌀</div>
+          <div class="feat-title">Encadernação em Espiral Wire-o</div>
+          <div class="feat-desc">
+            Espiral duplo de aço reforçado que permite <strong>abertura plana de 180° e 360°</strong>. Você folheia e escreve com total conforto em qualquer mesa, escrivaninha ou no próprio colo.
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">📖</div>
+          <div class="feat-title">Papel de Alta Gramatura</div>
+          <div class="feat-desc">
+            Páginas encorpadas com papel especial premium. Pode usar caneta esferográfica, caneta gel ou marca-texto com tranquilidade: <strong>a tinta não vaza para o outro lado</strong>.
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">✨</div>
+          <div class="feat-title">Capa Dura com Laminação Nobre</div>
+          <div class="feat-desc">
+            Capa frontal com a solene imagem de <strong>Nossa Senhora Aparecida</strong> e acabamento fosco aveludado resistente a marcas de dedos, respingos leves e ao desgaste diário dos 365 dias.
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">🚚</div>
+          <div class="feat-title">Entrega Protegida no seu Endereço</div>
+          <div class="feat-desc">
+            Seu exemplar é embalado com proteção especial para chegar impecável na sua casa. <strong>Envio com rastreamento</strong> enviado diretamente no seu WhatsApp e e-mail.
+          </div>
+        </div>
+      </div>
+
+      <!-- FOTOS REAIS DA AGENDA FÍSICA -->
+      <div style="margin-top: 40px; text-align: center;">
+        <span class="section-tag">FOTOS REAIS</span>
+        <h3 style="font-size: 1.4rem; color: var(--navy-900); font-weight: 800; margin-bottom: 20px;">
+          Veja a beleza da Agenda Católica Física em uso real
+        </h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 20px;">
+          <div style="border-radius: 14px; overflow: hidden; border: 1.5px solid var(--line); box-shadow: 0 4px 14px rgba(12,24,48,0.08); background:#fff;">
+            <img src="assets/depoimento_foto_mesa.jpg" alt="Agenda Católica Física na mesa com Bíblia e Rosário" style="width:100%; height:240px; object-fit:cover; display:block;" loading="lazy">
+            <div style="padding: 12px 14px; font-size: 0.84rem; font-weight: 700; color: var(--navy-900);">
+              📍 Perfeita no oratório e na mesa de estudos
+            </div>
+          </div>
+
+          <div style="border-radius: 14px; overflow: hidden; border: 1.5px solid var(--line); box-shadow: 0 4px 14px rgba(12,24,48,0.08); background:#fff;">
+            <img src="assets/depoimento_foto_aberta.jpg" alt="Agenda Católica aberta mostrando a liturgia diária" style="width:100%; height:240px; object-fit:cover; display:block;" loading="lazy">
+            <div style="padding: 12px 14px; font-size: 0.84rem; font-weight: 700; color: var(--navy-900);">
+              📖 Liturgia diária completa e espaço para anotações
+            </div>
+          </div>
+
+          <div style="border-radius: 14px; overflow: hidden; border: 1.5px solid var(--line); box-shadow: 0 4px 14px rgba(12,24,48,0.08); background:#fff;">
+            <img src="assets/depoimento_foto_agenda_calendario.jpg" alt="Agenda Católica com os calendários litúrgicos e marcadores" style="width:100%; height:240px; object-fit:cover; display:block;" loading="lazy">
+            <div style="padding: 12px 14px; font-size: 0.84rem; font-weight: 700; color: var(--navy-900);">
+              🎁 Acompanha todos os calendários e bônus devocionais
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURES / CONTEÚDO DA AGENDA -->
+  <section class="section-features" id="conteudo">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">VISÃO COMPLETA</span>
+        <h2>TUDO O QUE VOCÊ PRECISA PARA UM ANO SANTO</h2>
+        <p class="section-subtitle">Sem precisar de múltiplos cadernos ou aplicativos cheios de distrações.</p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">📖</div>
+          <h3>LITURGIA DIÁRIA 2027</h3>
+          <p>O Evangelho de cada dia de 2027 com o santo comemorado e a cor litúrgica para rezar em união com a Santa Igreja.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">✝️</div>
+          <h3>CAMINHO QUARESMAL 2027</h3>
+          <p>Calendário visual diário da Quarta-feira de Cinzas até a Páscoa com marcação de <strong>Oração (O), Penitência (P) e Caridade (C)</strong>.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">🙏</div>
+          <h3>REGISTRO DE INTENÇÕES</h3>
+          <p>Espaço reservado para colocar o nome de quem você ama, pedidos de oração, bênçãos e testemunhos de graças alcançadas.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">🌹</div>
+          <h3>GUIA DO SANTO ROSÁRIO</h3>
+          <p>Passo a passo com orações completas e todos os Mistérios (Gozosos, Luminosos, Dolorosos e Gloriosos) para rezar o terço.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">🕊️</div>
+          <h3>EXAME DE CONSCIÊNCIA</h3>
+          <p>Roteiro prático para preparar confissões bem feitas, identificando virtudes a cultivar e pecados a confessar.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">👑</div>
+          <h3>CONSAGRAÇÃO A NOSSA SENHORA</h3>
+          <p>Página solene de abertura para consagrar cada mês de 2027 aos cuidados maternos da Virgem Aparecida.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE EM USO -->
+  <section class="section-showcase">
+    <div class="wrap">
+      <div class="showcase-row">
+        <div class="showcase-media">
+          <img src="assets/agenda_in_use.jpg" alt="Mulher escrevendo na agenda católica 2027 com bíblia, terço e café" width="540" height="540" loading="lazy">
+        </div>
+        <div class="showcase-text">
+          <span class="section-tag">MOMENTO DE ORAÇÃO</span>
+          <h2>A PAZ DE COMEÇAR O DIA CONECTADA COM DEUS</h2>
+          <p>
+            Imagine acordar, tomar seu café com calma e abrir uma página feita para acolher sua alma. Você lê o Evangelho do dia, faz seu propósito e entrega suas preocupações a Deus antes de começar o trabalho.
+          </p>
+          <ul class="showcase-bullets">
+            <li class="showcase-card">
+              <span class="showcase-icon">✦</span>
+              <div class="showcase-content">
+                <strong>Sem telas azuis nem distrações:</strong>
+                <p>Mais serenidade, paz e foco espiritual para o seu dia a dia.</p>
+              </div>
+            </li>
+            <li class="showcase-card">
+              <span class="showcase-icon">✦</span>
+              <div class="showcase-content">
+                <strong>Memória viva da sua fé:</strong>
+                <p>No fim do ano, veja todos os pedidos e graças que Deus atendeu.</p>
+              </div>
+            </li>
+            <li class="showcase-card">
+              <span class="showcase-icon">✦</span>
+              <div class="showcase-content">
+                <strong>Presente abençoado:</strong>
+                <p>Imprima para presentear familiares, afilhados e amigos de paróquia.</p>
+              </div>
+            </li>
+          </ul>
+          <div>
+            <a class="btn btn-blue" href="#oferta">QUERO VIVER MEU 2027 ASSIM</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-row reverse">
+        <div class="showcase-media">
+          <img src="assets/preview_quaresma.png" alt="Página interna do Caminho Quaresmal 2027" width="540" height="660" loading="lazy" style="background:#fff; padding:10px;">
+        </div>
+        <div class="showcase-text">
+          <span class="section-tag">QUARESMA COM PROPÓSITO</span>
+          <h2>VIVA A QUARESMA COM UM PLANO, NÃO APENAS BOA VONTADE</h2>
+          <p>
+            A Quaresma de 2027 começa em 10 de fevereiro. Com o <strong>Caminho Quaresmal</strong>, você tem um mapa diário para não deixar a penitência morrer na primeira semana.
+          </p>
+          <ul class="showcase-bullets">
+            <li class="showcase-card">
+              <span class="showcase-icon">✦</span>
+              <div class="showcase-content">
+                <strong>Os Três Pilares da Quaresma:</strong>
+                <p>Controle diário prático de Oração, Penitência e Caridade.</p>
+              </div>
+            </li>
+            <li class="showcase-card">
+              <span class="showcase-icon">✦</span>
+              <div class="showcase-content">
+                <strong>Intenção Maior de Conversão:</strong>
+                <p>Linhas especiais para registrar e renovar seu propósito espiritual.</p>
+              </div>
+            </li>
+            <li class="showcase-card">
+              <span class="showcase-icon">✦</span>
+              <div class="showcase-content">
+                <strong>Acompanhamento Visual Contínuo:</strong>
+                <p>Caminhe firme dia a dia desde a Quarta-feira de Cinzas até a Páscoa.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BÔNUS COM IMAGENS INDIVIDUAIS -->
+  <section class="section-bonuses" id="bonus">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag dark">PRESENTES EXCLUSIVOS</span>
+        <h2 class="dark-title">5 BÔNUS ABENÇOADOS NO PACOTE COMPLETO</h2>
+        <p class="section-subtitle dark">
+          Materiais devocionais ricos que complementam sua rotina. Tanto na Edição Física quanto na Versão em PDF, você leva todos eles 100% inclusos!
+        </p>
+      </div>
+
+      <!-- MOCKUP BUNDLE CENTRAL (MAIS QUE UM CALENDÁRIO, UM GUIA PARA VIVER A FÉ) -->
+      <div class="bonus-lead-hero">
+        <img src="assets/agenda_bonus_bundle_completo.jpg" alt="Kit completo Agenda Católica 2027 com Calendários Litúrgicos e os 5 Bônus Exclusivos" width="672" height="742" loading="lazy">
+      </div>
+
+      <!-- CARDS DE BÔNUS COM IMAGENS DEDICADAS -->
+      <div class="bonus-cards-grid">
+        
+        <!-- BÔNUS 1 -->
+        <div class="bonus-card">
+          <div class="bonus-card-img">
+            <img src="assets/bonus1_novenas.jpg" alt="Capa 3D do Caderno de Novenas e Orações Poderosas" width="400" height="400" loading="lazy">
+          </div>
+          <span class="bonus-tag">BÔNUS 01</span>
+          <h3>CADERNO DE NOVENAS & ORAÇÕES PODEROSAS</h3>
+          <p>Coletânea com as maiores novenas: N. Sra. Desatadora dos Nós, São Miguel Arcanjo, Santa Teresinha, Terço da Misericórdia e orações de proteção.</p>
+          <div class="bonus-price-row">
+            <span>Valor: <span class="cross">R$ 37,00</span></span>
+            <span class="free">100% INCLUSO</span>
+          </div>
+        </div>
+
+        <!-- BÔNUS 2 -->
+        <div class="bonus-card">
+          <div class="bonus-card-img">
+            <img src="assets/bonus2_viasacra.jpg" alt="Capa 3D do Guia da Via Sacra Ilustrada" width="400" height="400" loading="lazy">
+          </div>
+          <span class="bonus-tag">BÔNUS 02</span>
+          <h3>GUIA DA VIA SACRA ILUSTRADA</h3>
+          <p>As 14 estações da Paixão com pinturas sacras clássicas e meditações de Santo Afonso de Ligório para rezar na Quaresma e sextas-feiras.</p>
+          <div class="bonus-price-row">
+            <span>Valor: <span class="cross">R$ 27,00</span></span>
+            <span class="free">100% INCLUSO</span>
+          </div>
+        </div>
+
+        <!-- BÔNUS 3 -->
+        <div class="bonus-card">
+          <div class="bonus-card-img">
+            <img src="assets/bonus3_calendario.jpg" alt="Pôster do Calendário Litúrgico de Parede 2027" width="400" height="400" loading="lazy">
+          </div>
+          <span class="bonus-tag">BÔNUS 03</span>
+          <h3>CALENDÁRIO LITÚRGICO DE PAREDE 2027</h3>
+          <p>Pôster A4 colorido para imprimir e pendurar no oratório ou na geladeira, com solenidades, festas, dias de preceito e jejum destacados.</p>
+          <div class="bonus-price-row">
+            <span>Valor: <span class="cross">R$ 22,00</span></span>
+            <span class="free">100% INCLUSO</span>
+          </div>
+        </div>
+
+        <!-- BÔNUS 4 -->
+        <div class="bonus-card">
+          <div class="bonus-card-img">
+            <img src="assets/bonus4_leitura_biblia.jpg" alt="Capa 3D do Plano de Leitura da Bíblia em 1 Ano" width="400" height="400" loading="lazy">
+          </div>
+          <span class="bonus-tag">BÔNUS 04</span>
+          <h3>PLANO DE LEITURA DA BÍBLIA EM 1 ANO</h3>
+          <p>Cronograma diário estruturado para ler toda a Bíblia Sagrada (do Gênesis ao Apocalipse) em 2027 com checkboxes de acompanhamento.</p>
+          <div class="bonus-price-row">
+            <span>Valor: <span class="cross">R$ 29,00</span></span>
+            <span class="free">100% INCLUSO</span>
+          </div>
+        </div>
+
+        <!-- BÔNUS 5 -->
+        <div class="bonus-card">
+          <div class="bonus-card-img">
+            <img src="assets/bonus5_marcadores.jpg" alt="Kit de 12 Marcadores de Páginas Católicos em leque" width="400" height="400" loading="lazy">
+          </div>
+          <span class="bonus-tag">BÔNUS 05</span>
+          <h3>KIT 12 MARCADORES DE PÁGINAS CATÓLICOS</h3>
+          <p>Lâminas em alta resolução para imprimir e plastificar, com artes de Nossa Senhora Aparecida, Sagrado Coração e frases dos santos.</p>
+          <div class="bonus-price-row">
+            <span>Valor: <span class="cross">R$ 17,00</span></span>
+            <span class="free">100% INCLUSO</span>
+          </div>
+        </div>
+
+        <!-- CARD ECONOMIA -->
+        <div class="bonus-card economy-highlight">
+          <span class="bonus-tag" style="background:#ffffff; color:#0c1830;">SUPER BENEFÍCIO</span>
+          <h3>MAIS DE R$ 132 EM BÔNUS!</h3>
+          <p style="color:#e2ecf9; font-size:1rem;">
+            Garantindo hoje a sua <strong>Agenda 2027</strong> (Edição Física ou Versão em PDF), você leva todos os 5 presentes devocionais totalmente inclusos!
+          </p>
+          <div class="bonus-price-row" style="border-top-color: rgba(255,255,255,0.25);">
+            <span style="font-weight:700; color:#fff;">Economia de +R$ 132</span>
+            <span class="free" style="color:#ffe28a;">100% INCLUSO</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- =========================================================================
+       SEÇÃO DE OFERTAS: CARDS LADO A LADO NO MOBILE (INSPIRADO NO SEU PRINT)
+       ========================================================================= -->
+    <section class="section-pricing" id="oferta">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">ESCOLHA SEU PACOTE</span>
+        <h2>GARANTA SUA EDIÇÃO FÍSICA OU A VERSÃO EM PDF</h2>
+        <p class="section-subtitle">Escolha entre receber o livro físico impresso na sua casa ou o download imediato em PDF com todos os bônus:</p>
+      </div>
+
+      <!-- GRID COM DOIS CARDS LADO A LADO NO MOBILE -->
+      <div class="pricing-grid-side-by-side">
+        
+        <!-- CARD 1: AGENDA FÍSICA (DESTAQUE / MAIS VENDIDA) -->
+        <div class="pricing-col">
+          <div class="p-card featured-card">
+            
+            <!-- SELO MAIS PEDIDA -->
+            <div class="p-badge-seller">
+              ★ MAIS PEDIDA
+            </div>
+
+            <div class="p-pill-top p-pill-super">
+              <span>📦 EDIÇÃO FÍSICA IMPRESSA</span>
+            </div>
+
+            <div class="p-title-red" style="font-size: 1.25rem;">
+              Agenda Física + Bônus
+            </div>
+
+            <ul class="p-check-list">
+              <li><strong>Exemplar Físico</strong> Impresso & Encadernado</li>
+              <li><strong>Entrega no seu Endereço</strong> em todo o Brasil</li>
+              <li><strong>Espiral Wire-o resistente</strong> com abertura 360°</li>
+              <li><strong>Papel encorpado</strong> que não vaza tinta de caneta</li>
+              <li>Liturgia Diária Completa de 2027 (365 Dias)</li>
+              <li>Caminho Quaresmal com Checklist</li>
+              <li>Consagração a Nossa Senhora Aparecida</li>
+              <li>Rastreamento do Envio no WhatsApp</li>
+            </ul>
+
+            <!-- BOX DE BÔNUS DIGITAIS INCLUSOS IMEDIATOS -->
+            <div class="p-bonus-box">
+              <span class="p-bonus-header">ACESSO IMEDIATO AOS 5 BÔNUS DIGITAIS!</span>
+              <ul class="p-bonus-items">
+                <li><span class="b-ico">🎁</span> Acesso imediato no Drive enquanto a física viaja</li>
+                <li><span class="b-ico">🎁</span> Caderno de Novenas e Orações</li>
+                <li><span class="b-ico">🎁</span> Guia da Via Sacra Ilustrada</li>
+                <li><span class="b-ico">🎁</span> Calendário Litúrgico de Parede</li>
+                <li><span class="b-ico">🎁</span> Plano de Leitura da Bíblia</li>
+                <li><span class="b-ico">🎁</span> Kit 12 Marcadores de Páginas</li>
+              </ul>
+            </div>
+
+            <div class="p-pricing-bottom">
+              <div class="p-strike">De <s>R$ 147,00</s> por apenas</div>
+              <div class="p-big-price">R$ 67,90</div>
+              <div style="font-size: 0.76rem; color: #15803d; font-weight: 800; margin-bottom: 8px;">
+                🚚 FRETE PARA TODO O BRASIL
+              </div>
+              <a class="p-btn-buy" href="#" data-plan="fisica">
+                👉 COMPRAR AGENDA FÍSICA
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- CARD 2: VERSÃO EM PDF (R$ 19,90 COM TODOS OS BÔNUS) -->
+        <div class="pricing-col">
+          <div class="p-card">
+            
+            <div class="p-pill-top p-pill-basic">
+              <span>⚡ VERSÃO 100% DIGITAL (PDF)</span>
+            </div>
+
+            <div class="p-title-red" style="font-size: 1.25rem;">
+              Agenda 2027 em PDF + 5 Bônus
+            </div>
+
+            <ul class="p-check-list">
+              <li><strong>Agenda Católica 2027 em PDF</strong> em Alta Definição</li>
+              <li><strong>Download Imediato</strong> no seu E-mail e WhatsApp</li>
+              <li>Pronta para ler no celular, tablet ou imprimir você mesmo</li>
+              <li>Liturgia Diária Completa dos 365 Dias</li>
+              <li>Caminho Quaresmal com Checklist Diário</li>
+              <li>Formatos A4 e A5 prontos para impressão</li>
+              <li>Acesso Vitalício na pasta oficial do Google Drive</li>
+            </ul>
+
+            <!-- BOX DE BÔNUS INCLUSOS POR 19,90 -->
+            <div class="p-bonus-box" style="background:#f0fdf4; border-color:#86efac;">
+              <span class="p-bonus-header" style="color:#15803d;">TODOS OS 5 BÔNUS INCLUSOS!</span>
+              <ul class="p-bonus-items">
+                <li><span class="b-ico">🎁</span> Caderno de Novenas e Orações</li>
+                <li><span class="b-ico">🎁</span> Guia da Via Sacra Ilustrada</li>
+                <li><span class="b-ico">🎁</span> Calendário Litúrgico de Parede</li>
+                <li><span class="b-ico">🎁</span> Plano de Leitura da Bíblia</li>
+                <li><span class="b-ico">🎁</span> Kit 12 Marcadores de Páginas</li>
+              </ul>
+            </div>
+
+            <div class="p-pricing-bottom">
+              <div class="p-strike">De <s>R$ 89,90</s> por apenas</div>
+              <div class="p-big-price">R$ 19,90</div>
+              <div style="font-size: 0.76rem; color: #1d4d90; font-weight: 800; margin-bottom: 8px;">
+                ⚡ DOWNLOAD IMEDIATO NO PIX
+              </div>
+              <a class="p-btn-buy" href="#" data-plan="digital_promo" style="background: linear-gradient(135deg, #1d4d90 0%, #0c1830 100%);">
+                COMPRAR VERSÃO EM PDF
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GUARANTEE SECTION -->
+  <section class="section-guarantee">
+    <div class="wrap">
+      <div class="guarantee-box">
+        <div class="guarantee-seal">
+          <img src="assets/selo_garantia_15_dias.png" alt="Selo dourado de Garantia Incondicional de 15 Dias" width="180" height="120" loading="lazy">
+        </div>
+        <div class="guarantee-text">
+          <div style="display: flex; justify-content: inherit;">
+            <span class="section-tag">RISCO ZERO ABSOLUTO</span>
+          </div>
+          <h2>GARANTIA INCONDICIONAL DE 15 DIAS</h2>
+          <p>
+            Você tem <strong>15 dias inteiros</strong> para baixar o material, folhear cada página, imprimir testes e comprovar a beleza da Agenda Católica 2027. Se por qualquer motivo você não ficar 100% encantada com o material, basta nos enviar um e-mail ou mensagem e devolveremos cada centavo pago, sem perguntas e sem burocracia.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section-testimonials">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">COMUNIDADE DE FÉ</span>
+        <h2>O QUE DIZEM QUEM JÁ USA NOSSAS AGENDAS</h2>
+        <p class="section-subtitle">Devotos de todo o Brasil que transformaram sua rotina de oração diária:</p>
+      </div>
+
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"A capa de Nossa Senhora Aparecida é emocionante de tão linda! Mandei encadernar na gráfica do meu bairro por menos de 10 reais e ficou uma verdadeira joia. Rezar a liturgia todo dia mudou minha rotina."</p>
+          <div class="testi-author">
+            <div class="author-avatar">MC</div>
+            <div class="author-info">
+              <strong>Maria Clara Silveira</strong>
+              <span>Aparecida do Norte, SP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"O que mais me tocou foi o Caminho Quaresmal com as caixinhas de Oração, Penitência e Caridade. Pela primeira vez na vida eu consegui seguir a Quaresma inteira sem me perder. O pacote completo vale cada centavo pelos bônus!"</p>
+          <div class="testi-author">
+            <div class="author-avatar">TR</div>
+            <div class="author-info">
+              <strong>Tereza Ribeiro da Cunha</strong>
+              <span>Belo Horizonte, MG</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"Comprei o arquivo e imprimi 4 cópias: uma para mim, uma para minha mãe, uma para minha sogra e outra para a catequista do meu filho. Todo mundo ficou apaixonado. A qualidade do PDF é impressionante!"</p>
+          <div class="testi-author">
+            <div class="author-avatar">LF</div>
+            <div class="author-info">
+              <strong>Luciana Fernandes</strong>
+              <span>Curitiba, PR</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+    <section class="section-faq">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">TIRE SUAS DÚVIDAS</span>
+        <h2>PERGUNTAS FREQUENTES</h2>
+        <p class="section-subtitle">Tudo o que você precisa saber sobre a entrega e a sua Agenda Católica:</p>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Como receberei minha Agenda Católica Física?</summary>
+          <div class="faq-answer">
+            Enviamos para qualquer endereço do Brasil pelos Correios ou transportadora parceira. Seu exemplar é embalado com plástico bolha e caixa reforçada para chegar impecável até você. Assim que for despachada, você recebe o código de rastreamento no seu WhatsApp e no e-mail.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Qual é o prazo de entrega?</summary>
+          <div class="faq-answer">
+            O despacho é realizado rapidamente após a confirmação do pagamento. O prazo médio de entrega varia de 5 a 12 dias úteis dependendo da sua cidade e estado.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Como é a encadernação e o papel da edição física?</summary>
+          <div class="faq-answer">
+            A agenda possui acabamento de altíssima qualidade: encadernação em espiral Wire-o de aço reforçado (permite abertura plana de 360° para escrever sem esforço), capa dura protetora com laminação nobre fosca e páginas internas em papel encorpado de alta gramatura, permitindo o uso de canetas e marca-textos sem manchar o verso da folha.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Já recebo algum acesso enquanto a agenda física não chega?</summary>
+          <div class="faq-answer">
+            Sim! Ao comprar a Agenda Física por R$ 67,90, você ganha acesso digital imediato a todos os 5 Bônus Devocionais (Novenas, Via Sacra, Calendário de Parede, Plano Bíblico e 12 Marcadores) pelo Google Drive para começar a rezar hoje mesmo enquanto aguarda o carteiro!
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>E se eu preferir comprar apenas a versão em PDF?</summary>
+          <div class="faq-answer">
+            Você pode escolher a versão 100% digital em PDF por apenas R$ 19,90. Nela você recebe o download imediato no e-mail e WhatsApp da Agenda completa e de todos os 5 bônus devocionais para usar no seu celular/tablet ou imprimir você mesmo.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Qual a garantia da minha compra?</summary>
+          <div class="faq-answer">
+            Você tem 15 dias de garantia incondicional. Se ao receber sua Agenda Católica você não ficar completamente encantado(a) com a qualidade e o conteúdo, basta nos enviar uma mensagem e nós devolvemos 100% do seu dinheiro, sem burocracia.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA SECTION -->
+  <section class="section-final-cta">
+    <div class="wrap narrow">
+      <span class="section-tag dark">CONSAGRAÇÃO E BÊNÇÃO</span>
+      <h2>COMECE 2027 COM A PALAVRA DE DEUS NO CENTRO DA SUA VIDA</h2>
+      <p>
+        Por menos do que o valor de um lanche na padaria, você garante 365 dias de oração organizada, comunhão com os santos e a bênção de Nossa Senhora Aparecida em seu lar.
+      </p>
+      <a class="btn btn-gold btn-pulse" href="#oferta">
+        👉 GARANTIR MINHA AGENDA 2027 AGORA
+      </a>
+      <span class="btn-subtext" style="color: #a9bedc;">
+        Download imediato em PDF · Acesso vitalício · Garantia incondicional de 15 dias
+      </span>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       MODAL DE CHECKOUT PRÓPRIO NATIVO (EDIÇÃO FÍSICA & DIGITAL)
+       =================================================== -->
+  <div class="checkout-modal" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+    <div class="checkout-dialog">
+      
+      <!-- HEADER DO CHECKOUT -->
+      <div class="checkout-header">
+        <div class="checkout-header-title">
+          <span>🔒</span>
+          <span id="checkout-title">Checkout 100% Seguro · Agenda Católica 2027</span>
+        </div>
+        <button class="checkout-close-btn" id="close-checkout-btn" aria-label="Fechar">✕</button>
+      </div>
+
+      <!-- BANNER DE PAGAMENTO SEGURO -->
+      <div class="checkout-banner-wrap">
+        <img src="assets/checkout_banner.png" alt="Pagamento Seguro - Seus Dados Protegidos em Todas as Etapas" width="1040" height="380" loading="eager">
+      </div>
+
+      <div class="checkout-body">
+        
+        <!-- ETAPA 1: FORMULÁRIO DE DADOS & SELEÇÃO DE PLANO -->
+        <div id="checkout-step-form">
+          
+          <!-- SELETOR DE PLANO: FÍSICA vs DIGITAL PROMO -->
+          <div class="checkout-plans-toggle">
+            <div class="checkout-plan-opt selected" id="opt-plan-fisica" data-plan-target="fisica">
+              <span class="checkout-plan-badge" style="background:#c99834; color:#fff;">★ EDIÇÃO FÍSICA</span>
+              <div class="checkout-plan-name">📦 Agenda Física</div>
+              <div class="checkout-plan-price">R$ 67,90</div>
+            </div>
+            <div class="checkout-plan-opt" id="opt-plan-digital" data-plan-target="digital_promo">
+              <span class="checkout-plan-badge" style="background:#2563eb; color:#fff;">DIGITAL EM PDF</span>
+              <div class="checkout-plan-name">📱 Versão em PDF</div>
+              <div class="checkout-plan-price">R$ 19,90</div>
+            </div>
+          </div>
+
+          <!-- DESCRIÇÃO DO QUE A PESSOA VAI RECEBER CONFORME O PLANO -->
+          <div class="checkout-plan-details" id="plan-details-box">
+            
+            <!-- DETALHES DO PLANO FÍSICO -->
+            <div id="details-fisica">
+              <div class="plan-details-header vip">
+                <span>📦</span>
+                <strong>O que você vai receber na Agenda Física Impressa:</strong>
+              </div>
+              <ul class="plan-details-bullets">
+                <li><span class="chk">✓</span> <span><strong>Agenda Católica 2027 Impressa & Encadernada:</strong> formato A5 (15x21cm), capa dura nobre e wire-o metálico duplo</span></li>
+                <li><span class="chk">✓</span> <span><strong>Liturgia Diária Completa dos 365 Dias:</strong> com cor litúrgica, evangelho, santo do dia e orações diárias</span></li>
+                <li><span class="chk">✓</span> <span><strong>Acabamento Nobre:</strong> papel encorpado de alta gramatura que não vaza tinta + fita marcadora em cetim</span></li>
+                <li><span class="chk-gold">★</span> <span><strong>BÔNUS DIGITAL INCLUSO:</strong> acesso imediato à versão PDF completa + todos os 5 bônus VIP</span></li>
+                <li><span class="chk">✓</span> <span><strong>Entrega Segura com Rastreamento:</strong> código de envio enviado direto no seu WhatsApp e E-mail</span></li>
+              </ul>
+            </div>
+
+            <!-- DETALHES DO PLANO DIGITAL (PDF PROMO) -->
+            <div id="details-digital" style="display: none;">
+              <div class="plan-details-header">
+                <span>📱</span>
+                <strong>O que você vai receber na Versão Digital em PDF:</strong>
+              </div>
+              <ul class="plan-details-bullets">
+                <li><span class="chk">✓</span> <span><strong>Agenda Católica 2027 Completa em PDF:</strong> alta resolução para celular, tablet ou imprimir em casa</span></li>
+                <li><span class="chk">✓</span> <span><strong>Liturgia Diária dos 365 Dias:</strong> calendário oficial Romano da Igreja no Brasil</span></li>
+                <li><span class="chk">✓</span> <span><strong>Caminho Quaresmal 2027:</strong> checklist completo da Quaresma dia a dia</span></li>
+                <li><span class="chk-gold">★</span> <span><strong>TODOS OS 5 BÔNUS INCLUSOS:</strong> Caderno de Novenas, Via Sacra, Calendário Litúrgico de Parede, Plano Bíblico 1 Ano e 12 Marcadores de Páginas</span></li>
+                <li><span class="chk">✓</span> <span><strong>Acesso Vitalício Imediato:</strong> download liberado na hora no seu e-mail e WhatsApp</span></li>
+              </ul>
+            </div>
+
+          </div>
+
+          <form id="checkout-native-form" onsubmit="return false;">
+            
+            <!-- DADOS PESSOAIS DO CLIENTE -->
+            <div class="checkout-field">
+              <label class="checkout-label" for="cust-name">Seu Nome Completo *</label>
+              <input class="checkout-input" type="text" id="cust-name" placeholder="Ex: Maria Clara Silveira" required autocomplete="name">
+            </div>
+
+            <div class="checkout-field">
+              <label class="checkout-label" for="cust-email">Seu Melhor E-mail (para envio da confirmação e rastreio) *</label>
+              <input class="checkout-input" type="email" id="cust-email" placeholder="Ex: seuemail@gmail.com" required autocomplete="email">
+            </div>
+
+            <div class="checkout-field-row">
+              <div class="checkout-field">
+                <label class="checkout-label" for="cust-phone">WhatsApp com DDD *</label>
+                <input class="checkout-input" type="tel" id="cust-phone" placeholder="(11) 99999-9999" required autocomplete="tel">
+              </div>
+              <div class="checkout-field">
+                <label class="checkout-label" for="cust-cpf">CPF (para emissão e PIX) *</label>
+                <input class="checkout-input" type="text" id="cust-cpf" placeholder="000.000.000-00" required>
+              </div>
+            </div>
+
+            <!-- SEÇÃO DE ENDEREÇO DE ENTREGA (EXCLUSIVA DA AGENDA FÍSICA) -->
+            <div id="checkout-shipping-section" class="checkout-shipping-box">
+              <div class="checkout-shipping-header">
+                <span>🚚</span>
+                <span>Endereço para Entrega da Agenda Física:</span>
+              </div>
+
+              <div class="checkout-field">
+                <label class="checkout-label" for="ship-cep">CEP de Entrega *</label>
+                <input class="checkout-input" type="text" id="ship-cep" placeholder="00000-000" maxlength="9" autocomplete="postal-code">
+                <div id="cep-status" style="font-size: 0.82rem; margin-top: 4px; display: none; font-weight: 600;"></div>
+              </div>
+
+              <div class="checkout-field">
+                <label class="checkout-label" for="ship-street">Rua / Avenida / Logradouro *</label>
+                <input class="checkout-input" type="text" id="ship-street" placeholder="Ex: Rua das Flores" autocomplete="address-line1">
+              </div>
+
+              <div class="checkout-field-row">
+                <div class="checkout-field">
+                  <label class="checkout-label" for="ship-number">Número *</label>
+                  <input class="checkout-input" type="text" id="ship-number" placeholder="Ex: 123">
+                </div>
+                <div class="checkout-field">
+                  <label class="checkout-label" for="ship-comp">Complemento (opcional)</label>
+                  <input class="checkout-input" type="text" id="ship-comp" placeholder="Ex: Apto 42, Bloco B">
+                </div>
+              </div>
+
+              <div class="checkout-field-row-3">
+                <div class="checkout-field">
+                  <label class="checkout-label" for="ship-neighborhood">Bairro *</label>
+                  <input class="checkout-input" type="text" id="ship-neighborhood" placeholder="Bairro">
+                </div>
+                <div class="checkout-field">
+                  <label class="checkout-label" for="ship-city">Cidade *</label>
+                  <input class="checkout-input" type="text" id="ship-city" placeholder="Cidade">
+                </div>
+                <div class="checkout-field">
+                  <label class="checkout-label" for="ship-state">UF *</label>
+                  <input class="checkout-input" type="text" id="ship-state" placeholder="UF" maxlength="2" style="text-transform: uppercase;">
+                </div>
+              </div>
+            </div>
+
+            <!-- AVISO DE ENTREGA DIGITAL (QUANDO ESCOLHER PDF) -->
+            <div id="checkout-digital-notice" class="checkout-digital-notice-box" style="display: none;">
+              ⚡ <strong>Entrega 100% Digital e Imediata:</strong> você receberá os links para download direto no seu WhatsApp e E-mail logo após a confirmação do PIX. Não há frete nem envio físico nesta opção.
+            </div>
+
+            <!-- FORMA DE PAGAMENTO -->
+            <label class="checkout-label" style="margin-top: 6px;">Forma de Pagamento:</label>
+            <div class="checkout-payment-tabs">
+              <div class="checkout-pay-tab active">
+                <span>💠 PIX</span>
+                <span class="tag-fast">Aprovação Imediata</span>
+              </div>
+            </div>
+
+            <!-- ORDER BUMP: CADERNO CATÓLICO DE COLORIR E HISTÓRIAS DOS SANTOS -->
+            <div class="checkout-order-bump" id="order-bump-box">
+              <div class="order-bump-header">
+                <div class="order-bump-checkbox-custom" id="order-bump-check-icon">✓</div>
+                <div>
+                  <div class="order-bump-title">
+                    <strong>+50 Cadernos de Colorir dos Santos Católicos</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="order-bump-content-row">
+                <img src="assets/order_bump_historias_santos.png" alt="Caderno de Colorir e Histórias dos Santos para Crianças" class="order-bump-img" width="160" height="90" loading="lazy">
+                <ul class="order-bump-bullets">
+                  <li><span>✅</span> <span><strong>Mais de 50 páginas</strong> de desenhos e histórias dos santos</span></li>
+                  <li><span>🎨</span> <span>Atividade criativa para <strong>colorir e se divertir</strong></span></li>
+                  <li><span>🙏</span> <span>Incentivo à fé e aos <strong>valores cristãos</strong></span></li>
+                </ul>
+              </div>
+              <button type="button" class="order-bump-btn" id="btn-toggle-bump-1" aria-label="Adicionar Caderno de Colorir">
+                <span>👉 Sim! Adicionar (+ R$ 7,90)</span>
+              </button>
+            </div>
+
+            <!-- ORDER BUMP 2: +90 QUADROS SACROS EM ALTA RESOLUÇÃO -->
+            <div class="checkout-order-bump bump-quadros" id="order-bump-quadros-box">
+              <div class="order-bump-header">
+                <div class="order-bump-checkbox-custom" id="order-bump-quadros-check-icon"></div>
+                <div>
+                  <div class="order-bump-title">
+                    <strong>+90 Quadros Sacros Prontos para Imprimir</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="order-bump-content-row">
+                <img src="assets/order_bump_quadros_sacros.jpg" alt="90 Quadros Sacros em Alta Definição" class="order-bump-img bump-quadros-img" width="160" height="90" loading="lazy">
+                <ul class="order-bump-bullets">
+                  <li><span>🖼️</span> <span><strong>90 Obras Sacras em 300 DPI:</strong> Sagrado Coração, N. Sra. Aparecida, Santos e Arcanjos</span></li>
+                  <li><span>🖨️</span> <span><strong>Prontos para Imprimir:</strong> perfeitos para quadros, altar pessoal ou presentear</span></li>
+                  <li><span>📁</span> <span><strong>Acesso Vitalício:</strong> pasta oficial organizada no Google Drive</span></li>
+                </ul>
+              </div>
+              <button type="button" class="order-bump-btn" id="btn-toggle-bump-2" aria-label="Adicionar Quadros Sacros">
+                <span>👉 Sim! Adicionar (+ R$ 7,50)</span>
+              </button>
+            </div>
+
+            <div id="checkout-form-error" style="display:none; color: #dc2626; font-size: 0.85rem; font-weight: 700; margin: 10px 0 12px; text-align: center;"></div>
+
+            <!-- BOTÃO GERAR PIX -->
+            <button type="submit" class="checkout-submit-btn" id="btn-generate-pix">
+              <span>👉 GERAR PIX DE <strong id="btn-price-display">R$ 67,90</strong></span>
+            </button>
+
+            <div class="checkout-security-seals">
+              <span>🔒 256-bit SSL</span>
+              <span>🚚 Envio Seguro Correios</span>
+              <span>🛡️ 15 Dias de Garantia</span>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- ETAPA 2: EXIBIÇÃO DO QR CODE E CHAVE PIX -->
+        <div class="pix-screen" id="checkout-step-pix">
+          <h3 style="font-size: 1.2rem; color: var(--navy-900); font-weight: 800; margin-bottom: 4px;">
+            Quase lá! Pague via PIX para confirmar seu pedido:
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--ink-secondary); margin-bottom: 12px;">
+            Valor a pagar: <strong id="pix-display-val" style="color: #15803d; font-size: 1.15rem;">R$ 67,90</strong>
+          </p>
+
+          <div class="pix-qr-container">
+            <img id="pix-qr-image" src="" alt="QR Code PIX">
+          </div>
+
+          <div class="pix-copy-box">
+            <input type="text" class="pix-code-input" id="pix-copy-paste" readonly>
+            <button type="button" class="btn-copy-pix" id="btn-copy-pix">
+              <span>📋 COPIAR CÓDIGO PIX COPIA E COLA</span>
+            </button>
+            <div id="copy-feedback" style="display:none; color: #15803d; font-size: 0.84rem; font-weight: 800; margin-top: 6px;">
+              ✓ Código PIX copiado com sucesso! Abra o app do seu banco e cole na opção Pix Copia e Cola.
+            </div>
+          </div>
+
+          <!-- ALERTA IMPORTANTE: NÃO FECHE ESTA PÁGINA -->
+          <div class="pix-dont-close-alert">
+            <span class="alert-icon">⚠️</span>
+            <div class="alert-text">
+              <strong>ATENÇÃO: NÃO FECHE OU ATUALIZE ESTA PÁGINA!</strong>
+              Após concluir o pagamento no seu banco, <strong>retorne imediatamente a esta tela</strong>. O sistema reconhecerá seu PIX automaticamente e confirmará seu pedido em instantes.
+            </div>
+          </div>
+
+          <!-- INSTRUÇÕES PASSO A PASSO -->
+          <div class="pix-instructions-box">
+            <div class="pix-instructions-title">
+              <span>📖</span>
+              <span>Como pagar no seu banco passo a passo:</span>
+            </div>
+            <ul class="pix-steps-list">
+              <li>
+                <span class="pix-step-num">1</span>
+                <span>Clique no botão azul acima <strong>"Copiar Código Pix Copia e Cola"</strong> (ou aponte a câmera para o QR Code).</span>
+              </li>
+              <li>
+                <span class="pix-step-num">2</span>
+                <span>Abra o app do seu banco no celular (Nubank, Bradesco, Itaú, Inter, Caixa, Banco do Brasil, etc.) e acesse a área <strong>PIX</strong>.</span>
+              </li>
+              <li>
+                <span class="pix-step-num">3</span>
+                <span>Escolha a opção <strong>"Pix Copia e Cola"</strong>, cole o código e confirme a transferência.</span>
+              </li>
+              <li>
+                <span class="pix-step-num">4</span>
+                <span><strong>Retorne a esta página</strong> e clique no botão verde abaixo para confirmar seu pedido na hora.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- BOTÃO JÁ REALIZEI O PAGAMENTO -->
+          <button type="button" class="btn-verify-pix" id="btn-manual-verify-pix">
+            <span>🟢 JÁ REALIZEI O PAGAMENTO (CONFIRMAR AGORA)</span>
+          </button>
+          <div id="pix-verify-msg" class="pix-verify-feedback info"></div>
+
+          <div class="pix-waiting-box">
+            <div class="pix-pulse-dot"></div>
+            <span>Aguardando compensação bancária em tempo real...</span>
+          </div>
+
+          <p style="font-size: 0.72rem; color: #64748b; margin-top: 10px;">
+            ID da Transação: <code id="pix-trans-id-display" style="font-family: monospace; color: #334155;"></code>
+          </p>
+        </div>
+
+        <!-- ETAPA 3: SUCESSO E TRANSIÇÃO PARA UPSELL -->
+        <div class="success-screen" id="checkout-step-success">
+          <div class="success-check-icon">✓</div>
+          <h3 style="font-size: 1.35rem; color: #15803d; font-weight: 900; margin-bottom: 6px;">
+            PAGAMENTO CONFIRMADO! 🙏
+          </h3>
+          <p style="font-size: 0.92rem; color: var(--ink-secondary); margin-bottom: 12px;">
+            Seu pedido foi aprovado! A confirmação e os detalhes do envio foram enviados para o seu e-mail e WhatsApp.
+          </p>
+          <div style="background: #fefce8; border: 1.5px solid #fde047; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 0.88rem; color: #854d0e;">
+            🎁 <strong>Espere! Preparamos uma bênção especial para o seu lar...</strong><br>
+            Redirecionando em instantes...
+          </div>
+
+          <a href="#" class="checkout-submit-btn" id="btn-go-to-downloads" style="text-decoration:none;">
+            👉 CONTINUAR PARA MEU ACESSO
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE INTERCEPTAÇÃO: OFERTA +90 QUADROS SACROS (+R$ 7,50) -->
+  <div class="modal-offer-backdrop" id="modal-offer-quadros">
+    <div class="modal-offer-card">
+      <div class="modal-offer-header">
+        <span class="modal-offer-header-badge">✨ Bênção Especial Para o Seu Lar</span>
+        <button type="button" class="modal-offer-close" id="btn-close-quadros-modal" aria-label="Fechar">✕</button>
+      </div>
+      <div class="modal-offer-body">
+        <h3 class="modal-offer-title">
+          Aproveite e adicione à sua compra:<br>
+          <span>+90 Quadros Sacros em Alta Qualidade</span>
+        </h3>
+        <p class="modal-offer-subtitle">
+          Leve agora uma coleção completa de obras sacras prontas para imprimir e emoldurar no seu lar, altar de oração ou presentear quem você ama!
+        </p>
+
+        <div class="modal-offer-img-box">
+          <img src="assets/order_bump_quadros_sacros.jpg" alt="90 Quadros Sacros Prontos para Imprimir">
+        </div>
+
+        <ul class="modal-offer-bullets">
+          <li><span>🖼️</span> <span><strong>90 Obras em Alta Definição (300 DPI):</strong> qualidade de galeria para molduras.</span></li>
+          <li><span>✨</span> <span><strong>Artes Sagradas Ricas:</strong> Sagrado Coração, N. Sra. Aparecida, Santos e Arcanjos.</span></li>
+          <li><span>📁</span> <span><strong>Acesso Imediato e Vitalício:</strong> pasta oficial organizada no Google Drive.</span></li>
+        </ul>
+
+        <div class="modal-offer-price-box">
+          <span class="modal-offer-price-old">De R$ 47,00</span>
+          <span>por apenas</span>
+          <span class="modal-offer-price-new">+ R$ 7,50</span>
+          <span style="font-size: 0.78rem; color: #166534; font-weight: 700;">(Preço Único de Checkout)</span>
+        </div>
+
+        <button type="button" class="btn-green-accept" id="btn-accept-quadros-modal">
+          <span>🟢 ADICIONAR AO MEU PEDIDO (+ R$ 7,50)</span>
+          <small>Sim! Quero os 90 Quadros Sacros e gerar meu PIX agora</small>
+        </button>
+
+        <button type="button" class="btn-decline-link" id="btn-decline-quadros-modal">
+          <span>Não adicionar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <p><strong>AGENDA CATÓLICA 2027 · LITURGIA DIÁRIA & DEVOÇÃO A NOSSA SENHORA APARECIDA</strong></p>
+      <p>Edição Física Impressa e Versão Digital da Agenda Católica 2027 com Liturgia Diária. Todos os direitos reservados.</p>
+      <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 14px;">
+        Dúvidas ou suporte? Entre em contato pelo e-mail ou WhatsApp do atendimento.
+      </p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT PARA CHECKOUT COM RASTREAMENTO AVANÇADO -->
+  <script>
+    (function() {
+      'use strict';
+
+      // ─── DADOS DOS PRODUTOS ─────────────────────────────
+      var PRODUCTS = {
+        fisica: {
+          name: 'Agenda Católica 2027 Física (Impressa & Encadernada)',
+          id: 'agenda-catolica-2027-fisica',
+          value: 67.90,
+          category: 'Livros e Agendas > Agenda Católica'
+        },
+        digital_promo: {
+          name: 'Agenda Católica 2027 em PDF + 5 Bônus',
+          id: 'agenda-catolica-2027-pdf-promo',
+          value: 19.90,
+          category: 'Produtos Digitais > Agenda Católica'
+        }
+      };
+
+      // ─── CHECKOUT SEGURO VIA EDGE FUNCTIONS (ZERO TOKENS EXPOSTOS) ───
+      var SUPABASE_URL = 'https://cittmkbqdzxaexprujyy.supabase.co';
+      var SUPABASE_ANON_KEY = 'sb_publishable_K8pfshJSKXwLwpWScjer-g_uRx4kCnn';
+
+      var checkoutModal = document.getElementById('checkout-modal');
+      var closeCheckoutBtn = document.getElementById('close-checkout-btn');
+      var stepForm = document.getElementById('checkout-step-form');
+      var stepPix = document.getElementById('checkout-step-pix');
+      var stepSuccess = document.getElementById('checkout-step-success');
+      var optFisica = document.getElementById('opt-plan-fisica');
+      var optDigital = document.getElementById('opt-plan-digital');
+      var btnGeneratePix = document.getElementById('btn-generate-pix');
+      var checkoutFormError = document.getElementById('checkout-form-error');
+      
+      var inputName = document.getElementById('cust-name');
+      var inputEmail = document.getElementById('cust-email');
+      var inputPhone = document.getElementById('cust-phone');
+      var inputCpf = document.getElementById('cust-cpf');
+
+      var shipSection = document.getElementById('checkout-shipping-section');
+      var digitalNotice = document.getElementById('checkout-digital-notice');
+      var inputCep = document.getElementById('ship-cep');
+      var inputStreet = document.getElementById('ship-street');
+      var inputNumber = document.getElementById('ship-number');
+      var inputComp = document.getElementById('ship-comp');
+      var inputNeighborhood = document.getElementById('ship-neighborhood');
+      var inputCity = document.getElementById('ship-city');
+      var inputState = document.getElementById('ship-state');
+      var cepStatus = document.getElementById('cep-status');
+
+      var pixQrImage = document.getElementById('pix-qr-image');
+      var pixCopyPaste = document.getElementById('pix-copy-paste');
+      var btnCopyPix = document.getElementById('btn-copy-pix');
+      var copyFeedback = document.getElementById('copy-feedback');
+      var btnGoToDownloads = document.getElementById('btn-go-to-downloads');
+      var btnManualVerifyPix = document.getElementById('btn-manual-verify-pix');
+      var pixVerifyMsg = document.getElementById('pix-verify-msg');
+      var pixDisplayVal = document.getElementById('pix-display-val');
+      var pixTransIdDisplay = document.getElementById('pix-trans-id-display');
+
+      var currentPlan = 'fisica';
+      var hasOrderBump = false;
+      var hasOrderBumpQuadros = false;
+      var hasShownQuadrosModal = false;
+      var currentOrderId = null;
+      var currentTransactionId = null;
+      var currentCustomerName = '';
+      var currentCustomerEmail = '';
+      var pixPollingInterval = null;
+      var isPaymentProcessing = false;
+
+      var detailsFisica = document.getElementById('details-fisica');
+      var detailsDigital = document.getElementById('details-digital');
+      var orderBumpBox = document.getElementById('order-bump-box');
+      var orderBumpCheckIcon = document.getElementById('order-bump-check-icon');
+      var orderBumpQuadrosBox = document.getElementById('order-bump-quadros-box');
+      var orderBumpQuadrosCheckIcon = document.getElementById('order-bump-quadros-check-icon');
+
+      var modalOfferQuadros = document.getElementById('modal-offer-quadros');
+      var btnCloseQuadrosModal = document.getElementById('btn-close-quadros-modal');
+      var btnAcceptQuadrosModal = document.getElementById('btn-accept-quadros-modal');
+      var btnDeclineQuadrosModal = document.getElementById('btn-decline-quadros-modal');
+
+      function calculateTotal() {
+        var base = currentPlan === 'fisica' ? 67.90 : 19.90;
+        var bump1 = hasOrderBump ? 7.90 : 0;
+        var bump2 = hasOrderBumpQuadros ? 7.50 : 0;
+        var total = Math.round((base + bump1 + bump2) * 100) / 100;
+        var baseCents = currentPlan === 'fisica' ? 6790 : 1990;
+        var totalCents = baseCents + (hasOrderBump ? 790 : 0) + (hasOrderBumpQuadros ? 750 : 0);
+        var formatted = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        return { base: base, total: total, totalCents: totalCents, formatted: formatted };
+      }
+
+      function updatePlanUI(plan) {
+        if (plan) {
+          currentPlan = (plan === 'digital_promo' || plan === 'pdf' || plan === 'basico') ? 'digital_promo' : 'fisica';
+        }
+        
+        if (currentPlan === 'digital_promo') {
+          if (optDigital) optDigital.classList.add('selected');
+          if (optFisica) optFisica.classList.remove('selected');
+          if (detailsDigital) detailsDigital.style.display = 'block';
+          if (detailsFisica) detailsFisica.style.display = 'none';
+          if (shipSection) shipSection.style.display = 'none';
+          if (digitalNotice) digitalNotice.style.display = 'block';
+        } else {
+          if (optFisica) optFisica.classList.add('selected');
+          if (optDigital) optDigital.classList.remove('selected');
+          if (detailsFisica) detailsFisica.style.display = 'block';
+          if (detailsDigital) detailsDigital.style.display = 'none';
+          if (shipSection) shipSection.style.display = 'block';
+          if (digitalNotice) digitalNotice.style.display = 'none';
+        }
+
+        // Atualiza estado visual do Order Bump 1 (Caderno de Colorir dos Santos)
+        if (orderBumpBox) {
+          var btnBump1 = document.getElementById('btn-toggle-bump-1');
+          if (hasOrderBump) {
+            orderBumpBox.classList.add('selected');
+            if (orderBumpCheckIcon) orderBumpCheckIcon.textContent = '✓';
+            if (btnBump1) btnBump1.innerHTML = '<span>✓ Sim! Adicionado (+ R$ 7,90)</span>';
+          } else {
+            orderBumpBox.classList.remove('selected');
+            if (orderBumpCheckIcon) orderBumpCheckIcon.textContent = '';
+            if (btnBump1) btnBump1.innerHTML = '<span>👉 Sim! Adicionar (+ R$ 7,90)</span>';
+          }
+        }
+
+        // Atualiza estado visual do Order Bump 2 (+90 Quadros Sacros)
+        if (orderBumpQuadrosBox) {
+          var btnBump2 = document.getElementById('btn-toggle-bump-2');
+          if (hasOrderBumpQuadros) {
+            orderBumpQuadrosBox.classList.add('selected');
+            if (orderBumpQuadrosCheckIcon) orderBumpQuadrosCheckIcon.textContent = '✓';
+            if (btnBump2) btnBump2.innerHTML = '<span>✓ Sim! Adicionado (+ R$ 7,50)</span>';
+          } else {
+            orderBumpQuadrosBox.classList.remove('selected');
+            if (orderBumpQuadrosCheckIcon) orderBumpQuadrosCheckIcon.textContent = '';
+            if (btnBump2) btnBump2.innerHTML = '<span>👉 Sim! Adicionar (+ R$ 7,50)</span>';
+          }
+        }
+
+        // Atualiza dinamicamente o botão com o valor total selecionado
+        var pricing = calculateTotal();
+        if (btnGeneratePix) {
+          btnGeneratePix.innerHTML = '<span>👉 GERAR PIX DE <strong id="btn-price-display">' + pricing.formatted + '</strong></span>';
+        }
+      }
+
+      if (optFisica) {
+        optFisica.addEventListener('click', function() { updatePlanUI('fisica'); });
+      }
+      if (optDigital) {
+        optDigital.addEventListener('click', function() { updatePlanUI('digital_promo'); });
+      }
+
+      // Alternar Order Bump 1 ao clicar no container ou botão
+      if (orderBumpBox) {
+        orderBumpBox.addEventListener('click', function() {
+          hasOrderBump = !hasOrderBump;
+          updatePlanUI();
+        });
+      }
+
+      // Alternar Order Bump 2 ao clicar no container ou botão
+      if (orderBumpQuadrosBox) {
+        orderBumpQuadrosBox.addEventListener('click', function() {
+          hasOrderBumpQuadros = !hasOrderBumpQuadros;
+          updatePlanUI();
+        });
+      }
+
+      // ─── BUSCA AUTOMÁTICA DE CEP VIA VIACEP ───
+      function lookupCep(cepValue) {
+        var clean = cepValue.replace(/\D/g, '');
+        if (clean.length !== 8) return;
+
+        if (cepStatus) {
+          cepStatus.style.display = 'block';
+          cepStatus.style.color = '#2563eb';
+          cepStatus.textContent = '⏳ Buscando endereço no Correios...';
+        }
+
+        fetch('https://viacep.com.br/ws/' + clean + '/json/')
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            if (data.erro) {
+              if (cepStatus) {
+                cepStatus.style.color = '#dc2626';
+                cepStatus.textContent = '❌ CEP não encontrado. Preencha o endereço manualmente.';
+              }
+              return;
+            }
+
+            if (inputStreet && data.logradouro) inputStreet.value = data.logradouro;
+            if (inputNeighborhood && data.bairro) inputNeighborhood.value = data.bairro;
+            if (inputCity && data.localidade) inputCity.value = data.localidade;
+            if (inputState && data.uf) inputState.value = data.uf;
+
+            if (cepStatus) {
+              cepStatus.style.color = '#15803d';
+              cepStatus.textContent = '✓ Endereço localizado: ' + data.localidade + '/' + data.uf;
+            }
+
+            if (inputNumber) {
+              inputNumber.focus();
+            }
+          })
+          .catch(function(err) {
+            console.warn('Erro ao consultar ViaCEP:', err);
+            if (cepStatus) {
+              cepStatus.style.color = '#64748b';
+              cepStatus.textContent = 'ℹ️ Digite o endereço nos campos abaixo.';
+            }
+          });
+      }
+
+      // Máscara e evento para o CEP
+      if (inputCep) {
+        inputCep.addEventListener('input', function(e) {
+          var v = e.target.value.replace(/\D/g, '').slice(0, 8);
+          if (v.length > 5) {
+            e.target.value = v.slice(0, 5) + '-' + v.slice(5);
+          } else {
+            e.target.value = v;
+          }
+          if (v.length === 8) {
+            lookupCep(v);
+          }
+        });
+      }
+
+      // Máscaras de entrada (Telefone e CPF)
+      if (inputPhone) {
+        inputPhone.addEventListener('input', function(e) {
+          var v = e.target.value.replace(/\D/g, '').slice(0, 11);
+          if (v.length > 10) {
+            e.target.value = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+          } else if (v.length > 6) {
+            e.target.value = '(' + v.slice(0,2) + ') ' + v.slice(2,6) + '-' + v.slice(6);
+          } else if (v.length > 2) {
+            e.target.value = '(' + v.slice(0,2) + ') ' + v.slice(2);
+          } else if (v.length > 0) {
+            e.target.value = '(' + v;
+          }
+        });
+      }
+
+      if (inputCpf) {
+        inputCpf.addEventListener('input', function(e) {
+          var v = e.target.value.replace(/\D/g, '').slice(0, 11);
+          if (v.length > 9) {
+            e.target.value = v.slice(0,3) + '.' + v.slice(3,6) + '.' + v.slice(6,9) + '-' + v.slice(9);
+          } else if (v.length > 6) {
+            e.target.value = v.slice(0,3) + '.' + v.slice(3,6) + '.' + v.slice(6);
+          } else if (v.length > 3) {
+            e.target.value = v.slice(0,3) + '.' + v.slice(3);
+          } else {
+            e.target.value = v;
+          }
+        });
+      }
+
+      function openCheckoutModal(plan) {
+        if (!checkoutModal) return;
+        hasOrderBump = false;
+        hasOrderBumpQuadros = false;
+        hasShownQuadrosModal = false;
+        updatePlanUI(plan || 'fisica');
+        
+        // Reseta telas
+        stepForm.style.display = 'block';
+        stepPix.classList.remove('active');
+        stepSuccess.classList.remove('active');
+        checkoutFormError.style.display = 'none';
+        btnGeneratePix.disabled = false;
+        
+        checkoutModal.classList.add('active');
+        checkoutModal.scrollTop = 0;
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeCheckoutModal() {
+        if (!checkoutModal) return;
+        checkoutModal.classList.remove('active');
+        document.body.style.overflow = '';
+        if (pixPollingInterval) {
+          clearInterval(pixPollingInterval);
+          pixPollingInterval = null;
+        }
+      }
+
+      if (closeCheckoutBtn) {
+        closeCheckoutBtn.addEventListener('click', closeCheckoutModal);
+      }
+
+      if (checkoutModal) {
+        checkoutModal.addEventListener('click', function(e) {
+          if (e.target === checkoutModal) closeCheckoutModal();
+        });
+      }
+
+      // Copiar código PIX
+      if (btnCopyPix && pixCopyPaste) {
+        btnCopyPix.addEventListener('click', function() {
+          pixCopyPaste.select();
+          pixCopyPaste.setSelectionRange(0, 99999);
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(pixCopyPaste.value);
+          } else {
+            document.execCommand('copy');
+          }
+          if (copyFeedback) {
+            copyFeedback.style.display = 'block';
+            setTimeout(function() { copyFeedback.style.display = 'none'; }, 5000);
+          }
+        });
+      }
+
+      function escapeHtml(str) {
+        return String(str || '').replace(/[&<>'"]/g, function(t) {
+          return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[t] || t);
+        });
+      }
+
+      // ─── TRATAMENTO DE CONFIRMAÇÃO DE PAGAMENTO ───
+      function handlePaymentSuccess(confirmedPlan) {
+        if (isPaymentProcessing) return;
+        isPaymentProcessing = true;
+
+        if (pixPollingInterval) {
+          clearInterval(pixPollingInterval);
+          pixPollingInterval = null;
+        }
+
+        var activePlan = confirmedPlan || currentPlan;
+
+        var purchaseEventId = currentOrderId ? ('purchase_' + currentOrderId) : ('eid_pur_' + Date.now());
+        var product = PRODUCTS[activePlan];
+        var pricing = calculateTotal();
+        if (typeof window.fbTrackEvent === 'function' && product) {
+          var contentName = product.name +
+            (hasOrderBump ? ' + Caderno de Colorir dos Santos' : '') +
+            (hasOrderBumpQuadros ? ' + 90 Quadros Sacros' : '');
+          var contentIds = [product.id];
+          if (hasOrderBump) contentIds.push('caderno-colorir-santos');
+          if (hasOrderBumpQuadros) contentIds.push('quadros-sacros-90');
+          var numItems = 1 + (hasOrderBump ? 1 : 0) + (hasOrderBumpQuadros ? 1 : 0);
+
+          window.fbTrackEvent('Purchase', {
+            content_name: contentName,
+            content_ids: contentIds,
+            content_type: 'product',
+            content_category: product.category,
+            value: pricing.total,
+            currency: 'BRL',
+            num_items: numItems,
+            order_id: currentOrderId || ''
+          }, true, purchaseEventId);
+        }
+
+        stepPix.classList.remove('active');
+        stepSuccess.classList.add('active');
+
+        var custName = (inputName && inputName.value.trim()) || currentCustomerName || localStorage.getItem('agenda_customer_name') || '';
+        var custEmail = (inputEmail && inputEmail.value.trim()) || currentCustomerEmail || localStorage.getItem('agenda_customer_email') || '';
+        var custPhone = (inputPhone && inputPhone.value.trim()) || localStorage.getItem('agenda_customer_phone') || '';
+        var custCpf = (inputCpf && inputCpf.value.trim()) || localStorage.getItem('agenda_customer_cpf') || '';
+        var trackingData = window.fbTrackingData || {};
+        var utmParams = trackingData.utmParams || {};
+
+        try {
+          if (custName) localStorage.setItem('agenda_customer_name', custName);
+          if (custEmail) localStorage.setItem('agenda_customer_email', custEmail);
+          if (custPhone) localStorage.setItem('agenda_customer_phone', custPhone);
+          if (custCpf) localStorage.setItem('agenda_customer_cpf', custCpf);
+          if (currentOrderId) {
+            localStorage.setItem('agenda_last_order_id', currentOrderId);
+            sessionStorage.setItem('agenda_last_order_id', currentOrderId);
+          }
+        } catch(e) {}
+
+        var upsellUrl = 'upsell.html?order_id=' + (currentOrderId || '') +
+          '&plan=' + activePlan +
+          (hasOrderBump ? '&order_bump=1' : '') +
+          (hasOrderBumpQuadros ? '&order_bump_quadros=1' : '') +
+          '&name=' + encodeURIComponent(custName) +
+          '&email=' + encodeURIComponent(custEmail) +
+          '&phone=' + encodeURIComponent(custPhone) +
+          '&cpf=' + encodeURIComponent(custCpf);
+
+        Object.keys(utmParams).forEach(function(k) {
+          if (utmParams[k]) upsellUrl += '&' + encodeURIComponent(k) + '=' + encodeURIComponent(utmParams[k]);
+        });
+        if (trackingData.fbclid) upsellUrl += '&fbclid=' + encodeURIComponent(trackingData.fbclid);
+        if (trackingData.fbc) upsellUrl += '&fbc=' + encodeURIComponent(trackingData.fbc);
+        if (trackingData.fbp) upsellUrl += '&fbp=' + encodeURIComponent(trackingData.fbp);
+
+        if (btnGoToDownloads) {
+          btnGoToDownloads.href = upsellUrl;
+          btnGoToDownloads.removeAttribute('target');
+        }
+
+        setTimeout(function() {
+          window.location.href = upsellUrl;
+        }, 1200);
+      }
+
+      // ─── CONSULTAR STATUS DO PIX VIA EDGE FUNCTION SEGURA ───
+      function checkPixStatus(isManual) {
+        if (!currentTransactionId || isPaymentProcessing) return;
+
+        if (isManual && btnManualVerifyPix) {
+          btnManualVerifyPix.disabled = true;
+          btnManualVerifyPix.innerHTML = '<span>⏳ Consultando Banco Central...</span>';
+          if (pixVerifyMsg) pixVerifyMsg.style.display = 'none';
+        }
+
+        fetch(SUPABASE_URL + '/functions/v1/check-pix', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY
+          },
+          body: JSON.stringify({
+            order_id: currentOrderId,
+            transaction_id: currentTransactionId
+          })
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data && data.status === 'paid') {
+            var confirmedPlan = (data.order && data.order.plan) ? data.order.plan : (data.plan || currentPlan);
+            handlePaymentSuccess(confirmedPlan);
+          } else {
+            if (isManual) {
+              if (pixVerifyMsg) {
+                pixVerifyMsg.textContent = '⏳ Seu pagamento ainda não foi identificado pelo Banco Central. Se você concluiu a transferência agora, aguarde 5 a 10 segundos e clique novamente!';
+                pixVerifyMsg.style.display = 'block';
+              }
+              setTimeout(function() {
+                if (btnManualVerifyPix && !isPaymentProcessing) {
+                  btnManualVerifyPix.disabled = false;
+                  btnManualVerifyPix.innerHTML = '<span>🟢 JÁ REALIZEI O PAGAMENTO (CONFIRMAR AGORA)</span>';
+                }
+              }, 2000);
+            }
+          }
+        })
+        .catch(function(err) {
+          console.warn('Erro ao consultar check-pix:', err);
+          if (isManual && btnManualVerifyPix) {
+            btnManualVerifyPix.disabled = false;
+            btnManualVerifyPix.innerHTML = '<span>🟢 JÁ REALIZEI O PAGAMENTO (CONFIRMAR AGORA)</span>';
+          }
+        });
+      }
+
+      function startPixPolling() {
+        if (pixPollingInterval) clearInterval(pixPollingInterval);
+        pixPollingInterval = setInterval(function() {
+          checkPixStatus(false);
+        }, 2500);
+      }
+
+      function handleTabWakeUp() {
+        if (currentTransactionId && !isPaymentProcessing && checkoutModal && checkoutModal.classList.contains('active')) {
+          checkPixStatus(false);
+        }
+      }
+      document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') {
+          handleTabWakeUp();
+        }
+      });
+      window.addEventListener('focus', handleTabWakeUp);
+
+      if (btnManualVerifyPix) {
+        btnManualVerifyPix.addEventListener('click', function() {
+          checkPixStatus(true);
+        });
+      }
+
+      // ─── EXECUÇÃO DA GERAÇÃO DO PIX ───
+      function proceedGeneratePix() {
+        var name = inputName ? inputName.value.trim() : '';
+        var email = inputEmail ? inputEmail.value.trim() : '';
+        var phone = inputPhone ? inputPhone.value.trim() : '';
+        var cpf = inputCpf ? inputCpf.value.trim() : '';
+
+        // Campos de entrega para plano físico
+        var shipCep = (inputCep && inputCep.value.trim()) || '';
+        var shipStreet = (inputStreet && inputStreet.value.trim()) || '';
+        var shipNumber = (inputNumber && inputNumber.value.trim()) || '';
+        var shipComp = (inputComp && inputComp.value.trim()) || '';
+        var shipNeighborhood = (inputNeighborhood && inputNeighborhood.value.trim()) || '';
+        var shipCity = (inputCity && inputCity.value.trim()) || '';
+        var shipState = (inputState && inputState.value.trim()) || '';
+
+        if (currentPlan === 'fisica') {
+          if (!shipCep || !shipStreet || !shipNumber || !shipCity || !shipState) {
+            if (checkoutFormError) {
+              checkoutFormError.textContent = 'Por favor, preencha os dados do endereço de entrega (CEP, Rua, Número, Cidade e Estado).';
+              checkoutFormError.style.display = 'block';
+            }
+            return;
+          }
+        }
+
+        checkoutFormError.style.display = 'none';
+        btnGeneratePix.disabled = true;
+        btnGeneratePix.innerHTML = '<span>⏳ Gerando PIX Seguro...</span>';
+
+        currentCustomerName = name;
+        currentCustomerEmail = email;
+        try {
+          localStorage.setItem('agenda_customer_name', name);
+          localStorage.setItem('agenda_customer_email', email);
+          localStorage.setItem('agenda_customer_phone', phone);
+          localStorage.setItem('agenda_customer_cpf', cpf);
+        } catch (e) {}
+        var tracking = window.fbTrackingData || {};
+
+        var checkoutEventId = typeof window.generateEventId === 'function' 
+          ? window.generateEventId() 
+          : 'eid_ic_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+
+        var pricing = calculateTotal();
+
+        var product = PRODUCTS[currentPlan];
+        if (typeof window.fbTrackEvent === 'function' && product) {
+          var contentName = product.name +
+            (hasOrderBump ? ' + Caderno de Colorir dos Santos' : '') +
+            (hasOrderBumpQuadros ? ' + 90 Quadros Sacros' : '');
+          var contentIds = [product.id];
+          if (hasOrderBump) contentIds.push('caderno-colorir-santos');
+          if (hasOrderBumpQuadros) contentIds.push('quadros-sacros-90');
+          var numItems = 1 + (hasOrderBump ? 1 : 0) + (hasOrderBumpQuadros ? 1 : 0);
+
+          window.fbTrackEvent('InitiateCheckout', {
+            content_name: contentName,
+            content_ids: contentIds,
+            content_type: 'product',
+            content_category: product.category,
+            value: pricing.total,
+            currency: 'BRL',
+            num_items: numItems
+          }, true, checkoutEventId);
+        }
+
+        fetch(SUPABASE_URL + '/functions/v1/create-pix', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            phone: phone,
+            cpf: cpf,
+            plan: currentPlan,
+            order_bump: hasOrderBump,
+            order_bump_quadros: hasOrderBumpQuadros,
+            shipping_cep: shipCep,
+            shipping_street: shipStreet,
+            shipping_number: shipNumber,
+            shipping_complement: shipComp,
+            shipping_neighborhood: shipNeighborhood,
+            shipping_city: shipCity,
+            shipping_state: shipState,
+            event_id: checkoutEventId,
+            event_source_url: window.location.href,
+            tracking: {
+              ...(tracking.utmParams || {}),
+              fbc: tracking.fbc || null,
+              fbp: tracking.fbp || null,
+              external_id: tracking.externalId || null
+            }
+          })
+        })
+        .then(function(res) {
+          return res.json().then(function(data) {
+            return { ok: res.ok, status: res.status, data: data };
+          });
+        })
+        .then(function(result) {
+          if (!result.ok || !result.data || !result.data.qr_code) {
+            btnGeneratePix.disabled = false;
+            updatePlanUI();
+            var errorMsg = (result.data && result.data.error) ? result.data.error : 'Erro ao gerar o código PIX na operadora.';
+            if (checkoutFormError) {
+              checkoutFormError.textContent = errorMsg;
+              checkoutFormError.style.display = 'block';
+            }
+            return;
+          }
+
+          var pixData = result.data;
+          currentTransactionId = pixData.transaction_id;
+          currentOrderId = pixData.order_id;
+          isPaymentProcessing = false;
+
+          startPixPolling();
+
+          btnGeneratePix.disabled = false;
+          updatePlanUI();
+          
+          stepForm.style.display = 'none';
+          stepPix.classList.add('active');
+          if (checkoutModal) {
+            checkoutModal.scrollTop = 0;
+          }
+
+          if (pixDisplayVal) {
+            var displayFormatted = (pixData.amount_cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            pixDisplayVal.textContent = displayFormatted;
+          }
+          if (pixTransIdDisplay) {
+            pixTransIdDisplay.textContent = escapeHtml(pixData.transaction_id);
+          }
+          if (pixQrImage) {
+            pixQrImage.src = pixData.qr_code_base64.startsWith('data:') 
+              ? pixData.qr_code_base64 
+              : 'data:image/png;base64,' + pixData.qr_code_base64;
+          }
+          if (pixCopyPaste) {
+            pixCopyPaste.value = pixData.qr_code;
+          }
+          if (pixVerifyMsg) {
+            if (pixData.reused) {
+              pixVerifyMsg.textContent = 'ℹ️ Identificamos o seu código Pix recente ainda disponível para pagamento:';
+              pixVerifyMsg.style.display = 'block';
+              pixVerifyMsg.style.backgroundColor = '#f0f9ff';
+              pixVerifyMsg.style.color = '#0369a1';
+              pixVerifyMsg.style.border = '1px solid #bae6fd';
+            } else {
+              pixVerifyMsg.style.display = 'none';
+            }
+          }
+        })
+        .catch(function(err) {
+          console.error('Erro na requisição create-pix:', err);
+          btnGeneratePix.disabled = false;
+          updatePlanUI();
+          if (checkoutFormError) {
+            checkoutFormError.textContent = 'Erro ao conectar à operadora de pagamento. Tente novamente.';
+            checkoutFormError.style.display = 'block';
+          }
+        });
+      }
+
+      // ─── CONTROLADORES DO MODAL DE OFERTA DE QUADROS SACROS ───
+      function openQuadrosModal() {
+        if (!modalOfferQuadros) return;
+        modalOfferQuadros.classList.add('active');
+      }
+
+      function closeQuadrosModal() {
+        if (!modalOfferQuadros) return;
+        modalOfferQuadros.classList.remove('active');
+      }
+
+      if (btnAcceptQuadrosModal) {
+        btnAcceptQuadrosModal.addEventListener('click', function() {
+          hasOrderBumpQuadros = true;
+          updatePlanUI();
+          closeQuadrosModal();
+          proceedGeneratePix();
+        });
+      }
+
+      if (btnDeclineQuadrosModal) {
+        btnDeclineQuadrosModal.addEventListener('click', function() {
+          closeQuadrosModal();
+          proceedGeneratePix();
+        });
+      }
+
+      if (btnCloseQuadrosModal) {
+        btnCloseQuadrosModal.addEventListener('click', function() {
+          closeQuadrosModal();
+        });
+      }
+
+      if (modalOfferQuadros) {
+        modalOfferQuadros.addEventListener('click', function(e) {
+          if (e.target === modalOfferQuadros) {
+            closeQuadrosModal();
+          }
+        });
+      }
+
+      // Submissão do Formulário de Checkout
+      var checkoutForm = document.getElementById('checkout-native-form');
+      if (checkoutForm) {
+        checkoutForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          var name = inputName ? inputName.value.trim() : '';
+          var email = inputEmail ? inputEmail.value.trim() : '';
+          var phone = inputPhone ? inputPhone.value.trim() : '';
+          var cpf = inputCpf ? inputCpf.value.trim() : '';
+
+          if (!name || !email || !phone) {
+            if (checkoutFormError) {
+              checkoutFormError.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+              checkoutFormError.style.display = 'block';
+            }
+            return;
+          }
+
+          if (currentPlan === 'fisica') {
+            var shipCep = (inputCep && inputCep.value.trim()) || '';
+            var shipStreet = (inputStreet && inputStreet.value.trim()) || '';
+            var shipNumber = (inputNumber && inputNumber.value.trim()) || '';
+            var shipCity = (inputCity && inputCity.value.trim()) || '';
+            var shipState = (inputState && inputState.value.trim()) || '';
+            if (!shipCep || !shipStreet || !shipNumber || !shipCity || !shipState) {
+              if (checkoutFormError) {
+                checkoutFormError.textContent = 'Por favor, preencha todos os campos do endereço de entrega.';
+                checkoutFormError.style.display = 'block';
+              }
+              return;
+            }
+          }
+
+          if (!hasOrderBumpQuadros && !hasShownQuadrosModal && modalOfferQuadros) {
+            hasShownQuadrosModal = true;
+            openQuadrosModal();
+            return;
+          }
+
+          proceedGeneratePix();
+        });
+      }
+
+      // ─── CLIQUE NOS BOTÕES DE COMPRA (ABRE CHECKOUT PRÓPRIO PUSHINPAY) ───
+      document.querySelectorAll('[data-plan]').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+          e.preventDefault();
+          var plan = this.getAttribute('data-plan') || 'completo';
+          openCheckoutModal(plan);
+        });
+      });
+
+      window.openNativeCheckout = openCheckoutModal;
+
+      // ─── SCROLL SUAVE PARA ÂNCORAS ──────────────────────
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          var targetEl = document.querySelector(this.getAttribute('href'));
+          if (targetEl) {
+            e.preventDefault();
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // ─── RASTREAR CLIQUE NA CTA FINAL ───────────────────
+      var finalCta = document.querySelector('.section-final-cta .btn-gold');
+      if (finalCta) {
+        finalCta.addEventListener('click', function() {
+          if (typeof window.fbTrackEvent === 'function') {
+            window.fbTrackEvent('ClickFinalCTA', {
+              content_name: 'CTA Final - Garantir Agenda',
+              page_title: document.title
+            }, false);
+          }
+        });
+      }
+
+      // ─── CARROSSEL DE DEPOIMENTOS DO WHATSAPP ───────────
+      (function initTestimonialCarousel() {
+        var track = document.getElementById('carousel-track');
+        var prevBtn = document.getElementById('carousel-prev');
+        var nextBtn = document.getElementById('carousel-next');
+        var dots = document.querySelectorAll('#carousel-dots .dot');
+        var slides = document.querySelectorAll('.carousel-slide');
+        if (!track || !slides.length) return;
+
+        function getSlideWidth() {
+          var slide = slides[0];
+          var gap = 18;
+          return slide ? slide.offsetWidth + gap : 330;
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function() {
+            track.scrollBy({ left: -getSlideWidth(), behavior: 'smooth' });
+          });
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function() {
+            track.scrollBy({ left: getSlideWidth(), behavior: 'smooth' });
+          });
+        }
+
+        dots.forEach(function(dot, idx) {
+          dot.addEventListener('click', function() {
+            if (slides[idx]) {
+              slides[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+          });
+        });
+
+        // Atualizar bolinhas indicadoras ao rolar
+        var scrollTimeout;
+        track.addEventListener('scroll', function() {
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(function() {
+            var scrollLeft = track.scrollLeft;
+            var slideWidth = getSlideWidth();
+            var activeIdx = Math.round(scrollLeft / slideWidth);
+            activeIdx = Math.max(0, Math.min(activeIdx, dots.length - 1));
+            dots.forEach(function(d, i) {
+              if (i === activeIdx) d.classList.add('active');
+              else d.classList.remove('active');
+            });
+          }, 60);
+        }, { passive: true });
+      })();
+
+      // ─── LOG DE DIAGNÓSTICO (só em dev) ─────────────────
+      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        console.group('🔍 Meta Pixel Tracking Data');
+        console.log('Pixel ID:', window.fbTrackingData.pixelId);
+        console.log('_fbc:', window.fbTrackingData.fbc);
+        console.log('_fbp:', window.fbTrackingData.fbp);
+        console.log('External ID:', window.fbTrackingData.externalId);
+        console.log('UTM Params:', window.fbTrackingData.utmParams);
+        console.groupEnd();
+      }
+
+      // ─── DATA DINÂMICA DA BARRA SUPERIOR (HORÁRIO DE BRASÍLIA) ───
+      (function updateBrasiliaDate() {
+        try {
+          var dateEl = document.getElementById('top-bar-date');
+          if (dateEl) {
+            var now = new Date();
+            // Formatar no fuso horário de Brasília (America/Sao_Paulo)
+            var formatter = new Intl.DateTimeFormat('pt-BR', {
+              timeZone: 'America/Sao_Paulo',
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+            });
+            dateEl.textContent = formatter.format(now);
+          }
+        } catch (e) {
+          // fallback silencioso
+        }
+      })();
+
+    })();
+  </script>
+</body>
+</html>

@@ -8,11 +8,21 @@ CREATE TABLE IF NOT EXISTS public.orders (
     customer_email TEXT NOT NULL,
     customer_phone TEXT NOT NULL,
     customer_cpf TEXT,
-    plan TEXT NOT NULL CHECK (plan IN ('basico', 'completo', 'upsell', 'downsell')),
+    plan TEXT NOT NULL CHECK (plan IN ('basico', 'completo', 'upsell', 'downsell', 'fisica', 'digital_promo', 'pdf')),
     order_bump BOOLEAN NOT NULL DEFAULT FALSE,
+    order_bump_quadros BOOLEAN NOT NULL DEFAULT FALSE,
     amount_cents INTEGER NOT NULL,
     payment_method TEXT NOT NULL DEFAULT 'pix',
     status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'paid', 'expired', 'canceled')),
+    
+    -- Endereço de entrega para Agenda Física
+    shipping_cep TEXT,
+    shipping_street TEXT,
+    shipping_number TEXT,
+    shipping_complement TEXT,
+    shipping_neighborhood TEXT,
+    shipping_city TEXT,
+    shipping_state TEXT,
     
     -- Dados retornados pela PushinPay
     pushinpay_transaction_id TEXT,
@@ -86,3 +96,22 @@ FOR UPDATE
 TO service_role
 USING (true)
 WITH CHECK (true);
+
+-- ============================================================
+-- TABELA DE CONFIGURAÇÕES GLOBAIS DO SISTEMA (APP_SETTINGS)
+-- Armazena Webhook de traqueamento e integrações externas
+-- ============================================================
+CREATE TABLE IF NOT EXISTS public.app_settings (
+    key TEXT PRIMARY KEY,
+    value JSONB NOT NULL,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE public.app_settings ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Allow service role full access" ON public.app_settings
+  FOR ALL TO service_role USING (true) WITH CHECK (true);
+
+CREATE POLICY "Allow anon read access" ON public.app_settings
+  FOR SELECT TO anon, authenticated USING (true);
+

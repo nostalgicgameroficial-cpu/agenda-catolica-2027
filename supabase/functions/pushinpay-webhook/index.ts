@@ -122,6 +122,8 @@ async function sendDeliveryEmail(order: {
   }
 
   const isCompleto = order.plan === 'completo';
+  const isFisica = order.plan === 'fisica';
+  const isDigitalPromo = order.plan === 'digital_promo' || order.plan === 'pdf';
   const isUpsell = order.plan === 'upsell';
   const isDownsell = order.plan === 'downsell';
   const hasOrderBump = !!order.order_bump;
@@ -129,7 +131,11 @@ async function sendDeliveryEmail(order: {
   const firstName = order.customer_name ? order.customer_name.split(' ')[0] : 'Irmão(ã) em Cristo';
   
   let packageName = isCompleto ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
-  if (isUpsell) {
+  if (isFisica) {
+    packageName = 'Agenda Católica 2027 Física (Edição Impressa) + Bônus Devocionais';
+  } else if (isDigitalPromo) {
+    packageName = 'Agenda Católica 2027 em PDF + 5 Bônus Exclusivos';
+  } else if (isUpsell) {
     packageName = 'Mega Coleção de 150 Quadros Sacros em Alta Definição';
   } else if (isDownsell) {
     packageName = 'Seleção Especial de 50 Quadros Sacros em Alta Definição';
@@ -144,7 +150,7 @@ async function sendDeliveryEmail(order: {
   let driveLink = 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing';
   if (isUpsell || isDownsell) {
     driveLink = 'https://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=sharing';
-  } else if (!isCompleto) {
+  } else if (order.plan === 'basico') {
     driveLink = 'https://drive.google.com/drive/folders/1vstC1uvFR11TZIg5zXpILGT-khchTjJp?usp=sharing';
   }
 
@@ -165,10 +171,12 @@ async function sendDeliveryEmail(order: {
         <table role="presentation" width="100%" style="max-width: 580px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 32px 24px; text-align: left;">
           <tr>
             <td>
-              <h2 style="color: #0c1830; font-size: 20px; font-weight: 700; margin: 0 0 16px;">Seus arquivos estão disponíveis 🙏✨</h2>
+              <h2 style="color: #0c1830; font-size: 20px; font-weight: 700; margin: 0 0 16px;">${isFisica ? 'Pedido da Agenda Física Confirmado! 📦🙏' : 'Seus arquivos estão disponíveis 🙏✨'}</h2>
               <p style="font-size: 15px; line-height: 1.6; margin: 0 0 16px;">Olá, <strong>${firstName}</strong>!</p>
               <p style="font-size: 15px; line-height: 1.6; margin: 0 0 20px;">
-                Confirmamos o seu pagamento da <strong>${packageName}</strong>. Seus arquivos digitais já estão prontos para consulta e download na pasta oficial do Google Drive.
+                ${isFisica 
+                  ? `Confirmamos com sucesso o pagamento da sua <strong>${packageName}</strong>!<br><br>📦 <strong>Sua Agenda Física está sendo preparada</strong> com muito carinho e bênçãos para envio ao seu endereço informado. Assim que for despachada, você receberá as atualizações e código de rastreamento no WhatsApp e neste e-mail.<br><br>🎁 <em>Enquanto aguarda a entrega, você já tem <strong>acesso digital imediato</strong> a todos os arquivos e bônus no Google Drive abaixo:</em>`
+                  : `Confirmamos o seu pagamento da <strong>${packageName}</strong>. Seus arquivos digitais já estão prontos para consulta e download na pasta oficial do Google Drive.`}
               </p>
               
               <div style="text-align: center; margin: 28px 0;">
@@ -536,13 +544,29 @@ serve(async (req: Request) => {
         const hasOrderBumpQuadros = !!order.order_bump_quadros;
         const isUpsell = order.plan === 'upsell';
         const isDownsell = order.plan === 'downsell';
-        const baseAmount = order.plan === 'basico' ? 19.90 : (isUpsell ? 67.90 : (isDownsell ? 29.90 : 27.90));
+        const isFisica = order.plan === 'fisica';
+        const isDigitalPromo = order.plan === 'digital_promo' || order.plan === 'pdf';
+        let baseAmount = 27.90;
+        if (isFisica) baseAmount = 67.90;
+        else if (isDigitalPromo || order.plan === 'basico') baseAmount = 19.90;
+        else if (isUpsell) baseAmount = 67.90;
+        else if (isDownsell) baseAmount = 29.90;
+
         const amount = order.amount_cents ? (order.amount_cents / 100) : (baseAmount + (hasOrderBump ? 7.90 : 0) + (hasOrderBumpQuadros ? 7.50 : 0));
 
-        let contentIds = [order.plan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'];
-        let contentName = order.plan === 'completo' ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
+        let contentIds = ['agenda-catolica-2027-completa'];
+        let contentName = 'Agenda Católica 2027 + 5 Bônus Exclusivos';
 
-        if (isUpsell) {
+        if (isFisica) {
+          contentIds = ['agenda-catolica-2027-fisica'];
+          contentName = 'Agenda Católica 2027 Física (Edição Impressa)';
+        } else if (isDigitalPromo) {
+          contentIds = ['agenda-catolica-2027-pdf-promo'];
+          contentName = 'Agenda Católica 2027 em PDF + 5 Bônus Exclusivos';
+        } else if (order.plan === 'basico') {
+          contentIds = ['agenda-catolica-2027-basica'];
+          contentName = 'Agenda Católica 2027 Básica';
+        } else if (isUpsell) {
           contentIds = ['quadros-sacros-150'];
           contentName = 'Mega Coleção 150 Quadros Sacros em Alta Definição';
         } else if (isDownsell) {
@@ -588,6 +612,65 @@ serve(async (req: Request) => {
         console.error('Erro ao agendar CAPI Purchase (Webhook):', metaErr);
       }
 
+      // 5. Encaminha webhook para ferramenta externa configurada no painel
+      try {
+        const { data: settingsRow } = await supabase
+          .from('app_settings')
+          .select('value')
+          .eq('key', 'webhook_settings')
+          .maybeSingle();
+
+        const webhookConfig = settingsRow?.value;
+        if (webhookConfig && webhookConfig.enabled && webhookConfig.url) {
+          const targetUrl = String(webhookConfig.url).trim();
+          const shouldRelay = !webhookConfig.events || webhookConfig.events.includes('paid');
+
+          if (shouldRelay && targetUrl.startsWith('http')) {
+            const forwardPayload = {
+              ...(typeof payload === 'object' && payload !== null ? payload : {}),
+              platform: 'pushinpay',
+              status: 'approved',
+              external_id: String(cleanTxId || order.pushinpay_transaction_id || order.id),
+              amount: order.amount_cents ? (order.amount_cents / 100) : amount,
+              product_name: contentName || 'Agenda Católica 2027 + 5 Bônus Exclusivos',
+              customer_name: order.customer_name || '',
+              customer_email: order.customer_email || '',
+              customer_phone: order.customer_phone || '',
+              utm_source: order.utm_source || '',
+              utm_campaign: order.utm_campaign || '',
+              utm_medium: order.utm_medium || '',
+              utm_content: order.utm_content || '',
+              utm_term: order.utm_term || '',
+              src: (order.utm_campaign && order.utm_content) ? `${order.utm_campaign}|${order.utm_content}` : (order.utm_source || ''),
+              fbc: finalFbc || order.fbc || '',
+              fbp: order.fbp || '',
+              fbclid: order.fbclid || '',
+              order_id: order.id,
+              plan: order.plan,
+              customer_cpf: order.customer_cpf || '',
+              sent_at: new Date().toISOString()
+            };
+
+            console.log(`[Webhook Relay] Encaminhando venda ${order.id} para ${targetUrl}`);
+            fetch(targetUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'User-Agent': 'AgendaCatolica-WebhookRelay/1.0',
+                'X-Relay-Event': 'order.paid'
+              },
+              body: JSON.stringify(forwardPayload),
+            }).then(r => {
+              console.log(`[Webhook Relay] Resposta da ferramenta externa: ${r.status} ${r.statusText}`);
+            }).catch(relayErr => {
+              console.error('[Webhook Relay] Erro ao disparar webhook para ferramenta externa:', relayErr);
+            });
+          }
+        }
+      } catch (relayEx) {
+        console.error('[Webhook Relay] Exceção ao ler configurações de webhook:', relayEx);
+      }
+
       return new Response(JSON.stringify({ 
         received: true, 
         order_id: order.id, 
@@ -598,6 +681,41 @@ serve(async (req: Request) => {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
+
+    // Se configurado para repassar status pendente
+    try {
+      if (status !== 'paid' && status !== 'approved') {
+        const { data: settingsRow } = await supabase
+          .from('app_settings')
+          .select('value')
+          .eq('key', 'webhook_settings')
+          .maybeSingle();
+
+        const webhookConfig = settingsRow?.value;
+        if (webhookConfig && webhookConfig.enabled && webhookConfig.url && webhookConfig.events?.includes('pending')) {
+          const targetUrl = String(webhookConfig.url).trim();
+          if (targetUrl.startsWith('http')) {
+            const forwardPayload = {
+              ...(typeof payload === 'object' && payload !== null ? payload : {}),
+              event: 'order.pending',
+              event_type: 'pending',
+              status: status || 'pending',
+              transaction_id: transactionId,
+              sent_at: new Date().toISOString()
+            };
+            fetch(targetUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'User-Agent': 'AgendaCatolica-WebhookRelay/1.0',
+                'X-Relay-Event': 'order.pending'
+              },
+              body: JSON.stringify(forwardPayload),
+            }).catch(e => console.error('[Webhook Relay Pending] Erro:', e));
+          }
+        }
+      }
+    } catch (_) {}
 
     return new Response(JSON.stringify({ 
       received: true, 

@@ -431,7 +431,17 @@
       linkDrive.textContent = targetDriveLink;
     }
 
-    if (plan === 'basico' && !hasUpsell && !hasDownsell) {
+    if (plan === 'fisica') {
+      var physicalNotice = document.createElement('div');
+      physicalNotice.style.cssText = 'background: #eff6ff; border: 1.5px solid #3b82f6; border-radius: 12px; padding: 18px 20px; margin-bottom: 24px; color: #1e3a8a;';
+      physicalNotice.innerHTML = '<h3 style="font-size: 1.15rem; font-weight: 800; color: #1d4d90; margin-bottom: 6px;">📦 PEDIDO DA AGENDA FÍSICA CONFIRMADO!</h3>' +
+        '<p style="font-size: 0.92rem; line-height: 1.6; margin: 0 0 10px;">Seus dados de entrega foram recebidos com sucesso e nossa equipe já está separando e embalando o seu exemplar com todo carinho. Em breve você receberá o código de rastreamento no seu WhatsApp e e-mail.</p>' +
+        '<p style="font-size: 0.88rem; font-weight: 700; color: #15803d; margin: 0;">🎁 Enquanto seu pacote está a caminho, aproveite o seu ACESSO ANTECIPADO a todos os arquivos e bônus digitais logo abaixo:</p>';
+      var mainCard = document.querySelector('.card-main');
+      if (mainCard) mainCard.insertBefore(physicalNotice, mainCard.firstChild);
+      var pageTitle = document.getElementById('page-title');
+      if (pageTitle) pageTitle.textContent = 'Pedido Confirmado! Sua Agenda Física está sendo preparada 📦🙏';
+    } else if (plan === 'basico' && !hasUpsell && !hasDownsell) {
       var bonusSection = document.getElementById('bonus-section');
       if (bonusSection) bonusSection.style.display = 'none';
       var pageTitle = document.getElementById('page-title');
@@ -459,19 +469,35 @@
     // Se o evento já foi processado no modal ou pelo CAPI, a Meta deduplica perfeitamente
     var orderId = params.get('order_id');
     var purchaseEventId = orderId ? ('purchase_' + orderId) : ('eid_pur_' + Date.now());
-    var baseValue = plan === 'basico' ? 19.90 : 27.90;
+    var baseValue = 27.90;
+    var basePackageName = 'Agenda Católica 2027 + 5 Bônus Exclusivos';
+    var defaultContentId = 'agenda-catolica-2027-completa';
+
+    if (plan === 'fisica') {
+      baseValue = 67.90;
+      basePackageName = 'Agenda Católica 2027 Física (Edição Impressa)';
+      defaultContentId = 'agenda-catolica-2027-fisica';
+    } else if (plan === 'digital_promo' || plan === 'pdf') {
+      baseValue = 19.90;
+      basePackageName = 'Agenda Católica 2027 em PDF + 5 Bônus';
+      defaultContentId = 'agenda-catolica-2027-pdf-promo';
+    } else if (plan === 'basico') {
+      baseValue = 19.90;
+      basePackageName = 'Agenda Católica 2027 Básica';
+      defaultContentId = 'agenda-catolica-2027-basica';
+    }
+
     var amountValue = hasOrderBumpParam ? (baseValue + 7.90) : baseValue;
     if (hasOrderBumpQuadrosParam) amountValue += 7.50;
     if (hasUpsell) amountValue += 67.90;
     if (hasDownsell && !hasOrderBumpQuadrosParam) amountValue += 29.90;
 
-    var basePackageName = plan === 'basico' ? 'Agenda Católica 2027 Básica' : 'Agenda Católica 2027 + 5 Bônus Exclusivos';
     var packageName = hasOrderBumpParam ? (basePackageName + ' + Caderno de Colorir dos Santos') : basePackageName;
     if (hasOrderBumpQuadrosParam) packageName += ' + 90 Quadros Sacros';
     if (hasUpsell) packageName += ' + 150 Quadros Sacros';
     if (hasDownsell && !hasOrderBumpQuadrosParam) packageName += ' + 50 Quadros Sacros';
 
-    var contentIds = [plan === 'basico' ? 'agenda-catolica-2027-basica' : 'agenda-catolica-2027-completa'];
+    var contentIds = [defaultContentId];
     if (hasOrderBumpParam) contentIds.push('caderno-colorir-santos');
     if (hasOrderBumpQuadrosParam) contentIds.push('quadros-sacros-50');
     if (hasUpsell) contentIds.push('quadros-sacros-150');

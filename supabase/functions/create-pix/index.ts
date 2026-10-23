@@ -121,7 +121,11 @@ async function sendPixPendingEmail(order: {
 
   const firstName = order.customer_name ? order.customer_name.split(' ')[0] : 'Irmão(ã) em Cristo';
   let baseName = 'Agenda Católica 2027 Completa + 5 Bônus';
-  if (order.plan === 'basico') {
+  if (order.plan === 'fisica') {
+    baseName = 'Agenda Católica 2027 Física (Edição Impressa)';
+  } else if (order.plan === 'digital_promo' || order.plan === 'pdf') {
+    baseName = 'Agenda Católica 2027 em PDF + 5 Bônus';
+  } else if (order.plan === 'basico') {
     baseName = 'Agenda Católica 2027 Básica';
   } else if (order.plan === 'upsell') {
     baseName = 'Mega Coleção 150 Quadros Sacros em Alta Definição';
@@ -256,7 +260,12 @@ serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     const body = await req.json();
-    const { name, email, phone, cpf, plan, order_bump, order_bump_quadros, tracking, event_id, event_source_url } = body;
+    const {
+      name, email, phone, cpf, plan,
+      order_bump, order_bump_quadros,
+      shipping_cep, shipping_street, shipping_number, shipping_complement, shipping_neighborhood, shipping_city, shipping_state,
+      tracking, event_id, event_source_url
+    } = body;
 
     const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 
                      req.headers.get('cf-connecting-ip') || 
@@ -275,7 +284,17 @@ serve(async (req) => {
     let contentName = 'Agenda Católica 2027 + 5 Bônus Exclusivos';
     let contentIds = ['agenda-catolica-2027-completa'];
 
-    if (plan === 'basico') {
+    if (plan === 'fisica') {
+      selectedPlan = 'fisica';
+      baseCents = 6790;
+      contentName = 'Agenda Católica 2027 Física (Impressa & Encadernada)';
+      contentIds = ['agenda-catolica-2027-fisica'];
+    } else if (plan === 'digital_promo' || plan === 'pdf') {
+      selectedPlan = 'digital_promo';
+      baseCents = 1990;
+      contentName = 'Agenda Católica 2027 em PDF + 5 Bônus Exclusivos';
+      contentIds = ['agenda-catolica-2027-pdf-promo'];
+    } else if (plan === 'basico') {
       selectedPlan = 'basico';
       baseCents = 1990;
       contentName = 'Agenda Católica 2027 Básica';
@@ -292,9 +311,9 @@ serve(async (req) => {
       contentIds = ['quadros-sacros-50'];
     }
 
-    const hasOrderBump = (selectedPlan === 'basico' || selectedPlan === 'completo') && 
+    const hasOrderBump = (selectedPlan === 'basico' || selectedPlan === 'completo' || selectedPlan === 'fisica' || selectedPlan === 'digital_promo') && 
       (order_bump === true || order_bump === 'true' || order_bump === 1 || order_bump === '1');
-    const hasOrderBumpQuadros = (selectedPlan === 'basico' || selectedPlan === 'completo') && 
+    const hasOrderBumpQuadros = (selectedPlan === 'basico' || selectedPlan === 'completo' || selectedPlan === 'fisica' || selectedPlan === 'digital_promo') && 
       (order_bump_quadros === true || order_bump_quadros === 'true' || order_bump_quadros === 1 || order_bump_quadros === '1');
 
     let amountCents = baseCents;
@@ -377,6 +396,13 @@ serve(async (req) => {
         fbp: tracking?.fbp || null,
         client_ip: clientIp || null,
         client_user_agent: clientUserAgent || null,
+        shipping_cep: shipping_cep || null,
+        shipping_street: shipping_street || null,
+        shipping_number: shipping_number || null,
+        shipping_complement: shipping_complement || null,
+        shipping_neighborhood: shipping_neighborhood || null,
+        shipping_city: shipping_city || null,
+        shipping_state: shipping_state || null,
       })
       .select()
       .single();
