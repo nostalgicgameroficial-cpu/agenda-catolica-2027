@@ -227,9 +227,13 @@
   <!-- End Meta Pixel + Rastreamento Avançado -->
 
   <!-- Fontes: Plus Jakarta Sans (Alta legibilidade editorial para Headlines) + Inter (Corpo) + Playfair Display (Detalhes) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Performance & Preload -->
+  <link rel="dns-prefetch" href="https://connect.facebook.net">
+  <link rel="dns-prefetch" href="https://api.pushinpay.com.br">
+  <link rel="preload" as="image" href="assets/agenda_hero_mockup_completo.webp" type="image/webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -2969,6 +2973,135 @@
       margin: 0 auto 16px;
       border: 3px solid #86efac;
     }
+  
+    /* BARRA VERMELHA FIXA DE URGÊNCIA COM CRONÔMETRO */
+    .checkout-urgent-bar.active { display: flex; }
+    .checkout-urgent-bar {
+      background: linear-gradient(90deg, #dc2626 0%, #b91c1c 100%);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      box-shadow: 0 2px 10px rgba(220, 38, 38, 0.35);
+    }
+
+    .checkout-urgent-bar .urgent-icon {
+      font-size: 1.1rem;
+      animation: urgentPulse 1.2s infinite ease-in-out;
+    }
+
+    .checkout-urgent-bar .urgent-msg {
+      line-height: 1.3;
+    }
+
+    .checkout-urgent-bar .urgent-timer {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: 'Inter', monospace;
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #fef08a;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    @keyframes urgentPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.22); }
+    }
+
+    @media (max-width: 640px) {
+      .checkout-urgent-bar {
+        font-size: 0.78rem;
+        padding: 8px 10px;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .checkout-urgent-bar .urgent-timer {
+        font-size: 0.88rem;
+        padding: 2px 6px;
+      }
+    }
+
+    /* CARD CALMO DE SEGURANÇA & AVISO (COR CALMA AZUL MARIANO) */
+    .pix-calm-card {
+      background: #f0f7ff;
+      border: 1.5px solid #bae6fd;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin: 14px 0 16px;
+      text-align: left;
+      box-shadow: 0 4px 16px rgba(12, 74, 110, 0.05);
+    }
+
+    .pix-calm-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .pix-calm-icon {
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .pix-calm-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #0369a1;
+    }
+
+    .pix-calm-desc {
+      font-size: 0.84rem;
+      color: #334155;
+      line-height: 1.48;
+      margin-bottom: 10px;
+    }
+
+    .pix-calm-desc strong {
+      color: #0f172a;
+    }
+
+    .pix-calm-desc em {
+      color: #64748b;
+      font-size: 0.8rem;
+    }
+
+    .pix-calm-warning-box {
+      background: #e0f2fe;
+      border-left: 3.5px solid #0284c7;
+      border-radius: 8px;
+      padding: 9px 12px;
+    }
+
+    .pix-calm-warn-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #075985;
+      font-size: 0.83rem;
+      font-weight: 800;
+      margin-bottom: 3px;
+    }
+
+    .pix-calm-warn-text {
+      font-size: 0.8rem;
+      color: #0c4a6e;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .pix-calm-warn-text strong {
+      color: #082f49;
+    }
+
   </style>
 </head>
 <body>
@@ -2994,7 +3127,7 @@
 
         <!-- 2. IMAGEM DA HERO ENTRE A HEADLINE E A SUBHEADLINE (MOBILE-FIRST) -->
         <div class="hero-mid-image">
-          <img src="assets/agenda_hero_mockup_completo.jpg" alt="Kit Completo Agenda Católica 2027 com Liturgia Diária, Calendários Litúrgicos e Marcadores Devocionais" width="666" height="618" fetchpriority="high">
+          <img src="assets/agenda_hero_mockup_completo.webp" alt="Kit Completo Agenda Católica 2027 com Liturgia Diária, Calendários Litúrgicos e Marcadores Devocionais" width="666" height="618" fetchpriority="high" decoding="async">
           <div class="hero-badge-float">
             <span>⭐</span>
             <span>Edição 2027 Completa</span>
@@ -3047,28 +3180,28 @@
             <!-- DEPOIMENTO 1 -->
             <div class="carousel-slide">
               <div class="slide-card">
-                <img src="assets/depoimento_whatsapp_1.png" alt="Depoimento WhatsApp Mariana Ferreira" width="414" height="820" loading="lazy">
+                <img src="assets/depoimento_whatsapp_1.webp" alt="Depoimento WhatsApp Mariana Ferreira" width="414" height="820" loading="lazy" decoding="async">
               </div>
             </div>
 
             <!-- DEPOIMENTO 2 -->
             <div class="carousel-slide">
               <div class="slide-card">
-                <img src="assets/depoimento_whatsapp_2.png" alt="Depoimento WhatsApp Gabriel" width="414" height="820" loading="lazy">
+                <img src="assets/depoimento_whatsapp_2.webp" alt="Depoimento WhatsApp Gabriel" width="414" height="820" loading="lazy" decoding="async">
               </div>
             </div>
 
             <!-- DEPOIMENTO 3 -->
             <div class="carousel-slide">
               <div class="slide-card">
-                <img src="assets/depoimento_whatsapp_3.png" alt="Depoimento WhatsApp Dona Teresa" width="414" height="820" loading="lazy">
+                <img src="assets/depoimento_whatsapp_3.webp" alt="Depoimento WhatsApp Dona Teresa" width="414" height="820" loading="lazy" decoding="async">
               </div>
             </div>
 
             <!-- DEPOIMENTO 4 -->
             <div class="carousel-slide">
               <div class="slide-card">
-                <img src="assets/depoimento_whatsapp_4.png" alt="Depoimento WhatsApp Fernanda" width="414" height="820" loading="lazy">
+                <img src="assets/depoimento_whatsapp_4.webp" alt="Depoimento WhatsApp Fernanda" width="414" height="820" loading="lazy" decoding="async">
               </div>
             </div>
 
@@ -3134,7 +3267,7 @@
 
       <div class="how-grid">
         <div class="how-media">
-          <img src="assets/como_usar_passo_a_passo.jpg" alt="Infográfico ilustrando os 4 passos de uso da agenda em PDF" width="520" height="693" loading="lazy">
+          <img src="assets/como_usar_passo_a_passo.webp" alt="Infográfico ilustrando os 4 passos de uso da agenda em PDF" width="520" height="693" loading="lazy" decoding="async">
         </div>
 
         <div class="steps-container">
@@ -3228,7 +3361,7 @@
     <div class="wrap">
       <div class="showcase-row">
         <div class="showcase-media">
-          <img src="assets/agenda_in_use.jpg" alt="Mulher escrevendo na agenda católica 2027 com bíblia, terço e café" width="540" height="540" loading="lazy">
+          <img src="assets/agenda_in_use.webp" alt="Mulher escrevendo na agenda católica 2027 com bíblia, terço e café" width="540" height="540" loading="lazy" decoding="async">
         </div>
         <div class="showcase-text">
           <span class="section-tag">MOMENTO DE ORAÇÃO</span>
@@ -3267,7 +3400,7 @@
 
       <div class="showcase-row reverse">
         <div class="showcase-media">
-          <img src="assets/preview_quaresma.png" alt="Página interna do Caminho Quaresmal 2027" width="540" height="660" loading="lazy" style="background:#fff; padding:10px;">
+          <img src="assets/preview_quaresma.webp" alt="Página interna do Caminho Quaresmal 2027" width="540" height="660" loading="lazy" style="background:#fff; padding:10px;" decoding="async">
         </div>
         <div class="showcase-text">
           <span class="section-tag">QUARESMA COM PROPÓSITO</span>
@@ -3316,7 +3449,7 @@
 
       <!-- MOCKUP BUNDLE CENTRAL (MAIS QUE UM CALENDÁRIO, UM GUIA PARA VIVER A FÉ) -->
       <div class="bonus-lead-hero">
-        <img src="assets/agenda_bonus_bundle_completo.jpg" alt="Kit completo Agenda Católica 2027 com Calendários Litúrgicos e os 5 Bônus Exclusivos" width="672" height="742" loading="lazy">
+        <img src="assets/agenda_bonus_bundle_completo.webp" alt="Kit completo Agenda Católica 2027 com Calendários Litúrgicos e os 5 Bônus Exclusivos" width="672" height="742" loading="lazy" decoding="async">
       </div>
 
       <!-- CARDS DE BÔNUS COM IMAGENS DEDICADAS -->
@@ -3325,7 +3458,7 @@
         <!-- BÔNUS 1 -->
         <div class="bonus-card">
           <div class="bonus-card-img">
-            <img src="assets/bonus5_marcadores.jpg" alt="Kit de 12 Marcadores de Páginas Católicos em leque" width="400" height="400" loading="lazy">
+            <img src="assets/bonus5_marcadores.webp" alt="Kit de 12 Marcadores de Páginas Católicos em leque" width="400" height="400" loading="lazy" decoding="async">
           </div>
           <span class="bonus-tag">BÔNUS 01</span>
           <h3>KIT 12 MARCADORES DE PÁGINAS CATÓLICOS</h3>
@@ -3339,7 +3472,7 @@
         <!-- BÔNUS 2 -->
         <div class="bonus-card">
           <div class="bonus-card-img">
-            <img src="assets/bonus2_viasacra.jpg" alt="Capa 3D do Guia da Via Sacra Ilustrada" width="400" height="400" loading="lazy">
+            <img src="assets/bonus2_viasacra.webp" alt="Capa 3D do Guia da Via Sacra Ilustrada" width="400" height="400" loading="lazy" decoding="async">
           </div>
           <span class="bonus-tag">BÔNUS 02</span>
           <h3>GUIA DA VIA SACRA ILUSTRADA</h3>
@@ -3353,7 +3486,7 @@
         <!-- BÔNUS 3 -->
         <div class="bonus-card">
           <div class="bonus-card-img">
-            <img src="assets/bonus3_calendario.jpg" alt="Pôster do Calendário Litúrgico de Parede 2027" width="400" height="400" loading="lazy">
+            <img src="assets/bonus3_calendario.webp" alt="Pôster do Calendário Litúrgico de Parede 2027" width="400" height="400" loading="lazy" decoding="async">
           </div>
           <span class="bonus-tag">BÔNUS 03</span>
           <h3>CALENDÁRIO LITÚRGICO DE PAREDE 2027</h3>
@@ -3367,7 +3500,7 @@
         <!-- BÔNUS 4 -->
         <div class="bonus-card">
           <div class="bonus-card-img">
-            <img src="assets/bonus4_leitura_biblia.jpg" alt="Capa 3D do Plano de Leitura da Bíblia em 1 Ano" width="400" height="400" loading="lazy">
+            <img src="assets/bonus4_leitura_biblia.webp" alt="Capa 3D do Plano de Leitura da Bíblia em 1 Ano" width="400" height="400" loading="lazy" decoding="async">
           </div>
           <span class="bonus-tag">BÔNUS 04</span>
           <h3>PLANO DE LEITURA DA BÍBLIA EM 1 ANO</h3>
@@ -3381,7 +3514,7 @@
         <!-- BÔNUS 5 -->
         <div class="bonus-card">
           <div class="bonus-card-img">
-            <img src="assets/bonus1_novenas.jpg" alt="Capa 3D do Caderno de Novenas e Orações Poderosas" width="400" height="400" loading="lazy">
+            <img src="assets/bonus1_novenas.webp" alt="Capa 3D do Caderno de Novenas e Orações Poderosas" width="400" height="400" loading="lazy" decoding="async">
           </div>
           <span class="bonus-tag">BÔNUS 05</span>
           <h3>CADERNO DE NOVENAS & ORAÇÕES PODEROSAS</h3>
@@ -3515,7 +3648,7 @@
     <div class="wrap">
       <div class="guarantee-box">
         <div class="guarantee-seal">
-          <img src="assets/selo_garantia_15_dias.png" alt="Selo dourado de Garantia Incondicional de 15 Dias" width="180" height="120" loading="lazy">
+          <img src="assets/selo_garantia_15_dias.webp" alt="Selo dourado de Garantia Incondicional de 15 Dias" width="180" height="120" loading="lazy" decoding="async">
         </div>
         <div class="guarantee-text">
           <div style="display: flex; justify-content: inherit;">
@@ -3656,6 +3789,13 @@
        =================================================== -->
   <div class="checkout-modal" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
     <div class="checkout-dialog">
+      <!-- BARRA VERMELHA FIXA DE URGÊNCIA COM CRONÔMETRO -->
+      <div class="checkout-urgent-bar" id="checkout-urgent-bar" style="display: none;">
+        <span class="urgent-icon">⚡</span>
+        <span class="urgent-msg">Seu material já está separado! Pague agora e receba um <strong>bônus exclusivo</strong>:</span>
+        <span class="urgent-timer" id="checkout-timer">05:00</span>
+      </div>
+
       
       <!-- HEADER DO CHECKOUT -->
       <div class="checkout-header">
@@ -3668,7 +3808,7 @@
 
       <!-- BANNER DE PAGAMENTO SEGURO E RECEBIMENTO IMEDIATO -->
       <div class="checkout-banner-wrap">
-        <img src="assets/checkout_banner.png" alt="Pagamento Seguro - Recebimento Imediato via Email e WhatsApp" width="1040" height="380" loading="eager">
+        <img src="assets/checkout_banner.webp" alt="Pagamento Seguro - Recebimento Imediato via Email e WhatsApp" width="1040" height="380" loading="lazy" decoding="async">
       </div>
 
       <div class="checkout-body">
@@ -3770,7 +3910,7 @@
                 </div>
               </div>
               <div class="order-bump-content-row">
-                <img src="assets/order_bump_historias_santos.png" alt="Caderno de Colorir e Histórias dos Santos para Crianças" class="order-bump-img" width="160" height="90" loading="lazy">
+                <img src="assets/order_bump_historias_santos.webp" alt="Caderno de Colorir e Histórias dos Santos para Crianças" class="order-bump-img" width="160" height="90" loading="lazy" decoding="async">
                 <ul class="order-bump-bullets">
                   <li><span>✅</span> <span><strong>Mais de 50 páginas</strong> de desenhos e histórias dos santos</span></li>
                   <li><span>🎨</span> <span>Atividade criativa para <strong>colorir e se divertir</strong></span></li>
@@ -3793,7 +3933,7 @@
                 </div>
               </div>
               <div class="order-bump-content-row">
-                <img src="assets/order_bump_quadros_sacros.jpg" alt="90 Quadros Sacros em Alta Definição" class="order-bump-img bump-quadros-img" width="160" height="90" loading="lazy">
+                <img src="assets/order_bump_quadros_sacros.webp" alt="90 Quadros Sacros em Alta Definição" class="order-bump-img bump-quadros-img" width="160" height="90" loading="lazy" decoding="async">
                 <ul class="order-bump-bullets">
                   <li><span>🖼️</span> <span><strong>90 Obras Sacras em 300 DPI:</strong> Sagrado Coração, N. Sra. Aparecida, Santos e Arcanjos</span></li>
                   <li><span>🖨️</span> <span><strong>Prontos para Imprimir:</strong> perfeitos para quadros, altar pessoal ou presentear</span></li>
@@ -3831,25 +3971,40 @@
           </p>
 
           <div class="pix-qr-container">
-            <img id="pix-qr-image" src="" alt="QR Code PIX">
+            <img id="pix-qr-image" src="" alt="QR Code PIX" decoding="async" loading="lazy">
           </div>
 
           <div class="pix-copy-box">
-            <input type="text" class="pix-code-input" id="pix-copy-paste" readonly>
+            <!-- Campo oculto para garantir cópia de 100% dos caracteres sem risco de seleção manual incorreta -->
+            <input type="text" id="pix-copy-paste" readonly style="position:absolute; left:-9999px; opacity:0; pointer-events:none;" aria-hidden="true">
             <button type="button" class="btn-copy-pix" id="btn-copy-pix">
-              <span>📋 COPIAR CÓDIGO PIX COPIA E COLA</span>
+              <span>📋 COPIAR CÓDIGO PIX COMPLETO</span>
             </button>
-            <div id="copy-feedback" style="display:none; color: #15803d; font-size: 0.84rem; font-weight: 800; margin-top: 6px;">
-              ✓ Código PIX copiado com sucesso! Abra o app do seu banco e cole na opção Pix Copia e Cola.
+            <div id="copy-feedback" style="display:none; color: #15803d; font-size: 0.88rem; font-weight: 800; margin-top: 8px; text-align: center; background: #dcfce7; border: 1.5px solid #86efac; border-radius: 10px; padding: 10px 12px;">
+              ✓ CÓDIGO PIX COPIADO COM SUCESSO!<br>
+              <span style="font-size: 0.8rem; font-weight: 600; color: #166534;">Abra o aplicativo do seu banco e cole na opção "Pix Copia e Cola".</span>
             </div>
           </div>
 
-          <!-- ALERTA IMPORTANTE: NÃO FECHE ESTA PÁGINA -->
-          <div class="pix-dont-close-alert">
-            <span class="alert-icon">⚠️</span>
-            <div class="alert-text">
-              <strong>ATENÇÃO: NÃO FECHE OU ATUALIZE ESTA PÁGINA!</strong>
-              Após concluir o pagamento no seu banco, <strong>retorne imediatamente a esta tela</strong>. O sistema reconhecerá seu PIX e liberará seu download aqui em instantes.
+          <!-- CARD CALMO DE SEGURANÇA & AVISO (COMPRA PROTEGIDA & SPAM) -->
+          <div class="pix-calm-card">
+            <div class="pix-calm-header">
+              <span class="pix-calm-icon">🛡️</span>
+              <span class="pix-calm-title">Compra Protegida & Entrega Imediata</span>
+            </div>
+            
+            <p class="pix-calm-desc">
+              Fique tranquilo: seu acesso é enviado direto para o seu <strong>WhatsApp e E-mail</strong> <em>(verifique sempre a caixa de <strong>Spam ou Lixeira Eletrônica</strong> do e-mail)</em>.
+            </p>
+
+            <div class="pix-calm-warning-box">
+              <div class="pix-calm-warn-title">
+                <span>⚠️</span>
+                <strong>IMPORTANTE: MANTENHA ESTA PÁGINA ABERTA!</strong>
+              </div>
+              <p class="pix-calm-warn-text">
+                Após confirmar a transferência no aplicativo do seu banco, <strong>retorne a esta tela</strong>. O reconhecimento é automático e o botão de download aparecerá aqui em instantes.
+              </p>
             </div>
           </div>
 
@@ -3862,7 +4017,7 @@
             <ul class="pix-steps-list">
               <li>
                 <span class="pix-step-num">1</span>
-                <span>Clique no botão azul acima <strong>"Copiar Código Pix Copia e Cola"</strong> (ou aponte a câmera para o QR Code).</span>
+                <span>Clique no botão azul acima <strong>"Copiar Código Pix Completo"</strong> (ou aponte a câmera para o QR Code).</span>
               </li>
               <li>
                 <span class="pix-step-num">2</span>
@@ -3935,7 +4090,7 @@
         </p>
 
         <div class="modal-offer-img-box">
-          <img src="assets/order_bump_quadros_sacros.jpg" alt="90 Quadros Sacros Prontos para Imprimir">
+          <img src="assets/order_bump_quadros_sacros.webp" alt="90 Quadros Sacros Prontos para Imprimir" decoding="async" loading="lazy">
         </div>
 
         <ul class="modal-offer-bullets">
@@ -4218,6 +4373,7 @@
         // Reseta telas
         stepForm.style.display = 'block';
         stepPix.classList.remove('active');
+        if (typeof stopCheckoutTimer === 'function') stopCheckoutTimer();
         stepSuccess.classList.remove('active');
         checkoutFormError.style.display = 'none';
         btnGeneratePix.disabled = false;
@@ -4230,6 +4386,7 @@
       function closeCheckoutModal() {
         if (!checkoutModal) return;
         checkoutModal.classList.remove('active');
+        if (typeof stopCheckoutTimer === 'function') stopCheckoutTimer();
         document.body.style.overflow = '';
         if (pixPollingInterval) {
           clearInterval(pixPollingInterval);
@@ -4248,6 +4405,42 @@
       }
 
       // Copiar código PIX
+      // ─── CRONÔMETRO DE 5 MINUTOS NO CHECKOUT (ATIVADO APENAS APÓS GERAR O PIX) ───
+      var checkoutUrgentBar = document.getElementById('checkout-urgent-bar');
+      var checkoutTimerEl = document.getElementById('checkout-timer');
+      var checkoutTimerInterval = null;
+
+      function startCheckoutTimer(seconds) {
+        if (checkoutTimerInterval) clearInterval(checkoutTimerInterval);
+        var remaining = seconds || (5 * 60);
+        function render() {
+          if (!checkoutTimerEl) return;
+          var m = Math.floor(remaining / 60);
+          var s = remaining % 60;
+          checkoutTimerEl.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+          if (remaining <= 0) {
+            checkoutTimerEl.textContent = '00:00';
+            clearInterval(checkoutTimerInterval);
+          } else {
+            remaining--;
+          }
+        }
+        render();
+        checkoutTimerInterval = setInterval(render, 1000);
+      }
+
+      function stopCheckoutTimer() {
+        if (checkoutTimerInterval) {
+          clearInterval(checkoutTimerInterval);
+          checkoutTimerInterval = null;
+        }
+        if (checkoutUrgentBar) {
+          checkoutUrgentBar.classList.remove('active');
+          checkoutUrgentBar.style.display = 'none';
+        }
+      }
+
+      // Copiar código PIX 100% íntegro com feedback tátil no botão
       if (btnCopyPix && pixCopyPaste) {
         btnCopyPix.addEventListener('click', function() {
           pixCopyPaste.select();
@@ -4257,10 +4450,17 @@
           } else {
             document.execCommand('copy');
           }
-          if (copyFeedback) {
-            copyFeedback.style.display = 'block';
-            setTimeout(function() { copyFeedback.style.display = 'none'; }, 5000);
-          }
+          btnCopyPix.style.background = '#15803d';
+          btnCopyPix.style.borderColor = '#22c55e';
+          btnCopyPix.innerHTML = '<span>✓ CÓDIGO PIX COPIADO! COLE NO SEU BANCO</span>';
+          if (copyFeedback) copyFeedback.style.display = 'block';
+
+          setTimeout(function() {
+            btnCopyPix.style.background = '';
+            btnCopyPix.style.borderColor = '';
+            btnCopyPix.innerHTML = '<span>📋 COPIAR CÓDIGO PIX COMPLETO</span>';
+            if (copyFeedback) copyFeedback.style.display = 'none';
+          }, 4500);
         });
       }
 
@@ -4311,6 +4511,7 @@
 
         // 2. Transiciona para tela de sucesso e redireciona para o upsell
         stepPix.classList.remove('active');
+        if (typeof stopCheckoutTimer === 'function') stopCheckoutTimer();
         stepSuccess.classList.add('active');
 
         var custName = (inputName && inputName.value.trim()) || currentCustomerName || localStorage.getItem('agenda_customer_name') || '';
@@ -4543,6 +4744,11 @@
           
           stepForm.style.display = 'none';
           stepPix.classList.add('active');
+          if (checkoutUrgentBar) {
+            checkoutUrgentBar.style.display = 'flex';
+            checkoutUrgentBar.classList.add('active');
+          }
+          startCheckoutTimer(5 * 60);
           if (checkoutModal) {
             checkoutModal.scrollTop = 0;
           }
