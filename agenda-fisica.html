@@ -226,10 +226,10 @@
   /></noscript>
   <!-- End Meta Pixel + Rastreamento Avançado -->
 
-  <!-- Fontes: Playfair Display (Serifa editorial nobre para Headlines) + Inter / Plus Jakarta Sans (Alta legibilidade para leitura) -->
+  <!-- Fontes: Plus Jakarta Sans (Alta legibilidade editorial para Headlines) + Inter (Corpo) + Playfair Display (Detalhes) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -482,71 +482,102 @@
 
     .btn-subtext {
       display: block;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       font-weight: 600;
-      color: #9cb2d4;
-      margin-top: 8px;
+      color: #475569;
+      margin-top: 10px;
       text-align: center;
     }
 
-    /* HERO SECTION: MOBILE-FIRST COM FUNDO CREME / MARFIM SACRO NOBRE */
+    /* HERO SECTION: LUMINOSA, SACRAL E DE MÁXIMA LEGIBILIDADE (PSICOLOGIA DAS CORES) */
     .hero {
-      background: linear-gradient(180deg, #fbf7ee 0%, #f4ede0 50%, #eee3cf 100%);
-      color: var(--ink-primary);
-      padding: 38px 0 55px;
+      background: radial-gradient(ellipse at 50% 0%, #ffffff 0%, #fbfcfe 45%, #f1f5f9 100%);
+      color: #0f172a;
+      padding: 42px 0 54px;
       position: relative;
-      border-bottom: 3px solid var(--gold-500);
+      border-bottom: 2px solid #e2e8f0;
       text-align: center;
+      overflow: hidden;
+    }
+
+    /* Suave halo de iluminação celestial no fundo que não compete com a leitura */
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 720px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(30, 64, 175, 0.04) 50%, transparent 75%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero .wrap {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-pill-badge {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      background: #fdf5df;
-      border: 1.5px solid #dfae47;
-      color: #785208;
+      gap: 8px;
+      background: #ffffff;
+      border: 1.5px solid #d4af37;
+      color: #0f2b5c;
       font-size: 0.88rem;
       font-weight: 700;
-      padding: 6px 18px;
+      padding: 7px 20px;
       border-radius: var(--radius-full);
       margin-bottom: 22px;
-      box-shadow: 0 2px 8px rgba(201, 152, 52, 0.12);
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06), 0 0 10px rgba(212, 175, 55, 0.15);
+      letter-spacing: 0.01em;
     }
 
     .hero-content h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      color: #1a1612;
-      margin-bottom: 18px;
+      font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #0c1930;
+      margin-bottom: 20px;
       font-weight: 800;
-      font-size: 2.35rem;
-      line-height: 1.22;
-      letter-spacing: -0.015em;
+      font-size: 2.25rem;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
       text-transform: none;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     @media (min-width: 768px) {
       .hero-content h1 {
         font-size: 3.1rem;
+        line-height: 1.22;
       }
     }
 
-    .hero-content h1 em {
-      color: #922026;
+    /* Destaque Sagrado: Azul Mariano Real Intenso (Contraste 8.5:1 com fundo branco - WCAG AAA) */
+    .hero-content h1 .gold-word {
+      color: #1e40af;
       font-style: normal;
-      background: linear-gradient(135deg, #a82025 0%, #85161b 100%);
+      font-weight: 850;
+      background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #0f2b5c 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      display: inline;
     }
 
-    .hero-content h1 .gold-word {
-      color: #c99834;
+    /* Destaque Emocional: Vinho / Bordeaux Litúrgico Nobre (Paixão, Eucaristia e Bênção) */
+    .hero-content h1 em {
+      color: #991b1b;
       font-style: normal;
-      background: linear-gradient(135deg, #dfae47 0%, #b8861f 100%);
+      font-weight: 850;
+      background: linear-gradient(135deg, #b91c1c 0%, #881337 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      display: inline;
     }
 
     /* IMAGEM NO MEIO (ENTRE HEADLINE E SUBHEADLINE) - MOCKUP COMPLETO DO BUNDLE */
@@ -561,8 +592,8 @@
       width: 100%;
       height: auto;
       border-radius: 18px;
-      box-shadow: 0 16px 40px rgba(78, 52, 21, 0.16), 0 0 25px rgba(201, 152, 52, 0.2);
-      border: 3px solid rgba(201, 152, 52, 0.45);
+      box-shadow: 0 16px 40px rgba(12, 24, 48, 0.12), 0 0 25px rgba(212, 175, 55, 0.18);
+      border: 3px solid rgba(212, 175, 55, 0.55);
     }
 
     .hero-badge-float {
@@ -587,18 +618,25 @@
     }
 
     .hero-lead {
-      font-size: 1.1rem;
-      line-height: 1.65;
-      color: #423b32;
-      margin: 14px auto 24px;
-      max-width: 660px;
-      font-weight: 500;
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 1.12rem;
+      line-height: 1.7;
+      color: #334155;
+      margin: 16px auto 26px;
+      max-width: 680px;
+      font-weight: 450;
       text-align: center;
       display: block;
     }
 
+    .hero-lead strong {
+      color: #0c1930;
+      font-weight: 700;
+    }
+
     .hero-checklist {
       list-style: none;
+      margin-top: 10px;
       margin-bottom: 28px;
       display: inline-block;
       text-align: left;
@@ -606,8 +644,8 @@
 
     .hero-checklist li {
       position: relative;
-      padding: 6px 0 6px 30px;
-      color: #3b352e;
+      padding: 7px 0 7px 32px;
+      color: #334155;
       font-size: 0.98rem;
       font-weight: 500;
       line-height: 1.45;
@@ -615,25 +653,25 @@
 
     .hero-checklist li strong {
       font-weight: 700;
-      color: #1a1612;
+      color: #0c1930;
     }
 
     .hero-checklist li::before {
       content: "✓";
       position: absolute;
       left: 0;
-      top: 5px;
+      top: 6px;
       width: 22px;
       height: 22px;
-      background: var(--gold-gradient);
-      color: #1a1202;
+      background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+      color: #ffffff;
       border-radius: 50%;
       font-size: 0.78rem;
       font-weight: 900;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      box-shadow: 0 2px 6px rgba(22, 101, 52, 0.25);
     }
 
     .hero-cta-group {
