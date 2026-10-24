@@ -1411,6 +1411,7 @@
           <select id="wa-script-select" class="form-input" onchange="updateWhatsAppMessage()">
             <option value="cobranca">🟡 Cobrança Amigável de PIX Pendente</option>
             <option value="boasvindas">🟢 Boas-vindas e Confirmação de Acesso</option>
+            <option value="rastreio">📦 Código de Rastreamento (Envio da Agenda Física)</option>
             <option value="oferta">🎁 Oferta de Bônus / Remarketing</option>
           </select>
         </div>
@@ -2384,16 +2385,31 @@
       if (!selectedOrder) return;
       const scriptType = document.getElementById('wa-script-select').value;
       const firstName = (selectedOrder.customer_name || '').split(' ')[0] || 'Irmão(ã)';
-      const isCompleto = selectedOrder.plan === 'completo';
+      const isFisica = selectedOrder.plan === 'fisica';
+      const isCompleto = selectedOrder.plan === 'completo' || isFisica;
       const driveLink = isCompleto
         ? 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing'
         : 'https://drive.google.com/drive/folders/1vstC1uvFR11TZIg5zXpILGT-khchTjJp?usp=sharing';
       
+      const fullAddress = selectedOrder.shipping_street
+        ? `${selectedOrder.shipping_street}, ${selectedOrder.shipping_number || 'S/N'}${selectedOrder.shipping_complement ? ' (' + selectedOrder.shipping_complement + ')' : ''} - ${selectedOrder.shipping_neighborhood || ''}, ${selectedOrder.shipping_city || ''}/${selectedOrder.shipping_state || ''} - CEP: ${selectedOrder.shipping_cep || ''}`
+        : '';
+
       let msg = '';
-      if (scriptType === 'cobranca') {
-        msg = `Olá, ${firstName}! Tudo bem? Paz e bem! 🙏\n\nVi aqui que você iniciou o pedido da Agenda Católica 2027, mas o pagamento do PIX ainda não foi concluído.\n\nQuer que eu envie novamente o código PIX por aqui para você concluir rapidinho pelo seu banco e já receber os arquivos? Estou à disposição! ✨`;
+      if (scriptType === 'rastreio') {
+        msg = `Olá, ${firstName}! Paz e bem! 🙏📦\n\nSua *Agenda Católica 2027 Física (Edição Impressa)* foi despachada com muito carinho para o seu endereço:\n📍 ${fullAddress || 'Endereço cadastrado'}\n\nCódigo de rastreamento: *[COLE_AQUI_O_CÓDIGO]*\nVocê pode acompanhar pelo site dos Correios ou transportadora.\n\nQualquer dúvida estou à disposição! Deus abençoe seu dia! ✨`;
+      } else if (scriptType === 'cobranca') {
+        if (isFisica) {
+          msg = `Olá, ${firstName}! Tudo bem? Paz e bem! 🙏\n\nVi aqui que você iniciou o pedido da *Agenda Católica 2027 Física (Edição Impressa)*, mas o pagamento do PIX ainda não foi confirmado.\n\nQuer que eu reenvie a chave PIX por aqui para garantirmos a impressão e o envio da sua agenda para o seu endereço? Estou à disposição! ✨`;
+        } else {
+          msg = `Olá, ${firstName}! Tudo bem? Paz e bem! 🙏\n\nVi aqui que você iniciou o pedido da Agenda Católica 2027, mas o pagamento do PIX ainda não foi concluído.\n\nQuer que eu envie novamente o código PIX por aqui para você concluir rapidinho pelo seu banco e já receber os arquivos? Estou à disposição! ✨`;
+        }
       } else if (scriptType === 'boasvindas') {
-        msg = `Olá, ${firstName}! Paz e bem! 🙏✨\n\nConfirmamos seu pagamento da Agenda Católica 2027 com sucesso!\n\nSeus arquivos já estão disponíveis para download no Google Drive:\n🔗 ${driveLink}\n\nTambém enviamos para o seu e-mail (${selectedOrder.customer_email}). Qualquer dúvida que tiver, pode me chamar por aqui. Deus abençoe seu 2027!`;
+        if (isFisica) {
+          msg = `Olá, ${firstName}! Paz e bem! 🙏✨\n\nConfirmamos com sucesso o pagamento da sua *Agenda Católica 2027 Física (Edição Impressa)*!\n\n📦 *Endereço de envio:* ${fullAddress || 'Registrado com sucesso'}\n\nSua agenda já está em processo de preparação para postagem! Assim que for enviada, mandaremos o código de rastreamento por aqui.\n\n🎁 *Acesso digital imediato:* Enquanto a sua agenda impressa está a caminho, você já tem acesso liberado a todos os arquivos e bônus no Google Drive:\n🔗 ${driveLink}\n\nQue Deus e Nossa Senhora abençoem o seu lar!`;
+        } else {
+          msg = `Olá, ${firstName}! Paz e bem! 🙏✨\n\nConfirmamos seu pagamento da Agenda Católica 2027 com sucesso!\n\nSeus arquivos já estão disponíveis para download no Google Drive:\n🔗 ${driveLink}\n\nTambém enviamos para o seu e-mail (${selectedOrder.customer_email}). Qualquer dúvida que tiver, pode me chamar por aqui. Deus abençoe seu 2027!`;
+        }
       } else {
         msg = `Olá, ${firstName}! Passando para compartilhar uma bênção com você: liberamos uma condição especial de upgrade da Agenda Católica 2027 com todos os 5 bônus exclusivos. Se tiver interesse em conhecer, me avise por aqui! 🙏`;
       }

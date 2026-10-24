@@ -1,0 +1,16 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/agenda-fisica", "destination": "/agenda-fisica.html" },
+    { "source": "/agenda%20fisica", "destination": "/agenda-fisica.html" },
+    { "source": "/agenda fisica", "destination": "/agenda-fisica.html" },
+    { "source": "/agenda_fisica", "destination": "/agenda-fisica.html" },
+    { "source": "/agendafisica", "destination": "/agenda-fisica.html" },
+    { "source": "/fisica", "destination": "/agenda-fisica.html" },
+    { "source": "/sucesso", "destination": "/sucesso.html" },
+    { "source": "/upsell", "destination": "/upsell.html" },
+    { "source": "/downsell", "destination": "/downsell.html" },
+    { "source": "/painel", "destination": "/painel.html" }
+  ]
+}
