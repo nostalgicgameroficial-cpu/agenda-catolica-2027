@@ -7,6 +7,163 @@
   <meta name="description" content="Agenda Católica 2027 em PDF com Liturgia Diária completa, Caminho Quaresmal e 5 Bônus Devocionais exclusivos. Pronta para imprimir ou usar no tablet/celular.">
   <meta name="facebook-domain-verification" content="3qnjbbunfxbuv0akbaodi4rwws60fa" />
 
+  <!-- TRACK GO - Smart Tracking & Meta Conversions Engine -->
+  <script>
+  (function() {
+    'use strict';
+    var PRODUCT_NAME = "Meu Produto Principal";
+    var PIXEL_ID = "1133049763020624";
+    var ENDPOINT = "https://ucsccgihiomuwgqngept.supabase.co/functions/v1/webhook-tracking";
+    var EMBED_PIXEL = true;
+
+    // 1. Utilitários de Cookies
+    function getCookie(n) {
+      var m = document.cookie.match(new RegExp('(^|;\\s*)' + n + '=([^;]+)'));
+      return m ? decodeURIComponent(m[2]) : null;
+    }
+    function setCookie(n, v, d) {
+      var t = new Date(); t.setTime(t.getTime() + (d * 864e5));
+      document.cookie = n + '=' + encodeURIComponent(v) + ';path=/;expires=' + t.toUTCString() + ';SameSite=Lax';
+    }
+
+    // 2. Captura e Persistência de UTMs e ClickID (90 dias)
+    var params = new URLSearchParams(window.location.search);
+    var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src', 'sck', 'fbclid', 'gclid'];
+    var data = {};
+
+    utmKeys.forEach(function(k) {
+      var val = params.get(k);
+      if (val) {
+        data[k] = val;
+        try { localStorage.setItem('tg_' + k, val); } catch(e) {}
+        setCookie('tg_' + k, val, 90);
+      } else {
+        var saved = null;
+        try { saved = localStorage.getItem('tg_' + k); } catch(e) {}
+        if (!saved) saved = getCookie('tg_' + k);
+        if (saved) data[k] = saved;
+      }
+    });
+
+    // 3. Formatação Oficial dos Cookies Meta (_fbc e _fbp)
+    var now = Date.now();
+    if (!getCookie('_fbp')) {
+      var fbpVal = 'fb.1.' + now + '.' + Math.floor(Math.random() * 8999999999 + 1000000000);
+      setCookie('_fbp', fbpVal, 90);
+      data.fbp = fbpVal;
+    } else {
+      data.fbp = getCookie('_fbp');
+    }
+
+    if (data.fbclid) {
+      var fbcVal = 'fb.1.' + now + '.' + data.fbclid;
+      setCookie('_fbc', fbcVal, 90);
+      data.fbc = fbcVal;
+    } else if (getCookie('_fbc')) {
+      data.fbc = getCookie('_fbc');
+    }
+
+    // 4. Meta Pixel Integrado (All-in-One)
+    if (EMBED_PIXEL && PIXEL_ID) {
+      if (!window.fbq) {
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+        (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        window.fbq('init', PIXEL_ID);
+      }
+      if (!window.__trackgo_fired) {
+        window.fbq('track', 'PageView');
+        window.__trackgo_fired = true;
+      }
+    }
+
+    // 5. Decoração Automática de Links de Checkout
+    var DOMAINS = ['kiwify.com.br', 'payt.com.br', 'lastlink.com', 'hotmart.com', 'perfectpay.com.br', 'eduzz.com', 'braip.com', 'kirvano.com', 'greenn.com.br', 'monetizze.com.br', 'cartpanda.com', 'yampi.com.br', 'shopify.com'];
+    function isCheckout(url) {
+      for (var i = 0; i < DOMAINS.length; i++) { if (url.indexOf(DOMAINS[i]) !== -1) return true; }
+      return false;
+    }
+
+    function decorate(urlStr) {
+      try {
+        var u = new URL(urlStr, window.location.href);
+        if (!isCheckout(u.hostname) && !isCheckout(u.href)) return urlStr;
+        utmKeys.forEach(function(k) { if (data[k] && !u.searchParams.has(k)) u.searchParams.set(k, data[k]); });
+        if (!u.searchParams.has('src') && (data.utm_campaign || data.utm_content)) {
+          var srcParts = [];
+          if (data.utm_campaign) srcParts.push(data.utm_campaign);
+          if (data.utm_content) srcParts.push(data.utm_content);
+          if (data.fbclid) srcParts.push(data.fbclid);
+          u.searchParams.set('src', srcParts.join('|'));
+        }
+        if (!u.searchParams.has('sck') && (data.utm_campaign || data.utm_content)) {
+          u.searchParams.set('sck', (data.utm_campaign || '') + '|' + (data.utm_content || ''));
+        }
+        if (data.fbc && !u.searchParams.has('fbc')) u.searchParams.set('fbc', data.fbc);
+        if (data.fbp && !u.searchParams.has('fbp')) u.searchParams.set('fbp', data.fbp);
+        return u.toString();
+      } catch(e) { return urlStr; }
+    }
+
+    function updateLinks() {
+      var links = document.querySelectorAll('a[href]');
+      for (var i = 0; i < links.length; i++) {
+        var h = links[i].getAttribute('href');
+        if (h && (h.indexOf('http') === 0 || h.indexOf('//') === 0)) {
+          var dec = decorate(h);
+          if (dec !== h) links[i].setAttribute('href', dec);
+        }
+      }
+    }
+
+    document.addEventListener('click', function(e) {
+      var t = e.target;
+      while (t && t !== document.body) {
+        if (t.tagName === 'A' && t.href && isCheckout(t.href)) {
+          t.href = decorate(t.href);
+          if (window.fbq && typeof window.fbq === 'function') {
+            window.fbq('track', 'InitiateCheckout', { content_name: PRODUCT_NAME, currency: 'BRL' });
+          }
+          sendPing('initiate_checkout', t.href);
+          break;
+        }
+        t = t.parentElement;
+      }
+    }, true);
+
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', updateLinks); } else { updateLinks(); }
+    setInterval(updateLinks, 1500);
+
+    // 6. Ping de Ativação ao Track Go
+    function sendPing(ev, tgt) {
+      try {
+        var payload = {
+          action: ev || 'pageview',
+          product_name: PRODUCT_NAME,
+          page_url: window.location.href,
+          target_url: tgt || '',
+          pixel_id: PIXEL_ID,
+          utm_source: data.utm_source || '',
+          utm_campaign: data.utm_campaign || '',
+          utm_content: data.utm_content || '',
+          fbc: data.fbc || '',
+          fbp: data.fbp || '',
+          fbclid: data.fbclid || ''
+        };
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(ENDPOINT + '?action=' + (ev || 'pageview'), new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+        } else {
+          fetch(ENDPOINT + '?action=' + (ev || 'pageview'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true });
+        }
+      } catch(e) {}
+    }
+    sendPing('pageview');
+    window.sendTrackGoPing = sendPing;
+  })();
+  </script>
+
   <!-- =============================================
        META PIXEL + RASTREAMENTO AVANÇADO
        - Captura fbclid da URL e armazena cookie _fbc
@@ -4509,6 +4666,11 @@
           }, true, purchaseEventId);
         }
 
+        // 1.1 Dispara Ping de Purchase no Track Go
+        if (typeof window.sendTrackGoPing === 'function') {
+          window.sendTrackGoPing('purchase', window.location.href);
+        }
+
         // 2. Transiciona para tela de sucesso e redireciona para o upsell
         stepPix.classList.remove('active');
         if (typeof stopCheckoutTimer === 'function') stopCheckoutTimer();
@@ -4686,6 +4848,11 @@
             currency: 'BRL',
             num_items: numItems
           }, true, checkoutEventId);
+        }
+
+        // Dispara Ping de InitiateCheckout no Track Go
+        if (typeof window.sendTrackGoPing === 'function') {
+          window.sendTrackGoPing('initiate_checkout', window.location.href);
         }
 
         // Chamada à Edge Function segura (O servidor gera o PIX e envia CAPI com o mesmo checkoutEventId)
