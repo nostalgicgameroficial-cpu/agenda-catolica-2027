@@ -97,10 +97,14 @@ async function sendMetaEvent(payload: any) {
       body: JSON.stringify(requestBody),
     });
     const result = await response.json();
-    return { success: response.ok, data: result };
+    console.log(`[Meta CAPI CheckPix] Evento ${eventName} (ID: ${eventId}) enviado: status=${response.status}, ok=${response.ok}`, result);
+    if (!response.ok) {
+      console.error(`[Meta CAPI CheckPix] Erro retornado pela Meta para ${eventName}:`, result);
+    }
+    return { success: response.ok, status: response.status, data: result };
   } catch (err) {
-    console.error('[Meta CAPI] Erro ao disparar evento:', err);
-    return { success: false, error: err };
+    console.error('[Meta CAPI CheckPix] Erro ao disparar evento:', err);
+    return { success: false, error: String(err) };
   }
 }
 
@@ -367,63 +371,81 @@ serve(async (req: Request) => {
               }
             }
 
-            // Dispara Purchase na Meta Conversions API (CAPI)
-            try {
-              const purchaseEventId = `purchase_${order.id}`;
-              const hasOrderBump = !!order.order_bump;
-              const hasOrderBumpQuadros = !!order.order_bump_quadros;
-              const isUpsell = order.plan === 'upsell';
-              const isDownsell = order.plan === 'downsell';
-              const baseAmount = order.plan === 'basico' ? 19.90 : (isUpsell ? 67.90 : (isDownsell ? 29.90 : 27.90));
-              const amount = order.amount_cents ? (order.amount_cents / 100) : (baseAmount + (hasOrderBump ? 7.90 : 0) + (hasOrderBumpQuadros ? 7.50 : 0));
+            // Dispara Purchase na Meta Conversions API (CAPI) com deduplicação
+            if (!order.meta_purchase_sent) {
+              try {
+                const purchaseEventId = `purchase_${order.id}`;
+                const hasOrderBump = !!order.order_bump;
+                const hasOrderBumpQuadros = !!order.order_bump_quadros;
+                const isUpsell = order.plan === 'upsell';
+                const isDownsell = order.plan === 'downsell';
+                const baseAmount = order.plan === 'basico' ? 19.90 : (isUpsell ? 67.90 : (isDownsell ? 29.90 : 27.90));
+                const amount = order.amount_cents ? (order.amount_cents / 100) : (baseAmount + (hasOrderBump ? 7.90 : 0) + (hasOrderBumpQuadros ? 7.50 : 0));
 
-              let contentIds = [order.plan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'];
-              let contentName = order.plan === 'completo' ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
+                let contentIds = [order.plan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'];
+                let contentName = order.plan === 'completo' ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
 
-              if (isUpsell) {
-                contentIds = ['quadros-sacros-150'];
-                contentName = 'Mega Coleção 150 Quadros Sacros em Alta Definição';
-              } else if (isDownsell) {
-                contentIds = ['quadros-sacros-50'];
-                contentName = 'Seleção 50 Quadros Sacros em Alta Definição';
-              }
-              if (hasOrderBump) {
-                contentIds.push('caderno-colorir-santos');
-                contentName += ' + 50 Histórias dos Santos para Colorir';
-              }
-              if (hasOrderBumpQuadros) {
-                contentIds.push('quadros-sacros-90');
-                contentName += ' + 90 Quadros Sacros em Alta Definição';
-              }
-
-              const finalFbc = order.fbc || (order.fbclid ? `fb.1.${new Date(order.created_at || Date.now()).getTime()}.${order.fbclid}` : undefined);
-
-              sendMetaEvent({
-                eventName: 'Purchase',
-                eventId: purchaseEventId,
-                eventSourceUrl: 'https://agendanossasenhora.online',
-                userData: {
-                  email: order.customer_email,
-                  phone: order.customer_phone,
-                  name: order.customer_name,
-                  clientIp: order.client_ip || undefined,
-                  clientUserAgent: order.client_user_agent || undefined,
-                  fbc: finalFbc,
-                  fbp: order.fbp || undefined,
-                  externalId: order.id || undefined,
-                },
-                customData: {
-                  currency: 'BRL',
-                  value: amount,
-                  content_name: contentName,
-                  content_ids: contentIds,
-                  content_type: 'product',
-                  num_items: (hasOrderBump ? 1 : 0) + (hasOrderBumpQuadros ? 1 : 0) + 1,
-                  order_id: order.id,
+                if (isUpsell) {
+                  contentIds = ['quadros-sacros-150'];
+                  contentName = 'Mega Coleção 150 Quadros Sacros em Alta Definição';
+                } else if (isDownsell) {
+                  contentIds = ['quadros-sacros-50'];
+                  contentName = 'Seleção 50 Quadros Sacros em Alta Definição';
                 }
-              }).catch(metaErr => console.error('Erro assíncrono ao enviar CAPI Purchase (CheckPix):', metaErr));
-            } catch (metaErr) {
-              console.error('Erro ao agendar CAPI Purchase (CheckPix):', metaErr);
+                if (hasOrderBump) {
+                  contentIds.push('caderno-colorir-santos');
+                  contentName += ' + 50 Histórias dos Santos para Colorir';
+                }
+                if (hasOrderBumpQuadros) {
+                  contentIds.push('quadros-sacros-90');
+                  contentName += ' + 90 Quadros Sacros em Alta Definição';
+                }
+
+                const finalFbc = order.fbc || (order.fbclid ? `fb.1.${new Date(order.created_at || Date.now()).getTime()}.${order.fbclid}` : undefined);
+
+                const metaResult = await sendMetaEvent({
+                  eventName: 'Purchase',
+                  eventId: purchaseEventId,
+                  eventTime: Math.floor(new Date(paidDate).getTime() / 1000),
+                  eventSourceUrl: 'https://agendanossasenhora.online',
+                  userData: {
+                    email: order.customer_email,
+                    phone: order.customer_phone,
+                    name: order.customer_name,
+                    clientIp: order.client_ip || undefined,
+                    clientUserAgent: order.client_user_agent || undefined,
+                    fbc: finalFbc,
+                    fbp: order.fbp || undefined,
+                    externalId: order.id || undefined,
+                  },
+                  customData: {
+                    currency: 'BRL',
+                    value: amount,
+                    content_name: contentName,
+                    content_ids: contentIds,
+                    content_type: 'product',
+                    num_items: (hasOrderBump ? 1 : 0) + (hasOrderBumpQuadros ? 1 : 0) + 1,
+                    order_id: order.id,
+                  }
+                });
+
+                console.log(`[Meta CAPI CheckPix] Evento Purchase disparado para pedido ${order.id}:`, metaResult);
+
+                if (metaResult && metaResult.success) {
+                  await supabase
+                    .from('orders')
+                    .update({
+                      meta_purchase_sent: true,
+                      meta_purchase_sent_at: new Date().toISOString()
+                    })
+                    .eq('id', order.id);
+                  order.meta_purchase_sent = true;
+                }
+              } catch (metaErr) {
+                console.error('[Meta CAPI CheckPix] Erro ao disparar CAPI Purchase:', metaErr);
+              }
+            } else {
+              console.log(`[Meta CAPI CheckPix] Purchase já havia sido enviado para pedido ${order.id}`);
             }
 
             return new Response(

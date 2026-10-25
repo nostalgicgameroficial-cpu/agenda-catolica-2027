@@ -97,10 +97,14 @@ async function sendMetaEvent(payload: any) {
       body: JSON.stringify(requestBody),
     });
     const result = await response.json();
-    return { success: response.ok, data: result };
+    console.log(`[Meta CAPI create-pix] Evento ${eventName} (ID: ${eventId}) enviado: status=${response.status}, ok=${response.ok}`, result);
+    if (!response.ok) {
+      console.error(`[Meta CAPI create-pix] Erro retornado pela Meta para ${eventName}:`, result);
+    }
+    return { success: response.ok, status: response.status, data: result };
   } catch (err) {
-    console.error('[Meta CAPI] Erro ao disparar evento:', err);
-    return { success: false, error: err };
+    console.error('[Meta CAPI create-pix] Erro ao disparar evento:', err);
+    return { success: false, error: String(err) };
   }
 }
 
@@ -481,10 +485,10 @@ serve(async (req) => {
       console.error('Erro ao agendar envio de email PIX:', emailErr);
     }
 
-    // 5. Dispara evento InitiateCheckout na Meta Conversions API (CAPI) de forma assíncrona
+    // 5. Dispara evento InitiateCheckout na Meta Conversions API (CAPI)
     // com o MESMO event_id para deduplicação sem contagem dupla
     try {
-      sendMetaEvent({
+      const metaResult = await sendMetaEvent({
         eventName: 'InitiateCheckout',
         eventId: finalEventId,
         eventSourceUrl: event_source_url || 'https://agendanossasenhora.online',
@@ -507,9 +511,10 @@ serve(async (req) => {
           num_items: hasOrderBump ? 2 : 1,
           order_id: order.id,
         }
-      }).catch(metaErr => console.error('Erro assíncrono ao enviar CAPI InitiateCheckout:', metaErr));
+      });
+      console.log(`[Meta CAPI create-pix] InitiateCheckout enviado para pedido ${order.id}:`, metaResult);
     } catch (metaErr) {
-      console.error('Erro ao agendar CAPI InitiateCheckout:', metaErr);
+      console.error('[Meta CAPI create-pix] Erro ao disparar CAPI InitiateCheckout:', metaErr);
     }
 
     return new Response(

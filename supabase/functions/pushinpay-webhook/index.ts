@@ -97,10 +97,14 @@ async function sendMetaEvent(payload: any) {
       body: JSON.stringify(requestBody),
     });
     const result = await response.json();
-    return { success: response.ok, data: result };
+    console.log(`[Meta CAPI Webhook] Evento ${eventName} (ID: ${eventId}) enviado: status=${response.status}, ok=${response.ok}`, result);
+    if (!response.ok) {
+      console.error(`[Meta CAPI Webhook] Erro retornado pela Meta para ${eventName}:`, result);
+    }
+    return { success: response.ok, status: response.status, data: result };
   } catch (err) {
-    console.error('[Meta CAPI] Erro ao disparar evento:', err);
-    return { success: false, error: err };
+    console.error('[Meta CAPI Webhook] Erro ao disparar evento:', err);
+    return { success: false, error: String(err) };
   }
 }
 
@@ -537,82 +541,102 @@ serve(async (req: Request) => {
         }
       }
 
-      // 4. Dispara evento Purchase na Meta Conversions API (CAPI) com deduplicação
-      try {
-        const purchaseEventId = `purchase_${order.id}`;
-        const hasOrderBump = !!order.order_bump;
-        const hasOrderBumpQuadros = !!order.order_bump_quadros;
-        const isUpsell = order.plan === 'upsell';
-        const isDownsell = order.plan === 'downsell';
-        const isFisica = order.plan === 'fisica';
-        const isDigitalPromo = order.plan === 'digital_promo' || order.plan === 'pdf';
-        let baseAmount = 27.90;
-        if (isFisica) baseAmount = 67.90;
-        else if (isDigitalPromo || order.plan === 'basico') baseAmount = 19.90;
-        else if (isUpsell) baseAmount = 67.90;
-        else if (isDownsell) baseAmount = 29.90;
+      // Preparação dos dados da compra para CAPI e Webhook Relay
+      const purchaseEventId = `purchase_${order.id}`;
+      const hasOrderBump = !!order.order_bump;
+      const hasOrderBumpQuadros = !!order.order_bump_quadros;
+      const isUpsell = order.plan === 'upsell';
+      const isDownsell = order.plan === 'downsell';
+      const isFisica = order.plan === 'fisica';
+      const isDigitalPromo = order.plan === 'digital_promo' || order.plan === 'pdf';
+      let baseAmount = 27.90;
+      if (isFisica) baseAmount = 67.90;
+      else if (isDigitalPromo || order.plan === 'basico') baseAmount = 19.90;
+      else if (isUpsell) baseAmount = 67.90;
+      else if (isDownsell) baseAmount = 29.90;
 
-        const amount = order.amount_cents ? (order.amount_cents / 100) : (baseAmount + (hasOrderBump ? 7.90 : 0) + (hasOrderBumpQuadros ? 7.50 : 0));
+      const amount = order.amount_cents ? (order.amount_cents / 100) : (baseAmount + (hasOrderBump ? 7.90 : 0) + (hasOrderBumpQuadros ? 7.50 : 0));
 
-        let contentIds = ['agenda-catolica-2027-completa'];
-        let contentName = 'Agenda Católica 2027 + 5 Bônus Exclusivos';
+      let contentIds = ['agenda-catolica-2027-completa'];
+      let contentName = 'Agenda Católica 2027 + 5 Bônus Exclusivos';
 
-        if (isFisica) {
-          contentIds = ['agenda-catolica-2027-fisica'];
-          contentName = 'Agenda Católica 2027 Física (Edição Impressa)';
-        } else if (isDigitalPromo) {
-          contentIds = ['agenda-catolica-2027-pdf-promo'];
-          contentName = 'Agenda Católica 2027 em PDF + 5 Bônus Exclusivos';
-        } else if (order.plan === 'basico') {
-          contentIds = ['agenda-catolica-2027-basica'];
-          contentName = 'Agenda Católica 2027 Básica';
-        } else if (isUpsell) {
-          contentIds = ['quadros-sacros-150'];
-          contentName = 'Mega Coleção 150 Quadros Sacros em Alta Definição';
-        } else if (isDownsell) {
-          contentIds = ['quadros-sacros-50'];
-          contentName = 'Seleção 50 Quadros Sacros em Alta Definição';
-        }
-        if (hasOrderBump) {
-          contentIds.push('caderno-colorir-santos');
-          contentName += ' + 50 Histórias dos Santos para Colorir';
-        }
-        if (hasOrderBumpQuadros) {
-          contentIds.push('quadros-sacros-90');
-          contentName += ' + 90 Quadros Sacros em Alta Definição';
-        }
-
-        const finalFbc = order.fbc || (order.fbclid ? `fb.1.${new Date(order.created_at || Date.now()).getTime()}.${order.fbclid}` : undefined);
-
-        sendMetaEvent({
-          eventName: 'Purchase',
-          eventId: purchaseEventId,
-          eventSourceUrl: 'https://agendanossasenhora.online',
-          userData: {
-            email: order.customer_email,
-            phone: order.customer_phone,
-            name: order.customer_name,
-            clientIp: order.client_ip || undefined,
-            clientUserAgent: order.client_user_agent || undefined,
-            fbc: finalFbc,
-            fbp: order.fbp || undefined,
-            externalId: order.id || undefined,
-          },
-          customData: {
-            currency: 'BRL',
-            value: amount,
-            content_name: contentName,
-            content_ids: contentIds,
-            content_type: 'product',
-            num_items: hasOrderBump ? 2 : 1,
-            order_id: order.id,
-          }
-        }).catch(metaErr => console.error('Erro assíncrono CAPI Purchase (Webhook):', metaErr));
-      } catch (metaErr) {
-        console.error('Erro ao agendar CAPI Purchase (Webhook):', metaErr);
+      if (isFisica) {
+        contentIds = ['agenda-catolica-2027-fisica'];
+        contentName = 'Agenda Católica 2027 Física (Edição Impressa)';
+      } else if (isDigitalPromo) {
+        contentIds = ['agenda-catolica-2027-pdf-promo'];
+        contentName = 'Agenda Católica 2027 em PDF + 5 Bônus Exclusivos';
+      } else if (order.plan === 'basico') {
+        contentIds = ['agenda-catolica-2027-basica'];
+        contentName = 'Agenda Católica 2027 Básica';
+      } else if (isUpsell) {
+        contentIds = ['quadros-sacros-150'];
+        contentName = 'Mega Coleção 150 Quadros Sacros em Alta Definição';
+      } else if (isDownsell) {
+        contentIds = ['quadros-sacros-50'];
+        contentName = 'Seleção 50 Quadros Sacros em Alta Definição';
+      }
+      if (hasOrderBump) {
+        contentIds.push('caderno-colorir-santos');
+        contentName += ' + 50 Histórias dos Santos para Colorir';
+      }
+      if (hasOrderBumpQuadros) {
+        contentIds.push('quadros-sacros-90');
+        contentName += ' + 90 Quadros Sacros em Alta Definição';
       }
 
-      // 5. Encaminha webhook para ferramenta externa configurada no painel
+      const finalFbc = order.fbc || (order.fbclid ? `fb.1.${new Date(order.created_at || Date.now()).getTime()}.${order.fbclid}` : undefined);
+
+      // 4. Dispara evento Purchase na Meta Conversions API (CAPI) com deduplicação
+      // MESMO QUE O CLIENTE FECHE O NAVEGADOR OU NUNCA RETORNE À PÁGINA
+      if (!order.meta_purchase_sent) {
+        try {
+          const metaResult = await sendMetaEvent({
+            eventName: 'Purchase',
+            eventId: purchaseEventId,
+            eventTime: Math.floor(new Date(paidDate).getTime() / 1000),
+            eventSourceUrl: 'https://agendanossasenhora.online',
+            userData: {
+              email: order.customer_email,
+              phone: order.customer_phone,
+              name: order.customer_name,
+              clientIp: order.client_ip || undefined,
+              clientUserAgent: order.client_user_agent || undefined,
+              fbc: finalFbc,
+              fbp: order.fbp || undefined,
+              externalId: order.id || undefined,
+            },
+            customData: {
+              currency: 'BRL',
+              value: amount,
+              content_name: contentName,
+              content_ids: contentIds,
+              content_type: 'product',
+              num_items: (hasOrderBump ? 1 : 0) + (hasOrderBumpQuadros ? 1 : 0) + 1,
+              order_id: order.id,
+            }
+          });
+
+          console.log(`[Meta CAPI Webhook] Evento Purchase disparado para pedido ${order.id}:`, metaResult);
+
+          if (metaResult && metaResult.success) {
+            await supabase
+              .from('orders')
+              .update({
+                meta_purchase_sent: true,
+                meta_purchase_sent_at: new Date().toISOString()
+              })
+              .eq('id', order.id);
+            order.meta_purchase_sent = true;
+          }
+        } catch (metaErr) {
+          console.error('[Meta CAPI Webhook] Erro ao disparar CAPI Purchase:', metaErr);
+        }
+      } else {
+        console.log(`[Meta CAPI Webhook] Purchase já havia sido enviado para pedido ${order.id}`);
+      }
+
+      // 5. Encaminha webhook para ferramenta externa configurada no painel (Track Go / etc)
       try {
         const { data: settingsRow } = await supabase
           .from('app_settings')
@@ -652,19 +676,20 @@ serve(async (req: Request) => {
             };
 
             console.log(`[Webhook Relay] Encaminhando venda ${order.id} para ${targetUrl}`);
-            fetch(targetUrl, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'User-Agent': 'AgendaCatolica-WebhookRelay/1.0',
-                'X-Relay-Event': 'order.paid'
-              },
-              body: JSON.stringify(forwardPayload),
-            }).then(r => {
-              console.log(`[Webhook Relay] Resposta da ferramenta externa: ${r.status} ${r.statusText}`);
-            }).catch(relayErr => {
+            try {
+              const relayRes = await fetch(targetUrl, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'User-Agent': 'AgendaCatolica-WebhookRelay/1.0',
+                  'X-Relay-Event': 'order.paid'
+                },
+                body: JSON.stringify(forwardPayload),
+              });
+              console.log(`[Webhook Relay] Resposta da ferramenta externa: ${relayRes.status} ${relayRes.statusText}`);
+            } catch (relayErr) {
               console.error('[Webhook Relay] Erro ao disparar webhook para ferramenta externa:', relayErr);
-            });
+            }
           }
         }
       } catch (relayEx) {

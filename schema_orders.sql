@@ -42,6 +42,8 @@ CREATE TABLE IF NOT EXISTS public.orders (
     fbclid TEXT,
     fbc TEXT,
     fbp TEXT,
+    meta_purchase_sent BOOLEAN NOT NULL DEFAULT FALSE,
+    meta_purchase_sent_at TIMESTAMPTZ,
     
     -- Timestamps
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),

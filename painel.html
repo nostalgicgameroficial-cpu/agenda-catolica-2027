@@ -1029,7 +1029,7 @@
                 <th>Bruto / Líquido</th>
                 <th>Campanha (UTM)</th>
                 <th>Status</th>
-                <th>E-mail Drive</th>
+                <th>Envios (Drive / Meta)</th>
                 <th style="text-align: right;">Ações de Gestão</th>
               </tr>
             </thead>
@@ -1761,7 +1761,10 @@
         else if (o.plan === 'upsell') planName = '150 Quadros';
         else if (o.plan === 'downsell') planName = '50 Quadros';
 
-        const emailSentIcon = o.email_sent ? '✅ Entregue' : '⏳ Pendente';
+        const emailSentIcon = o.email_sent ? '✅ Drive OK' : '⏳ Drive Pendente';
+        const metaSentIcon = o.meta_purchase_sent 
+          ? '<span style="color:#38bdf8; font-weight:600;" title="Purchase enviado à Meta via CAPI">⚡ FB Enviado</span>' 
+          : (isPaid ? '<span style="color:#f59e0b;" title="Aguardando disparo Meta CAPI">⏳ FB Pendente</span>' : '<span style="color:var(--text-muted);">-</span>');
 
         const safeOrderJson = JSON.stringify(o).replace(/"/g, '&quot;');
         const isChecked = selectedOrderIds.has(o.id) ? 'checked' : '';
@@ -1803,7 +1806,10 @@
               <div style="font-size: 11px; color: var(--text-muted);">src: ${escapeHtml(o.utm_source || 'orgânico')}</div>
             </td>
             <td>${statusBadge}</td>
-            <td style="font-size: 12px;">${emailSentIcon}</td>
+            <td style="font-size: 11px; line-height: 1.4;">
+              <div>${emailSentIcon}</div>
+              <div style="margin-top: 3px;">${metaSentIcon}</div>
+            </td>
             <td style="text-align: right;">
               <div class="row-actions" style="justify-content: flex-end;">
                 <button class="action-btn" style="background:#1877f2; color:#fff;" title="Disparar evento Purchase deste pedido diretamente para o Facebook" onclick="sendFacebookPurchaseSingle(${safeOrderJson})">

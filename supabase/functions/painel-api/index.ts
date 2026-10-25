@@ -720,6 +720,16 @@ serve(async (req) => {
         }
       });
 
+      if (metaResult && metaResult.success) {
+        await supabase
+          .from('orders')
+          .update({
+            meta_purchase_sent: true,
+            meta_purchase_sent_at: new Date().toISOString()
+          })
+          .eq('id', order.id);
+      }
+
       return new Response(
         JSON.stringify({ 
           success: metaResult.success, 
