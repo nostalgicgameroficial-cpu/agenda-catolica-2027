@@ -383,32 +383,33 @@
   /></noscript>
   <!-- End Meta Pixel + Rastreamento Avançado -->
 
-  <!-- Fontes: Plus Jakarta Sans (Alta legibilidade editorial para Headlines) + Inter (Corpo) + Playfair Display (Detalhes) -->
-    <!-- Performance & Preload -->
+  <!-- Fontes: Poppins (Títulos de Alta Legibilidade e Força) + Inter (Corpo) -->
+  <!-- Performance & Preload -->
   <link rel="dns-prefetch" href="https://connect.facebook.net">
   <link rel="dns-prefetch" href="https://api.pushinpay.com.br">
   <link rel="preload" as="image" href="assets/agenda_hero_mockup_completo.webp" type="image/webp" fetchpriority="high">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --navy-950: #070e1c;
-      --navy-900: #0c1830;
+      --navy-900: #0F1B33;
       --navy-850: #122244;
-      --navy-800: #19315f;
+      --navy-800: #172a4d;
       --blue-marian: #1d4d90;
       --blue-accent: #2664be;
       --blue-soft: #fbf8f0;
       --blue-canvas: #faf6ed;
+      --ivory: #FBF6EC;
 
-      --gold-500: #c99834;
-      --gold-400: #dfae47;
-      --gold-300: #f4cc6e;
+      --gold-500: #D4A63C;
+      --gold-400: #E5B84C;
+      --gold-300: #F7D679;
       --gold-light: #fef8eb;
-      --gold-gradient: linear-gradient(135deg, #f7d679 0%, #d8a436 45%, #b3801f 100%);
-      --gold-shadow: 0 8px 24px rgba(201, 152, 52, 0.42);
+      --gold-gradient: linear-gradient(135deg, #FFE082 0%, #D4A63C 48%, #B88628 100%);
+      --gold-shadow: 0 8px 26px rgba(212, 166, 60, 0.48);
 
       --green-btn: #16a34a;
       --green-btn-hover: #15803d;
@@ -428,8 +429,8 @@
       --radius-xl: 24px;
       --radius-full: 9999px;
 
-      --shadow-card: 0 6px 20px rgba(12, 24, 48, 0.06);
-      --shadow-hover: 0 14px 32px rgba(12, 24, 48, 0.12);
+      --shadow-card: 0 6px 20px rgba(15, 27, 51, 0.08);
+      --shadow-hover: 0 14px 32px rgba(15, 27, 51, 0.14);
     }
 
     /* RESET & BASE */
@@ -485,28 +486,32 @@
       max-width: 780px;
     }
 
-    /* TIPOGRAFIA ULTRA-LEGÍVEL SANS-SERIF */
+    /* TIPOGRAFIA MODERNA E ULTRA-LEGÍVEL: POPPINS EM CAIXA ALTA */
     h1, h2, h3, h4 {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      line-height: 1.26;
-      font-weight: 700;
-      letter-spacing: 0;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
     }
 
     h1 {
-      font-size: clamp(1.6rem, 4.4vw, 2.5rem);
-      font-weight: 700;
-      line-height: 1.28;
-      letter-spacing: 0.01em;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: clamp(1.22rem, 4.4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.26;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
     }
 
     h2 {
-      font-size: clamp(1.4rem, 3.6vw, 2.15rem);
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: clamp(1.25rem, 3.4vw, 2rem);
       font-weight: 800;
       color: var(--navy-900);
       text-align: center;
       line-height: 1.28;
-      letter-spacing: 0.01em;
+      letter-spacing: -0.01em;
       margin-bottom: 14px;
       text-transform: uppercase;
     }
@@ -516,10 +521,11 @@
     }
 
     h3 {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       font-size: 1.15rem;
       font-weight: 700;
       color: var(--navy-900);
-      letter-spacing: 0;
+      letter-spacing: -0.01em;
       margin-bottom: 6px;
     }
 
@@ -560,16 +566,16 @@
       color: #cbd8ef;
     }
 
-    /* BARRA SUPERIOR SIMPLES, FINA E RÁPIDA DE LER NO MOBILE */
+    /* BARRA SUPERIOR ELEGANTE EM AZUL-MARINHO E DOURADO */
     .top-bar {
-      background: linear-gradient(90deg, #7a1518 0%, #a82025 50%, #7a1518 100%);
-      color: #ffffff;
-      font-size: 0.82rem;
+      background: linear-gradient(90deg, #091222 0%, #0F1B33 50%, #091222 100%);
+      color: #FBF6EC;
+      font-size: 0.84rem;
       font-weight: 800;
       text-align: center;
-      padding: 9px 14px;
+      padding: 10px 14px;
       border-bottom: 2px solid var(--gold-500);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
@@ -579,13 +585,13 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1.05rem;
       font-weight: 900;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
       text-decoration: none;
-      padding: 16px 28px;
+      padding: 17px 32px;
       border-radius: var(--radius-full);
       cursor: pointer;
       transition: all 0.25s ease;
@@ -597,14 +603,16 @@
 
     .btn-gold {
       background: var(--gold-gradient);
-      color: #1a1202;
+      color: #0F1B33;
       box-shadow: var(--gold-shadow);
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
     }
 
     .btn-gold:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(201, 152, 52, 0.55);
-      filter: brightness(1.05);
+      box-shadow: 0 14px 34px rgba(212, 166, 60, 0.65);
+      filter: brightness(1.08);
+      color: #070e1c;
     }
 
     .btn-blue {
@@ -636,9 +644,9 @@
     }
 
     @keyframes pulse-glow {
-      0% { box-shadow: 0 0 0 0 rgba(201, 152, 52, 0.65); }
-      70% { box-shadow: 0 0 0 16px rgba(201, 152, 52, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(201, 152, 52, 0); }
+      0% { box-shadow: 0 0 0 0 rgba(212, 166, 60, 0.7); }
+      70% { box-shadow: 0 0 0 16px rgba(212, 166, 60, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(212, 166, 60, 0); }
     }
 
     .btn-subtext {
@@ -650,13 +658,13 @@
       text-align: center;
     }
 
-    /* HERO SECTION: LUMINOSA, SACRAL E DE MÁXIMA LEGIBILIDADE (PSICOLOGIA DAS CORES) */
+    /* HERO SECTION: AZUL-MARINHO #0F1B33, SACRAL, VIBRANTE E COM CONTRASTE MÁXIMO */
     .hero {
-      background: radial-gradient(ellipse at 50% 0%, #ffffff 0%, #fbfcfe 45%, #f1f5f9 100%);
-      color: #0f172a;
-      padding: 42px 0 54px;
+      background: radial-gradient(ellipse at 50% -10%, #1a2f55 0%, #0F1B33 55%, #081120 100%);
+      color: #FBF6EC;
+      padding: 44px 0 58px;
       position: relative;
-      border-bottom: 2px solid #e2e8f0;
+      border-bottom: 2px solid rgba(212, 166, 60, 0.45);
       text-align: center;
       overflow: hidden;
     }
@@ -665,12 +673,13 @@
     .hero::before {
       content: "";
       position: absolute;
-      top: -100px;
+      top: -120px;
       left: 50%;
       transform: translateX(-50%);
-      width: 720px;
-      height: 380px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(30, 64, 175, 0.04) 50%, transparent 75%);
+      width: 100%;
+      max-width: 860px;
+      height: 440px;
+      background: radial-gradient(circle, rgba(255, 208, 0, 0.18) 0%, rgba(38, 100, 190, 0.08) 50%, transparent 75%);
       pointer-events: none;
       z-index: 0;
     }
@@ -683,62 +692,94 @@
     .hero-pill-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: #ffffff;
-      border: 1.5px solid #d4af37;
-      color: #0f2b5c;
-      font-size: 0.88rem;
-      font-weight: 700;
-      padding: 7px 20px;
+      justify-content: center;
+      gap: 6px;
+      background: rgba(255, 208, 0, 0.12);
+      border: 1.5px solid #FFD000;
+      color: #FBF6EC;
+      font-size: clamp(0.68rem, 2.2vw, 0.82rem);
+      font-weight: 800;
+      padding: 6px 14px;
       border-radius: var(--radius-full);
-      margin-bottom: 22px;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06), 0 0 10px rgba(212, 175, 55, 0.15);
-      letter-spacing: 0.01em;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 14px rgba(255, 208, 0, 0.25);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      max-width: 100%;
+      text-align: center;
     }
 
     .hero-content h1 {
-      font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      color: #0c1930;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #FFFFFF;
       margin-bottom: 20px;
       font-weight: 800;
-      font-size: 2.25rem;
-      line-height: 1.25;
-      letter-spacing: -0.025em;
-      text-transform: none;
+      font-size: clamp(1.1rem, 3.6vw, 1.45rem);
+      line-height: 1.34;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
       max-width: 960px;
       margin-left: auto;
       margin-right: auto;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 640px) {
       .hero-content h1 {
-        font-size: 3.1rem;
-        line-height: 1.22;
+        font-size: clamp(1.4rem, 2.8vw, 1.85rem);
+        line-height: 1.3;
       }
     }
 
-    /* Destaque Sagrado: Azul Mariano Real Intenso (Contraste 8.5:1 com fundo branco - WCAG AAA) */
-    .hero-content h1 .gold-word {
-      color: #1e40af;
-      font-style: normal;
-      font-weight: 850;
-      background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #0f2b5c 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline;
+    @media (min-width: 900px) {
+      .hero-content h1 {
+        font-size: clamp(1.85rem, 2.6vw, 2.45rem);
+        line-height: 1.25;
+      }
     }
 
-    /* Destaque Emocional: Vinho / Bordeaux Litúrgico Nobre (Paixão, Eucaristia e Bênção) */
+    /* Linhas intencionais para evitar linhas órfãs */
+    .hero-line {
+      display: block;
+    }
+
+    .hero-line-1 {
+      color: #FFFFFF;
+    }
+
+    .hero-line-2 {
+      color: #FBF6EC;
+      margin-top: 6px;
+    }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    /* Redução intencional da última linha para criar hierarquia / segunda camada */
+    .hero-line-sub {
+      display: block;
+      margin-top: 8px;
+      font-size: clamp(0.72rem, 2.1vw, 0.95rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #FBF6EC;
+      opacity: 0.92;
+    }
+
+    /* Destaques em Amarelo Forte e Vibrante (#FFD000) */
+    .hero-content h1 .gold-word,
+    .hero-content h1 .gold-highlight,
     .hero-content h1 em {
-      color: #991b1b;
+      color: #FFD000;
       font-style: normal;
-      font-weight: 850;
-      background: linear-gradient(135deg, #b91c1c 0%, #881337 100%);
+      font-weight: 900;
+      background: linear-gradient(180deg, #FFF58A 0%, #FFD000 50%, #FFB300 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
     }
 
     /* IMAGEM NO MEIO (ENTRE HEADLINE E SUBHEADLINE) - MOCKUP COMPLETO DO BUNDLE */
@@ -753,8 +794,8 @@
       width: 100%;
       height: auto;
       border-radius: 18px;
-      box-shadow: 0 16px 40px rgba(12, 24, 48, 0.12), 0 0 25px rgba(212, 175, 55, 0.18);
-      border: 3px solid rgba(212, 175, 55, 0.55);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55), 0 0 35px rgba(212, 166, 60, 0.28);
+      border: 3px solid rgba(212, 166, 60, 0.65);
     }
 
     .hero-badge-float {
@@ -763,35 +804,40 @@
       left: 50%;
       transform: translateX(-50%);
       background: var(--gold-gradient);
-      color: #1a1202;
-      padding: 8px 18px;
+      color: #0F1B33;
+      padding: 8px 20px;
       border-radius: var(--radius-full);
       font-weight: 900;
       font-size: 0.82rem;
-      box-shadow: 0 6px 18px rgba(78, 52, 21, 0.25);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 16px rgba(212, 166, 60, 0.45);
       display: flex;
       align-items: center;
       gap: 6px;
       border: 2px solid #ffffff;
       white-space: nowrap;
       text-transform: uppercase;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
     }
 
     .hero-lead {
-      font-family: 'Inter', -apple-system, sans-serif;
-      font-size: 1.12rem;
-      line-height: 1.7;
-      color: #334155;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1.15rem;
+      line-height: 1.65;
+      color: #E2E8F0;
       margin: 16px auto 26px;
-      max-width: 680px;
-      font-weight: 450;
+      max-width: 720px;
+      font-weight: 500;
       text-align: center;
       display: block;
     }
 
     .hero-lead strong {
-      color: #0c1930;
+      color: #FBF6EC;
+      font-weight: 700;
+    }
+
+    .hero-lead .lead-gold {
+      color: #D4A63C;
       font-weight: 700;
     }
 
@@ -805,8 +851,8 @@
 
     .hero-checklist li {
       position: relative;
-      padding: 7px 0 7px 32px;
-      color: #334155;
+      padding: 8px 0 8px 34px;
+      color: #E2E8F0;
       font-size: 0.98rem;
       font-weight: 500;
       line-height: 1.45;
@@ -814,25 +860,25 @@
 
     .hero-checklist li strong {
       font-weight: 700;
-      color: #0c1930;
+      color: #FBF6EC;
     }
 
     .hero-checklist li::before {
       content: "✓";
       position: absolute;
       left: 0;
-      top: 6px;
+      top: 7px;
       width: 22px;
       height: 22px;
-      background: linear-gradient(135deg, #15803d 0%, #166534 100%);
-      color: #ffffff;
+      background: linear-gradient(135deg, #FFE082 0%, #D4A63C 100%);
+      color: #0F1B33;
       border-radius: 50%;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 900;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 6px rgba(22, 101, 52, 0.25);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
     }
 
     .hero-cta-group {
@@ -843,12 +889,8 @@
       margin-bottom: 24px;
     }
 
-    .hero-checklist {
-      list-style: none;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      display: inline-block;
-      text-align: left;
+    .hero .btn-subtext {
+      color: #cbd5e1;
     }
 
     /* TRUST BAR */
@@ -1676,29 +1718,31 @@
       margin-bottom: 10px;
     }
 
-    /* BOTÃO COMPRAR AGORA VERDE ESTILO DO PRINT */
+    /* BOTÃO COMPRAR AGORA DOURADO DE ALTO CONTRASTE */
     .p-btn-buy {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--green-btn);
-      color: #ffffff;
+      background: var(--gold-gradient);
+      color: #0F1B33;
       font-size: clamp(0.74rem, 2.5vw, 0.96rem);
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.03em;
-      padding: 12px 6px;
+      padding: 13px 8px;
       border-radius: var(--radius-full);
-      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
+      box-shadow: 0 4px 16px rgba(212, 166, 60, 0.42);
       transition: all 0.2s ease;
       text-decoration: none;
       width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.5);
     }
 
     .p-btn-buy:hover {
-      background: var(--green-btn-hover);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(22, 163, 74, 0.5);
+      box-shadow: 0 8px 24px rgba(212, 166, 60, 0.65);
+      filter: brightness(1.08);
+      color: #070e1c;
     }
 
     /* GUARANTEE SECTION */
@@ -1908,23 +1952,27 @@
 
     /* FINAL CTA */
     .section-final-cta {
-      background: radial-gradient(circle at 50% 20%, #152d56 0%, #0c1830 70%, #050a14 100%);
-      color: #ffffff;
-      padding: 65px 0;
+      background: radial-gradient(circle at 50% 20%, #172a4d 0%, #0F1B33 70%, #070e1c 100%);
+      color: #FBF6EC;
+      padding: 68px 0;
       text-align: center;
       border-top: 3px solid var(--gold-500);
     }
 
     .section-final-cta h2 {
-      color: #ffffff;
-      margin-bottom: 12px;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #FFFFFF;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
     }
 
     .section-final-cta p {
-      color: #cbd8ef;
+      color: #E2E8F0;
       font-size: 1.05rem;
-      max-width: 620px;
-      margin: 0 auto 26px;
+      max-width: 640px;
+      margin: 0 auto 28px;
       line-height: 1.6;
       font-weight: 500;
     }
@@ -3276,11 +3324,15 @@
         <!-- 0. PILL BADGE SUPERIOR -->
         <div class="hero-pill-badge">
           <span>✨</span>
-          <span>Liturgia Diária Completa + 5 Bônus Devocionais Exclusivos</span>
+          <span>LITURGIA DIÁRIA COMPLETA + 5 BÔNUS DEVOCIONAIS EXCLUSIVOS</span>
         </div>
 
-        <!-- 1. HEADLINE PRINCIPAL (INSPIRADA NO MODELO REFERÊNCIA) -->
-        <h1>Viva todos os 365 dias de 2027 com a <span class="gold-word">Liturgia Diária</span> e <span class="gold-word">Nossa Senhora</span> de forma <em>simples, profunda e abençoada</em></h1>
+        <!-- 1. HEADLINE PRINCIPAL (POPPINS CAIXA ALTA + QUEBRAS INTENCIONAIS + DESTAQUES EM AMARELO FORTE) -->
+        <h1>
+          <span class="hero-line hero-line-1">COMO VIVER <span class="gold-word">2027</span> COM MAIS PAZ E FÉ:</span>
+          <span class="hero-line hero-line-2"><span class="nowrap"><span class="gold-word">365 DIAS</span> DE</span> <span class="nowrap">LITURGIA DIÁRIA</span> <span class="nowrap"><span class="gold-word">COM NOSSA SENHORA</span></span></span>
+          <span class="hero-line-sub">DE FORMA SIMPLES, PROFUNDA E ABENÇOADA</span>
+        </h1>
 
         <!-- 2. IMAGEM DA HERO ENTRE A HEADLINE E A SUBHEADLINE (MOBILE-FIRST) -->
         <div class="hero-mid-image">
@@ -3291,9 +3343,9 @@
           </div>
         </div>
 
-        <!-- 3. SUBHEADLINE (INSPIRADA NO MODELO REFERÊNCIA) -->
+        <!-- 3. SUBHEADLINE -->
         <p class="hero-lead">
-          A <strong>Agenda Católica 2027</strong> reúne o Evangelho de cada dia, reflexões guiadas, o Caminho Quaresmal e calendários litúrgicos ilustrados — para você <strong>conhecer, rezar e santificar a sua rotina</strong> com clareza e devoção.
+          Sua agenda personalizada de <strong>2027</strong>, com <strong>entrega imediata</strong>, pronta para <span class="lead-gold">imprimir e rezar</span>.
         </p>
 
         <!-- 4. BOTÃO DE AÇÃO HERO (ANTES DOS BENEFÍCIOS) -->
