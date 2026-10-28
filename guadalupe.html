@@ -1,0 +1,3155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Live 2027 with Our Lady of Guadalupe | 2027 Catholic Daily Planner (Printable PDF)</title>
+  <meta name="description" content="A Catholic daily planner with the Gospel reference, the saint of the day and a clear path through Lent. Formatted for US Letter and Half-Letter. Instant PDF download.">
+
+  <!-- TRACK GO - Smart Tracking & Meta Conversions Engine -->
+  <script>
+  (function() {
+    'use strict';
+    var PRODUCT_NAME = "Agenda EUA";
+    var PIXEL_ID = "2333041117531828";
+    var ENDPOINT = "https://ucsccgihiomuwgqngept.supabase.co/functions/v1/webhook-tracking";
+    var EMBED_PIXEL = true;
+
+    // 1. Utilitários de Cookies
+    function getCookie(n) {
+      var m = document.cookie.match(new RegExp('(^|;\\s*)' + n + '=([^;]+)'));
+      return m ? decodeURIComponent(m[2]) : null;
+    }
+    function setCookie(n, v, d) {
+      var t = new Date(); t.setTime(t.getTime() + (d * 864e5));
+      document.cookie = n + '=' + encodeURIComponent(v) + ';path=/;expires=' + t.toUTCString() + ';SameSite=Lax';
+    }
+
+    // 2. Captura e Persistência de UTMs e ClickID (90 dias)
+    var params = new URLSearchParams(window.location.search);
+    var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src', 'sck', 'fbclid', 'gclid'];
+    var data = {};
+
+    utmKeys.forEach(function(k) {
+      var val = params.get(k);
+      if (val) {
+        data[k] = val;
+        try { localStorage.setItem('tg_' + k, val); } catch(e) {}
+        setCookie('tg_' + k, val, 90);
+      } else {
+        var saved = null;
+        try { saved = localStorage.getItem('tg_' + k); } catch(e) {}
+        if (!saved) saved = getCookie('tg_' + k);
+        if (saved) data[k] = saved;
+      }
+    });
+
+    // 3. Formatação Oficial dos Cookies Meta (_fbc e _fbp)
+    var now = Date.now();
+    if (!getCookie('_fbp')) {
+      var fbpVal = 'fb.1.' + now + '.' + Math.floor(Math.random() * 8999999999 + 1000000000);
+      setCookie('_fbp', fbpVal, 90);
+      data.fbp = fbpVal;
+    } else {
+      data.fbp = getCookie('_fbp');
+    }
+
+    if (data.fbclid) {
+      var fbcVal = 'fb.1.' + now + '.' + data.fbclid;
+      setCookie('_fbc', fbcVal, 90);
+      data.fbc = fbcVal;
+    } else if (getCookie('_fbc')) {
+      data.fbc = getCookie('_fbc');
+    }
+
+    // 4. Meta Pixel Integrado (All-in-One)
+    if (EMBED_PIXEL && PIXEL_ID) {
+      if (!window.fbq) {
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+        (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        window.fbq('init', PIXEL_ID);
+      }
+      if (!window.__trackgo_fired) {
+        window.fbq('track', 'PageView');
+        window.__trackgo_fired = true;
+      }
+    }
+
+    // 5. Decoração Automática de Links de Checkout
+    var DOMAINS = ['kiwify.com.br', 'payt.com.br', 'lastlink.com', 'hotmart.com', 'perfectpay.com.br', 'eduzz.com', 'braip.com', 'kirvano.com', 'greenn.com.br', 'monetizze.com.br', 'cartpanda.com', 'yampi.com.br', 'shopify.com'];
+    function isCheckout(url) {
+      for (var i = 0; i < DOMAINS.length; i++) { if (url.indexOf(DOMAINS[i]) !== -1) return true; }
+      return false;
+    }
+
+    function decorate(urlStr) {
+      try {
+        var u = new URL(urlStr, window.location.href);
+        if (!isCheckout(u.hostname) && !isCheckout(u.href)) return urlStr;
+        utmKeys.forEach(function(k) { if (data[k] && !u.searchParams.has(k)) u.searchParams.set(k, data[k]); });
+        if (!u.searchParams.has('src') && (data.utm_campaign || data.utm_content)) {
+          var srcParts = [];
+          if (data.utm_campaign) srcParts.push(data.utm_campaign);
+          if (data.utm_content) srcParts.push(data.utm_content);
+          if (data.fbclid) srcParts.push(data.fbclid);
+          u.searchParams.set('src', srcParts.join('|'));
+        }
+        if (!u.searchParams.has('sck') && (data.utm_campaign || data.utm_content)) {
+          u.searchParams.set('sck', (data.utm_campaign || '') + '|' + (data.utm_content || ''));
+        }
+        if (data.fbc && !u.searchParams.has('fbc')) u.searchParams.set('fbc', data.fbc);
+        if (data.fbp && !u.searchParams.has('fbp')) u.searchParams.set('fbp', data.fbp);
+        return u.toString();
+      } catch(e) { return urlStr; }
+    }
+
+    function updateLinks() {
+      var links = document.querySelectorAll('a[href]');
+      for (var i = 0; i < links.length; i++) {
+        var h = links[i].getAttribute('href');
+        if (h && (h.indexOf('http') === 0 || h.indexOf('//') === 0)) {
+          var dec = decorate(h);
+          if (dec !== h) links[i].setAttribute('href', dec);
+        }
+      }
+    }
+
+    document.addEventListener('click', function(e) {
+      var t = e.target;
+      while (t && t !== document.body) {
+        if (t.tagName === 'A' && t.href && isCheckout(t.href)) {
+          t.href = decorate(t.href);
+          if (window.fbq && typeof window.fbq === 'function') {
+            window.fbq('track', 'InitiateCheckout', { content_name: PRODUCT_NAME, currency: 'BRL' });
+          }
+          sendPing('initiate_checkout', t.href);
+          break;
+        }
+        t = t.parentElement;
+      }
+    }, true);
+
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', updateLinks); } else { updateLinks(); }
+    setInterval(updateLinks, 1500);
+
+    // 6. Ping de Ativação ao Track Go
+    function sendPing(ev, tgt) {
+      try {
+        var payload = {
+          action: ev || 'pageview',
+          product_name: PRODUCT_NAME,
+          page_url: window.location.href,
+          target_url: tgt || '',
+          pixel_id: PIXEL_ID,
+          utm_source: data.utm_source || '',
+          utm_campaign: data.utm_campaign || '',
+          utm_content: data.utm_content || '',
+          fbc: data.fbc || '',
+          fbp: data.fbp || '',
+          fbclid: data.fbclid || ''
+        };
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(ENDPOINT + '?action=' + (ev || 'pageview'), new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+        } else {
+          fetch(ENDPOINT + '?action=' + (ev || 'pageview'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true });
+        }
+      } catch(e) {}
+    }
+    sendPing('pageview');
+  })();
+  </script>
+
+  <!-- Preconnect & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="preload" as="image" href="assets/guadalupe_kit_oficial.webp" type="image/webp">
+
+  <style>
+    :root {
+      --navy-950: #060c18;
+      --navy-900: #0F1B33;
+      --navy-850: #132345;
+      --navy-800: #172a4d;
+      --blue-marian: #1a498b;
+      --blue-accent: #2563eb;
+      --teal-mantle: #0f4c5c;
+      --blue-canvas: #fbf9f4;
+      --ivory: #FDFBF7;
+      --warm-white: #ffffff;
+
+      --gold-500: #C99834;
+      --gold-400: #DCAB43;
+      --gold-300: #F7D679;
+      --gold-light: #fef8eb;
+      --gold-gradient: linear-gradient(135deg, #FFE082 0%, #D4A63C 48%, #B88628 100%);
+      --gold-shadow: 0 8px 26px rgba(201, 152, 52, 0.42);
+
+      --rose-guadalupe: #c84b61;
+      --rose-light: #fdf2f4;
+
+      --green-btn: #16a34a;
+      --green-btn-hover: #15803d;
+      --green-light: #22c55e;
+      --green-price: #15803d;
+
+      --ink-primary: #151e2e;
+      --ink-secondary: #3e4c66;
+      --ink-muted: #64748b;
+      --line: #e6ddce;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+
+      --shadow-card: 0 8px 24px rgba(15, 27, 51, 0.08);
+      --shadow-hover: 0 16px 36px rgba(15, 27, 51, 0.14);
+    }
+
+    /* RESET & BASE */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--blue-canvas);
+      color: var(--ink-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+
+    @media (min-width: 640px) {
+      .wrap {
+        padding-left: 32px;
+        padding-right: 32px;
+      }
+    }
+
+    .narrow {
+      max-width: 780px;
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3, h4 {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    h1 {
+      font-size: clamp(1.65rem, 5vw, 2.85rem);
+      font-weight: 800;
+      line-height: 1.22;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.4);
+    }
+
+    h2 {
+      font-size: clamp(1.35rem, 3.8vw, 2.15rem);
+      font-weight: 800;
+      color: var(--navy-900);
+      text-align: center;
+      line-height: 1.28;
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    h2.dark-title {
+      color: #ffffff;
+    }
+
+    h3 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--ink-secondary);
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 34px;
+      line-height: 1.55;
+    }
+
+    .section-subtitle.dark {
+      color: #cbd5e1;
+    }
+
+    /* BADGES */
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: var(--gold-500);
+      background: var(--gold-light);
+      border: 1px solid rgba(201, 152, 52, 0.45);
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      margin-bottom: 12px;
+    }
+
+    .section-tag.dark {
+      background: rgba(247, 214, 121, 0.12);
+      border-color: rgba(247, 214, 121, 0.35);
+      color: var(--gold-300);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 16px 30px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s ease;
+      text-align: center;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-gold {
+      background: var(--gold-gradient);
+      color: #0b1528;
+      box-shadow: var(--gold-shadow);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 32px rgba(201, 152, 52, 0.6);
+    }
+
+    .btn-green {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(22, 163, 74, 0.42);
+    }
+
+    .btn-green:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(22, 163, 74, 0.55);
+    }
+
+    .btn-blue {
+      background: linear-gradient(135deg, #1d4d90 0%, #0c1830 100%);
+      color: #ffffff;
+      border: 1.5px solid var(--gold-400);
+      box-shadow: 0 6px 20px rgba(15, 27, 51, 0.25);
+    }
+
+    .btn-blue:hover {
+      background: var(--gold-gradient);
+      color: #0c1830;
+      transform: translateY(-2px);
+    }
+
+    .btn-pulse {
+      animation: ctaPulse 2.2s infinite ease-in-out;
+    }
+
+    @keyframes ctaPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.028); }
+    }
+
+    .btn-subtext {
+      display: block;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    /* TOP ANNOUNCEMENT BAR — WINE RED URGENCY */
+    .top-bar {
+      background: #8B1E2D;
+      color: #ffffff;
+      text-align: center;
+      padding: 9px 16px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      border-bottom: 2px solid #5c1020;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .top-bar span.hl {
+      color: #FFD000;
+      font-weight: 900;
+    }
+
+    .top-bar-timer {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,0,0,0.25);
+      border-radius: 999px;
+      padding: 2px 12px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.06em;
+      font-size: 0.86rem;
+      white-space: nowrap;
+    }
+
+    .top-bar-timer .timer-digit {
+      font-weight: 900;
+      font-size: 0.95rem;
+      color: #FFD000;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      background: radial-gradient(circle at 50% 18%, #1c3d73 0%, #0F1B33 60%, #060c18 100%);
+      color: #ffffff;
+      padding: 42px 0 65px;
+      text-align: center;
+      position: relative;
+      border-bottom: 3px solid var(--gold-500);
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201, 152, 52, 0.16);
+      border: 1.5px solid var(--gold-400);
+      color: var(--gold-300);
+      padding: 6px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero-line-1 {
+      display: block;
+      color: #ffffff;
+      font-size: 0.9em;
+      margin-bottom: 2px;
+    }
+
+    .hero-line-2 {
+      display: block;
+      color: #FFD000;
+      background: linear-gradient(135deg, #FFE89E 0%, #FFD000 50%, #E5A823 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .hero-lead-text {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: #e2e8f0;
+      max-width: 720px;
+      margin: 18px auto 26px;
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
+    .hero-mid-image {
+      width: 100%;
+      max-width: 560px;
+      margin: 18px auto 24px;
+      position: relative;
+    }
+
+    .hero-mid-image img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 30px rgba(201, 152, 52, 0.25);
+      border: 2px solid rgba(247, 214, 121, 0.4);
+    }
+
+    .hero-badge-float {
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #c84b61 0%, #8b1e2d 100%);
+      color: #ffffff;
+      padding: 6px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: 0 6px 18px rgba(139, 30, 45, 0.45);
+      border: 1.5px solid #ffa3b0;
+      white-space: nowrap;
+    }
+
+    .hero-cta-group {
+      margin: 28px 0 22px;
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .hero-cta-group .btn {
+      width: 100%;
+      padding: 18px 24px;
+      font-size: 1.12rem;
+    }
+
+    .hero-badges-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+
+    .hero-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+    }
+
+    .hero-checklist {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      text-align: left;
+      margin-top: 26px;
+      width: 100%;
+      max-width: 680px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+    }
+
+    @media (min-width: 640px) {
+      .hero-checklist {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .hero-checklist li {
+      font-size: 0.88rem;
+      color: #e2e8f0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .hero-checklist li::before {
+      content: "✦";
+      color: #FFD000;
+      font-size: 1rem;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+
+    /* SECTION PAIN / EMPATHY */
+    .section-pain {
+      padding: 68px 0;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pain-card {
+      background: #fcfbfa;
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 34px 24px;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+    }
+
+    @media (min-width: 640px) {
+      .pain-card {
+        padding: 44px 40px;
+      }
+    }
+
+    .pain-card h2 {
+      color: #8b1e2d;
+      font-size: clamp(1.3rem, 3.6vw, 2rem);
+      margin-bottom: 12px;
+    }
+
+    .pain-list {
+      display: grid;
+      gap: 14px;
+      margin: 28px 0;
+      text-align: left;
+    }
+
+    .pain-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #ffffff;
+      border: 1px solid #f1e9dc;
+      border-left: 4px solid #c84b61;
+      padding: 14px 18px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .pain-item .icon {
+      color: #c84b61;
+      font-weight: 900;
+      font-size: 1.15rem;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+
+    .pain-item p {
+      font-size: 0.96rem;
+      color: var(--ink-primary);
+      line-height: 1.48;
+    }
+
+    .punch-box {
+      background: linear-gradient(135deg, #0F1B33 0%, #1a325e 100%);
+      color: #ffffff;
+      padding: 24px;
+      border-radius: 16px;
+      border: 1.5px solid var(--gold-500);
+      box-shadow: 0 10px 28px rgba(15, 27, 51, 0.2);
+      margin-top: 28px;
+    }
+
+    .lead-quote {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #FFD000;
+      line-height: 1.4;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+
+    .lead-sub {
+      font-size: 0.98rem;
+      color: #e2e8f0;
+      line-height: 1.5;
+    }
+
+    /* SECTION FEATURES */
+    .section-features {
+      padding: 72px 0;
+      background: var(--blue-canvas);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 36px;
+    }
+
+    @media (min-width: 640px) {
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 960px) {
+      .feature-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .feature-box {
+      background: #ffffff;
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 26px 22px;
+      box-shadow: var(--shadow-card);
+      transition: all 0.25s ease;
+      text-align: left;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--gold-400);
+    }
+
+    .feature-icon-wrapper {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(201, 152, 52, 0.15) 0%, rgba(201, 152, 52, 0.05) 100%);
+      border: 1.5px solid var(--gold-400);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.45rem;
+      margin-bottom: 16px;
+    }
+
+    .feature-box h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .feature-box p {
+      font-size: 0.92rem;
+      color: var(--ink-secondary);
+      line-height: 1.52;
+    }
+
+    /* SECTION SHOWCASE / LENT & IN-USE */
+    .section-showcase {
+      padding: 75px 0;
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .showcase-row {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      align-items: center;
+      margin-bottom: 70px;
+    }
+
+    .showcase-row:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (min-width: 860px) {
+      .showcase-row {
+        flex-direction: row;
+        gap: 52px;
+      }
+      .showcase-row.reverse {
+        flex-direction: row-reverse;
+      }
+    }
+
+    .showcase-media {
+      flex: 1;
+      width: 100%;
+    }
+
+    .showcase-media img {
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 16px 40px rgba(15, 27, 51, 0.14);
+      border: 2px solid #ecdcc8;
+    }
+
+    .showcase-text {
+      flex: 1;
+      text-align: left;
+    }
+
+    .showcase-text h2 {
+      text-align: left;
+      margin-bottom: 14px;
+    }
+
+    .showcase-text p {
+      font-size: 1.02rem;
+      color: var(--ink-secondary);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .showcase-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 22px 0 26px;
+    }
+
+    .showcase-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #fdfbf7;
+      border: 1px solid #eae0d0;
+      border-radius: 14px;
+      padding: 13px 16px;
+      box-shadow: 0 2px 6px rgba(15, 27, 51, 0.03);
+    }
+
+    .showcase-bullets .showcase-icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: rgba(201, 152, 52, 0.15);
+      color: #996515;
+      border: 1px solid rgba(201, 152, 52, 0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 900;
+      margin-top: 2px;
+    }
+
+    .showcase-bullets .bullet-content strong {
+      font-size: 0.98rem;
+      color: var(--navy-900);
+      font-weight: 800;
+    }
+
+    .showcase-bullets .bullet-content p {
+      margin: 2px 0 0;
+      font-size: 0.91rem;
+      color: var(--ink-secondary);
+      line-height: 1.45;
+    }
+
+    /* SECTION HOW IT WORKS */
+    .section-how {
+      padding: 72px 0;
+      background: var(--blue-canvas);
+    }
+
+    .how-steps-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 36px;
+    }
+
+    @media (min-width: 640px) {
+      .how-steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 980px) {
+      .how-steps-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .step-card {
+      background: #ffffff;
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      text-align: left;
+      position: relative;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1d4d90 0%, #0c1830 100%);
+      color: var(--gold-300);
+      border: 2px solid var(--gold-400);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(15, 27, 51, 0.2);
+    }
+
+    .step-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: var(--navy-900);
+    }
+
+    .step-card p {
+      font-size: 0.91rem;
+      color: var(--ink-secondary);
+      line-height: 1.5;
+    }
+
+    /* SECTION BONUSES */
+    .section-bonuses {
+      background: radial-gradient(circle at 50% 15%, #183363 0%, #0d1a33 65%, #050a14 100%);
+      color: #ffffff;
+      padding: 72px 0 80px;
+      position: relative;
+      border-top: 3px solid var(--gold-500);
+    }
+
+    .bonus-lead-hero {
+      width: 100%;
+      max-width: 620px;
+      margin: 0 auto 42px;
+      text-align: center;
+    }
+
+    .bonus-lead-hero img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+      border: 2px solid rgba(247, 214, 121, 0.45);
+    }
+
+    .bonus-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    @media (min-width: 620px) {
+      .bonus-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 980px) {
+      .bonus-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .bonus-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(247, 214, 121, 0.32);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .bonus-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold-400);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .bonus-card-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background: #000;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .bonus-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .bonus-tag {
+      align-self: center;
+      background: var(--gold-gradient);
+      color: #0b1528;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      padding: 3px 12px;
+      border-radius: var(--radius-full);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .bonus-card h3 {
+      font-size: 1.08rem;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .bonus-card p {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      line-height: 1.48;
+      margin-bottom: 14px;
+      flex-grow: 1;
+    }
+
+    .bonus-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 10px;
+      font-size: 0.84rem;
+      color: #94a3b8;
+    }
+
+    .bonus-price-row .cross {
+      text-decoration: line-through;
+      color: #ef4444;
+      font-weight: 700;
+    }
+
+    .bonus-price-row .free {
+      color: #4ade80;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+
+    .economy-highlight {
+      background: linear-gradient(135deg, rgba(201, 152, 52, 0.22) 0%, rgba(201, 152, 52, 0.08) 100%);
+      border: 2px solid var(--gold-400);
+      justify-content: center;
+    }
+
+    /* SECTION WHY OUR LADY OF GUADALUPE */
+    .section-guadalupe-story {
+      padding: 75px 0;
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+    }
+
+    .guadalupe-story-card {
+      background: #fdfbf7;
+      border: 1.5px solid #ecdcc8;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 860px) {
+      .guadalupe-story-card {
+        flex-direction: row;
+      }
+    }
+
+    .story-media {
+      flex: 1;
+      line-height: 0;
+      background: #000;
+    }
+
+    .story-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .story-text {
+      flex: 1.15;
+      padding: 34px 28px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    @media (min-width: 640px) {
+      .story-text {
+        padding: 44px 38px;
+      }
+    }
+
+    .story-text h2 {
+      text-align: left;
+      margin-bottom: 16px;
+      color: var(--navy-900);
+    }
+
+    .story-text p {
+      font-size: 1.02rem;
+      color: var(--ink-secondary);
+      line-height: 1.62;
+      margin-bottom: 16px;
+    }
+
+    .story-mantle-quote {
+      background: #f6efe2;
+      border-left: 4px solid var(--gold-500);
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-style: italic;
+      color: #172a4d;
+      font-size: 0.96rem;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    /* SECTION PRICING */
+    .section-pricing {
+      padding: 75px 0 85px;
+      background: var(--blue-canvas);
+      border-top: 1px solid var(--line);
+    }
+
+    .pricing-grid-side-by-side {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      max-width: 880px;
+      margin: 36px auto 0;
+    }
+
+    @media (min-width: 720px) {
+      .pricing-grid-side-by-side {
+        grid-template-columns: 1fr 1.08fr;
+        align-items: stretch;
+      }
+    }
+
+    .p-card {
+      background: #ffffff;
+      border: 2px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 30px 24px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+
+    .p-card:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .p-card.featured-card {
+      border: 2.5px solid var(--green-btn);
+      box-shadow: 0 14px 40px rgba(22, 163, 74, 0.16);
+      background: #ffffff;
+    }
+
+    .p-badge-seller {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold-gradient);
+      color: #0b1528;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      padding: 4px 18px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 4px 12px rgba(201, 152, 52, 0.4);
+      white-space: nowrap;
+    }
+
+    .p-pill-top {
+      display: inline-block;
+      margin: 0 auto 12px;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .p-pill-basic {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .p-pill-super {
+      background: #f0fdf4;
+      color: #16a34a;
+      border: 1px solid #86efac;
+    }
+
+    .p-title-red {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--navy-900);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .p-check-list {
+      list-style: none;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 18px 0 22px;
+      padding: 0;
+      flex-grow: 1;
+    }
+
+    .p-check-list li {
+      font-size: 0.91rem;
+      color: var(--ink-primary);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.45;
+    }
+
+    .p-check-list li::before {
+      content: "✓";
+      color: var(--green-btn);
+      font-weight: 900;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .p-bonus-box {
+      background: #fefce8;
+      border: 1.5px dashed #eab308;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .p-bonus-header {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: #a16207;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .p-bonus-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 0;
+    }
+
+    .p-bonus-items li {
+      font-size: 0.82rem;
+      color: #713f12;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .p-pricing-bottom {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .p-strike {
+      font-size: 0.86rem;
+      color: var(--ink-muted);
+      margin-bottom: 4px;
+    }
+
+    .p-strike s {
+      color: #ef4444;
+      font-weight: 700;
+    }
+
+    .p-big-price {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.35rem;
+      font-weight: 900;
+      color: var(--green-price);
+      line-height: 1.1;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+
+    .p-currency-note {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .p-btn-buy {
+      width: 100%;
+      background: var(--green-btn);
+      color: #ffffff;
+      padding: 15px 20px;
+      border-radius: var(--radius-full);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 900;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 18px rgba(22, 163, 74, 0.35);
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .p-btn-buy:hover {
+      background: var(--green-btn-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(22, 163, 74, 0.45);
+    }
+
+    .p-btn-super {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      box-shadow: 0 8px 24px rgba(22, 163, 74, 0.45);
+    }
+
+    /* SECTION GUARANTEE */
+    .section-guarantee {
+      padding: 60px 0;
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+    }
+
+    .guarantee-box {
+      background: #fdfbf7;
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 34px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+    }
+
+    @media (min-width: 720px) {
+      .guarantee-box {
+        flex-direction: row;
+        text-align: left;
+        padding: 40px 38px;
+        gap: 36px;
+      }
+    }
+
+    .guarantee-seal-badge {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFE082 0%, #D4A63C 50%, #B88628 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #0b1528;
+      box-shadow: 0 8px 24px rgba(201, 152, 52, 0.35);
+      border: 3px solid #ffffff;
+    }
+
+    .guarantee-seal-badge .days {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.1rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .guarantee-seal-badge .text {
+      font-size: 0.68rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .guarantee-text h2 {
+      text-align: left;
+      font-size: 1.45rem;
+      margin-bottom: 10px;
+    }
+
+    .guarantee-text p {
+      font-size: 0.96rem;
+      color: var(--ink-secondary);
+      line-height: 1.58;
+    }
+
+    /* ===================================================
+       SECTION TESTIMONIALS — INSTAGRAM STORIES CAROUSEL
+       =================================================== */
+    .section-testimonials {
+      padding: 72px 0 80px;
+      background: var(--blue-canvas);
+      border-top: 1px solid var(--line);
+      position: relative;
+    }
+
+    .ig-carousel-container {
+      width: 100%;
+      max-width: 1080px;
+      margin: 32px auto 0;
+      position: relative;
+      padding: 0 16px;
+    }
+
+    .ig-carousel-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .ig-carousel-track {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding: 12px 6px 20px;
+      scrollbar-width: none;
+    }
+
+    .ig-carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Individual slide */
+    .ig-carousel-slide {
+      flex: 0 0 260px;
+      max-width: 260px;
+      scroll-snap-align: center;
+      transition: transform 0.28s ease;
+    }
+
+    @media (min-width: 480px) {
+      .ig-carousel-slide {
+        flex: 0 0 280px;
+        max-width: 280px;
+      }
+    }
+
+    /* The Instagram Story Card (Vertical 9:16 portrait) */
+    .ig-story-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(15, 27, 51, 0.18), 0 2px 10px rgba(0, 0, 0, 0.08);
+      border: 2.5px solid rgba(255, 255, 255, 0.9);
+      background: #0b141a;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+      user-select: none;
+    }
+
+    .ig-story-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 44px rgba(15, 27, 51, 0.25), 0 0 22px rgba(201, 152, 52, 0.28);
+      border-color: var(--gold-400);
+    }
+
+    /* The photo background */
+    .ig-story-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      z-index: 1;
+      transition: transform 0.4s ease;
+    }
+
+    .ig-story-card:hover .ig-story-img {
+      transform: scale(1.03);
+    }
+
+    /* Gradient overlays */
+    .ig-story-overlay-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 95px;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.2) 65%, transparent 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .ig-story-overlay-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(to top, rgba(6, 12, 24, 0.88) 0%, rgba(6, 12, 24, 0.45) 60%, transparent 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Progress bars inside story */
+    .ig-story-bars {
+      position: relative;
+      z-index: 3;
+      padding: 10px 12px 0;
+      display: flex;
+      gap: 4px;
+    }
+
+    .ig-story-bar {
+      flex: 1;
+      height: 2.5px;
+      background: rgba(255, 255, 255, 0.45);
+      border-radius: 99px;
+    }
+
+    .ig-story-bar.active {
+      background: #ffffff;
+    }
+
+    /* Header on top of the story */
+    .ig-story-header {
+      position: relative;
+      z-index: 3;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ig-story-user {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .ig-story-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      padding: 2px;
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .ig-story-avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #0f1b33;
+      border: 1.5px solid #ffffff;
+      color: #ffd000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .ig-story-name-wrap {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .ig-story-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    .ig-story-location {
+      font-size: 0.68rem;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.2;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+    }
+
+    /* Instagram emoji icon badge on top right */
+    .ig-story-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    .ig-story-badge .ig-emoji {
+      font-size: 0.92rem;
+    }
+
+    /* Bottom caption sticker */
+    .ig-story-bottom {
+      position: relative;
+      z-index: 3;
+      padding: 12px 14px 16px;
+      text-align: left;
+    }
+
+    .ig-story-sticker {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      color: #0F1B33;
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.35;
+      padding: 8px 12px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+      border-left: 3px solid #dc2743;
+      display: inline-block;
+      max-width: 100%;
+    }
+
+    .ig-story-stars {
+      color: #f59e0b;
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      margin-top: 6px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Carousel navigation buttons (Prev / Next) */
+    .ig-carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid var(--gold-500);
+      color: var(--navy-900);
+      font-size: 1.25rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      box-shadow: 0 6px 20px rgba(15, 27, 51, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .ig-carousel-btn:hover {
+      background: var(--gold-gradient);
+      color: #060c18;
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 8px 24px rgba(201, 152, 52, 0.35);
+    }
+
+    .ig-carousel-btn.prev {
+      left: -8px;
+    }
+
+    .ig-carousel-btn.next {
+      right: -8px;
+    }
+
+    @media (max-width: 600px) {
+      .ig-carousel-btn {
+        display: none;
+      }
+    }
+
+    /* Carousel Dots */
+    .ig-carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .ig-carousel-dots .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(15, 27, 51, 0.22);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .ig-carousel-dots .dot.active {
+      width: 28px;
+      border-radius: 10px;
+      background: var(--gold-gradient);
+    }
+
+    /* SECTION FAQ */
+    .section-faq {
+      padding: 72px 0;
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+    }
+
+    .faq-accordion {
+      max-width: 760px;
+      margin: 36px auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: #fdfbf7;
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .faq-item[open] {
+      border-color: var(--gold-400);
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(15, 27, 51, 0.05);
+    }
+
+    .faq-question {
+      padding: 18px 20px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-question::after {
+      content: "+";
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold-500);
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+
+    .faq-item[open] .faq-question::after {
+      transform: rotate(45deg);
+      color: #8b1e2d;
+    }
+
+    .faq-answer {
+      padding: 0 20px 20px;
+      font-size: 0.94rem;
+      color: var(--ink-secondary);
+      line-height: 1.6;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    /* FINAL CTA */
+    .section-final-cta {
+      background: radial-gradient(circle at 50% 20%, #1a3c75 0%, #0F1B33 65%, #060c18 100%);
+      color: #ffffff;
+      padding: 75px 0 85px;
+      text-align: center;
+      border-top: 3px solid var(--gold-500);
+    }
+
+    .section-final-cta h2 {
+      color: #ffffff;
+      font-size: clamp(1.4rem, 4.2vw, 2.35rem);
+      margin-bottom: 16px;
+    }
+
+    .section-final-cta p {
+      font-size: 1.08rem;
+      color: #cbd5e1;
+      max-width: 660px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #040810;
+      color: #8c9bb4;
+      font-size: 0.84rem;
+      padding: 34px 18px 44px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      line-height: 1.6;
+    }
+
+    footer p {
+      margin-bottom: 8px;
+    }
+
+    footer .disclaimer {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 14px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* MODAL DE CHECKOUT STRIPE / DIGITAL DELIVERY */
+    .checkout-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(6, 12, 24, 0.78);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .checkout-modal-backdrop.active {
+      display: flex;
+    }
+
+    .checkout-modal-card {
+      background: #ffffff;
+      border-radius: var(--radius-xl);
+      max-width: 480px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+      border: 1.5px solid var(--line);
+      animation: modalFadeIn 0.25s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { transform: translateY(20px) scale(0.96); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .modal-hdr {
+      background: linear-gradient(135deg, #0F1B33 0%, #172a4d 100%);
+      color: #ffffff;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--gold-500);
+    }
+
+    .modal-hdr h3 {
+      color: #ffffff;
+      font-size: 1.05rem;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-close-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #ffffff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .modal-bdy {
+      padding: 22px 24px 26px;
+    }
+
+    .modal-order-summary {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-order-name {
+      font-weight: 800;
+      color: var(--navy-900);
+      font-size: 0.95rem;
+    }
+
+    .modal-order-sub {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+    }
+
+    .modal-order-price {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--green-price);
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1.5px solid var(--line);
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--ink-primary);
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--blue-accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .modal-submit-btn {
+      width: 100%;
+      background: var(--green-btn);
+      color: #ffffff;
+      border: none;
+      padding: 16px;
+      border-radius: var(--radius-full);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 900;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.2s;
+      box-shadow: 0 6px 18px rgba(22, 163, 74, 0.35);
+    }
+
+    .modal-submit-btn:hover {
+      background: var(--green-btn-hover);
+      transform: translateY(-2px);
+    }
+
+    .modal-security {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 14px;
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR — WINE RED URGENCY WITH US TIMEZONE COUNTDOWN -->
+  <aside class="top-bar" aria-label="Special Offer Announcement" id="top-urgency-bar">
+    <span>⚡ <span class="hl">Special offer ends today</span> — <span id="top-bar-date-us"></span></span>
+    <span class="top-bar-timer" id="top-bar-countdown">
+      ⏳ Offer closes in: <span class="timer-digit" id="tbc-h">00</span>h <span class="timer-digit" id="tbc-m">00</span>m <span class="timer-digit" id="tbc-s">00</span>s
+    </span>
+  </aside>
+
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-content">
+        
+        <!-- TOP PILL BADGE -->
+        <div class="hero-pill-badge">
+          <span>🌹</span>
+          <span>Patroness of the Americas · 2027 Edition</span>
+        </div>
+
+        <!-- MAIN HEADLINE -->
+        <h1>
+          <span class="hero-line-1">LIVE 2027 WITH</span>
+          <span class="hero-line-2">OUR LADY OF GUADALUPE</span>
+        </h1>
+
+        <!-- SUBHEADLINE -->
+        <p class="hero-lead-text">
+          A Catholic daily planner with the Gospel reference, the saint of the day and a clear path through Lent. One place for your prayer, your intentions and your year.
+        </p>
+
+        <!-- PRODUCT IMAGE HERO -->
+        <div class="hero-mid-image">
+          <picture>
+            <source srcset="assets/guadalupe_kit_oficial.webp" type="image/webp">
+            <img src="assets/guadalupe_kit_oficial.jpg" alt="2027 Catholic Daily Planner & Complete Kit Our Lady of Guadalupe Edition" width="600" height="600" fetchpriority="high">
+          </picture>
+          <div class="hero-badge-float">
+            <span>⭐</span>
+            <span>Printable PDF · Works on iPad & Tablets</span>
+          </div>
+        </div>
+
+        <!-- PRIMARY CALL TO ACTION -->
+        <div class="hero-cta-group">
+          <a class="btn btn-gold btn-pulse" href="#plans" id="cta-hero">
+            <span>👉 GET MY 2027 PLANNER</span>
+          </a>
+          <span class="btn-subtext">Delivered to your email · Instant download from only $9.99</span>
+        </div>
+
+        <!-- HERO BADGES -->
+        <div class="hero-badges-row">
+          <span class="hero-badge-pill">🔒 Secure checkout</span>
+          <span class="hero-badge-pill">📄 US Letter & Half-Letter</span>
+          <span class="hero-badge-pill">🛡️ 15-day money-back guarantee</span>
+        </div>
+
+        <!-- QUICK BULLET POINTS -->
+        <ul class="hero-checklist">
+          <li><strong>Daily liturgy:</strong> Gospel reference, saint or feast, liturgical color</li>
+          <li><strong>Lenten journey:</strong> Prayer, Fasting and Almsgiving tracker</li>
+          <li><strong>Cover:</strong> Our Lady of Guadalupe, Patroness of the Americas</li>
+          <li><strong>Digital & Printable:</strong> Use on iPad / tablets or print at home</li>
+        </ul>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- PAIN & EMPATHY SECTION -->
+  <section class="section-pain">
+    <div class="wrap narrow">
+      <div class="pain-card">
+        <span class="section-tag">SPIRITUAL REFLECTION</span>
+        <h2>DOES YOUR PRAYER LIFE SLIP BY FEBRUARY?</h2>
+        <p class="section-subtitle" style="margin-bottom: 20px;">
+          You start January with good intentions. Then life gets loud.
+        </p>
+
+        <div class="pain-list">
+          <div class="pain-item">
+            <span class="icon">✕</span>
+            <p><strong>Scattered intentions:</strong> The calendar is in one app, the readings in another, and your prayer intentions on scraps of paper.</p>
+          </div>
+          <div class="pain-item">
+            <span class="icon">✕</span>
+            <p><strong>Digital distractions:</strong> You pick up your phone to pray, and a notification pulls you away into noise and worry.</p>
+          </div>
+          <div class="pain-item">
+            <span class="icon">✕</span>
+            <p><strong>Lost seasons:</strong> Advent and Lent arrive and pass before you have a clear spiritual plan for them.</p>
+          </div>
+          <div class="pain-item">
+            <span class="icon">✕</span>
+            <p><strong>Fading momentum:</strong> Great initial resolve in January weakens as daily busyness pushes prayer to the margins.</p>
+          </div>
+        </div>
+
+        <div class="punch-box">
+          <p class="lead-quote">"IT ISN’T A LACK OF FAITH. IT’S A LACK OF ONE SIMPLE PLACE TO KEEP IT ALL."</p>
+          <p class="lead-sub">The 2027 Catholic Daily Planner is your peaceful daily sanctuary for prayer, liturgy, and purposeful living.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES / EVERYTHING YOU NEED -->
+  <section class="section-features" id="features">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">COMPLETE WALKTHROUGH</span>
+        <h2>EVERYTHING YOU NEED FOR THE YEAR</h2>
+        <p class="section-subtitle">No stack of notebooks. No app full of distractions. Just one simple place to walk with God.</p>
+      </div>
+
+      <div class="feature-grid">
+        <!-- Feature 1 -->
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">📖</div>
+          <h3>DAILY LITURGY 2027</h3>
+          <p>The Gospel reference for each day, the saint or feast being celebrated, and the liturgical color, so you can pray with the Church.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">✝️</div>
+          <h3>LENTEN JOURNEY</h3>
+          <p>A daily visual tracker from Ash Wednesday to Easter with dedicated boxes for Prayer, Fasting, and Almsgiving.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">🙏</div>
+          <h3>PRAYER INTENTIONS</h3>
+          <p>Space for the names of people you pray for, your petitions, and the graces you receive along the way.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">🌹</div>
+          <h3>GUIDE TO THE ROSARY</h3>
+          <p>Step-by-step prayers and all four sets of mysteries: Joyful, Luminous, Sorrowful, and Glorious.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">🕊️</div>
+          <h3>EXAMINATION OF CONSCIENCE</h3>
+          <p>A simple outline to prepare for Confession, with virtues to grow in and sins to bring to the sacrament.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">👑</div>
+          <h3>CONSECRATION TO MARY</h3>
+          <p>An opening page to entrust each month of 2027 to the loving care of Our Lady of Guadalupe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE SECTION: IN-USE & LENT -->
+  <section class="section-showcase">
+    <div class="wrap">
+      
+      <!-- Showcase 1: Morning Prayer in use -->
+      <div class="showcase-row">
+        <div class="showcase-media">
+          <picture>
+            <source srcset="assets/guadalupe_agenda_in_use.webp" type="image/webp">
+            <img src="assets/guadalupe_agenda_in_use.jpg" alt="Catholic Daily Planner open on breakfast table with coffee, rosary and morning sunlight" width="540" height="540" loading="lazy">
+          </picture>
+        </div>
+        <div class="showcase-text">
+          <span class="section-tag">QUIET MORNING REFLECTION</span>
+          <h2>THE PEACE OF STARTING YOUR DAY ROOTED IN GOD</h2>
+          <p>
+            Imagine waking up, brewing your morning coffee, and opening a sacred page designed to anchor your mind and heart. You read the day’s Gospel reference, set your holy intention, and begin the day under Our Lady’s protection before the world rushes in.
+          </p>
+          <ul class="showcase-bullets">
+            <li>
+              <span class="showcase-icon">✦</span>
+              <div class="bullet-content">
+                <strong>Screen-Free Simplicity:</strong>
+                <p>No blue light, no notifications, no algorithmic noise during your sacred time.</p>
+              </div>
+            </li>
+            <li>
+              <span class="showcase-icon">✦</span>
+              <div class="bullet-content">
+                <strong>A Record of God’s Faithfulness:</strong>
+                <p>Look back in December and witness every answered prayer and quiet grace.</p>
+              </div>
+            </li>
+            <li>
+              <span class="showcase-icon">✦</span>
+              <div class="bullet-content">
+                <strong>A Thoughtful Catholic Gift:</strong>
+                <p>Print copies to bind and bless your spouse, godchildren, parents, or parish friends.</p>
+              </div>
+            </li>
+          </ul>
+          <div>
+            <a class="btn btn-blue" href="#plans">CHOOSE YOUR PLANNER</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Showcase 2: Lenten Journey -->
+      <div class="showcase-row reverse">
+        <div class="showcase-media">
+          <picture>
+            <source srcset="assets/guadalupe_lenten_tracker.webp" type="image/webp">
+            <img src="assets/guadalupe_lenten_tracker.jpg" alt="Lenten Journey 2027 page preview with daily boxes for Prayer, Fasting and Almsgiving" width="540" height="540" loading="lazy">
+          </picture>
+        </div>
+        <div class="showcase-text">
+          <span class="section-tag">LENTEN DISCIPLINE</span>
+          <h2>MAKE A PLAN FOR LENT, NOT JUST GOOD INTENTIONS</h2>
+          <p>
+            Lent 2027 begins on Ash Wednesday, February 10, and Easter is March 28. The Lenten journey gives you a daily map, so your sacrifices don’t fade after the first week.
+          </p>
+          <ul class="showcase-bullets">
+            <li>
+              <span class="showcase-icon">✝</span>
+              <div class="bullet-content">
+                <strong>Prayer:</strong>
+                <p>Track your daily prayer and spiritual reading consistency.</p>
+              </div>
+            </li>
+            <li>
+              <span class="showcase-icon">🍞</span>
+              <div class="bullet-content">
+                <strong>Fasting:</strong>
+                <p>Mark each sacrifice you offer to unite yourself with the Cross.</p>
+              </div>
+            </li>
+            <li>
+              <span class="showcase-icon">❤️</span>
+              <div class="bullet-content">
+                <strong>Almsgiving:</strong>
+                <p>Note every intentional act of charity and sacrificial giving.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section-how" id="how-it-works">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">SIMPLE PROCESS</span>
+        <h2>HOW IT WORKS</h2>
+        <p class="section-subtitle">Instant access, completely flexible. Use it digitally or print it your way.</p>
+      </div>
+
+      <div class="how-steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h4>DOWNLOAD YOUR PDF</h4>
+          <p>Once your payment is confirmed, a secure download link arrives in your email inbox immediately.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h4>PRINT IT OR KEEP IT DIGITAL</h4>
+          <p>Files come in US Letter (8.5×11") and Half-Letter (5.5×8.5") with margins ready for hole punching and binding.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h4>BIND IT YOUR WAY</h4>
+          <p>Use a binder, spiral or disc binding at a local print shop, or open it in GoodNotes, Notability or Acrobat on your iPad.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h4>OPEN IT EACH MORNING</h4>
+          <p>Read the day’s Gospel, set your intention, and begin the day with Our Lady leading you to Christ.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 DEVOTIONAL BONUSES -->
+  <section class="section-bonuses" id="bonuses">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag dark">EXCLUSIVE GIFTS</span>
+        <h2 class="dark-title">5 DEVOTIONAL BONUSES IN THE COMPLETE BUNDLE</h2>
+        <p class="section-subtitle dark">
+          Printable extras to support your prayer all year. Included 100% free with the Complete Bundle!
+        </p>
+      </div>
+
+      <!-- COMPLETE BUNDLE LEAD MOCKUP -->
+      <div class="bonus-lead-hero">
+        <picture>
+          <source srcset="assets/guadalupe_kit_oficial.webp" type="image/webp">
+          <img src="assets/guadalupe_kit_oficial.jpg" alt="Complete Bundle: 2027 Catholic Daily Planner plus 5 Devotional Bonuses" width="620" height="620" loading="lazy">
+        </picture>
+      </div>
+
+      <!-- CARDS GRID -->
+      <div class="bonus-cards-grid">
+        
+        <!-- Bonus 1: Bookmarks -->
+        <div class="bonus-card">
+          <div class="bonus-card-img">
+            <picture>
+              <source srcset="assets/guadalupe_bonus_bookmarks.webp" type="image/webp">
+              <img src="assets/guadalupe_bonus_bookmarks.jpg" alt="12 Catholic bookmarks featuring Our Lady of Guadalupe, Sacred Heart and saints" width="380" height="380" loading="lazy">
+            </picture>
+          </div>
+          <span class="bonus-tag">BONUS 01</span>
+          <h3>12 CATHOLIC BOOKMARKS</h3>
+          <p>High-resolution designs to print and laminate, featuring Our Lady of Guadalupe, the Sacred Heart, and favorite saints.</p>
+          <div class="bonus-price-row">
+            <span>Value: <span class="cross">$12.00</span></span>
+            <span class="free">FREE IN BUNDLE</span>
+          </div>
+        </div>
+
+        <!-- Bonus 2: Stations of the Cross -->
+        <div class="bonus-card">
+          <div class="bonus-card-img">
+            <picture>
+              <source srcset="assets/guadalupe_bonus_viasacra.webp" type="image/webp">
+              <img src="assets/guadalupe_bonus_viasacra.jpg" alt="Illustrated Stations of the Cross with meditations by St Alphonsus Liguori" width="380" height="380" loading="lazy">
+            </picture>
+          </div>
+          <span class="bonus-tag">BONUS 02</span>
+          <h3>ILLUSTRATED STATIONS OF THE CROSS</h3>
+          <p>The 14 stations with classic sacred art and meditations by St. Alphonsus Liguori, for Lent and Friday devotion.</p>
+          <div class="bonus-price-row">
+            <span>Value: <span class="cross">$15.00</span></span>
+            <span class="free">FREE IN BUNDLE</span>
+          </div>
+        </div>
+
+        <!-- Bonus 3: Liturgical Wall Calendar -->
+        <div class="bonus-card">
+          <div class="bonus-card-img">
+            <picture>
+              <source srcset="assets/guadalupe_bonus_calendar.webp" type="image/webp">
+              <img src="assets/guadalupe_bonus_calendar.jpg" alt="2027 Liturgical Wall Calendar Letter-size poster" width="380" height="380" loading="lazy">
+            </picture>
+          </div>
+          <span class="bonus-tag">BONUS 03</span>
+          <h3>2027 LITURGICAL WALL CALENDAR</h3>
+          <p>A color Letter-size poster with solemnities, feasts, and fast days marked, for your home prayer corner or fridge.</p>
+          <div class="bonus-price-row">
+            <span>Value: <span class="cross">$10.00</span></span>
+            <span class="free">FREE IN BUNDLE</span>
+          </div>
+        </div>
+
+        <!-- Bonus 4: Bible in a Year -->
+        <div class="bonus-card">
+          <div class="bonus-card-img">
+            <picture>
+              <source srcset="assets/guadalupe_bonus_biblia.webp" type="image/webp">
+              <img src="assets/guadalupe_bonus_biblia.jpg" alt="Bible in a Year reading plan checklist" width="380" height="380" loading="lazy">
+            </picture>
+          </div>
+          <span class="bonus-tag">BONUS 04</span>
+          <h3>BIBLE IN A YEAR PLAN</h3>
+          <p>A daily reading schedule from Genesis to Revelation, with clear checkboxes to follow your Scripture progress.</p>
+          <div class="bonus-price-row">
+            <span>Value: <span class="cross">$12.00</span></span>
+            <span class="free">FREE IN BUNDLE</span>
+          </div>
+        </div>
+
+        <!-- Bonus 5: Novenas & Prayers Booklet -->
+        <div class="bonus-card">
+          <div class="bonus-card-img">
+            <picture>
+              <source srcset="assets/guadalupe_bonus_novenas.webp" type="image/webp">
+              <img src="assets/guadalupe_bonus_novenas.jpg" alt="Novenas and prayers booklet with Our Lady of Guadalupe and Divine Mercy Chaplet" width="380" height="380" loading="lazy">
+            </picture>
+          </div>
+          <span class="bonus-tag">BONUS 05</span>
+          <h3>NOVENAS AND PRAYERS BOOKLET</h3>
+          <p>Novena to Our Lady of Guadalupe, Divine Mercy Chaplet, and prayers to St. Michael, St. Thérèse, and St. Joseph.</p>
+          <div class="bonus-price-row">
+            <span>Value: <span class="cross">$14.00</span></span>
+            <span class="free">FREE IN BUNDLE</span>
+          </div>
+        </div>
+
+        <!-- Value Highlight Card -->
+        <div class="bonus-card economy-highlight">
+          <span class="bonus-tag" style="background:#ffffff; color:#0b1528;">TOTAL VALUE</span>
+          <h3 style="color:#ffffff;">OVER $63 IN DEVOTIONAL GIFTS</h3>
+          <p style="color:#e2ecf9; font-size: 0.95rem;">
+            When you choose the Complete Bundle for just <strong>$14.99</strong>, you get all 5 printable devotional bonuses included for only <strong>$5.00 more</strong>!
+          </p>
+          <div class="bonus-price-row" style="border-top-color: rgba(255,255,255,0.25);">
+            <span style="color:#ffffff; font-weight:700;">Save over 75%</span>
+            <span class="free" style="color:#ffe28a;">100% INCLUDED</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY OUR LADY OF GUADALUPE SECTION -->
+  <section class="section-guadalupe-story">
+    <div class="wrap">
+      <div class="guadalupe-story-card">
+        <div class="story-media">
+          <picture>
+            <source srcset="assets/guadalupe_tepeyac_story.webp" type="image/webp">
+            <img src="assets/guadalupe_tepeyac_story.jpg" alt="Our Lady of Guadalupe appearing to Saint Juan Diego with roses on Tepeyac Hill" width="560" height="560" loading="lazy">
+          </picture>
+        </div>
+        <div class="story-text">
+          <span class="section-tag">PATRONESS OF THE AMERICAS</span>
+          <h2>WHY OUR LADY OF GUADALUPE</h2>
+          <p>
+            In December 1531, Mary appeared to St. Juan Diego on Tepeyac Hill, near present-day Mexico City. Her image on his tilma has drawn pilgrims for nearly five centuries. She is honored as Patroness of the Americas, and her feast is celebrated on December 12.
+          </p>
+          <p>
+            This edition places the year under her mantle. Open it each morning, bring her your intentions, and let her lead you to her Son.
+          </p>
+          <div class="story-mantle-quote">
+            "Am I not here, who am your Mother? Are you not under my shadow and protection?"
+            <span style="display:block; font-size:0.8rem; margin-top:4px; font-weight:700; text-align:right;">— Words of Our Lady to St. Juan Diego</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS — INSTAGRAM STORIES CAROUSEL -->
+  <section class="section-testimonials" id="testimonials">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">COMMUNITY OF FAITH</span>
+        <h2>DEVOTEES SHARING THEIR 2027 JOURNEY</h2>
+        <p class="section-subtitle">Real Catholics across the country holding their Guadalupe planners and growing in daily prayer:</p>
+      </div>
+    </div>
+
+    <div class="ig-carousel-container">
+      <div class="ig-carousel-wrapper">
+        <button class="ig-carousel-btn prev" aria-label="Previous story" id="ig-carousel-prev">&#10094;</button>
+        
+        <div class="ig-carousel-track" id="ig-carousel-track">
+
+          <!-- STORY 1 -->
+          <div class="ig-carousel-slide">
+            <div class="ig-story-card">
+              <picture>
+                <source srcset="assets/story_guadalupe_1.webp" type="image/webp">
+                <img src="assets/story_guadalupe_1.jpg" alt="Maria Morales holding her 2027 Guadalupe planner" class="ig-story-img" loading="lazy">
+              </picture>
+              <div class="ig-story-overlay-top"></div>
+              <div class="ig-story-overlay-bottom"></div>
+              
+              <div>
+                <div class="ig-story-bars">
+                  <div class="ig-story-bar active"></div>
+                  <div class="ig-story-bar"></div>
+                  <div class="ig-story-bar"></div>
+                </div>
+                <div class="ig-story-header">
+                  <div class="ig-story-user">
+                    <div class="ig-story-avatar">
+                      <div class="ig-story-avatar-inner">MM</div>
+                    </div>
+                    <div class="ig-story-name-wrap">
+                      <span class="ig-story-name">Maria Morales</span>
+                      <span class="ig-story-location">San Antonio, TX</span>
+                    </div>
+                  </div>
+                  <div class="ig-story-badge">
+                    <span class="ig-emoji">📸</span> Instagram
+                  </div>
+                </div>
+              </div>
+
+              <div class="ig-story-bottom">
+                <div class="ig-story-sticker">
+                  "Ready for 2027 under Our Lady's mantle ✨🙏"
+                </div>
+                <div class="ig-story-stars">★★★★★</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STORY 2 -->
+          <div class="ig-carousel-slide">
+            <div class="ig-story-card">
+              <picture>
+                <source srcset="assets/story_guadalupe_2.webp" type="image/webp">
+                <img src="assets/story_guadalupe_2.jpg" alt="David and Laura Miller morning prayer setup" class="ig-story-img" loading="lazy">
+              </picture>
+              <div class="ig-story-overlay-top"></div>
+              <div class="ig-story-overlay-bottom"></div>
+
+              <div>
+                <div class="ig-story-bars">
+                  <div class="ig-story-bar"></div>
+                  <div class="ig-story-bar active"></div>
+                  <div class="ig-story-bar"></div>
+                </div>
+                <div class="ig-story-header">
+                  <div class="ig-story-user">
+                    <div class="ig-story-avatar">
+                      <div class="ig-story-avatar-inner">DM</div>
+                    </div>
+                    <div class="ig-story-name-wrap">
+                      <span class="ig-story-name">David &amp; Laura Miller</span>
+                      <span class="ig-story-location">Denver, CO</span>
+                    </div>
+                  </div>
+                  <div class="ig-story-badge">
+                    <span class="ig-emoji">📸</span> Instagram
+                  </div>
+                </div>
+              </div>
+
+              <div class="ig-story-bottom">
+                <div class="ig-story-sticker">
+                  "Daily liturgy + morning Rosary. Pure peace 🌹"
+                </div>
+                <div class="ig-story-stars">★★★★★</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STORY 3 -->
+          <div class="ig-carousel-slide">
+            <div class="ig-story-card">
+              <picture>
+                <source srcset="assets/story_guadalupe_3.webp" type="image/webp">
+                <img src="assets/story_guadalupe_3.jpg" alt="Theresa Henderson with printed Half-Letter planner" class="ig-story-img" loading="lazy">
+              </picture>
+              <div class="ig-story-overlay-top"></div>
+              <div class="ig-story-overlay-bottom"></div>
+
+              <div>
+                <div class="ig-story-bars">
+                  <div class="ig-story-bar"></div>
+                  <div class="ig-story-bar"></div>
+                  <div class="ig-story-bar active"></div>
+                </div>
+                <div class="ig-story-header">
+                  <div class="ig-story-user">
+                    <div class="ig-story-avatar">
+                      <div class="ig-story-avatar-inner">TH</div>
+                    </div>
+                    <div class="ig-story-name-wrap">
+                      <span class="ig-story-name">Theresa Henderson</span>
+                      <span class="ig-story-location">Phoenix, AZ</span>
+                    </div>
+                  </div>
+                  <div class="ig-story-badge">
+                    <span class="ig-emoji">📸</span> Instagram
+                  </div>
+                </div>
+              </div>
+
+              <div class="ig-story-bottom">
+                <div class="ig-story-sticker">
+                  "Printed Half-Letter at Office Depot — in love! 📖"
+                </div>
+                <div class="ig-story-stars">★★★★★</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STORY 4 -->
+          <div class="ig-carousel-slide">
+            <div class="ig-story-card">
+              <picture>
+                <source srcset="assets/story_guadalupe_4.webp" type="image/webp">
+                <img src="assets/story_guadalupe_4.jpg" alt="Elena Brooks praying with planner in church" class="ig-story-img" loading="lazy">
+              </picture>
+              <div class="ig-story-overlay-top"></div>
+              <div class="ig-story-overlay-bottom"></div>
+
+              <div>
+                <div class="ig-story-bars">
+                  <div class="ig-story-bar active"></div>
+                  <div class="ig-story-bar"></div>
+                  <div class="ig-story-bar"></div>
+                </div>
+                <div class="ig-story-header">
+                  <div class="ig-story-user">
+                    <div class="ig-story-avatar">
+                      <div class="ig-story-avatar-inner">EB</div>
+                    </div>
+                    <div class="ig-story-name-wrap">
+                      <span class="ig-story-name">Elena Brooks</span>
+                      <span class="ig-story-location">Dallas, TX</span>
+                    </div>
+                  </div>
+                  <div class="ig-story-badge">
+                    <span class="ig-emoji">📸</span> Instagram
+                  </div>
+                </div>
+              </div>
+
+              <div class="ig-story-bottom">
+                <div class="ig-story-sticker">
+                  "Daily Mass and holy hour companion ⛪🕊️"
+                </div>
+                <div class="ig-story-stars">★★★★★</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STORY 5 -->
+          <div class="ig-carousel-slide">
+            <div class="ig-story-card">
+              <picture>
+                <source srcset="assets/story_guadalupe_5.webp" type="image/webp">
+                <img src="assets/story_guadalupe_5.jpg" alt="James Pelletier morning desk reflection" class="ig-story-img" loading="lazy">
+              </picture>
+              <div class="ig-story-overlay-top"></div>
+              <div class="ig-story-overlay-bottom"></div>
+
+              <div>
+                <div class="ig-story-bars">
+                  <div class="ig-story-bar"></div>
+                  <div class="ig-story-bar active"></div>
+                  <div class="ig-story-bar"></div>
+                </div>
+                <div class="ig-story-header">
+                  <div class="ig-story-user">
+                    <div class="ig-story-avatar">
+                      <div class="ig-story-avatar-inner">JP</div>
+                    </div>
+                    <div class="ig-story-name-wrap">
+                      <span class="ig-story-name">James Pelletier</span>
+                      <span class="ig-story-location">Chicago, IL</span>
+                    </div>
+                  </div>
+                  <div class="ig-story-badge">
+                    <span class="ig-emoji">📸</span> Instagram
+                  </div>
+                </div>
+              </div>
+
+              <div class="ig-story-bottom">
+                <div class="ig-story-sticker">
+                  "Gospel reference & intentions every morning ☕"
+                </div>
+                <div class="ig-story-stars">★★★★★</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STORY 6 -->
+          <div class="ig-carousel-slide">
+            <div class="ig-story-card">
+              <picture>
+                <source srcset="assets/story_guadalupe_6.webp" type="image/webp">
+                <img src="assets/story_guadalupe_6.jpg" alt="Sofia Ramirez with complete Guadalupe Catholic bundle" class="ig-story-img" loading="lazy">
+              </picture>
+              <div class="ig-story-overlay-top"></div>
+              <div class="ig-story-overlay-bottom"></div>
+
+              <div>
+                <div class="ig-story-bars">
+                  <div class="ig-story-bar"></div>
+                  <div class="ig-story-bar"></div>
+                  <div class="ig-story-bar active"></div>
+                </div>
+                <div class="ig-story-header">
+                  <div class="ig-story-user">
+                    <div class="ig-story-avatar">
+                      <div class="ig-story-avatar-inner">SR</div>
+                    </div>
+                    <div class="ig-story-name-wrap">
+                      <span class="ig-story-name">Sofia Ramirez</span>
+                      <span class="ig-story-location">Miami, FL</span>
+                    </div>
+                  </div>
+                  <div class="ig-story-badge">
+                    <span class="ig-emoji">📸</span> Instagram
+                  </div>
+                </div>
+              </div>
+
+              <div class="ig-story-bottom">
+                <div class="ig-story-sticker">
+                  "The complete bundle is truly a blessing 🎁"
+                </div>
+                <div class="ig-story-stars">★★★★★</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /ig-carousel-track -->
+
+        <button class="ig-carousel-btn next" aria-label="Next story" id="ig-carousel-next">&#10095;</button>
+      </div><!-- /ig-carousel-wrapper -->
+
+      <div class="ig-carousel-dots" id="ig-carousel-dots" role="tablist" aria-label="Story dots navigation">
+        <button class="dot active" aria-label="Story 1"></button>
+        <button class="dot" aria-label="Story 2"></button>
+        <button class="dot" aria-label="Story 3"></button>
+        <button class="dot" aria-label="Story 4"></button>
+        <button class="dot" aria-label="Story 5"></button>
+        <button class="dot" aria-label="Story 6"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING SECTION -->
+  <section class="section-pricing" id="plans">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">CHOOSE YOUR PLANNER</span>
+        <h2>CHOOSE YOUR 2027 PLANNER</h2>
+        <p class="section-subtitle">Instant digital download. Yours to keep, print, and reuse forever.</p>
+      </div>
+
+      <div class="pricing-grid-side-by-side">
+        
+        <!-- CARD 1: PLANNER ONLY -->
+        <div class="p-card">
+          <div class="p-pill-top p-pill-basic">STANDARD EDITION</div>
+          <div class="p-title-red">Planner Only</div>
+          
+          <ul class="p-check-list">
+            <li>2027 planner PDF with daily liturgy</li>
+            <li>Gospel reference & saint of the day</li>
+            <li>Lenten journey with tracker</li>
+            <li>Consecration to Our Lady of Guadalupe</li>
+            <li>Guide to the Holy Rosary</li>
+            <li>Examination of conscience</li>
+            <li>US Letter and Half-Letter files</li>
+            <li>Delivered instantly to your email</li>
+          </ul>
+
+          <div class="p-pricing-bottom">
+            <div class="p-strike">Reg. <s>$19.99</s></div>
+            <div class="p-big-price">$9.99</div>
+            <div class="p-currency-note">USD · One-Time Payment</div>
+            <a href="https://pay.hotmart.com/H108233213U?checkoutMode=10" class="p-btn-buy" id="btn-buy-basic">
+              BUY NOW
+            </a>
+          </div>
+        </div>
+
+        <!-- CARD 2: COMPLETE BUNDLE (FEATURED) -->
+        <div class="p-card featured-card">
+          <div class="p-badge-seller">★ MOST POPULAR</div>
+          <div class="p-pill-top p-pill-super">BEST VALUE</div>
+          <div class="p-title-red">Complete Bundle</div>
+
+          <ul class="p-check-list">
+            <li><strong>Everything in Planner Only:</strong></li>
+            <li>2027 planner PDF with daily liturgy (365 days)</li>
+            <li>Lenten journey with daily tracker</li>
+            <li>US Letter and Half-Letter print-ready files</li>
+            <li>Instant email delivery + lifetime updates</li>
+          </ul>
+
+          <div class="p-bonus-box">
+            <span class="p-bonus-header">🎁 INCLUDES ALL 5 DEVOTIONAL BONUSES:</span>
+            <ul class="p-bonus-items">
+              <li>✨ 12 Catholic bookmarks</li>
+              <li>✨ Illustrated Stations of the Cross</li>
+              <li>✨ 2027 liturgical wall calendar</li>
+              <li>✨ Bible in a Year plan</li>
+              <li>✨ Novenas and prayers booklet</li>
+            </ul>
+          </div>
+
+          <div class="p-pricing-bottom">
+            <div class="p-strike">Total Value <s>$82.99</s></div>
+            <div class="p-big-price">$14.99</div>
+            <div class="p-currency-note">USD · One-Time Payment</div>
+            <a href="https://pay.hotmart.com/U108234271O?checkoutMode=10" class="p-btn-buy p-btn-super" id="btn-buy-bundle">
+              BUY THE COMPLETE BUNDLE
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 15-DAY GUARANTEE -->
+  <section class="section-guarantee">
+    <div class="wrap">
+      <div class="guarantee-box">
+        <div class="guarantee-seal-badge">
+          <span class="days">15</span>
+          <span class="text">Days Guarantee</span>
+        </div>
+        <div class="guarantee-text">
+          <span class="section-tag">RISK-FREE PROMISE</span>
+          <h2>15-DAY MONEY-BACK GUARANTEE</h2>
+          <p>
+            Download it, flip through every page, and print a test copy. If it isn’t what you hoped for, email us within <strong>15 days</strong> and we’ll refund your payment in full. No questions asked.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FREQUENTLY ASKED QUESTIONS -->
+  <section class="section-faq">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">GOT QUESTIONS?</span>
+        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+        <p class="section-subtitle">Everything you need to know about your 2027 Catholic daily planner:</p>
+      </div>
+
+      <div class="faq-accordion">
+        <details class="faq-item" open>
+          <summary class="faq-question">How do I receive my files?</summary>
+          <div class="faq-answer">
+            Immediately upon completing your checkout, an automated confirmation email with your direct, secure download link is sent to the email address you provide. You can download and save the PDF files to your computer, tablet, or phone immediately.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">What’s the difference between the two options?</summary>
+          <div class="faq-answer">
+            The <strong>Planner Only ($9.99)</strong> includes the complete 2027 daily planner PDF with daily liturgy, the Lenten journey tracker, Rosary guide, and Consecration. The <strong>Complete Bundle ($14.99)</strong> includes everything in the planner plus all <strong>5 Devotional Bonuses</strong>: the 12 Catholic bookmarks, Illustrated Stations of the Cross, 2027 liturgical wall calendar poster, Bible in a Year reading plan, and the Novenas & prayers booklet.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Does it include the full text of the daily readings?</summary>
+          <div class="faq-answer">
+            The planner provides the exact Catholic liturgical references for the daily Gospel, along with the saint or feast of the day and liturgical color. This keeps the planner compact, practical, and portable, allowing you to read directly from your personal Bible or missal and reflect on the day's readings.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Can I print it more than once?</summary>
+          <div class="faq-answer">
+            Yes! Your purchase grants you lifetime personal use. You may print a personal copy for home, another for your office or desk, or print copies for your immediate household.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Can I use it on my iPad or tablet?</summary>
+          <div class="faq-answer">
+            Absolutely! The files are standard, high-resolution PDF documents that work seamlessly with digital note-taking apps such as <strong>GoodNotes, Notability, Samsung Notes, Penly, Xodo, and Adobe Acrobat</strong> using an Apple Pencil or stylus.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Is this a physical product?</summary>
+          <div class="faq-answer">
+            No, this is an <strong>instant digital download</strong>. You receive high-resolution printable PDF files formatted for both standard <strong>US Letter (8.5×11")</strong> and <strong>Half-Letter (5.5×8.5")</strong>. This means no waiting for shipping, no damaged mail, and the complete freedom to print at home, take it to your favorite local print shop (FedEx, Staples, Office Depot), or use it digitally on your tablet!
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA SECTION -->
+  <section class="section-final-cta">
+    <div class="wrap narrow">
+      <span class="section-tag dark">ENTRUST YOUR YEAR</span>
+      <h2>BEGIN 2027 UNDER HER MANTLE</h2>
+      <p>
+        Get your Catholic planner today and be ready before Advent turns into Ordinary Time. Walk every single day of 2027 in communion with the saints and the Church.
+      </p>
+      <a class="btn btn-gold btn-pulse" href="#plans">
+        👉 CHOOSE MY PLANNER
+      </a>
+      <span class="btn-subtext">
+        Instant PDF download · US Letter & Half-Letter · 15-day money-back guarantee
+      </span>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <p><strong>LIVE 2027 WITH OUR LADY OF GUADALUPE · CATHOLIC DAILY PLANNER</strong></p>
+      <p>© 2026 Catholic Daily Planner. All rights reserved.</p>
+      <p class="disclaimer">
+        This is an independent product and is not affiliated with or endorsed by any diocese or the USCCB.
+      </p>
+    </div>
+  </footer>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="checkout-modal-backdrop" id="checkout-modal">
+    <div class="checkout-modal-card">
+      <div class="modal-hdr">
+        <h3>🔒 Secure Digital Checkout</h3>
+        <button type="button" class="modal-close-btn" onclick="closeCheckoutModal()">✕</button>
+      </div>
+      <div class="modal-bdy">
+        <div class="modal-order-summary">
+          <div>
+            <div class="modal-order-name" id="modal-product-title">Complete Bundle (2027 Planner + 5 Bonuses)</div>
+            <div class="modal-order-sub">Instant PDF Download · US Letter & Half-Letter</div>
+          </div>
+          <div class="modal-order-price" id="modal-product-price">$14.99</div>
+        </div>
+
+        <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)">
+          <div class="form-group">
+            <label for="buyer-name">Your Full Name *</label>
+            <input type="text" id="buyer-name" placeholder="e.g. Maria Morales" required>
+          </div>
+          <div class="form-group">
+            <label for="buyer-email">Your Email Address (where your files will be sent) *</label>
+            <input type="email" id="buyer-email" placeholder="e.g. maria@example.com" required>
+          </div>
+          
+          <button type="submit" class="modal-submit-btn" id="modal-btn-submit">
+            PROCEED TO SECURE PAYMENT
+          </button>
+        </form>
+
+        <div class="modal-security">
+          <span>🔒 256-Bit Encryption</span>
+          <span>⚡ Instant Email Delivery</span>
+          <span>🛡️ 15-Day Guarantee</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    /* ===== TOP BAR: US TIMEZONE COUNTDOWN ===== */
+    (function() {
+      function pad(n) { return String(n).padStart(2, '0'); }
+
+      /* Format today's date in US Eastern time */
+      function getUSDate() {
+        var now = new Date();
+        return now.toLocaleDateString('en-US', {
+          timeZone: 'America/New_York',
+          weekday: 'long', month: 'long', day: 'numeric'
+        });
+      }
+
+      /* Calculate seconds remaining until midnight US Eastern */
+      function getSecondsUntilUSMidnight() {
+        var now = new Date();
+        /* Get current time string in ET */
+        var etStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
+        var etNow = new Date(etStr);
+        var etMidnight = new Date(etNow);
+        etMidnight.setHours(23, 59, 59, 999);
+        return Math.max(0, Math.floor((etMidnight - etNow) / 1000));
+      }
+
+      var dateEl = document.getElementById('top-bar-date-us');
+      var hEl = document.getElementById('tbc-h');
+      var mEl = document.getElementById('tbc-m');
+      var sEl = document.getElementById('tbc-s');
+
+      if (dateEl) dateEl.textContent = getUSDate();
+
+      function tickBar() {
+        var sec = getSecondsUntilUSMidnight();
+        var h = Math.floor(sec / 3600);
+        var m = Math.floor((sec % 3600) / 60);
+        var s = sec % 60;
+        if (hEl) hEl.textContent = pad(h);
+        if (mEl) mEl.textContent = pad(m);
+        if (sEl) sEl.textContent = pad(s);
+      }
+      tickBar();
+      setInterval(tickBar, 1000);
+    })();
+
+    /* ===== INSTAGRAM STORIES AUTO-SCROLLING CAROUSEL ===== */
+    (function() {
+      var track = document.getElementById('ig-carousel-track');
+      var prevBtn = document.getElementById('ig-carousel-prev');
+      var nextBtn = document.getElementById('ig-carousel-next');
+      var dots = document.querySelectorAll('#ig-carousel-dots .dot');
+      var slides = document.querySelectorAll('.ig-carousel-slide');
+      if (!track || !slides.length) return;
+
+      function getSlideStep() {
+        var slide = slides[0];
+        var gap = 18;
+        return slide ? slide.offsetWidth + gap : 298;
+      }
+
+      function scrollNext() {
+        var maxScroll = track.scrollWidth - track.clientWidth;
+        if (track.scrollLeft >= maxScroll - 20) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: getSlideStep(), behavior: 'smooth' });
+        }
+      }
+
+      function scrollPrev() {
+        if (track.scrollLeft <= 20) {
+          var maxScroll = track.scrollWidth - track.clientWidth;
+          track.scrollTo({ left: maxScroll, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: -getSlideStep(), behavior: 'smooth' });
+        }
+      }
+
+      if (nextBtn) nextBtn.addEventListener('click', function() { scrollNext(); resetAuto(); });
+      if (prevBtn) prevBtn.addEventListener('click', function() { scrollPrev(); resetAuto(); });
+
+      dots.forEach(function(dot, idx) {
+        dot.addEventListener('click', function() {
+          if (slides[idx]) {
+            slides[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            resetAuto();
+          }
+        });
+      });
+
+      // Update active dot on scroll
+      function updateDots() {
+        var center = track.scrollLeft + track.clientWidth / 2;
+        var closestIdx = 0;
+        var minDiff = Infinity;
+        slides.forEach(function(slide, idx) {
+          var slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+          var diff = Math.abs(center - slideCenter);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIdx = idx;
+          }
+        });
+        dots.forEach(function(d, i) {
+          d.classList.toggle('active', i === closestIdx);
+        });
+      }
+      track.addEventListener('scroll', updateDots, { passive: true });
+
+      // Auto-scrolling every 3.2 seconds
+      var autoTimer = null;
+      function startAuto() {
+        if (autoTimer) clearInterval(autoTimer);
+        autoTimer = setInterval(scrollNext, 3200);
+      }
+      function stopAuto() {
+        if (autoTimer) {
+          clearInterval(autoTimer);
+          autoTimer = null;
+        }
+      }
+      function resetAuto() {
+        stopAuto();
+        startAuto();
+      }
+
+      track.addEventListener('mouseenter', stopAuto);
+      track.addEventListener('mouseleave', startAuto);
+      track.addEventListener('touchstart', stopAuto, { passive: true });
+      track.addEventListener('touchend', startAuto, { passive: true });
+
+      startAuto();
+    })();
+
+    var HOTMART_LINKS = {
+      basic: 'https://pay.hotmart.com/H108233213U?checkoutMode=10',
+      bundle: 'https://pay.hotmart.com/U108234271O?checkoutMode=10'
+    };
+
+    function openCheckoutModal(plan) {
+      var url = HOTMART_LINKS[plan] || HOTMART_LINKS.bundle;
+      window.location.href = url;
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkout-modal').classList.remove('active');
+    }
+
+    // Close on outside click
+    document.getElementById('checkout-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeCheckoutModal();
+      }
+    });
+
+    function handleCheckoutSubmit(e) {
+      e.preventDefault();
+      var url = HOTMART_LINKS[currentPlan] || HOTMART_LINKS.bundle;
+      window.location.href = url;
+    }
+  </script>
+
+</body>
+</html>

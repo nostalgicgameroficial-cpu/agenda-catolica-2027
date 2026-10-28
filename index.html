@@ -4992,6 +4992,64 @@
           currentOrderId = pixData.order_id;
           isPaymentProcessing = false;
 
+          // ─── DISPARAR WEBHOOK TRACK GO (PIX GERADO - WAITING_PAYMENT) ───
+          try {
+            function getParamVal(key) {
+              var urlP = new URLSearchParams(window.location.search);
+              if (urlP.get(key)) return urlP.get(key);
+              try {
+                var tg = localStorage.getItem('tg_' + key);
+                if (tg) return tg;
+              } catch (e) {}
+              if (tracking && tracking.utmParams && tracking.utmParams[key]) {
+                return tracking.utmParams[key];
+              }
+              return '';
+            }
+
+            var cleanPhone = (phone || '').replace(/\D/g, '');
+            var utmSource = getParamVal('utm_source');
+            var utmCampaign = getParamVal('utm_campaign');
+            var utmMedium = getParamVal('utm_medium');
+            var utmContent = getParamVal('utm_content');
+            var utmTerm = getParamVal('utm_term');
+            var srcParam = getParamVal('src') || getParamVal('sck') || '';
+
+            var webhookPayload = {
+              id: String(pixData.transaction_id || ''),
+              amount: typeof pixData.amount_cents === 'number'
+                ? Number((pixData.amount_cents / 100).toFixed(2))
+                : (pricing && pricing.total ? Number(pricing.total.toFixed(2)) : 0),
+              status: 'waiting_payment',
+              product_name: 'Agenda Católica 2027',
+              customer_name: name || '',
+              customer_email: email || '',
+              customer_phone: cleanPhone,
+              utm_source: utmSource,
+              utm_campaign: utmCampaign,
+              utm_medium: utmMedium,
+              utm_content: utmContent,
+              utm_term: utmTerm,
+              src: srcParam
+            };
+
+            fetch('https://ucsccgihiomuwgqngept.supabase.co/functions/v1/webhook-tracking?platform=pushinpay', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(webhookPayload)
+            })
+            .then(function(whRes) {
+              console.log('[Track Go Webhook] Pix gerado (waiting_payment) enviado com sucesso:', whRes.status);
+            })
+            .catch(function(whErr) {
+              console.warn('[Track Go Webhook] Erro ao enviar webhook:', whErr);
+            });
+          } catch (whE) {
+            console.warn('[Track Go Webhook] Exceção ao preparar webhook:', whE);
+          }
+
           // Inicia o polling seguro
           startPixPolling();
 
