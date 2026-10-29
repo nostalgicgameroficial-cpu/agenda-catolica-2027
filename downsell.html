@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Meta Pixel Code -->
+  <!-- Meta Pixel Code com Correspondência Avançada Manual -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -22,8 +22,50 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1133049763020624');
-    fbq('track', 'PageView');
+
+    (function() {
+      var p = new URLSearchParams(window.location.search);
+      function getStored(k) {
+        try { return localStorage.getItem(k) || sessionStorage.getItem(k) || ''; } catch(e) { return ''; }
+      }
+      function getCookieVal(n) {
+        var m = document.cookie.match(new RegExp('(^|;\\s*)' + n + '=([^;]+)'));
+        return m ? decodeURIComponent(m[2]) : null;
+      }
+
+      var rawEmail = p.get('email') || p.get('buyer_email') || getStored('agenda_customer_email') || getStored('tg_user_email') || '';
+      var rawPhone = p.get('phone') || p.get('mobile') || getStored('agenda_customer_phone') || getStored('tg_user_phone') || '';
+      var rawName  = p.get('name')  || p.get('buyer_name') || getStored('agenda_customer_name') || getStored('tg_user_name') || '';
+      var orderId  = p.get('order_id') || getStored('agenda_last_order_id') || '';
+
+      var advancedMatching = {};
+      if (rawEmail && rawEmail.indexOf('@') !== -1) {
+        advancedMatching.em = rawEmail.trim().toLowerCase();
+      }
+      if (rawPhone) {
+        var cleanPhone = rawPhone.replace(/\D/g, '');
+        if (cleanPhone.length >= 10 && !cleanPhone.startsWith('55')) cleanPhone = '55' + cleanPhone;
+        if (cleanPhone.length >= 10) advancedMatching.ph = cleanPhone;
+      }
+      if (rawName) {
+        var cleanName = rawName.trim().toLowerCase().replace(/[^\p{L}\s]/gu, '');
+        var parts = cleanName.split(/\s+/);
+        if (parts.length > 0 && parts[0]) {
+          advancedMatching.fn = parts[0];
+          if (parts.length > 1) advancedMatching.ln = parts.slice(1).join(' ');
+        }
+      }
+      if (orderId) advancedMatching.external_id = orderId;
+
+      var fbp = getCookieVal('_fbp') || getStored('tg_fbp');
+      var fbc = getCookieVal('_fbc') || getStored('tg_fbc') || (p.get('fbclid') ? ('fb.1.' + Date.now() + '.' + p.get('fbclid')) : null);
+      if (fbp) advancedMatching.fbp = fbp;
+      if (fbc) advancedMatching.fbc = fbc;
+
+      fbq('init', '1133049763020624', advancedMatching);
+      var pvEventId = 'pv_dw_' + (orderId ? orderId : Date.now());
+      fbq('track', 'PageView', {}, { eventID: pvEventId });
+    })();
   </script>
   <noscript>
     <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1133049763020624&ev=PageView&noscript=1" />

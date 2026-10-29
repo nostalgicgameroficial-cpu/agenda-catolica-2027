@@ -14,7 +14,7 @@
     var PRODUCT_NAME = "Agenda Católica 2027 Física";
     var PIXEL_ID = "1133049763020624";
     var ENDPOINT = "https://ucsccgihiomuwgqngept.supabase.co/functions/v1/webhook-tracking";
-    var EMBED_PIXEL = true;
+    var EMBED_PIXEL = false; // Desativado aqui para usar a inicialização estruturada abaixo com Correspondência Avançada
 
     // 1. Utilitários de Cookies
     function getCookie(n) {
@@ -289,11 +289,33 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
-    // Init com dados avançados do usuário
+    // Init com dados avançados do usuário (Correspondência Avançada Manual)
     var initData = {};
     if (externalId) initData.external_id = externalId;
     if (fbc) initData.fbc = fbc;
     if (fbp) initData.fbp = fbp;
+
+    // Capturar dados de identificação prévios se disponíveis
+    (function() {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var uEmail = p.get('email') || p.get('buyer_email') || localStorage.getItem('agenda_customer_email') || localStorage.getItem('tg_user_email') || '';
+        var uPhone = p.get('phone') || p.get('mobile') || localStorage.getItem('agenda_customer_phone') || localStorage.getItem('tg_user_phone') || '';
+        var uName = p.get('name') || p.get('buyer_name') || localStorage.getItem('agenda_customer_name') || localStorage.getItem('tg_user_name') || '';
+
+        if (uEmail && uEmail.indexOf('@') !== -1) initData.em = uEmail.trim().toLowerCase();
+        if (uPhone) {
+          var cPh = uPhone.replace(/\D/g, '');
+          if (cPh.length >= 10 && !cPh.startsWith('55')) cPh = '55' + cPh;
+          if (cPh.length >= 10) initData.ph = cPh;
+        }
+        if (uName) {
+          var nParts = uName.trim().toLowerCase().replace(/[^\p{L}\s]/gu, '').split(/\s+/);
+          if (nParts[0]) initData.fn = nParts[0];
+          if (nParts.length > 1) initData.ln = nParts.slice(1).join(' ');
+        }
+      } catch (e) {}
+    })();
 
     fbq('init', PIXEL_ID, initData);
 
@@ -560,17 +582,23 @@
       color: #cbd8ef;
     }
 
-    /* BARRA SUPERIOR SIMPLES, FINA E RÁPIDA DE LER NO MOBILE */
+    /* BARRA SUPERIOR EM VINHO LITÚRGICO #8B1E2D COM LETRAS BRANCAS NÍTIDAS */
     .top-bar {
-      background: linear-gradient(90deg, #7a1518 0%, #a82025 50%, #7a1518 100%);
-      color: #ffffff;
-      font-size: 0.82rem;
+      background: #8B1E2D;
+      color: #FFFFFF;
+      font-size: 0.84rem;
       font-weight: 800;
       text-align: center;
-      padding: 9px 14px;
+      padding: 10px 14px;
       border-bottom: 2px solid var(--gold-500);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
+      text-shadow: none;
+    }
+
+    .top-bar span {
+      color: #FFFFFF;
+      text-shadow: none;
     }
 
     /* BOTÕES */
@@ -3174,10 +3202,10 @@
       border: 3px solid #86efac;
     }
   
-    /* BARRA VERMELHA FIXA DE URGÊNCIA COM CRONÔMETRO */
+    /* BARRA FIXA DE URGÊNCIA COM CRONÔMETRO APÓS GERAR O PIX */
     .checkout-urgent-bar.active { display: flex; }
     .checkout-urgent-bar {
-      background: linear-gradient(90deg, #dc2626 0%, #b91c1c 100%);
+      background: #8B1E2D;
       display: none;
       align-items: center;
       justify-content: center;
@@ -3186,7 +3214,14 @@
       position: sticky;
       top: 0;
       z-index: 30;
-      box-shadow: 0 2px 10px rgba(220, 38, 38, 0.35);
+      padding: 10px 14px;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #FFFFFF;
+      font-size: 0.84rem;
+      font-weight: 600;
+      border-bottom: 2px solid var(--gold-500);
+      box-shadow: 0 4px 14px rgba(139, 30, 45, 0.35);
+      text-shadow: none;
     }
 
     .checkout-urgent-bar .urgent-icon {
@@ -3195,20 +3230,30 @@
     }
 
     .checkout-urgent-bar .urgent-msg {
-      line-height: 1.3;
+      line-height: 1.35;
+      color: #FFFFFF;
+      font-family: 'Poppins', sans-serif;
+      text-shadow: none;
+    }
+
+    .checkout-urgent-bar .urgent-msg strong {
+      color: #FFD000;
+      font-weight: 800;
+      text-shadow: none;
     }
 
     .checkout-urgent-bar .urgent-timer {
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 2px 8px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 208, 0, 0.5);
+      padding: 3px 8px;
       border-radius: 6px;
-      font-family: 'Inter', monospace;
+      font-family: 'Poppins', monospace;
       font-size: 0.95rem;
-      font-weight: 900;
-      color: #fef08a;
+      font-weight: 800;
+      color: #FFD000;
       letter-spacing: 0.05em;
       white-space: nowrap;
+      text-shadow: none;
     }
 
     @keyframes urgentPulse {
@@ -3219,12 +3264,13 @@
     @media (max-width: 640px) {
       .checkout-urgent-bar {
         font-size: 0.78rem;
-        padding: 8px 10px;
+        padding: 9px 10px;
         gap: 6px;
         flex-wrap: wrap;
+        line-height: 1.3;
       }
       .checkout-urgent-bar .urgent-timer {
-        font-size: 0.88rem;
+        font-size: 0.85rem;
         padding: 2px 6px;
       }
     }
@@ -3238,6 +3284,7 @@
       margin: 14px 0 16px;
       text-align: left;
       box-shadow: 0 4px 16px rgba(12, 74, 110, 0.05);
+      font-family: 'Poppins', sans-serif;
     }
 
     .pix-calm-header {
@@ -3256,6 +3303,7 @@
       font-size: 0.95rem;
       font-weight: 800;
       color: #0369a1;
+      font-family: 'Poppins', sans-serif;
     }
 
     .pix-calm-desc {
@@ -3263,6 +3311,7 @@
       color: #334155;
       line-height: 1.48;
       margin-bottom: 10px;
+      font-family: 'Poppins', sans-serif;
     }
 
     .pix-calm-desc strong {
@@ -3275,27 +3324,42 @@
     }
 
     .pix-calm-warning-box {
-      background: #e0f2fe;
-      border-left: 3.5px solid #0284c7;
-      border-radius: 8px;
-      padding: 9px 12px;
+      background: #8B1E2D;
+      border: 1px solid rgba(255, 208, 0, 0.35);
+      border-left: 4px solid #FFD000;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      text-shadow: none;
+      box-shadow: 0 4px 12px rgba(139, 30, 45, 0.25);
     }
 
     .pix-calm-warn-title {
       display: flex;
       align-items: center;
       gap: 6px;
-      color: #075985;
-      font-size: 0.83rem;
+      color: #FFFFFF;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.84rem;
       font-weight: 800;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      text-shadow: none;
     }
 
     .pix-calm-warn-text {
       font-size: 0.8rem;
-      color: #0c4a6e;
-      line-height: 1.4;
+      color: #FFFFFF;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.45;
       margin: 0;
+      text-shadow: none;
+    }
+
+    .pix-calm-warn-text strong {
+      color: #FFD000;
+      font-weight: 800;
     }
 
     .pix-calm-warn-text strong {

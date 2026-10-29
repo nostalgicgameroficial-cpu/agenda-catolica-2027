@@ -14,7 +14,7 @@
     var PRODUCT_NAME = "Agenda Católica 2027 Física";
     var PIXEL_ID = "1133049763020624";
     var ENDPOINT = "https://ucsccgihiomuwgqngept.supabase.co/functions/v1/webhook-tracking";
-    var EMBED_PIXEL = true;
+    var EMBED_PIXEL = false; // Desativado aqui para usar a inicialização estruturada abaixo com Correspondência Avançada
 
     // 1. Utilitários de Cookies
     function getCookie(n) {
@@ -289,11 +289,33 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
-    // Init com dados avançados do usuário
+    // Init com dados avançados do usuário (Correspondência Avançada Manual)
     var initData = {};
     if (externalId) initData.external_id = externalId;
     if (fbc) initData.fbc = fbc;
     if (fbp) initData.fbp = fbp;
+
+    // Capturar dados de identificação prévios se disponíveis
+    (function() {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var uEmail = p.get('email') || p.get('buyer_email') || localStorage.getItem('agenda_customer_email') || localStorage.getItem('tg_user_email') || '';
+        var uPhone = p.get('phone') || p.get('mobile') || localStorage.getItem('agenda_customer_phone') || localStorage.getItem('tg_user_phone') || '';
+        var uName = p.get('name') || p.get('buyer_name') || localStorage.getItem('agenda_customer_name') || localStorage.getItem('tg_user_name') || '';
+
+        if (uEmail && uEmail.indexOf('@') !== -1) initData.em = uEmail.trim().toLowerCase();
+        if (uPhone) {
+          var cPh = uPhone.replace(/\D/g, '');
+          if (cPh.length >= 10 && !cPh.startsWith('55')) cPh = '55' + cPh;
+          if (cPh.length >= 10) initData.ph = cPh;
+        }
+        if (uName) {
+          var nParts = uName.trim().toLowerCase().replace(/[^\p{L}\s]/gu, '').split(/\s+/);
+          if (nParts[0]) initData.fn = nParts[0];
+          if (nParts.length > 1) initData.ln = nParts.slice(1).join(' ');
+        }
+      } catch (e) {}
+    })();
 
     fbq('init', PIXEL_ID, initData);
 

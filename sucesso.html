@@ -16,7 +16,7 @@
     var PRODUCT_NAME = "Meu Produto Principal";
     var PIXEL_ID = "1133049763020624";
     var ENDPOINT = "https://ucsccgihiomuwgqngept.supabase.co/functions/v1/webhook-tracking";
-    var EMBED_PIXEL = true;
+    var EMBED_PIXEL = false; // Desativado aqui para usar a inicialização com Correspondência Avançada Manual abaixo
 
     // 1. Utilitários de Cookies
     function getCookie(n) {
@@ -166,7 +166,7 @@
   })();
   </script>
 
-  <!-- Meta Pixel + Conversions Deduplication -->
+  <!-- Meta Pixel Code com Correspondência Avançada Manual -->
   <script>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -176,8 +176,78 @@
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1133049763020624');
-  fbq('track', 'PageView');
+
+  (function() {
+    // 1. Capturar dados do comprador (URL ou Armazenamento Local)
+    var p = new URLSearchParams(window.location.search);
+    function getStored(k) {
+      try { return localStorage.getItem(k) || sessionStorage.getItem(k) || ''; } catch(e) { return ''; }
+    }
+    function getCookieVal(n) {
+      var m = document.cookie.match(new RegExp('(^|;\\s*)' + n + '=([^;]+)'));
+      return m ? decodeURIComponent(m[2]) : null;
+    }
+
+    var rawEmail = p.get('email') || p.get('buyer_email') || p.get('customer_email') || p.get('e') || getStored('agenda_customer_email') || getStored('tg_user_email') || '';
+    var rawPhone = p.get('phone') || p.get('mobile') || p.get('telephone') || p.get('tel') || p.get('cellphone') || getStored('agenda_customer_phone') || getStored('tg_user_phone') || '';
+    var rawName  = p.get('name')  || p.get('buyer_name') || p.get('customer_name') || p.get('n') || getStored('agenda_customer_name') || getStored('tg_user_name') || '';
+    var orderId  = p.get('order_id') || p.get('order') || p.get('transaction_id') || p.get('id') || getStored('agenda_last_order_id') || '';
+
+    // Salvar localmente para consistência caso a página seja recarregada
+    try {
+      if (rawEmail) localStorage.setItem('tg_user_email', rawEmail);
+      if (rawPhone) localStorage.setItem('tg_user_phone', rawPhone);
+      if (rawName)  localStorage.setItem('tg_user_name', rawName);
+      if (orderId)  localStorage.setItem('agenda_last_order_id', orderId);
+    } catch(e) {}
+
+    // 2. Normalização estrita segundo as diretrizes oficiais da Meta
+    var advancedMatching = {};
+
+    if (rawEmail && rawEmail.indexOf('@') !== -1) {
+      advancedMatching.em = rawEmail.trim().toLowerCase();
+    }
+
+    if (rawPhone) {
+      var cleanDigits = rawPhone.replace(/\D/g, '');
+      if (cleanDigits.length >= 10 && !cleanDigits.startsWith('55')) {
+        cleanDigits = '55' + cleanDigits;
+      }
+      if (cleanDigits.length >= 10) {
+        advancedMatching.ph = cleanDigits;
+      }
+    }
+
+    if (rawName) {
+      var cleanName = rawName.trim().toLowerCase().replace(/[^\p{L}\s]/gu, '');
+      var parts = cleanName.split(/\s+/);
+      if (parts.length > 0 && parts[0]) {
+        advancedMatching.fn = parts[0];
+        if (parts.length > 1) {
+          advancedMatching.ln = parts.slice(1).join(' ');
+        }
+      }
+    }
+
+    if (orderId) {
+      advancedMatching.external_id = orderId;
+    }
+
+    // Incluir cookies primários Meta se disponíveis
+    var fbp = getCookieVal('_fbp') || getStored('tg_fbp');
+    var fbc = getCookieVal('_fbc') || getStored('tg_fbc') || (p.get('fbclid') ? ('fb.1.' + Date.now() + '.' + p.get('fbclid')) : null);
+    if (fbp) advancedMatching.fbp = fbp;
+    if (fbc) advancedMatching.fbc = fbc;
+
+    window.metaAdvancedMatching = advancedMatching;
+
+    // 3. Inicialização com os dados de correspondência avançada manual
+    fbq('init', '1133049763020624', advancedMatching);
+
+    // PageView com eventID para deduplicação CAPI
+    var pageViewEventId = 'pv_suc_' + (orderId ? orderId : Date.now());
+    fbq('track', 'PageView', {}, { eventID: pageViewEventId });
+  })();
   </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1133049763020624&ev=PageView&noscript=1"
@@ -624,7 +694,9 @@
 
     // Dispara Purchase via Pixel com deduplicação segura (eventID: purchase_orderId)
     // Se o evento já foi processado no modal ou pelo CAPI, a Meta deduplica perfeitamente
-    var orderId = params.get('order_id');
+    var orderId = params.get('order_id') || (function() {
+      try { return localStorage.getItem('agenda_last_order_id') || sessionStorage.getItem('agenda_last_order_id') || ''; } catch(e) { return ''; }
+    })();
     var purchaseEventId = orderId ? ('purchase_' + orderId) : ('eid_pur_' + Date.now());
     var baseValue = 27.90;
     var basePackageName = 'Agenda Católica 2027 + 5 Bônus Exclusivos';
