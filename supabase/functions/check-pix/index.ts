@@ -133,10 +133,10 @@ async function sendDeliveryEmail(order: {
   const firstName = order.customer_name ? order.customer_name.split(' ')[0] : 'Irmão(ã) em Cristo';
   
   let packageName = isCompleto ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
-  if (isUpsell) {
-    packageName = 'Mega Coleção de 150 Quadros Sacros em Alta Definição';
+  if (order.plan === 'fisica' || isUpsell) {
+    packageName = 'Agenda Católica 2027 Física Personalizada (Edição Impressa)';
   } else if (isDownsell) {
-    packageName = 'Seleção Especial de 50 Quadros Sacros em Alta Definição';
+    packageName = 'Calendário Litúrgico 2027 com Moldura de Parede';
   }
   if (hasOrderBump) {
     packageName += ' + 50 Histórias dos Santos para Colorir';
@@ -385,12 +385,12 @@ serve(async (req: Request) => {
                 let contentIds = [order.plan === 'completo' ? 'agenda-catolica-2027-completa' : 'agenda-catolica-2027-basica'];
                 let contentName = order.plan === 'completo' ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
 
-                if (isUpsell) {
-                  contentIds = ['quadros-sacros-150'];
-                  contentName = 'Mega Coleção 150 Quadros Sacros em Alta Definição';
+                if (isUpsell || order.plan === 'fisica') {
+                  contentIds = ['agenda-catolica-2027-fisica'];
+                  contentName = 'Agenda Católica 2027 Física Personalizada (Edição Impressa)';
                 } else if (isDownsell) {
-                  contentIds = ['quadros-sacros-50'];
-                  contentName = 'Seleção 50 Quadros Sacros em Alta Definição';
+                  contentIds = ['calendario-liturgico-moldura-29'];
+                  contentName = 'Calendário Litúrgico 2027 com Moldura de Parede';
                 }
                 if (hasOrderBump) {
                   contentIds.push('caderno-colorir-santos');

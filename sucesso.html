@@ -570,37 +570,37 @@
         </div>
       </div>
 
-      <!-- SEÇÃO DO UPSELL: 150 QUADROS SACROS -->
+      <!-- SEÇÃO DO UPSELL: AGENDA FÍSICA PERSONALIZADA -->
       <div id="upsell-download-section" style="display: none; margin-top: 20px; padding-top: 18px; border-top: 2px dashed #16a34a;">
-        <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: 12px; padding: 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 1.4rem;">🖼️</span>
+        <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: 12px; padding: 16px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 1.6rem;">📦</span>
           <div>
-            <strong style="color: #166534; font-size: 0.95rem; display: block;">Sua Mega Coleção com 150 Quadros Sacros está liberada!</strong>
-            <span style="color: #15803d; font-size: 0.82rem;">Arquivos em 300 DPI prontos para moldura nos formatos A3, A4, A5 e 10x15cm.</span>
+            <strong style="color: #166534; font-size: 1rem; display: block;">Seu Pedido da Agenda Física Personalizada foi Confirmado!</strong>
+            <span style="color: #15803d; font-size: 0.85rem;">Sua agenda com capa dura e nome gravado já está sendo produzida com muito carinho. O código de rastreamento do envio será enviado no seu WhatsApp e e-mail.</span>
           </div>
         </div>
 
         <div class="file-item">
           <div class="file-info">
-            <div class="file-icon gold">🖼️</div>
+            <div class="file-icon gold">📖</div>
             <div class="file-text">
-              <h4>Mega Coleção: 150 Quadros Sacros em Altíssima Definição</h4>
-              <span>Pasta no Google Drive com todas as 150 artes organizadas por categorias</span>
+              <h4>Agenda Católica 2027 Física (Edição Impressa & Encadernada)</h4>
+              <span>Envio com Frete Grátis para o endereço cadastrado · Rastreio via Correios</span>
             </div>
           </div>
-          <a class="btn-download" href="https://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=sharing" target="_blank">
-            ⬇ ACESSAR QUADROS NO DRIVE
-          </a>
+          <span style="background: #dcfce7; color: #15803d; font-weight: 800; font-size: 0.8rem; padding: 6px 12px; border-radius: 50px;">
+            ✓ EM PRODUÇÃO
+          </span>
         </div>
       </div>
 
-      <!-- SEÇÃO DE 50 QUADROS SACROS (ORDER BUMP OU DOWNSELL) -->
+      <!-- SEÇÃO DO DOWNSELL: CALENDÁRIO COM MOLDURA DE PAREDE -->
       <div id="downsell-download-section" style="display: none; margin-top: 20px; padding-top: 18px; border-top: 2px dashed #f97316;">
-        <div style="background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: 12px; padding: 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 1.4rem;">🖼️</span>
+        <div style="background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: 12px; padding: 16px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 1.6rem;">🖼️</span>
           <div>
-            <strong style="color: #9a3412; font-size: 0.95rem; display: block;">Sua Coleção com 50 Quadros Sacros está liberada!</strong>
-            <span style="color: #c2410c; font-size: 0.82rem;">As 50 artes sacras em altíssima definição (300 DPI) prontas para moldura e impressão.</span>
+            <strong style="color: #9a3412; font-size: 1rem; display: block;">Seu Calendário Litúrgico com Moldura de Parede foi Confirmado!</strong>
+            <span style="color: #c2410c; font-size: 0.85rem;">Seu quadro sacro emoldurado já está em fase de embalagem e será despachado com Frete Grátis para o seu endereço.</span>
           </div>
         </div>
 
@@ -608,13 +608,13 @@
           <div class="file-info">
             <div class="file-icon gold">🖼️</div>
             <div class="file-text">
-              <h4>Coleção Especial: 50 Quadros Sacros em Alta Definição</h4>
-              <span>Pasta no Google Drive com todas as artes em alta qualidade prontas para imprimir</span>
+              <h4>Calendário Litúrgico 2027 com Moldura de Parede</h4>
+              <span>Envio com Frete Grátis para o seu endereço · Pronto para pendurar</span>
             </div>
           </div>
-          <a class="btn-download" href="https://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=drive_link" target="_blank">
-            ⬇ ACESSAR 50 QUADROS NO DRIVE
-          </a>
+          <span style="background: #ffedd5; color: #9a3412; font-weight: 800; font-size: 0.8rem; padding: 6px 12px; border-radius: 50px;">
+            ✓ EM PREPARAÇÃO
+          </span>
         </div>
       </div>
 
@@ -723,14 +723,14 @@
 
     var packageName = hasOrderBumpParam ? (basePackageName + ' + Caderno de Colorir dos Santos') : basePackageName;
     if (hasOrderBumpQuadrosParam) packageName += ' + 90 Quadros Sacros';
-    if (hasUpsell) packageName += ' + 150 Quadros Sacros';
-    if (hasDownsell && !hasOrderBumpQuadrosParam) packageName += ' + 50 Quadros Sacros';
+    if (hasUpsell) packageName += ' + Agenda Física Personalizada';
+    if (hasDownsell && !hasOrderBumpQuadrosParam) packageName += ' + Calendário com Moldura';
 
     var contentIds = [defaultContentId];
     if (hasOrderBumpParam) contentIds.push('caderno-colorir-santos');
     if (hasOrderBumpQuadrosParam) contentIds.push('quadros-sacros-50');
-    if (hasUpsell) contentIds.push('quadros-sacros-150');
-    if (hasDownsell && !hasOrderBumpQuadrosParam) contentIds.push('quadros-sacros-50');
+    if (hasUpsell) contentIds.push('agenda-catolica-2027-fisica');
+    if (hasDownsell && !hasOrderBumpQuadrosParam) contentIds.push('calendario-liturgico-moldura-29');
 
     if (typeof fbq === 'function' && orderId) {
       // Dispara apenas com pedido válido e evita duplicação ao recarregar

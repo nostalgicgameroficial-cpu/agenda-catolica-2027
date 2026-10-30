@@ -134,15 +134,15 @@ async function sendDeliveryEmail(order: {
   const hasOrderBumpQuadros = !!order.order_bump_quadros;
   const firstName = order.customer_name ? order.customer_name.split(' ')[0] : 'Irmão(ã) em Cristo';
   
+  const isPhysicalDelivery = isFisica || isUpsell || isDownsell;
+
   let packageName = isCompleto ? 'Agenda Católica 2027 + 5 Bônus Exclusivos' : 'Agenda Católica 2027 Básica';
-  if (isFisica) {
-    packageName = 'Agenda Católica 2027 Física (Edição Impressa) + Bônus Devocionais';
+  if (isFisica || isUpsell) {
+    packageName = 'Agenda Católica 2027 Física Personalizada (Edição Impressa) + Bônus Devocionais';
   } else if (isDigitalPromo) {
     packageName = 'Agenda Católica 2027 em PDF + 5 Bônus Exclusivos';
-  } else if (isUpsell) {
-    packageName = 'Mega Coleção de 150 Quadros Sacros em Alta Definição';
   } else if (isDownsell) {
-    packageName = 'Seleção Especial de 50 Quadros Sacros em Alta Definição';
+    packageName = 'Calendário Litúrgico 2027 com Moldura de Parede';
   }
   if (hasOrderBump) {
     packageName += ' + 50 Histórias dos Santos para Colorir';
@@ -152,9 +152,7 @@ async function sendDeliveryEmail(order: {
   }
 
   let driveLink = 'https://drive.google.com/drive/folders/1z-omzWDOf-s8h2XWGW_BCgCagGWU5vtq?usp=sharing';
-  if (isUpsell || isDownsell) {
-    driveLink = 'https://drive.google.com/drive/folders/1UdG6owMKkbJDjlJ4m9Uw4grCpm5JOZyy?usp=sharing';
-  } else if (order.plan === 'basico') {
+  if (order.plan === 'basico') {
     driveLink = 'https://drive.google.com/drive/folders/1vstC1uvFR11TZIg5zXpILGT-khchTjJp?usp=sharing';
   }
 
@@ -175,11 +173,11 @@ async function sendDeliveryEmail(order: {
         <table role="presentation" width="100%" style="max-width: 580px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 32px 24px; text-align: left;">
           <tr>
             <td>
-              <h2 style="color: #0c1830; font-size: 20px; font-weight: 700; margin: 0 0 16px;">${isFisica ? 'Pedido da Agenda Física Confirmado! 📦🙏' : 'Seus arquivos estão disponíveis 🙏✨'}</h2>
+              <h2 style="color: #0c1830; font-size: 20px; font-weight: 700; margin: 0 0 16px;">${isPhysicalDelivery ? 'Pedido Confirmado! 📦🙏' : 'Seus arquivos estão disponíveis 🙏✨'}</h2>
               <p style="font-size: 15px; line-height: 1.6; margin: 0 0 16px;">Olá, <strong>${firstName}</strong>!</p>
               <p style="font-size: 15px; line-height: 1.6; margin: 0 0 20px;">
-                ${isFisica 
-                  ? `Confirmamos com sucesso o pagamento da sua <strong>${packageName}</strong>!<br><br>📦 <strong>Sua Agenda Física está sendo preparada</strong> com muito carinho e bênçãos para envio ao seu endereço informado. Assim que for despachada, você receberá as atualizações e código de rastreamento no WhatsApp e neste e-mail.<br><br>🎁 <em>Enquanto aguarda a entrega, você já tem <strong>acesso digital imediato</strong> a todos os arquivos e bônus no Google Drive abaixo:</em>`
+                ${isPhysicalDelivery 
+                  ? `Confirmamos com sucesso o pagamento da sua <strong>${packageName}</strong>!<br><br>📦 <strong>Seu pedido físico está sendo preparado</strong> com muito carinho e bênçãos para envio ao seu endereço informado. Assim que for despachado, você receberá as atualizações e código de rastreamento no WhatsApp e neste e-mail.<br><br>🎁 <em>Enquanto aguarda a entrega, você já tem <strong>acesso digital imediato</strong> a todos os arquivos e bônus no Google Drive abaixo:</em>`
                   : `Confirmamos o seu pagamento da <strong>${packageName}</strong>. Seus arquivos digitais já estão prontos para consulta e download na pasta oficial do Google Drive.`}
               </p>
               
@@ -570,11 +568,11 @@ serve(async (req: Request) => {
         contentIds = ['agenda-catolica-2027-basica'];
         contentName = 'Agenda Católica 2027 Básica';
       } else if (isUpsell) {
-        contentIds = ['quadros-sacros-150'];
-        contentName = 'Mega Coleção 150 Quadros Sacros em Alta Definição';
+        contentIds = ['agenda-catolica-2027-fisica'];
+        contentName = 'Agenda Católica 2027 Física Personalizada (Edição Impressa)';
       } else if (isDownsell) {
-        contentIds = ['quadros-sacros-50'];
-        contentName = 'Seleção 50 Quadros Sacros em Alta Definição';
+        contentIds = ['calendario-liturgico-moldura-29'];
+        contentName = 'Calendário Litúrgico 2027 com Moldura de Parede';
       }
       if (hasOrderBump) {
         contentIds.push('caderno-colorir-santos');

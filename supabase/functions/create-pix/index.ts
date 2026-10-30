@@ -131,10 +131,10 @@ async function sendPixPendingEmail(order: {
     baseName = 'Agenda Católica 2027 em PDF + 5 Bônus';
   } else if (order.plan === 'basico') {
     baseName = 'Agenda Católica 2027 Básica';
-  } else if (order.plan === 'upsell') {
-    baseName = 'Mega Coleção 150 Quadros Sacros em Alta Definição';
+  } else if (order.plan === 'upsell' || order.plan === 'fisica') {
+    baseName = 'Agenda Católica 2027 Física Personalizada (Edição Impressa)';
   } else if (order.plan === 'downsell') {
-    baseName = 'Seleção 50 Quadros Sacros em Alta Definição';
+    baseName = 'Calendário Litúrgico 2027 com Moldura de Parede';
   }
   let packageName = baseName;
   if (order.order_bump) packageName += ' + Caderno de Colorir dos Santos';
@@ -303,16 +303,16 @@ serve(async (req) => {
       baseCents = 1990;
       contentName = 'Agenda Católica 2027 Básica';
       contentIds = ['agenda-catolica-2027-basica'];
-    } else if (plan === 'upsell') {
-      selectedPlan = 'upsell';
+    } else if (plan === 'upsell' || plan === 'fisica') {
+      selectedPlan = 'fisica';
       baseCents = 6790;
-      contentName = 'Mega Coleção 150 Quadros Sacros em Alta Definição';
-      contentIds = ['quadros-sacros-150'];
+      contentName = 'Agenda Católica 2027 Física Personalizada (Edição Impressa)';
+      contentIds = ['agenda-catolica-2027-fisica'];
     } else if (plan === 'downsell') {
       selectedPlan = 'downsell';
       baseCents = 2990;
-      contentName = 'Seleção 50 Quadros Sacros em Alta Definição';
-      contentIds = ['quadros-sacros-50'];
+      contentName = 'Calendário Litúrgico 2027 com Moldura de Parede';
+      contentIds = ['calendario-liturgico-moldura-29'];
     }
 
     const hasOrderBump = (selectedPlan === 'basico' || selectedPlan === 'completo' || selectedPlan === 'fisica' || selectedPlan === 'digital_promo') && 
