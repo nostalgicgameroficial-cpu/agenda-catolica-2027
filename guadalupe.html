@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Live 2027 with Our Lady of Guadalupe | 2027 Catholic Daily Planner (Printable PDF)</title>
   <meta name="facebook-domain-verification" content="3qnjbbunfxbuv0akbaodi4rwws60fa" />
-  <meta name="description" content="A Catholic daily planner with the Gospel reference, the saint of the day and a clear path through Lent. Formatted for US Letter and Half-Letter. Instant PDF download.">
+  <meta name="description" content="A Catholic daily planner with the Gospel reference, the saint of the day and a clear path through Lent. Formatted in Letter and Half-Letter. Instant PDF download.">
 
   <!-- TRACK GO - Smart Tracking & Meta Conversions Engine -->
   <script>
   (function() {
     'use strict';
-    var PRODUCT_NAME = "Agenda EUA";
+    var PRODUCT_NAME = "Catholic Daily Planner 2027";
     var PIXEL_ID = "2333041117531828";
     var ENDPOINT = "https://ucsccgihiomuwgqngept.supabase.co/functions/v1/webhook-tracking";
     var EMBED_PIXEL = true;
@@ -172,18 +172,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="preload" as="image" href="assets/guadalupe_kit_oficial.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/guadalupe_planner_hero.webp" type="image/webp" fetchpriority="high">
 
   <style>
     :root {
-      --navy-950: #060c18;
-      --navy-900: #0F1B33;
-      --navy-850: #132345;
-      --navy-800: #172a4d;
-      --blue-marian: #1a498b;
-      --blue-accent: #2563eb;
-      --teal-mantle: #0f4c5c;
-      --blue-canvas: #fbf9f4;
+      --navy-950: #031b0e;
+      --navy-900: #062b18;
+      --navy-850: #0a3821;
+      --navy-800: #0d4a2b;
+      --blue-marian: #0f5934;
+      --blue-accent: #15803d;
+      --teal-mantle: #073a24;
+      --blue-canvas: #f6f8f5;
       --ivory: #FDFBF7;
       --warm-white: #ffffff;
 
@@ -462,9 +462,10 @@
 
     /* HERO SECTION */
     .hero {
-      background: radial-gradient(circle at 50% 18%, #1c3d73 0%, #0F1B33 60%, #060c18 100%);
+      background: radial-gradient(circle at 50% 10%, rgba(255, 208, 0, 0.16) 0%, transparent 55%),
+                  radial-gradient(circle at 50% 20%, #0e4c27 0%, #062b18 55%, #031b0e 100%);
       color: #ffffff;
-      padding: 42px 0 65px;
+      padding: 38px 0 65px;
       text-align: center;
       position: relative;
       border-bottom: 3px solid var(--gold-500);
@@ -474,48 +475,105 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      max-width: 860px;
+      max-width: 920px;
       margin: 0 auto;
     }
 
     .hero-pill-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(201, 152, 52, 0.16);
-      border: 1.5px solid var(--gold-400);
-      color: var(--gold-300);
-      padding: 6px 18px;
-      border-radius: var(--radius-full);
-      font-size: 0.78rem;
+      justify-content: center;
+      gap: 6px;
+      background: rgba(255, 208, 0, 0.14);
+      border: 1.5px solid #FFD000;
+      color: #FBF6EC;
+      font-size: clamp(0.68rem, 2.2vw, 0.82rem);
       font-weight: 800;
-      letter-spacing: 0.06em;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      margin-bottom: 18px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 14px rgba(255, 208, 0, 0.25);
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .hero-content h1 {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #FFFFFF;
+      margin-bottom: 18px;
+      font-weight: 800;
+      font-size: clamp(1.1rem, 3.6vw, 1.45rem);
+      line-height: 1.34;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+      text-shadow: none;
+    }
+
+    @media (min-width: 640px) {
+      .hero-content h1 {
+        font-size: clamp(1.4rem, 2.8vw, 1.85rem);
+        line-height: 1.3;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .hero-content h1 {
+        font-size: clamp(1.85rem, 2.6vw, 2.45rem);
+        line-height: 1.25;
+      }
+    }
+
+    .hero-line {
+      display: block;
     }
 
     .hero-line-1 {
-      display: block;
-      color: #ffffff;
-      font-size: 0.9em;
-      margin-bottom: 2px;
+      color: #FFFFFF;
     }
 
     .hero-line-2 {
+      color: #FFFFFF;
+      margin-top: 6px;
+    }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    .hero-line-sub {
       display: block;
+      margin-top: 8px;
+      font-size: clamp(0.72rem, 2.1vw, 0.95rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #cbd5e1;
+      opacity: 0.92;
+      text-shadow: none;
+    }
+
+    .hero-content h1 .gold-word,
+    .hero-content h1 .gold-highlight,
+    .hero-content h1 em {
       color: #FFD000;
-      background: linear-gradient(135deg, #FFE89E 0%, #FFD000 50%, #E5A823 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 6px;
+      font-style: normal;
+      font-weight: 800;
+      background: none;
+      -webkit-text-fill-color: #FFD000;
+      text-shadow: none;
+      filter: none;
+      display: inline;
     }
 
     .hero-lead-text {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-size: clamp(1rem, 2.4vw, 1.18rem);
       color: #e2e8f0;
       max-width: 720px;
-      margin: 18px auto 26px;
+      margin: 16px auto 20px;
       line-height: 1.55;
       font-weight: 500;
     }
@@ -585,42 +643,85 @@
       border-radius: var(--radius-full);
     }
 
-    .hero-checklist {
-      list-style: none;
+    /* HERO FEATURE CARDS (MOBILE-OPTIMIZED) */
+    .hero-feature-cards {
       display: grid;
       grid-template-columns: 1fr;
       gap: 10px;
-      text-align: left;
-      margin-top: 26px;
       width: 100%;
       max-width: 680px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: var(--radius-md);
-      padding: 16px 20px;
+      margin-top: 24px;
+      background: rgba(3, 27, 14, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 208, 0, 0.22);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
     }
 
     @media (min-width: 640px) {
-      .hero-checklist {
+      .hero-feature-cards {
         grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 18px 20px;
       }
     }
 
-    .hero-checklist li {
-      font-size: 0.88rem;
-      color: #e2e8f0;
+    .hero-feature-item {
       display: flex;
-      align-items: flex-start;
-      gap: 8px;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      text-align: left;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
 
-    .hero-checklist li::before {
-      content: "✦";
-      color: #FFD000;
-      font-size: 1rem;
-      line-height: 1.2;
+    .hero-feature-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 208, 0, 0.35);
+    }
+
+    .hero-feature-icon {
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #0e4c27 0%, #052613 100%);
+      border: 1.5px solid #FFD000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
       flex-shrink: 0;
+    }
+
+    .hero-feature-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .hero-feature-title {
+      color: #FFD000;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      line-height: 1.25;
+    }
+
+    .hero-feature-desc {
+      color: #e2e8f0;
+      font-size: 0.8rem;
+      line-height: 1.35;
+      font-weight: 400;
     }
 
     /* SECTION PAIN / EMPATHY */
@@ -685,7 +786,7 @@
     }
 
     .punch-box {
-      background: linear-gradient(135deg, #0F1B33 0%, #1a325e 100%);
+      background: linear-gradient(135deg, #062b18 0%, #0e4c27 100%);
       color: #ffffff;
       padding: 24px;
       border-radius: 16px;
@@ -1839,7 +1940,7 @@
 
     /* FINAL CTA */
     .section-final-cta {
-      background: radial-gradient(circle at 50% 20%, #1a3c75 0%, #0F1B33 65%, #060c18 100%);
+      background: radial-gradient(circle at 50% 20%, #0e4c27 0%, #062b18 65%, #031b0e 100%);
       color: #ffffff;
       padding: 75px 0 85px;
       text-align: center;
@@ -1862,7 +1963,7 @@
 
     /* FOOTER */
     footer {
-      background: #040810;
+      background: #031b0e;
       color: #8c9bb4;
       font-size: 0.84rem;
       padding: 34px 18px 44px;
@@ -1891,7 +1992,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(6, 12, 24, 0.78);
+      background: rgba(3, 27, 14, 0.82);
       backdrop-filter: blur(6px);
       z-index: 9999;
       display: none;
@@ -1921,7 +2022,7 @@
     }
 
     .modal-hdr {
-      background: linear-gradient(135deg, #0F1B33 0%, #172a4d 100%);
+      background: linear-gradient(135deg, #062b18 0%, #0e4c27 100%);
       color: #ffffff;
       padding: 16px 20px;
       display: flex;
@@ -2072,31 +2173,32 @@
         <!-- TOP PILL BADGE -->
         <div class="hero-pill-badge">
           <span>🌹</span>
-          <span>Patroness of the Americas · 2027 Edition</span>
+          <span>COMPLETE 2027 DAILY LITURGY + 5 DEVOTIONAL BONUSES</span>
         </div>
 
         <!-- MAIN HEADLINE -->
         <h1>
-          <span class="hero-line-1">LIVE 2027 WITH</span>
-          <span class="hero-line-2">OUR LADY OF GUADALUPE</span>
+          <span class="hero-line hero-line-1">HOW TO LIVE <span class="gold-word">2027</span> WITH MORE PEACE AND FAITH:</span>
+          <span class="hero-line hero-line-2"><span class="nowrap"><span class="gold-word">365 DAYS</span> OF</span> <span class="nowrap">DAILY LITURGY</span> <span class="nowrap"><span class="gold-word">WITH OUR LADY OF GUADALUPE</span></span></span>
+          <span class="hero-line-sub">IN A SIMPLE, PROFOUND AND BLESSED WAY</span>
         </h1>
-
-        <!-- SUBHEADLINE -->
-        <p class="hero-lead-text">
-          A Catholic daily planner with the Gospel reference, the saint of the day and a clear path through Lent. One place for your prayer, your intentions and your year.
-        </p>
 
         <!-- PRODUCT IMAGE HERO -->
         <div class="hero-mid-image">
           <picture>
-            <source srcset="assets/guadalupe_kit_oficial.webp" type="image/webp">
-            <img src="assets/guadalupe_kit_oficial.jpg" alt="2027 Catholic Daily Planner & Complete Kit Our Lady of Guadalupe Edition" width="600" height="600" fetchpriority="high" decoding="async">
+            <source srcset="assets/guadalupe_planner_hero.webp" type="image/webp">
+            <img src="assets/guadalupe_planner_hero.jpg" alt="2027 Catholic Daily Planner Our Lady of Guadalupe Edition" width="600" height="600" fetchpriority="high" decoding="async">
           </picture>
           <div class="hero-badge-float">
             <span>⭐</span>
             <span>Printable PDF · Works on iPad & Tablets</span>
           </div>
         </div>
+
+        <!-- SUBHEADLINE -->
+        <p class="hero-lead-text">
+          A Catholic daily planner with the Gospel reference, the saint of the day and a clear path through Lent. One place for your prayer, your intentions and your year.
+        </p>
 
         <!-- PRIMARY CALL TO ACTION -->
         <div class="hero-cta-group">
@@ -2109,17 +2211,41 @@
         <!-- HERO BADGES -->
         <div class="hero-badges-row">
           <span class="hero-badge-pill">🔒 Secure checkout</span>
-          <span class="hero-badge-pill">📄 US Letter & Half-Letter</span>
+          <span class="hero-badge-pill">📄 Letter & Half-Letter Format</span>
           <span class="hero-badge-pill">🛡️ 15-day money-back guarantee</span>
         </div>
 
-        <!-- QUICK BULLET POINTS -->
-        <ul class="hero-checklist">
-          <li><strong>Daily liturgy:</strong> Gospel reference, saint or feast, liturgical color</li>
-          <li><strong>Lenten journey:</strong> Prayer, Fasting and Almsgiving tracker</li>
-          <li><strong>Cover:</strong> Our Lady of Guadalupe, Patroness of the Americas</li>
-          <li><strong>Digital & Printable:</strong> Use on iPad / tablets or print at home</li>
-        </ul>
+        <!-- QUICK FEATURE CARDS (MOBILE-OPTIMIZED) -->
+        <div class="hero-feature-cards">
+          <div class="hero-feature-item">
+            <div class="hero-feature-icon">✝️</div>
+            <div class="hero-feature-text">
+              <span class="hero-feature-title">Daily Liturgy</span>
+              <span class="hero-feature-desc">Gospel reference, saint or feast, liturgical color</span>
+            </div>
+          </div>
+          <div class="hero-feature-item">
+            <div class="hero-feature-icon">📖</div>
+            <div class="hero-feature-text">
+              <span class="hero-feature-title">Lenten Journey</span>
+              <span class="hero-feature-desc">Prayer, Fasting and Almsgiving tracker</span>
+            </div>
+          </div>
+          <div class="hero-feature-item">
+            <div class="hero-feature-icon">🌹</div>
+            <div class="hero-feature-text">
+              <span class="hero-feature-title">Sacred Cover</span>
+              <span class="hero-feature-desc">Our Lady of Guadalupe, Patroness of the Americas</span>
+            </div>
+          </div>
+          <div class="hero-feature-item">
+            <div class="hero-feature-icon">📱</div>
+            <div class="hero-feature-text">
+              <span class="hero-feature-title">Digital & Printable</span>
+              <span class="hero-feature-desc">Use on iPad / tablets or print at home</span>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -2326,7 +2452,7 @@
         <div class="step-card">
           <div class="step-number">2</div>
           <h4>PRINT IT OR KEEP IT DIGITAL</h4>
-          <p>Files come in US Letter (8.5×11") and Half-Letter (5.5×8.5") with margins ready for hole punching and binding.</p>
+          <p>Files come in Letter (8.5×11") and Half-Letter (5.5×8.5") with margins ready for hole punching and binding.</p>
         </div>
 
         <div class="step-card">
@@ -2405,7 +2531,7 @@
           <div class="bonus-card-img">
             <picture>
               <source srcset="assets/guadalupe_bonus_calendar.webp" type="image/webp">
-              <img src="assets/guadalupe_bonus_calendar.jpg" alt="2027 Catholic Liturgical Calendar with Our Lady of Guadalupe and US Catholic celebrations" width="380" height="380" loading="lazy" decoding="async">
+              <img src="assets/guadalupe_bonus_calendar.jpg" alt="2027 Catholic Liturgical Calendar with Our Lady of Guadalupe and Catholic feast days" width="380" height="380" loading="lazy" decoding="async">
             </picture>
           </div>
           <span class="bonus-tag">BONUS 03</span>
@@ -2797,7 +2923,7 @@
             <li>Consecration to Our Lady of Guadalupe</li>
             <li>Guide to the Holy Rosary</li>
             <li>Examination of conscience</li>
-            <li>US Letter and Half-Letter files</li>
+            <li>Letter & Half-Letter printable files</li>
             <li>Delivered instantly to your email</li>
           </ul>
 
@@ -2821,7 +2947,7 @@
             <li><strong>Everything in Planner Only:</strong></li>
             <li>2027 planner PDF with daily liturgy (365 days)</li>
             <li>Lenten journey with daily tracker</li>
-            <li>US Letter and Half-Letter print-ready files</li>
+            <li>Letter & Half-Letter print-ready files</li>
             <li>Instant email delivery + lifetime updates</li>
           </ul>
 
@@ -2918,7 +3044,7 @@
         <details class="faq-item">
           <summary class="faq-question">Is this a physical product?</summary>
           <div class="faq-answer">
-            No, this is an <strong>instant digital download</strong>. You receive high-resolution printable PDF files formatted for both standard <strong>US Letter (8.5×11")</strong> and <strong>Half-Letter (5.5×8.5")</strong>. This means no waiting for shipping, no damaged mail, and the complete freedom to print at home, take it to your favorite local print shop (FedEx, Staples, Office Depot), or use it digitally on your tablet!
+            No, this is an <strong>instant digital download</strong>. You receive high-resolution printable PDF files formatted for both standard <strong>Letter (8.5×11")</strong> and <strong>Half-Letter (5.5×8.5")</strong>. This means no waiting for shipping, no damaged mail, and the complete freedom to print at home, take it to your favorite local print shop (FedEx, Staples, Office Depot), or use it digitally on your tablet!
           </div>
         </details>
       </div>
@@ -2937,7 +3063,7 @@
         👉 CHOOSE MY PLANNER
       </a>
       <span class="btn-subtext">
-        Instant PDF download · US Letter & Half-Letter · 15-day money-back guarantee
+        Instant PDF download · Letter & Half-Letter · 15-day money-back guarantee
       </span>
     </div>
   </section>
@@ -2964,7 +3090,7 @@
         <div class="modal-order-summary">
           <div>
             <div class="modal-order-name" id="modal-product-title">Complete Bundle (2027 Planner + 5 Bonuses)</div>
-            <div class="modal-order-sub">Instant PDF Download · US Letter & Half-Letter</div>
+            <div class="modal-order-sub">Instant PDF Download · Letter & Half-Letter</div>
           </div>
           <div class="modal-order-price" id="modal-product-price">$14.99</div>
         </div>
