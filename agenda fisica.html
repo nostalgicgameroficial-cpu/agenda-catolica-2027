@@ -4336,14 +4336,25 @@
           </div>
 
           <div class="pix-copy-box">
-            <!-- Campo oculto para garantir cópia de 100% dos caracteres sem risco de seleção manual incorreta -->
-            <input type="text" id="pix-copy-paste" readonly style="position:absolute; left:-9999px; opacity:0; pointer-events:none;" aria-hidden="true">
+            <!-- Campo de entrada para garantir cópia de 100% dos caracteres -->
+            <input type="text" id="pix-copy-paste" readonly style="position:absolute; left:-9999px; opacity:0;" aria-hidden="true">
             <button type="button" class="btn-copy-pix" id="btn-copy-pix">
               <span>📋 COPIAR CÓDIGO PIX COMPLETO</span>
             </button>
             <div id="copy-feedback" style="display:none; color: #15803d; font-size: 0.88rem; font-weight: 800; margin-top: 8px; text-align: center; background: #dcfce7; border: 1.5px solid #86efac; border-radius: 10px; padding: 10px 12px;">
               ✓ CÓDIGO PIX COPIADO COM SUCESSO!<br>
               <span style="font-size: 0.8rem; font-weight: 600; color: #166534;">Abra o aplicativo do seu banco e cole na opção "Pix Copia e Cola".</span>
+            </div>
+
+            <!-- Código Pix visível para conferência e cópia manual alternativa -->
+            <div style="margin-top: 10px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 10px; text-align: left;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-weight: 700; color: #475569; text-transform: uppercase;">Código Pix Copia e Cola:</span>
+                <span style="font-size: 0.72rem; color: #0284c7; font-weight: 600;">(Toque para selecionar)</span>
+              </div>
+              <div id="pix-code-text-preview" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px 10px; font-family: monospace; font-size: 0.75rem; color: #0f172a; word-break: break-all; max-height: 75px; overflow-y: auto; user-select: all; -webkit-user-select: all; cursor: text;">
+                Carregando código Pix...
+              </div>
             </div>
           </div>
 
@@ -4832,27 +4843,111 @@
         }
       }
 
+      // Função blindada de cópia para a área de transferência (Compatível com WebViews, iOS, Android e navegadores modernos)
+      function copyTextToClipboard(text, fallbackEl) {
+        return new Promise(function(resolve) {
+          if (!text) {
+            resolve(false);
+            return;
+          }
+          // 1. Tentar navigator.clipboard.writeText moderno
+          if (navigator.clipboard && window.isSecureContext && typeof navigator.clipboard.writeText === 'function') {
+            navigator.clipboard.writeText(text).then(function() {
+              resolve(true);
+            }).catch(function(err) {
+              console.warn('[Clipboard] writeText falhou no WebView, acionando fallback execCommand:', err);
+              execFallback();
+            });
+          } else {
+            execFallback();
+          }
+
+          function execFallback() {
+            var succeeded = false;
+            try {
+              if (fallbackEl && typeof fallbackEl.select === 'function') {
+                try {
+                  fallbackEl.focus();
+                  fallbackEl.select();
+                  if (typeof fallbackEl.setSelectionRange === 'function') {
+                    fallbackEl.setSelectionRange(0, 99999);
+                  }
+                  succeeded = document.execCommand('copy');
+                } catch(e) {}
+              }
+
+              if (!succeeded) {
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                ta.setAttribute('readonly', '');
+                ta.style.position = 'fixed';
+                ta.style.top = '0';
+                ta.style.left = '0';
+                ta.style.width = '2em';
+                ta.style.height = '2em';
+                ta.style.padding = '0';
+                ta.style.border = 'none';
+                ta.style.outline = 'none';
+                ta.style.boxShadow = 'none';
+                ta.style.background = 'transparent';
+                ta.style.opacity = '0.01';
+                ta.style.zIndex = '99999';
+                document.body.appendChild(ta);
+                ta.focus();
+                ta.select();
+                if (typeof ta.setSelectionRange === 'function') {
+                  ta.setSelectionRange(0, ta.value.length);
+                }
+                succeeded = document.execCommand('copy');
+                document.body.removeChild(ta);
+              }
+            } catch (ex) {
+              console.error('[Clipboard] Falha no fallback execCommand:', ex);
+            }
+            resolve(succeeded);
+          }
+        });
+      }
+
       // Copiar código PIX 100% íntegro com feedback tátil no botão
       if (btnCopyPix && pixCopyPaste) {
         btnCopyPix.addEventListener('click', function() {
-          pixCopyPaste.select();
-          pixCopyPaste.setSelectionRange(0, 99999);
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(pixCopyPaste.value);
-          } else {
-            document.execCommand('copy');
-          }
-          btnCopyPix.style.background = '#15803d';
-          btnCopyPix.style.borderColor = '#22c55e';
-          btnCopyPix.innerHTML = '<span>✓ CÓDIGO PIX COPIADO! COLE NO SEU BANCO</span>';
-          if (copyFeedback) copyFeedback.style.display = 'block';
+          var previewEl = document.getElementById('pix-code-text-preview');
+          var code = (pixCopyPaste && pixCopyPaste.value) ? pixCopyPaste.value : (previewEl ? previewEl.textContent.trim() : '');
+          if (!code) return;
 
-          setTimeout(function() {
-            btnCopyPix.style.background = '';
-            btnCopyPix.style.borderColor = '';
-            btnCopyPix.innerHTML = '<span>📋 COPIAR CÓDIGO PIX COMPLETO</span>';
-            if (copyFeedback) copyFeedback.style.display = 'none';
-          }, 4500);
+          copyTextToClipboard(code, pixCopyPaste).then(function() {
+            btnCopyPix.style.background = '#15803d';
+            btnCopyPix.style.borderColor = '#22c55e';
+            btnCopyPix.innerHTML = '<span>✓ CÓDIGO PIX COPIADO! COLE NO SEU BANCO</span>';
+            if (copyFeedback) copyFeedback.style.display = 'block';
+
+            setTimeout(function() {
+              btnCopyPix.style.background = '';
+              btnCopyPix.style.borderColor = '';
+              btnCopyPix.innerHTML = '<span>📋 COPIAR CÓDIGO PIX COMPLETO</span>';
+              if (copyFeedback) copyFeedback.style.display = 'none';
+            }, 4500);
+          });
+        });
+      }
+
+      var pixTextPreviewEl = document.getElementById('pix-code-text-preview');
+      if (pixTextPreviewEl) {
+        pixTextPreviewEl.addEventListener('click', function() {
+          var code = pixTextPreviewEl.textContent.trim();
+          if (!code || code === 'Carregando código Pix...') return;
+          var sel = window.getSelection();
+          var range = document.createRange();
+          range.selectNodeContents(pixTextPreviewEl);
+          sel.removeAllRanges();
+          sel.addRange(range);
+          copyTextToClipboard(code, pixCopyPaste).then(function() {
+            if (copyFeedback) {
+              copyFeedback.style.display = 'block';
+              setTimeout(function() { copyFeedback.style.display = 'none'; }, 3500);
+            }
+          });
         });
       }
 
@@ -5181,6 +5276,10 @@
           }
           if (pixCopyPaste) {
             pixCopyPaste.value = pixData.qr_code;
+          }
+          var pixPreviewEl = document.getElementById('pix-code-text-preview');
+          if (pixPreviewEl) {
+            pixPreviewEl.textContent = pixData.qr_code;
           }
           if (pixVerifyMsg) {
             if (pixData.reused) {

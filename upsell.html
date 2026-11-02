@@ -1322,20 +1322,83 @@
         });
       }
 
+      // Função blindada de cópia para a área de transferência (Compatível com WebViews, iOS, Android e navegadores modernos)
+      function copyTextToClipboard(text, fallbackEl) {
+        return new Promise(function(resolve) {
+          if (!text) {
+            resolve(false);
+            return;
+          }
+          if (navigator.clipboard && window.isSecureContext && typeof navigator.clipboard.writeText === 'function') {
+            navigator.clipboard.writeText(text).then(function() {
+              resolve(true);
+            }).catch(function(err) {
+              console.warn('[Clipboard] writeText falhou no WebView, acionando fallback execCommand:', err);
+              execFallback();
+            });
+          } else {
+            execFallback();
+          }
+
+          function execFallback() {
+            var succeeded = false;
+            try {
+              if (fallbackEl && typeof fallbackEl.select === 'function') {
+                try {
+                  fallbackEl.focus();
+                  fallbackEl.select();
+                  if (typeof fallbackEl.setSelectionRange === 'function') {
+                    fallbackEl.setSelectionRange(0, 99999);
+                  }
+                  succeeded = document.execCommand('copy');
+                } catch(e) {}
+              }
+
+              if (!succeeded) {
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                ta.setAttribute('readonly', '');
+                ta.style.position = 'fixed';
+                ta.style.top = '0';
+                ta.style.left = '0';
+                ta.style.width = '2em';
+                ta.style.height = '2em';
+                ta.style.padding = '0';
+                ta.style.border = 'none';
+                ta.style.outline = 'none';
+                ta.style.boxShadow = 'none';
+                ta.style.background = 'transparent';
+                ta.style.opacity = '0.01';
+                ta.style.zIndex = '99999';
+                document.body.appendChild(ta);
+                ta.focus();
+                ta.select();
+                if (typeof ta.setSelectionRange === 'function') {
+                  ta.setSelectionRange(0, ta.value.length);
+                }
+                succeeded = document.execCommand('copy');
+                document.body.removeChild(ta);
+              }
+            } catch (ex) {
+              console.error('[Clipboard] Falha no fallback execCommand:', ex);
+            }
+            resolve(succeeded);
+          }
+        });
+      }
+
       // Copiar código Pix
       if (btnCopyUpsellPix && upsellPixCode) {
         btnCopyUpsellPix.addEventListener('click', function() {
-          upsellPixCode.select();
-          upsellPixCode.setSelectionRange(0, 99999);
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(upsellPixCode.value);
-          } else {
-            document.execCommand('copy');
-          }
-          if (copyMsg) {
-            copyMsg.style.display = 'block';
-            setTimeout(function() { copyMsg.style.display = 'none'; }, 4000);
-          }
+          var code = upsellPixCode.value || '';
+          if (!code) return;
+
+          copyTextToClipboard(code, upsellPixCode).then(function() {
+            if (copyMsg) {
+              copyMsg.style.display = 'block';
+              setTimeout(function() { copyMsg.style.display = 'none'; }, 4000);
+            }
+          });
         });
       }
 
