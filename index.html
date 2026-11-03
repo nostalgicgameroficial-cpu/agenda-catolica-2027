@@ -409,7 +409,7 @@
   <!-- Performance & Preload -->
   <link rel="dns-prefetch" href="https://connect.facebook.net">
   <link rel="dns-prefetch" href="https://api.pushinpay.com.br">
-  <link rel="preload" as="image" href="assets/agenda_hero_mockup_completo.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/hero_bundle_2027.webp" type="image/webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -810,20 +810,52 @@
       display: inline;
     }
 
-    /* IMAGEM NO MEIO (ENTRE HEADLINE E SUBHEADLINE) - MOCKUP COMPLETO DO BUNDLE */
+    /* IMAGEM NO MEIO (ENTRE HEADLINE E SUBHEADLINE) - MOCKUP COMPLETO RECORTADO COM ILUMINAÇÃO DOURADA */
     .hero-mid-image {
       width: 100%;
       max-width: 620px;
-      margin: 0 auto 28px;
+      margin: 0 auto 32px;
       position: relative;
+    }
+
+    /* Sombra iluminada dourada pulsante atrás da imagem (sem contorno quadrado) */
+    .hero-mid-image::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 88%;
+      height: 88%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.7) 0%, rgba(234, 179, 8, 0.45) 35%, rgba(212, 166, 60, 0.25) 60%, transparent 80%);
+      filter: blur(48px);
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 50%;
+      animation: goldenAuraPulse 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes goldenAuraPulse {
+      0% {
+        transform: translate(-50%, -50%) scale(0.94);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.06);
+        opacity: 1;
+      }
     }
 
     .hero-mid-image img {
       width: 100%;
       height: auto;
-      border-radius: 18px;
-      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55), 0 0 35px rgba(212, 166, 60, 0.28);
-      border: 3px solid rgba(212, 166, 60, 0.65);
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 38px rgba(245, 158, 11, 0.65)) drop-shadow(0 0 75px rgba(234, 179, 8, 0.4));
+      display: block;
     }
 
     .hero-badge-float {
@@ -977,88 +1009,237 @@
       font-weight: 500;
     }
 
-    /* PAIN & EMPATHY SECTION */
-    .section-pain {
-      padding: 55px 0;
-      background: #f7f2e7;
+    /* SEÇÃO CARROSSEL: COMO ELA É POR DENTRO */
+    .section-inside-agenda {
+      padding: 65px 0;
+      background: linear-gradient(180deg, #fbf7ee 0%, #f4ede0 100%);
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
 
-    .pain-card {
-      background: #ffffff;
-      border: 1px solid var(--line);
+    .inside-carousel-wrapper {
+      position: relative;
+      max-width: 880px;
+      margin: 32px auto 0;
+      padding: 0 16px;
+    }
+
+    .inside-carousel-container {
+      overflow: hidden;
       border-radius: var(--radius-lg);
-      padding: 26px 18px;
-      box-shadow: var(--shadow-card);
-      text-align: center;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12), 0 0 35px rgba(212, 166, 60, 0.22);
+      border: 2px solid rgba(212, 166, 60, 0.55);
+      background: #ffffff;
+      position: relative;
     }
 
-    @media (min-width: 640px) {
-      .pain-card {
-        padding: 40px 32px;
+    .inside-carousel-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 100%;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .inside-slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      background: #ffffff;
+    }
+
+    @media (min-width: 768px) {
+      .inside-slide {
+        flex-direction: row;
+        padding: 38px 34px;
+        gap: 34px;
+        text-align: left;
       }
     }
 
-    .pain-list {
-      list-style: none;
-      margin: 24px 0;
-      display: grid;
-      gap: 14px;
-      text-align: left;
-    }
-
-    .pain-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px 16px;
-      background: #fdf3f3;
-      border-left: 4px solid #dc3545;
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    }
-
-    .pain-item .icon {
-      font-size: 1.1rem;
-      color: #dc3545;
+    .inside-slide-img-box {
+      width: 100%;
+      max-width: 360px;
       flex-shrink: 0;
-      margin-top: 2px;
-      font-weight: 900;
-    }
-
-    .pain-item p {
-      font-size: 0.95rem;
-      color: #492525;
-      font-weight: 500;
-      line-height: 1.5;
-    }
-
-    .pain-item strong {
-      font-weight: 800;
-    }
-
-    .punch-box {
-      margin-top: 28px;
-      padding: 22px 18px;
-      background: linear-gradient(135deg, #0c1830 0%, #173260 100%);
-      border-radius: var(--radius-md);
-      color: #ffffff;
       text-align: center;
-      border: 2px solid var(--gold-500);
+      position: relative;
     }
 
-    .punch-box p.lead-quote {
-      font-size: 1.15rem;
-      font-weight: 700;
-      line-height: 1.5;
-      letter-spacing: 0.02em;
-      color: var(--gold-300);
-      margin-bottom: 10px;
+    .inside-slide-img-box img {
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: contain;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16), 0 0 24px rgba(212, 166, 60, 0.25);
+      border: 1.5px solid #e2e8f0;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .inside-slide-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .inside-slide-badge {
+      display: inline-block;
+      align-self: flex-start;
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      border: 1px solid #fde68a;
+      margin-bottom: 12px;
       text-transform: uppercase;
     }
 
-    .punch-box p.lead-sub {
+    .inside-slide-info h3 {
+      font-family: 'Poppins', serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0c1830;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .inside-slide-sub {
+      font-size: 0.96rem;
+      color: #b45309;
+      font-weight: 700;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    .inside-slide-desc {
       font-size: 0.95rem;
-      color: #d6e2f5;
-      font-weight: 500;
+      line-height: 1.65;
+      color: #334155;
+      margin-bottom: 18px;
+    }
+
+    .inside-slide-tagline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: #f8fafc;
+      border-left: 3px solid #d4a63c;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    /* BOTOES DE NAVEGAÇÃO DO CARROSSEL */
+    .inside-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #0c1830;
+      border: 2px solid #d4a63c;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+      cursor: pointer;
+      font-size: 1.7rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+
+    .inside-nav-btn:hover {
+      background: var(--gold-gradient);
+      color: #0c1830;
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 6px 20px rgba(212, 166, 60, 0.5);
+    }
+
+    .inside-nav-btn.prev {
+      left: -8px;
+    }
+
+    .inside-nav-btn.next {
+      right: -8px;
+    }
+
+    @media (max-width: 640px) {
+      .inside-nav-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.4rem;
+      }
+      .inside-nav-btn.prev {
+        left: 2px;
+      }
+      .inside-nav-btn.next {
+        right: 2px;
+      }
+    }
+
+    /* INDICADORES (DOTS) */
+    .inside-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .inside-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+
+    .inside-dot.active {
+      background: #d4a63c;
+      transform: scale(1.3);
+      box-shadow: 0 0 10px rgba(212, 166, 60, 0.6);
+    }
+
+    /* IMAGEM ILUSTRATIVA NO PACOTE COMPLETO (PRICING CARD) */
+    .p-bundle-highlight-img {
+      margin: 12px auto 16px;
+      text-align: center;
+      max-width: 290px;
+      position: relative;
+    }
+
+    .p-bundle-highlight-img img {
+      width: 100%;
+      height: auto;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 20px rgba(245, 158, 11, 0.5));
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .p-bundle-highlight-img img:hover {
+      transform: scale(1.04);
     }
 
     /* HOW TO USE - 4 STEPS */
@@ -3396,7 +3577,7 @@
 
         <!-- 2. IMAGEM DA HERO ENTRE A HEADLINE E A SUBHEADLINE (MOBILE-FIRST) -->
         <div class="hero-mid-image">
-          <img src="assets/agenda_hero_mockup_completo.webp" alt="Kit Completo Agenda Católica 2027 com Liturgia Diária, Calendários Litúrgicos e Marcadores Devocionais" width="666" height="618" fetchpriority="high" decoding="async">
+          <img src="assets/hero_bundle_2027.webp" alt="Kit Completo Agenda Católica 2027 com Liturgia Diária, Calendários Litúrgicos e Marcadores Devocionais" width="916" height="990" fetchpriority="high" decoding="async">
           <div class="hero-badge-float">
             <span>⭐</span>
             <span>Edição 2027 Completa</span>
@@ -3488,38 +3669,111 @@
     </div>
   </section>
 
-  <!-- PAIN & EMPATHY SECTION -->
-  <section class="section-pain">
-    <div class="wrap narrow">
-      <div class="pain-card">
-        <span class="section-tag">REFLEXÃO ESPIRITUAL</span>
-        <h2>VOCÊ JÁ SE SENTIU ASSIM AO TENTAR MANTER SUA ROTINA DE ORAÇÃO?</h2>
-        <p class="section-subtitle" style="margin-bottom: 20px;">
-          Começamos janeiro cheios de promessas com Deus, mas os ruídos do mundo acabam sufocando o essencial:
-        </p>
+  <!-- CARROSSEL DE PÁGINAS INTERNAS (COMO ELA É POR DENTRO) -->
+  <section class="section-inside-agenda" id="por-dentro">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">VEJA COMO ELA É POR DENTRO</span>
+        <h2>CONHEÇA AS PÁGINAS INTERNAS DA SUA AGENDA 2027</h2>
+        <p class="section-subtitle">Diagramação nobre, serena e inspiradora, pensada nos mínimos detalhes para aprofundar sua vida de oração diária.</p>
+      </div>
 
-        <div class="pain-list">
-          <div class="pain-item">
-            <span class="icon">✕</span>
-            <p><strong>Começa janeiro firme na fé,</strong> mas em fevereiro a correria diária atropela seu tempo com Deus e você perde a constância.</p>
-          </div>
-          <div class="pain-item">
-            <span class="icon">✕</span>
-            <p><strong>Anota compromissos em um app,</strong> a liturgia em outro e suas intenções de oração acabam perdidas em pedaços de papel.</p>
-          </div>
-          <div class="pain-item">
-            <span class="icon">✕</span>
-            <p><strong>Ao usar o celular para rezar,</strong> notificações de WhatsApp e redes sociais quebram sua paz e tiram sua concentração.</p>
-          </div>
-          <div class="pain-item">
-            <span class="icon">✕</span>
-            <p><strong>A Quaresma e o Advento passam voando</strong> sem que você tenha vivido um roteiro claro de oração, penitência e conversão.</p>
+      <div class="inside-carousel-wrapper">
+        <button type="button" class="inside-nav-btn prev" id="inside-carousel-prev" aria-label="Página anterior">‹</button>
+        <button type="button" class="inside-nav-btn next" id="inside-carousel-next" aria-label="Próxima página">›</button>
+
+        <div class="inside-carousel-container">
+          <div class="inside-carousel-track" id="inside-carousel-track">
+            
+            <!-- Slide 1: Meu Ano Diante de Deus -->
+            <div class="inside-slide" data-index="0">
+              <div class="inside-slide-img-box">
+                <img src="assets/agenda_interna_1_meu_ano.webp" alt="Página Meu Ano Diante de Deus da Agenda Católica 2027" width="682" height="890" loading="lazy" decoding="async">
+              </div>
+              <div class="inside-slide-info">
+                <span class="inside-slide-badge">PÁGINA INICIAL DEVOCIONAL</span>
+                <h3>Meu Ano Diante de Deus</h3>
+                <p class="inside-slide-sub">Pertencimento, intenção e propósito sagrado</p>
+                <p class="inside-slide-desc">
+                  Espaço dedicado para registrar sua pertença, paróquia, intenções profundas para 2027, seu santo de devoção e seu propósito espiritual diante do Senhor.
+                </p>
+                <div class="inside-slide-tagline">
+                  <span>✨</span>
+                  <span>Consagre cada um dos seus 365 dias logo no início da sua agenda.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2: Consagração do Ano -->
+            <div class="inside-slide" data-index="1">
+              <div class="inside-slide-img-box">
+                <img src="assets/agenda_interna_3_consagracao.webp" alt="Página Consagração do Ano da Agenda Católica 2027" width="604" height="858" loading="lazy" decoding="async">
+              </div>
+              <div class="inside-slide-info">
+                <span class="inside-slide-badge">ENTREGA ESPIRITUAL</span>
+                <h3>Consagração do Ano</h3>
+                <p class="inside-slide-sub">Uma entrega simples para começar cada jornada</p>
+                <p class="inside-slide-desc">
+                  Oração tocante de consagração de todos os seus dias, trabalhos, alegrias, dificuldades e família sob o manto e a intercessão de Maria, Mãe da Divina Providência.
+                </p>
+                <div class="inside-slide-tagline">
+                  <span>🕊️</span>
+                  <span>"Que cada página vivida neste ano se transforme em oferta, memória e louvor."</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3: Orações Essenciais -->
+            <div class="inside-slide" data-index="2">
+              <div class="inside-slide-img-box">
+                <img src="assets/agenda_interna_2_oracoes.webp" alt="Página Orações Essenciais da Agenda Católica 2027" width="662" height="863" loading="lazy" decoding="async">
+              </div>
+              <div class="inside-slide-info">
+                <span class="inside-slide-badge">ORAÇÕES DIÁRIAS</span>
+                <h3>Orações Essenciais</h3>
+                <p class="inside-slide-sub">Para começar e terminar o dia na presença de Deus</p>
+                <p class="inside-slide-desc">
+                  Diagramação nobre com as orações fundamentais da nossa fé: Sinal da Cruz, Pai-Nosso, Ave-Maria e Glória ao Pai com tipografia clássica e serena.
+                </p>
+                <div class="inside-slide-tagline">
+                  <span>✝️</span>
+                  <span>Tenha suas orações diárias sempre prontas sem distrações do celular.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4: Profissão de Fé e Salve Rainha -->
+            <div class="inside-slide" data-index="3">
+              <div class="inside-slide-img-box">
+                <img src="assets/agenda_interna_4_oracoes_fe.webp" alt="Página Profissão de Fé e Devoção Mariana da Agenda Católica 2027" width="606" height="851" loading="lazy" decoding="async">
+              </div>
+              <div class="inside-slide-info">
+                <span class="inside-slide-badge">DEVOÇÃO MARIANA</span>
+                <h3>Profissão de Fé & Confiança em Maria</h3>
+                <p class="inside-slide-sub">Oração do Creio, Salve Rainha e Jaculatórias</p>
+                <p class="inside-slide-desc">
+                  Textos sagrados completos para rezar o Credo Apostólico, a Salve Rainha e jaculatórias para blindar seu coração nos momentos de batalha espiritual.
+                </p>
+                <div class="inside-slide-tagline">
+                  <span>🌹</span>
+                  <span>Uma companhia diária de paz e fortalecimento espiritual para a sua alma.</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <div class="punch-box">
-          <p class="lead-quote">"NÃO É FALTA DE FÉ NEM FALTA DE AMOR A DEUS. É APENAS A FALTA DE UMA FERRAMENTA SAGRADA PARA UNIFICAR SEU DIA A DIA."</p>
-          <p class="lead-sub">A Agenda Católica 2027 é o seu refúgio diário de paz, oração e organização prática.</p>
+        <!-- Indicadores (Dots) do Carrossel -->
+        <div class="inside-dots" id="inside-dots">
+          <button type="button" class="inside-dot active" data-index="0" aria-label="Ir para página 1"></button>
+          <button type="button" class="inside-dot" data-index="1" aria-label="Ir para página 2"></button>
+          <button type="button" class="inside-dot" data-index="2" aria-label="Ir para página 3"></button>
+          <button type="button" class="inside-dot" data-index="3" aria-label="Ir para página 4"></button>
+        </div>
+
+        <div style="text-align: center; margin-top: 14px;">
+          <span style="font-size: 0.82rem; color: #64748b; font-weight: 600;">👆 Deslize para os lados ou use as setas para ver as páginas</span>
         </div>
       </div>
     </div>
@@ -3876,6 +4130,11 @@
               Agenda 2027 + 5 Bônus
             </div>
 
+            <!-- IMAGEM ILUSTRATIVA DO KIT COMPLETO HERO -->
+            <div class="p-bundle-highlight-img">
+              <img src="assets/hero_bundle_2027.webp" alt="Kit Completo Agenda Católica 2027 com Liturgia Diária, Calendários e Bônus" width="916" height="990" loading="lazy" decoding="async">
+            </div>
+
             <ul class="p-check-list">
               <li>Agenda Católica 2027 em PDF</li>
               <li>Liturgia Diária Completa</li>
@@ -4120,6 +4379,9 @@
               <div class="plan-details-header vip">
                 <span>🎁</span>
                 <strong>O que você vai receber no Pacote Completo VIP:</strong>
+              </div>
+              <div style="text-align: center; margin: 10px 0 12px;">
+                <img src="assets/hero_bundle_2027.webp" alt="Kit Completo Agenda Católica 2027" style="max-width: 230px; width: 100%; height: auto; border: none; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.22)) drop-shadow(0 0 16px rgba(245,158,11,0.45));" loading="lazy" decoding="async">
               </div>
               <ul class="plan-details-bullets">
                 <li><span class="chk">✓</span> <span><strong>Agenda Católica 2027 Completa em PDF:</strong> formatos prontos para impressão (A4 e A5)</span></li>
@@ -5423,6 +5685,76 @@
         } catch (e) {
           // fallback silencioso
         }
+      })();
+
+      // Carrossel de Páginas Internas da Agenda
+      (function initInsideCarousel() {
+        var track = document.getElementById('inside-carousel-track');
+        var dots = document.querySelectorAll('.inside-dot');
+        var prevBtn = document.getElementById('inside-carousel-prev');
+        var nextBtn = document.getElementById('inside-carousel-next');
+        var slides = document.querySelectorAll('.inside-slide');
+        if (!track || !slides.length) return;
+
+        var currentIndex = 0;
+        var totalSlides = slides.length;
+
+        function goToSlide(index) {
+          if (index < 0) index = totalSlides - 1;
+          if (index >= totalSlides) index = 0;
+          currentIndex = index;
+          track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+          dots.forEach(function(dot, i) {
+            if (i === currentIndex) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            goToSlide(currentIndex - 1);
+          });
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            goToSlide(currentIndex + 1);
+          });
+        }
+
+        dots.forEach(function(dot) {
+          dot.addEventListener('click', function(e) {
+            e.preventDefault();
+            var targetIndex = parseInt(this.getAttribute('data-index'), 10);
+            if (!isNaN(targetIndex)) {
+              goToSlide(targetIndex);
+            }
+          });
+        });
+
+        // Touch swipe support (mobile)
+        var touchStartX = 0;
+        var touchEndX = 0;
+        track.addEventListener('touchstart', function(e) {
+          touchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', function(e) {
+          touchEndX = e.changedTouches[0].clientX;
+          var diff = touchStartX - touchEndX;
+          if (Math.abs(diff) > 40) {
+            if (diff > 0) {
+              goToSlide(currentIndex + 1);
+            } else {
+              goToSlide(currentIndex - 1);
+            }
+          }
+        }, { passive: true });
       })();
 
     })();
