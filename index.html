@@ -740,13 +740,13 @@
     .hero-content h1 {
       font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       color: #FFFFFF;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       font-weight: 800;
-      font-size: clamp(1.1rem, 3.6vw, 1.45rem);
+      font-size: clamp(1.2rem, 3.8vw, 1.65rem);
       line-height: 1.34;
       letter-spacing: -0.01em;
-      text-transform: uppercase;
-      max-width: 960px;
+      text-transform: none;
+      max-width: 900px;
       margin-left: auto;
       margin-right: auto;
       text-shadow: none;
@@ -754,14 +754,14 @@
 
     @media (min-width: 640px) {
       .hero-content h1 {
-        font-size: clamp(1.4rem, 2.8vw, 1.85rem);
+        font-size: clamp(1.45rem, 3vw, 2.05rem);
         line-height: 1.3;
       }
     }
 
     @media (min-width: 900px) {
       .hero-content h1 {
-        font-size: clamp(1.85rem, 2.6vw, 2.45rem);
+        font-size: clamp(1.8rem, 2.6vw, 2.4rem);
         line-height: 1.25;
       }
     }
@@ -858,25 +858,28 @@
       display: block;
     }
 
+    .hero-badge-top-container {
+      text-align: center;
+      margin: 0 auto 18px;
+      position: relative;
+      z-index: 2;
+    }
+
     .hero-badge-float {
-      position: absolute;
-      bottom: -12px;
-      left: 50%;
-      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
       background: var(--gold-gradient);
       color: #0F1B33;
-      padding: 8px 20px;
+      padding: 9px 24px;
       border-radius: var(--radius-full);
       font-weight: 900;
-      font-size: 0.82rem;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 16px rgba(212, 166, 60, 0.45);
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      font-size: 0.85rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 18px rgba(212, 166, 60, 0.5);
       border: 2px solid #ffffff;
       white-space: nowrap;
       text-transform: uppercase;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
     }
 
     .hero-lead {
@@ -3568,25 +3571,27 @@
           <span>LITURGIA DIÁRIA COMPLETA + 5 BÔNUS DEVOCIONAIS EXCLUSIVOS</span>
         </div>
 
-        <!-- 1. HEADLINE PRINCIPAL (POPPINS CAIXA ALTA + QUEBRAS INTENCIONAIS + DESTAQUES EM AMARELO FORTE) -->
+        <!-- 1. HEADLINE PRINCIPAL -->
         <h1>
-          <span class="hero-line hero-line-1">COMO VIVER <span class="gold-word">2027</span> COM MAIS PAZ E FÉ:</span>
-          <span class="hero-line hero-line-2"><span class="nowrap"><span class="gold-word">365 DIAS</span> DE</span> <span class="nowrap">LITURGIA DIÁRIA</span> <span class="nowrap"><span class="gold-word">COM NOSSA SENHORA</span></span></span>
-          <span class="hero-line-sub">DE FORMA SIMPLES, PROFUNDA E ABENÇOADA</span>
+          Sem tempo para rezar? Abra a agenda, leia o <span class="gold-word">Evangelho do dia</span> e reze em <span class="gold-word">5 minutos</span>.
         </h1>
 
-        <!-- 2. IMAGEM DA HERO ENTRE A HEADLINE E A SUBHEADLINE (MOBILE-FIRST) -->
-        <div class="hero-mid-image">
-          <img src="assets/hero_bundle_2027.webp" alt="Kit Completo Agenda Católica 2027 com Liturgia Diária, Calendários Litúrgicos e Marcadores Devocionais" width="916" height="990" fetchpriority="high" decoding="async">
+        <!-- BADGE ACIMA DA IMAGEM -->
+        <div class="hero-badge-top-container">
           <div class="hero-badge-float">
             <span>⭐</span>
             <span>Edição 2027 Completa</span>
           </div>
         </div>
 
+        <!-- 2. IMAGEM DA HERO ENTRE A HEADLINE E A SUBHEADLINE (MOBILE-FIRST) -->
+        <div class="hero-mid-image">
+          <img src="assets/hero_bundle_2027.webp" alt="Kit Completo Agenda Católica 2027 com Liturgia Diária, Calendários Litúrgicos e Marcadores Devocionais" width="916" height="990" fetchpriority="high" decoding="async">
+        </div>
+
         <!-- 3. SUBHEADLINE -->
         <p class="hero-lead">
-          Sua agenda personalizada de <strong>2027</strong>, com <strong>entrega imediata</strong>, pronta para <span class="lead-gold">imprimir e rezar</span>.
+          A <strong>Agenda Católica 2027</strong> traz a liturgia de cada dia já pronta, com Nossa Senhora como companhia. <span class="lead-gold">Sem procurar, sem planejar, sem culpa.</span>
         </p>
 
         <!-- 4. BOTÃO DE AÇÃO HERO (ANTES DOS BENEFÍCIOS) -->
