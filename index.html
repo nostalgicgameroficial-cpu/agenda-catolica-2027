@@ -887,62 +887,71 @@
       margin-top: 8px;
     }
 
-    /* CARROSSEL DAS 10 CAPAS EXCLUSIVAS (AUTO-SCROLL) */
+    /* CARROSSEL CONTÍNUO DAS CAPAS EXCLUSIVAS (AUTO-SCROLL COM DESTAQUE) */
     .hero-covers-carousel-section {
       width: 100%;
-      max-width: 1080px;
-      margin: 16px auto 24px;
+      max-width: 1140px;
+      margin: 20px auto 26px;
       text-align: center;
+      position: relative;
     }
 
     .covers-carousel-header {
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .covers-badge {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       font-family: 'Poppins', sans-serif;
-      font-size: 0.74rem;
+      font-size: clamp(0.74rem, 2.2vw, 0.82rem);
       font-weight: 800;
-      color: #B4821A;
-      background: #FEF9C3;
-      border: 1px solid #FDE047;
-      padding: 4px 14px;
+      color: #92400E;
+      background: #FEF3C7;
+      border: 1.5px solid #D4A63C;
+      padding: 5px 16px;
       border-radius: 20px;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-bottom: 6px;
+      box-shadow: 0 2px 10px rgba(212, 166, 60, 0.2);
     }
 
     .covers-title {
       font-family: 'Poppins', sans-serif;
-      font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+      font-size: clamp(1.15rem, 3vw, 1.5rem);
       font-weight: 800;
       color: #0F1B33;
-      margin: 4px 0;
+      margin: 6px 0 4px;
       line-height: 1.3;
+      letter-spacing: -0.01em;
     }
 
     .covers-subtitle {
-      font-size: clamp(0.82rem, 2vw, 0.92rem);
-      color: #64748B;
+      font-size: clamp(0.85rem, 2.2vw, 0.96rem);
+      color: #475569;
       margin: 0;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .covers-marquee-wrapper {
       position: relative;
       width: 100%;
       overflow: hidden;
-      padding: 12px 0 16px;
-      mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+      padding: 16px 0 22px;
+      mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
     }
 
     .covers-marquee-track {
       display: flex;
-      gap: 14px;
+      gap: 18px;
       width: max-content;
-      animation: scrollCoversMarquee 38s linear infinite;
+      animation: scrollCoversMarquee 30s linear infinite;
+      will-change: transform;
     }
 
     .covers-marquee-track:hover {
@@ -959,34 +968,44 @@
     }
 
     .cover-card {
-      flex: 0 0 128px;
-      width: 128px;
+      flex: 0 0 160px;
+      width: 160px;
       background: #FFFFFF;
-      border: 1.5px solid #E2E8F0;
-      border-radius: 12px;
-      padding: 8px 8px 10px;
-      box-shadow: 0 4px 12px rgba(15, 27, 51, 0.06);
+      border: 1.8px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 10px 10px 12px;
+      box-shadow: 0 8px 22px rgba(15, 27, 51, 0.08);
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
       cursor: pointer;
+      position: relative;
+    }
+
+    @media (min-width: 768px) {
+      .cover-card {
+        flex: 0 0 178px;
+        width: 178px;
+        padding: 12px 12px 14px;
+      }
     }
 
     .cover-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-8px) scale(1.02);
       border-color: #D4A63C;
-      box-shadow: 0 8px 20px rgba(212, 166, 60, 0.22);
+      box-shadow: 0 14px 32px rgba(212, 166, 60, 0.28);
     }
 
     .cover-card-img {
-      width: 110px;
-      height: 145px;
-      border-radius: 6px;
+      width: 100%;
+      aspect-ratio: 1080 / 1456;
+      border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-      margin-bottom: 7px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+      margin-bottom: 9px;
       background: #F1F5F9;
+      position: relative;
     }
 
     .cover-card-img img {
@@ -994,18 +1013,24 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .cover-card:hover .cover-card-img img {
+      transform: scale(1.04);
     }
 
     .cover-card-num {
-      font-size: 0.65rem;
+      font-size: 0.68rem;
       font-weight: 800;
       color: #B4821A;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
     }
 
     .cover-card-name {
-      font-size: 0.72rem;
+      font-size: 0.78rem;
       font-weight: 700;
       color: #0F1B33;
       text-align: center;
@@ -1014,8 +1039,7 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      height: 28px;
-      margin-top: 2px;
+      height: 32px;
     }
 
     /* CHECKLIST DE BENEFÍCIOS NO FUNDO CLARO */
@@ -3867,118 +3891,88 @@
           <span class="btn-subtext">⚡ Acesso imediato no e-mail e WhatsApp · A partir de apenas R$ 19,90</span>
         </div>
 
-        <!-- 5. CARROSSEL CONTÍNUO DAS 10 CAPAS EXCLUSIVAS (LOGO ABAIXO DO BOTÃO) -->
+                <!-- 5. CARROSSEL CONTÍNUO DAS CAPAS EXCLUSIVAS (LOGO ABAIXO DO BOTÃO) -->
         <div class="hero-covers-carousel-section">
           <div class="covers-carousel-header">
-            <span class="covers-badge">🏆 10 CAPAS EXCLUSIVAS INCLUSAS NO KIT</span>
+            <span class="covers-badge">✨ CAPAS EM ALTA DEFINIÇÃO INCLUSAS</span>
             <h3 class="covers-title">A Edição Mais Linda de Todos os Anos</h3>
-            <p class="covers-subtitle">Você recebe todas as 10 capas em alta resolução para escolher e imprimir a sua devoção favorita:</p>
+            <p class="covers-subtitle">Você recebe todas as capas em alta resolução para imprimir ou usar no digital com sua devoção favorita:</p>
           </div>
           
           <div class="covers-marquee-wrapper" id="covers-marquee">
             <div class="covers-marquee-track">
-              <!-- BLOCO 1 (10 Capas) -->
+              <!-- BLOCO 1 -->
               <div class="cover-card">
-                <div class="cover-card-img"><img src="assets/capa_1_sagrado_coracao_de_jesus.webp" alt="Capa Sagrado Coração de Jesus" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 1</span>
+                <div class="cover-card-img"><img src="assets/capa_hd_sagrado_coracao.webp" alt="Capa Sagrado Coração de Jesus — Agenda Católica 2027" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
                 <span class="cover-card-name">Sagrado Coração de Jesus</span>
               </div>
               <div class="cover-card">
-                <div class="cover-card-img"><img src="assets/capa_2_nossa_senhora_de_guadalupe.webp" alt="Capa Nossa Senhora de Guadalupe" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 2</span>
-                <span class="cover-card-name">N. Sra. de Guadalupe</span>
-              </div>
-              <div class="cover-card">
-                <div class="cover-card-img"><img src="assets/capa_3_nossa_senhora_aparecida.webp" alt="Capa Nossa Senhora Aparecida" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 3</span>
-                <span class="cover-card-name">Nossa Senhora Aparecida</span>
-              </div>
-              <div class="cover-card">
-                <div class="cover-card-img"><img src="assets/capa_4_imaculado_coracao_de_maria.webp" alt="Capa Imaculado Coração de Maria" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 4</span>
-                <span class="cover-card-name">Imaculado Coração</span>
-              </div>
-              <div class="cover-card">
-                <div class="cover-card-img"><img src="assets/capa_5_nossa_senhora_desatadora_dos_nos.webp" alt="Capa Nossa Senhora Desatadora dos Nós" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 5</span>
-                <span class="cover-card-name">Desatadora dos Nós</span>
-              </div>
-              <div class="cover-card">
-                <div class="cover-card-img"><img src="assets/capa_6_nossa_senhora_de_fatima.webp" alt="Capa Nossa Senhora de Fátima" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 6</span>
+                <div class="cover-card-img"><img src="assets/capa_hd_fatima.webp" alt="Capa Nossa Senhora de Fátima — Agenda Católica 2027" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
                 <span class="cover-card-name">Nossa Senhora de Fátima</span>
               </div>
               <div class="cover-card">
-                <div class="cover-card-img"><img src="assets/capa_7_maria_rainha_do_ceu.webp" alt="Capa Maria, Rainha do Céu" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 7</span>
-                <span class="cover-card-name">Maria, Rainha do Céu</span>
+                <div class="cover-card-img"><img src="assets/capa_hd_nossa_senhora_celestial.webp" alt="Capa Nossa Senhora Celestial — Agenda Católica 2027" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
+                <span class="cover-card-name">Nossa Senhora Celestial</span>
               </div>
               <div class="cover-card">
-                <div class="cover-card-img"><img src="assets/capa_8_sao_jose.webp" alt="Capa São José" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 8</span>
+                <div class="cover-card-img"><img src="assets/capa_hd_sao_jose.webp" alt="Capa São José com Menino — Agenda Católica 2027" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
                 <span class="cover-card-name">São José com Menino</span>
               </div>
               <div class="cover-card">
-                <div class="cover-card-img"><img src="assets/capa_9_sao_miguel_arcanjo.webp" alt="Capa São Miguel Arcanjo" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 9</span>
+                <div class="cover-card-img"><img src="assets/capa_hd_desatadora_dos_nos.webp" alt="Capa Desatadora dos Nós — Agenda Católica 2027" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
+                <span class="cover-card-name">Desatadora dos Nós</span>
+              </div>
+              <div class="cover-card">
+                <div class="cover-card-img"><img src="assets/capa_hd_sao_miguel.webp" alt="Capa São Miguel Arcanjo — Agenda Católica 2027" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
                 <span class="cover-card-name">São Miguel Arcanjo</span>
               </div>
               <div class="cover-card">
-                <div class="cover-card-img"><img src="assets/capa_10_nossa_senhora_das_dores.webp" alt="Capa Nossa Senhora das Dores" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 10</span>
-                <span class="cover-card-name">N. Sra. das Dores</span>
+                <div class="cover-card-img"><img src="assets/capa_hd_nossa_senhora_em_gloria.webp" alt="Capa N. Sra. em Glória — Agenda Católica 2027" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
+                <span class="cover-card-name">N. Sra. em Glória</span>
               </div>
 
               <!-- BLOCO 2 (DUPLICADO PARA ROLAGEM INFINITA 100% CONTÍNUA) -->
               <div class="cover-card" aria-hidden="true">
-                <div class="cover-card-img"><img src="assets/capa_1_sagrado_coracao_de_jesus.webp" alt="" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 1</span>
+                <div class="cover-card-img"><img src="assets/capa_hd_sagrado_coracao.webp" alt="" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
                 <span class="cover-card-name">Sagrado Coração de Jesus</span>
               </div>
               <div class="cover-card" aria-hidden="true">
-                <div class="cover-card-img"><img src="assets/capa_2_nossa_senhora_de_guadalupe.webp" alt="" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 2</span>
-                <span class="cover-card-name">N. Sra. de Guadalupe</span>
-              </div>
-              <div class="cover-card" aria-hidden="true">
-                <div class="cover-card-img"><img src="assets/capa_3_nossa_senhora_aparecida.webp" alt="" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 3</span>
-                <span class="cover-card-name">Nossa Senhora Aparecida</span>
-              </div>
-              <div class="cover-card" aria-hidden="true">
-                <div class="cover-card-img"><img src="assets/capa_4_imaculado_coracao_de_maria.webp" alt="" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 4</span>
-                <span class="cover-card-name">Imaculado Coração</span>
-              </div>
-              <div class="cover-card" aria-hidden="true">
-                <div class="cover-card-img"><img src="assets/capa_5_nossa_senhora_desatadora_dos_nos.webp" alt="" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 5</span>
-                <span class="cover-card-name">Desatadora dos Nós</span>
-              </div>
-              <div class="cover-card" aria-hidden="true">
-                <div class="cover-card-img"><img src="assets/capa_6_nossa_senhora_de_fatima.webp" alt="" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 6</span>
+                <div class="cover-card-img"><img src="assets/capa_hd_fatima.webp" alt="" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
                 <span class="cover-card-name">Nossa Senhora de Fátima</span>
               </div>
               <div class="cover-card" aria-hidden="true">
-                <div class="cover-card-img"><img src="assets/capa_7_maria_rainha_do_ceu.webp" alt="" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 7</span>
-                <span class="cover-card-name">Maria, Rainha do Céu</span>
+                <div class="cover-card-img"><img src="assets/capa_hd_nossa_senhora_celestial.webp" alt="" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
+                <span class="cover-card-name">Nossa Senhora Celestial</span>
               </div>
               <div class="cover-card" aria-hidden="true">
-                <div class="cover-card-img"><img src="assets/capa_8_sao_jose.webp" alt="" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 8</span>
+                <div class="cover-card-img"><img src="assets/capa_hd_sao_jose.webp" alt="" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
                 <span class="cover-card-name">São José com Menino</span>
               </div>
               <div class="cover-card" aria-hidden="true">
-                <div class="cover-card-img"><img src="assets/capa_9_sao_miguel_arcanjo.webp" alt="" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 9</span>
+                <div class="cover-card-img"><img src="assets/capa_hd_desatadora_dos_nos.webp" alt="" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
+                <span class="cover-card-name">Desatadora dos Nós</span>
+              </div>
+              <div class="cover-card" aria-hidden="true">
+                <div class="cover-card-img"><img src="assets/capa_hd_sao_miguel.webp" alt="" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
                 <span class="cover-card-name">São Miguel Arcanjo</span>
               </div>
               <div class="cover-card" aria-hidden="true">
-                <div class="cover-card-img"><img src="assets/capa_10_nossa_senhora_das_dores.webp" alt="" width="125" height="165" loading="lazy"></div>
-                <span class="cover-card-num">Capa 10</span>
-                <span class="cover-card-name">N. Sra. das Dores</span>
+                <div class="cover-card-img"><img src="assets/capa_hd_nossa_senhora_em_gloria.webp" alt="" width="320" height="432" loading="lazy" decoding="async"></div>
+                <span class="cover-card-num">Edição 2027</span>
+                <span class="cover-card-name">N. Sra. em Glória</span>
               </div>
             </div>
           </div>
