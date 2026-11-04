@@ -688,28 +688,31 @@
       text-align: center;
     }
 
-    /* HERO SECTION: AZUL-MARINHO #0F1B33, SACRAL, VIBRANTE E COM CONTRASTE MÁXIMO */
+        /* ========================================================
+       HERO SECTION: FUNDO BRANCO / OFF-WHITE SACRAL COM LETRAS AZUIS (#0F1B33)
+       ======================================================== */
     .hero {
-      background: radial-gradient(ellipse at 50% -10%, #1a2f55 0%, #0F1B33 55%, #081120 100%);
-      color: #FBF6EC;
-      padding: 44px 0 58px;
+      background: #FFFFFF;
+      background: radial-gradient(ellipse at 50% 0%, #FFFFFF 0%, #F8FAFC 55%, #EEF2F6 100%);
+      color: #0F1B33;
+      padding: 38px 0 44px;
       position: relative;
-      border-bottom: 2px solid rgba(212, 166, 60, 0.45);
+      border-bottom: 2px solid #E2E8F0;
       text-align: center;
       overflow: hidden;
     }
 
-    /* Suave halo de iluminação celestial no fundo que não compete com a leitura */
+    /* Suave halo de iluminação celestial dourada suave sobre o fundo claro */
     .hero::before {
       content: "";
       position: absolute;
-      top: -120px;
+      top: -80px;
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
-      max-width: 860px;
-      height: 440px;
-      background: radial-gradient(circle, rgba(255, 208, 0, 0.18) 0%, rgba(38, 100, 190, 0.08) 50%, transparent 75%);
+      max-width: 920px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(212, 166, 60, 0.14) 0%, rgba(29, 77, 144, 0.04) 50%, transparent 75%);
       pointer-events: none;
       z-index: 0;
     }
@@ -719,144 +722,118 @@
       z-index: 1;
     }
 
+    /* PILL BADGE SUPERIOR */
     .hero-pill-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      background: rgba(255, 208, 0, 0.12);
-      border: 1.5px solid #FFD000;
-      color: #FBF6EC;
-      font-size: clamp(0.68rem, 2.2vw, 0.82rem);
+      background: #FEF3C7;
+      border: 1.5px solid #D4A63C;
+      color: #92400E;
+      font-size: clamp(0.7rem, 2.2vw, 0.82rem);
       font-weight: 800;
-      padding: 6px 14px;
+      padding: 7px 16px;
       border-radius: var(--radius-full);
-      margin-bottom: 20px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 14px rgba(255, 208, 0, 0.25);
+      margin-bottom: 18px;
+      box-shadow: 0 4px 14px rgba(212, 166, 60, 0.22);
       letter-spacing: 0.03em;
       text-transform: uppercase;
       max-width: 100%;
       text-align: center;
     }
 
+    /* HEADLINE PRINCIPAL COM LETRAS AZUIS (#0F1B33) */
     .hero-content h1 {
       font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      color: #FFFFFF;
+      color: #0F1B33;
       margin-bottom: 18px;
       font-weight: 800;
-      font-size: clamp(1.2rem, 3.8vw, 1.65rem);
+      font-size: clamp(1.22rem, 3.8vw, 1.7rem);
       line-height: 1.34;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.015em;
       text-transform: none;
-      max-width: 900px;
+      max-width: 920px;
       margin-left: auto;
       margin-right: auto;
-      text-shadow: 
-        -1px -1px 0 #000000,
-         1px -1px 0 #000000,
-        -1px  1px 0 #000000,
-         1px  1px 0 #000000,
-         0 2px 4px rgba(0, 0, 0, 0.85);
-      -webkit-text-stroke: 0.5px #000000;
+      text-shadow: none;
+      -webkit-text-stroke: 0;
     }
 
     @media (min-width: 640px) {
       .hero-content h1 {
-        font-size: clamp(1.45rem, 3vw, 2.05rem);
+        font-size: clamp(1.5rem, 3vw, 2.1rem);
         line-height: 1.3;
       }
     }
 
     @media (min-width: 900px) {
       .hero-content h1 {
-        font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+        font-size: clamp(1.85rem, 2.6vw, 2.45rem);
         line-height: 1.25;
       }
     }
 
-    /* Linhas intencionais para evitar linhas órfãs */
-    .hero-line {
-      display: block;
-    }
-
-    .hero-line-1 {
-      color: #FFFFFF;
-    }
-
-    .hero-line-2 {
-      color: #FFFFFF;
-      margin-top: 6px;
-    }
-
-    .nowrap {
-      white-space: nowrap;
-    }
-
-    /* Redução intencional da última linha para criar hierarquia / segunda camada */
-    .hero-line-sub {
-      display: block;
-      margin-top: 8px;
-      font-size: clamp(0.72rem, 2.1vw, 0.95rem);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: #cbd5e1;
-      opacity: 0.92;
-      text-shadow: none;
-    }
-
-    /* Destaques em Amarelo Puro, Forte e Sem Sombra Preta (#FFD000) com Contorno Preto */
+    /* DESTAQUE DOURADO COM ALTO CONTRASTE NO FUNDO BRANCO (#B4821A) */
     .hero-content h1 .gold-word,
     .hero-content h1 .gold-highlight,
     .hero-content h1 em {
-      color: #FFD000;
+      color: #B4821A;
       font-style: normal;
-      font-weight: 800;
+      font-weight: 900;
       background: none;
-      -webkit-text-fill-color: #FFD000;
+      -webkit-text-fill-color: #B4821A;
       display: inline;
-      text-shadow: 
-        -1px -1px 0 #000000,
-         1px -1px 0 #000000,
-        -1px  1px 0 #000000,
-         1px  1px 0 #000000,
-         0 2px 4px rgba(0, 0, 0, 0.85);
-      -webkit-text-stroke: 0.5px #000000;
+      text-shadow: none;
+      -webkit-text-stroke: 0;
     }
 
-    /* IMAGEM NO MEIO (ENTRE HEADLINE E SUBHEADLINE) - MOCKUP COMPLETO RECORTADO COM ILUMINAÇÃO DOURADA */
+    /* BADGE ACIMA DA IMAGEM: AZUL MARINHO COM TEXTO DOURADO */
+    .hero-badge-top-container {
+      text-align: center;
+      margin: 0 auto 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge-float {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #0F1B33;
+      color: #FFD000;
+      padding: 8px 22px;
+      border-radius: var(--radius-full);
+      font-weight: 800;
+      font-size: 0.82rem;
+      box-shadow: 0 4px 16px rgba(15, 27, 51, 0.22);
+      border: 1.5px solid #D4A63C;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* IMAGEM NO MEIO DA HERO */
     .hero-mid-image {
       width: 100%;
-      max-width: 620px;
-      margin: 0 auto 32px;
+      max-width: 580px;
+      margin: 0 auto 26px;
       position: relative;
     }
 
-    /* Sombra iluminada dourada discreta e controlada (não pega a headline) */
     .hero-mid-image::before {
       content: '';
       position: absolute;
-      top: 56%;
+      top: 52%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 72%;
-      height: 72%;
-      background: radial-gradient(circle, rgba(245, 158, 11, 0.45) 0%, rgba(234, 179, 8, 0.25) 45%, rgba(212, 166, 60, 0.1) 70%, transparent 85%);
+      width: 75%;
+      height: 75%;
+      background: radial-gradient(circle, rgba(212, 166, 60, 0.28) 0%, rgba(245, 158, 11, 0.15) 45%, transparent 75%);
       filter: blur(28px);
       z-index: 0;
       pointer-events: none;
       border-radius: 50%;
-      animation: goldenAuraPulse 4s ease-in-out infinite alternate;
-    }
-
-    @keyframes goldenAuraPulse {
-      0% {
-        transform: translate(-50%, -50%) scale(0.96);
-        opacity: 0.7;
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(1.03);
-        opacity: 0.9;
-      }
     }
 
     .hero-mid-image img {
@@ -867,109 +844,384 @@
       box-shadow: none;
       position: relative;
       z-index: 1;
-      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 16px rgba(245, 158, 11, 0.38));
+      filter: drop-shadow(0 14px 28px rgba(15, 27, 51, 0.18)) drop-shadow(0 4px 12px rgba(212, 166, 60, 0.25));
       display: block;
     }
 
-    .hero-badge-top-container {
-      text-align: center;
-      margin: 0 auto 18px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-badge-float {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: var(--gold-gradient);
-      color: #0F1B33;
-      padding: 9px 24px;
-      border-radius: var(--radius-full);
-      font-weight: 900;
-      font-size: 0.85rem;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 18px rgba(212, 166, 60, 0.5);
-      border: 2px solid #ffffff;
-      white-space: nowrap;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
+    /* SUBHEADLINE (LEAD) PARA FUNDO BRANCO */
     .hero-lead {
       font-family: 'Inter', system-ui, sans-serif;
-      font-size: 1.15rem;
-      line-height: 1.65;
-      color: #E2E8F0;
-      margin: 16px auto 26px;
-      max-width: 720px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #334155;
+      margin: 14px auto 22px;
+      max-width: 760px;
       font-weight: 500;
       text-align: center;
       display: block;
     }
 
     .hero-lead strong {
-      color: #FBF6EC;
+      color: #0F1B33;
       font-weight: 700;
     }
 
     .hero-lead .lead-gold {
-      color: #D4A63C;
+      color: #B4821A;
       font-weight: 700;
     }
 
+    /* BOTÃO CTA & SUBTEXTO */
+    .hero-cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 22px;
+    }
+
+    .hero .btn-subtext {
+      color: #64748B;
+      font-weight: 600;
+      font-size: 0.86rem;
+      margin-top: 8px;
+    }
+
+    /* CARROSSEL DAS 10 CAPAS EXCLUSIVAS (AUTO-SCROLL) */
+    .hero-covers-carousel-section {
+      width: 100%;
+      max-width: 1080px;
+      margin: 16px auto 24px;
+      text-align: center;
+    }
+
+    .covers-carousel-header {
+      margin-bottom: 12px;
+    }
+
+    .covers-badge {
+      display: inline-block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: #B4821A;
+      background: #FEF9C3;
+      border: 1px solid #FDE047;
+      padding: 4px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .covers-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+      font-weight: 800;
+      color: #0F1B33;
+      margin: 4px 0;
+      line-height: 1.3;
+    }
+
+    .covers-subtitle {
+      font-size: clamp(0.82rem, 2vw, 0.92rem);
+      color: #64748B;
+      margin: 0;
+    }
+
+    .covers-marquee-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 12px 0 16px;
+      mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    }
+
+    .covers-marquee-track {
+      display: flex;
+      gap: 14px;
+      width: max-content;
+      animation: scrollCoversMarquee 38s linear infinite;
+    }
+
+    .covers-marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes scrollCoversMarquee {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .cover-card {
+      flex: 0 0 128px;
+      width: 128px;
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 8px 8px 10px;
+      box-shadow: 0 4px 12px rgba(15, 27, 51, 0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .cover-card:hover {
+      transform: translateY(-4px);
+      border-color: #D4A63C;
+      box-shadow: 0 8px 20px rgba(212, 166, 60, 0.22);
+    }
+
+    .cover-card-img {
+      width: 110px;
+      height: 145px;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+      margin-bottom: 7px;
+      background: #F1F5F9;
+    }
+
+    .cover-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cover-card-num {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #B4821A;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .cover-card-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #0F1B33;
+      text-align: center;
+      line-height: 1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 28px;
+      margin-top: 2px;
+    }
+
+    /* CHECKLIST DE BENEFÍCIOS NO FUNDO CLARO */
     .hero-checklist {
       list-style: none;
-      margin-top: 10px;
-      margin-bottom: 28px;
+      margin: 14px auto 0;
       display: inline-block;
       text-align: left;
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 14px 20px;
+      box-shadow: 0 4px 16px rgba(15, 27, 51, 0.05);
+      max-width: 760px;
+      width: 100%;
     }
 
     .hero-checklist li {
       position: relative;
-      padding: 8px 0 8px 34px;
-      color: #E2E8F0;
-      font-size: 0.98rem;
+      padding: 7px 0 7px 32px;
+      color: #334155;
+      font-size: 0.95rem;
       font-weight: 500;
       line-height: 1.45;
+      border-bottom: 1px solid #F1F5F9;
+    }
+
+    .hero-checklist li:last-child {
+      border-bottom: none;
     }
 
     .hero-checklist li strong {
       font-weight: 700;
-      color: #FBF6EC;
+      color: #0F1B33;
     }
 
     .hero-checklist li::before {
       content: "✓";
       position: absolute;
       left: 0;
-      top: 7px;
-      width: 22px;
-      height: 22px;
-      background: linear-gradient(135deg, #FFE082 0%, #D4A63C 100%);
-      color: #0F1B33;
+      top: 6px;
+      width: 20px;
+      height: 20px;
+      background: #DCFCE7;
+      color: #16A34A;
+      border: 1.5px solid #86EFAC;
       border-radius: 50%;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 900;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
     }
 
-    .hero-cta-group {
+    /* ========================================================
+       SEÇÃO DE IMAGINAÇÃO DO LEAD FRIO (A EDIÇÃO MAIS LINDA DE TODOS OS ANOS)
+       ======================================================== */
+    .section-cold-lead-imagination {
+      background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+      padding: 58px 0;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .imagination-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+      margin-top: 36px;
+    }
+
+    .imagination-card {
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 26px 22px;
+      box-shadow: 0 4px 18px rgba(15, 27, 51, 0.05);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      text-align: left;
+      position: relative;
+    }
+
+    .imagination-card:hover {
+      transform: translateY(-4px);
+      border-color: #D4A63C;
+      box-shadow: 0 10px 28px rgba(212, 166, 60, 0.16);
+    }
+
+    .imagination-icon-box {
+      width: 52px;
+      height: 52px;
+      background: #FEF9C3;
+      border: 1.5px solid #FDE047;
+      color: #B4821A;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(212, 166, 60, 0.18);
+    }
+
+    .imagination-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: #0F1B33;
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    .imagination-card p {
+      color: #475569;
+      font-size: 0.94rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ========================================================
+       SEÇÃO DE PÁGINAS DE ESCRITA E PLANEJAMENTO 2027
+       ======================================================== */
+    .section-writing-showcase {
+      background: #FFFFFF;
+      padding: 58px 0;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .writing-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 26px;
+      margin-top: 36px;
+    }
+
+    .writing-card {
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(15, 27, 51, 0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       display: flex;
       flex-direction: column;
-      align-items: center;
+    }
+
+    .writing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(15, 27, 51, 0.12);
+      border-color: #D4A63C;
+    }
+
+    .writing-card-img {
       width: 100%;
-      margin-bottom: 24px;
+      height: 235px;
+      background: #FFFFFF;
+      overflow: hidden;
+      border-bottom: 1.5px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
     }
 
-    .hero .btn-subtext {
-      color: #cbd5e1;
+    .writing-card-img img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
 
-    /* TRUST BAR */
+    .writing-card-body {
+      padding: 22px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .writing-card-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #B4821A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      display: inline-block;
+    }
+
+    .writing-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0F1B33;
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    .writing-card p {
+      color: #475569;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      margin: 0;
+      flex: 1;
+    }
+
+/* TRUST BAR */
     .trust-bar {
       background: #ffffff;
       padding: 18px 0;
@@ -3573,7 +3825,7 @@
     ⚡ Oferta especial somente hoje <span id="top-bar-date">21/10/2026</span>
   </aside>
 
-  <!-- HERO SECTION (MOBILE-FIRST: HEADLINE -> IMAGEM -> SUBHEADLINE) -->
+    <!-- HERO SECTION COM FUNDO BRANCO E LETRAS AZUIS -->
   <header class="hero">
     <div class="wrap">
       <div class="hero-content">
@@ -3581,10 +3833,10 @@
         <!-- 0. PILL BADGE SUPERIOR -->
         <div class="hero-pill-badge">
           <span>✨</span>
-          <span>LITURGIA DIÁRIA COMPLETA + 5 BÔNUS DEVOCIONAIS EXCLUSIVOS</span>
+          <span>A EDIÇÃO MAIS LINDA DE TODOS OS ANOS · 10 CAPAS + 5 BÔNUS EXCLUSIVOS</span>
         </div>
 
-        <!-- 1. HEADLINE PRINCIPAL -->
+        <!-- 1. HEADLINE PRINCIPAL (LETRAS AZUIS + DESTAQUE DOURADO) -->
         <h1>
           Rotina corrida em 2027? Abra a agenda e reze o <span class="gold-word">Evangelho do dia</span> em apenas <span class="gold-word">5 minutos</span>.
         </h1>
@@ -3607,7 +3859,7 @@
           A <strong>Agenda Católica 2027</strong> traz a liturgia dos 365 dias já pronta nas suas mãos. <span class="lead-gold">Sem desculpas, sem complicações e sem culpa.</span>
         </p>
 
-        <!-- 4. BOTÃO DE AÇÃO HERO (ANTES DOS BENEFÍCIOS) -->
+        <!-- 4. BOTÃO DE AÇÃO HERO -->
         <div class="hero-cta-group">
           <a class="btn btn-gold btn-pulse" href="#oferta" id="cta-hero">
             <span>👉 QUERO MINHA AGENDA CATÓLICA 2027</span>
@@ -3615,7 +3867,124 @@
           <span class="btn-subtext">⚡ Acesso imediato no e-mail e WhatsApp · A partir de apenas R$ 19,90</span>
         </div>
 
-        <!-- 5. BENEFÍCIOS RÁPIDOS -->
+        <!-- 5. CARROSSEL CONTÍNUO DAS 10 CAPAS EXCLUSIVAS (LOGO ABAIXO DO BOTÃO) -->
+        <div class="hero-covers-carousel-section">
+          <div class="covers-carousel-header">
+            <span class="covers-badge">🏆 10 CAPAS EXCLUSIVAS INCLUSAS NO KIT</span>
+            <h3 class="covers-title">A Edição Mais Linda de Todos os Anos</h3>
+            <p class="covers-subtitle">Você recebe todas as 10 capas em alta resolução para escolher e imprimir a sua devoção favorita:</p>
+          </div>
+          
+          <div class="covers-marquee-wrapper" id="covers-marquee">
+            <div class="covers-marquee-track">
+              <!-- BLOCO 1 (10 Capas) -->
+              <div class="cover-card">
+                <div class="cover-card-img"><img src="assets/capa_1_sagrado_coracao_de_jesus.webp" alt="Capa Sagrado Coração de Jesus" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 1</span>
+                <span class="cover-card-name">Sagrado Coração de Jesus</span>
+              </div>
+              <div class="cover-card">
+                <div class="cover-card-img"><img src="assets/capa_2_nossa_senhora_de_guadalupe.webp" alt="Capa Nossa Senhora de Guadalupe" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 2</span>
+                <span class="cover-card-name">N. Sra. de Guadalupe</span>
+              </div>
+              <div class="cover-card">
+                <div class="cover-card-img"><img src="assets/capa_3_nossa_senhora_aparecida.webp" alt="Capa Nossa Senhora Aparecida" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 3</span>
+                <span class="cover-card-name">Nossa Senhora Aparecida</span>
+              </div>
+              <div class="cover-card">
+                <div class="cover-card-img"><img src="assets/capa_4_imaculado_coracao_de_maria.webp" alt="Capa Imaculado Coração de Maria" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 4</span>
+                <span class="cover-card-name">Imaculado Coração</span>
+              </div>
+              <div class="cover-card">
+                <div class="cover-card-img"><img src="assets/capa_5_nossa_senhora_desatadora_dos_nos.webp" alt="Capa Nossa Senhora Desatadora dos Nós" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 5</span>
+                <span class="cover-card-name">Desatadora dos Nós</span>
+              </div>
+              <div class="cover-card">
+                <div class="cover-card-img"><img src="assets/capa_6_nossa_senhora_de_fatima.webp" alt="Capa Nossa Senhora de Fátima" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 6</span>
+                <span class="cover-card-name">Nossa Senhora de Fátima</span>
+              </div>
+              <div class="cover-card">
+                <div class="cover-card-img"><img src="assets/capa_7_maria_rainha_do_ceu.webp" alt="Capa Maria, Rainha do Céu" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 7</span>
+                <span class="cover-card-name">Maria, Rainha do Céu</span>
+              </div>
+              <div class="cover-card">
+                <div class="cover-card-img"><img src="assets/capa_8_sao_jose.webp" alt="Capa São José" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 8</span>
+                <span class="cover-card-name">São José com Menino</span>
+              </div>
+              <div class="cover-card">
+                <div class="cover-card-img"><img src="assets/capa_9_sao_miguel_arcanjo.webp" alt="Capa São Miguel Arcanjo" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 9</span>
+                <span class="cover-card-name">São Miguel Arcanjo</span>
+              </div>
+              <div class="cover-card">
+                <div class="cover-card-img"><img src="assets/capa_10_nossa_senhora_das_dores.webp" alt="Capa Nossa Senhora das Dores" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 10</span>
+                <span class="cover-card-name">N. Sra. das Dores</span>
+              </div>
+
+              <!-- BLOCO 2 (DUPLICADO PARA ROLAGEM INFINITA 100% CONTÍNUA) -->
+              <div class="cover-card" aria-hidden="true">
+                <div class="cover-card-img"><img src="assets/capa_1_sagrado_coracao_de_jesus.webp" alt="" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 1</span>
+                <span class="cover-card-name">Sagrado Coração de Jesus</span>
+              </div>
+              <div class="cover-card" aria-hidden="true">
+                <div class="cover-card-img"><img src="assets/capa_2_nossa_senhora_de_guadalupe.webp" alt="" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 2</span>
+                <span class="cover-card-name">N. Sra. de Guadalupe</span>
+              </div>
+              <div class="cover-card" aria-hidden="true">
+                <div class="cover-card-img"><img src="assets/capa_3_nossa_senhora_aparecida.webp" alt="" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 3</span>
+                <span class="cover-card-name">Nossa Senhora Aparecida</span>
+              </div>
+              <div class="cover-card" aria-hidden="true">
+                <div class="cover-card-img"><img src="assets/capa_4_imaculado_coracao_de_maria.webp" alt="" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 4</span>
+                <span class="cover-card-name">Imaculado Coração</span>
+              </div>
+              <div class="cover-card" aria-hidden="true">
+                <div class="cover-card-img"><img src="assets/capa_5_nossa_senhora_desatadora_dos_nos.webp" alt="" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 5</span>
+                <span class="cover-card-name">Desatadora dos Nós</span>
+              </div>
+              <div class="cover-card" aria-hidden="true">
+                <div class="cover-card-img"><img src="assets/capa_6_nossa_senhora_de_fatima.webp" alt="" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 6</span>
+                <span class="cover-card-name">Nossa Senhora de Fátima</span>
+              </div>
+              <div class="cover-card" aria-hidden="true">
+                <div class="cover-card-img"><img src="assets/capa_7_maria_rainha_do_ceu.webp" alt="" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 7</span>
+                <span class="cover-card-name">Maria, Rainha do Céu</span>
+              </div>
+              <div class="cover-card" aria-hidden="true">
+                <div class="cover-card-img"><img src="assets/capa_8_sao_jose.webp" alt="" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 8</span>
+                <span class="cover-card-name">São José com Menino</span>
+              </div>
+              <div class="cover-card" aria-hidden="true">
+                <div class="cover-card-img"><img src="assets/capa_9_sao_miguel_arcanjo.webp" alt="" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 9</span>
+                <span class="cover-card-name">São Miguel Arcanjo</span>
+              </div>
+              <div class="cover-card" aria-hidden="true">
+                <div class="cover-card-img"><img src="assets/capa_10_nossa_senhora_das_dores.webp" alt="" width="125" height="165" loading="lazy"></div>
+                <span class="cover-card-num">Capa 10</span>
+                <span class="cover-card-name">N. Sra. das Dores</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. BENEFÍCIOS RÁPIDOS -->
         <ul class="hero-checklist">
           <li><strong>Liturgia diária 2027:</strong> Evangelho do dia, cor litúrgica e santo padroeiro</li>
           <li><strong>Caminho Quaresmal exclusivo:</strong> Checklist de Oração, Penitência e Caridade</li>
@@ -3626,8 +3995,7 @@
       </div>
     </div>
   </header>
-
-  <!-- ===================================================
+<!-- ===================================================
        SEÇÃO DE DEPOIMENTOS DO WHATSAPP (LOGO ABAIXO DA HERO)
        =================================================== -->
   <section class="section-whatsapp-proof" id="depoimentos-whatsapp">
@@ -3687,7 +4055,124 @@
     </div>
   </section>
 
-  <!-- CARROSSEL DE PÁGINAS INTERNAS (COMO ELA É POR DENTRO) -->
+    <!-- ===================================================
+       SEÇÃO DE IMAGINAÇÃO DO LEAD FRIO (A EDIÇÃO MAIS LINDA DE TODOS OS ANOS)
+       =================================================== -->
+  <section class="section-cold-lead-imagination" id="experiencia">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">A EDIÇÃO MAIS LINDA DE TODOS OS ANOS</span>
+        <h2>IMAGINE COMO SERÁ O SEU ANO DE 2027 COM ESTA AGENDA NA SUA MESA...</h2>
+        <p class="section-subtitle">
+          Não é apenas uma agenda de datas. É um refúgio sagrado de paz no meio da correria, pensado para transformar a sua rotina com Deus.
+        </p>
+      </div>
+
+      <div class="imagination-cards-grid">
+        <div class="imagination-card">
+          <div class="imagination-icon-box">🌅</div>
+          <h3>1. Manhãs em Paz e Sem Ansiedade</h3>
+          <p>
+            Em vez de acordar com a enxurrada de notificações e estresse do celular, imagine começar o dia abrindo sua agenda, lendo a Liturgia e fazendo uma oração de 5 minutos que traz serenidade para todo o seu dia.
+          </p>
+        </div>
+
+        <div class="imagination-card">
+          <div class="imagination-icon-box">✍️</div>
+          <h3>2. Seus Projetos e Orações Escritos no Papel</h3>
+          <p>
+            Espaço pautado generoso para escrever suas metas do ano, intenções de oração pela família e gratidão pelas bênçãos recebidas. Escrever à mão acalma a mente e firma o compromisso com Deus.
+          </p>
+        </div>
+
+        <div class="imagination-card">
+          <div class="imagination-icon-box">🛡️</div>
+          <h3>3. A Certeza de que Sua Fé Não Vai Esfriar</h3>
+          <p>
+            Com as celebrações da Igreja, dias de preceito, Santos do Dia e o Caminho Quaresmal organizados dia a dia, você nunca mais terminará o ano com aquela dor de ter deixado a vida espiritual de lado.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SEÇÃO DE PÁGINAS DE ESCRITA E PLANEJAMENTO NO ANO DE 2027
+       =================================================== -->
+  <section class="section-writing-showcase" id="planejamento">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">ORGANIZAÇÃO &amp; VIDA COM DEUS</span>
+        <h2>MUITO ESPAÇO PARA ESCREVER E PLANEJAR O SEU 2027</h2>
+        <p class="section-subtitle">
+          Veja os detalhes das páginas internas feitas especialmente para você anotar compromissos, traçar metas e acompanhar seu progresso espiritual:
+        </p>
+      </div>
+
+      <div class="writing-showcase-grid">
+        <!-- Card 1 -->
+        <div class="writing-card">
+          <div class="writing-card-img">
+            <img src="assets/agenda_pagina_metas_anotacoes.webp" alt="Página de Planejamento Mensal, Minhas Metas e Anotações da Agenda Católica 2027" width="450" height="606" loading="lazy">
+          </div>
+          <div class="writing-card-body">
+            <span class="writing-card-tag">ESPAÇO PAUTADO</span>
+            <h3>Planejamento Mensal &amp; Minhas Metas</h3>
+            <p>Linhas organizadas para listar suas metas espirituais, projetos de vida, intenções do mês e anotações pessoais diante de Deus.</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="writing-card">
+          <div class="writing-card-img">
+            <img src="assets/agenda_paginas_planejamento_aberto.webp" alt="Visão de Dupla Página Aberta da Agenda Católica 2027" width="680" height="472" loading="lazy">
+          </div>
+          <div class="writing-card-body">
+            <span class="writing-card-tag">FORMATO ABERTO EM DUPLA PÁGINA</span>
+            <h3>Visão Ampla: Leitura &amp; Meditação</h3>
+            <p>Diagramação nobre com espaço para anotações ao lado de ricas meditações, como as 14 estações da Via Sacra de Santo Afonso.</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="writing-card">
+          <div class="writing-card-img">
+            <img src="assets/preview_calendario_maio_2027.webp" alt="Calendário Litúrgico Mensal Oficial 2027 com Cores e Dias Santos" width="290" height="375" loading="lazy">
+          </div>
+          <div class="writing-card-body">
+            <span class="writing-card-tag">CALENDÁRIO LITÚRGICO MENSAL</span>
+            <h3>Visão Anual &amp; Dias de Preceito</h3>
+            <p>Todos os meses com cores litúrgicas (Verde, Roxo, Branco, Vermelho), Solenidades, Festas e dias obrigatórios de Jejum e Abstinência.</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="writing-card">
+          <div class="writing-card-img">
+            <img src="assets/preview_quaresma.webp" alt="Caminho Quaresmal com Checklist Diário de Hábitos" width="450" height="450" loading="lazy">
+          </div>
+          <div class="writing-card-body">
+            <span class="writing-card-tag">CHECKLIST DE HÁBITOS 2027</span>
+            <h3>Caminho Quaresmal Dia a Dia</h3>
+            <p>Checklist diário prático de Oração, Penitência e Caridade para transformar sua Quaresma no momento mais profundo do ano.</p>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="writing-card">
+          <div class="writing-card-img">
+            <img src="assets/preview_12_marcadores_santos.webp" alt="12 Marcadores de Páginas com Santos Católicos" width="665" height="205" loading="lazy">
+          </div>
+          <div class="writing-card-body">
+            <span class="writing-card-tag">12 MARCADORES EXCLUSIVOS</span>
+            <h3>Marcadores dos Grandes Santos</h3>
+            <p>Coleção de 12 marcadores em leque com imagens sacras em altíssima definição para acompanhar sua leitura da Bíblia e da Agenda.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- CARROSSEL DE PÁGINAS INTERNAS (COMO ELA É POR DENTRO) -->
   <section class="section-inside-agenda" id="por-dentro">
     <div class="wrap">
       <div style="text-align: center;">
