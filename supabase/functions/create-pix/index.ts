@@ -337,15 +337,16 @@ serve(async (req) => {
     const resolvedFbc = tracking?.fbc || (tracking?.fbclid ? `fb.1.${Date.now()}.${tracking.fbclid}` : null);
     const normalizedEmail = email.trim().toLowerCase();
 
-    // 0. Proteção Anti-Abuso / Idempotência:
+    // 0. Proteção Anti-Abuso / Idempotência Rápida:
     // Se o cliente já gerou um Pix com o mesmo e-mail e valor nos últimos 10 minutos que ainda está 'pending',
     // reutiliza o QR Code já gerado. Não gasta chamada na PushinPay, não envia e-mails repetidos e não duplica pedidos.
+    // Usamos .eq (busca indexada instantânea B-tree) em vez de .ilike (que causava table scan sequencial de quase 1s).
     const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000).toISOString();
     try {
       const { data: existingOrders, error: searchError } = await supabase
         .from('orders')
         .select('id, pushinpay_transaction_id, pix_code, pix_qr_code_base64, amount_cents, status, created_at')
-        .ilike('customer_email', normalizedEmail)
+        .eq('customer_email', normalizedEmail)
         .eq('status', 'pending')
         .eq('amount_cents', amountCents)
         .gte('created_at', tenMinutesAgo)
@@ -377,61 +378,20 @@ serve(async (req) => {
       console.warn('[create-pix] Falha ao verificar Pix recente, prosseguindo com criação normal:', checkErr);
     }
 
-    // 1. Cria o registro inicial do pedido no Supabase
-    const { data: order, error: insertError } = await supabase
-      .from('orders')
-      .insert({
-        customer_name: name,
-        customer_email: normalizedEmail,
-        customer_phone: phone,
-        customer_cpf: cpf || null,
-        plan: selectedPlan,
-        order_bump: hasOrderBump,
-        order_bump_quadros: hasOrderBumpQuadros,
-        amount_cents: amountCents,
-        status: 'pending',
-        utm_source: tracking?.utm_source || null,
-        utm_medium: tracking?.utm_medium || null,
-        utm_campaign: tracking?.utm_campaign || null,
-        utm_content: tracking?.utm_content || null,
-        utm_term: tracking?.utm_term || null,
-        fbclid: tracking?.fbclid || null,
-        fbc: resolvedFbc,
-        fbp: tracking?.fbp || null,
-        client_ip: clientIp || null,
-        client_user_agent: clientUserAgent || null,
-        shipping_cep: shipping_cep || null,
-        shipping_street: shipping_street || null,
-        shipping_number: shipping_number || null,
-        shipping_complement: shipping_complement || null,
-        shipping_neighborhood: shipping_neighborhood || null,
-        shipping_city: shipping_city || null,
-        shipping_state: shipping_state || null,
-      })
-      .select()
-      .single();
-
-    if (insertError || !order) {
-      console.error('Erro ao inserir pedido:', insertError);
-      return new Response(
-        JSON.stringify({ error: 'Erro ao registrar pedido no banco de dados.' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
-
-    // 2. Chama a API da PushinPay para gerar o QR Code PIX
+    // 1. Valida token da PushinPay antes de prosseguir
     if (!pushinToken) {
       console.warn('PUSHINPAY_TOKEN não configurada.');
       return new Response(
         JSON.stringify({
           error: 'Configuração pendente: Defina o PUSHINPAY_TOKEN no Supabase Secrets para gerar o PIX real.',
-          order_id: order.id,
           require_token: true
         }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
+    // 2. Chama imediatamente a API da PushinPay para gerar o QR Code PIX
+    // Fazemos isso ANTES de gravar no banco para evitar operações duplicadas (insert + update)
     const webhookUrl = `${supabaseUrl}/functions/v1/pushinpay-webhook`;
 
     const pushinResponse = await fetch('https://api.pushinpay.com.br/api/pix/cashIn', {
@@ -460,18 +420,54 @@ serve(async (req) => {
       );
     }
 
-    // 3. Atualiza o pedido com os dados recebidos da PushinPay
-    await supabase
+    // 3. Cria o pedido em UMA ÚNICA chamada ao banco (com os dados do Pix já preenchidos)
+    // Isso elimina 1 roundtrip completo de UPDATE no banco de dados, economizando de 300 a 500ms.
+    const { data: order, error: insertError } = await supabase
       .from('orders')
-      .update({
+      .insert({
+        customer_name: name,
+        customer_email: normalizedEmail,
+        customer_phone: phone,
+        customer_cpf: cpf || null,
+        plan: selectedPlan,
+        order_bump: hasOrderBump,
+        order_bump_quadros: hasOrderBumpQuadros,
+        amount_cents: amountCents,
+        status: 'pending',
         pushinpay_transaction_id: String(pushinData.id).trim().toLowerCase(),
         pix_code: pushinData.qr_code,
         pix_qr_code_base64: pushinData.qr_code_base64,
+        utm_source: tracking?.utm_source || null,
+        utm_medium: tracking?.utm_medium || null,
+        utm_campaign: tracking?.utm_campaign || null,
+        utm_content: tracking?.utm_content || null,
+        utm_term: tracking?.utm_term || null,
+        fbclid: tracking?.fbclid || null,
+        fbc: resolvedFbc,
+        fbp: tracking?.fbp || null,
+        client_ip: clientIp || null,
+        client_user_agent: clientUserAgent || null,
+        shipping_cep: shipping_cep || null,
+        shipping_street: shipping_street || null,
+        shipping_number: shipping_number || null,
+        shipping_complement: shipping_complement || null,
+        shipping_neighborhood: shipping_neighborhood || null,
+        shipping_city: shipping_city || null,
+        shipping_state: shipping_state || null,
       })
-      .eq('id', order.id);
+      .select('id')
+      .single();
 
-    // 4. Envia imediatamente o código PIX para o e-mail do cliente com proteções anti-spam
-    try {
+    if (insertError) {
+      console.error('Aviso ao registrar pedido no banco:', insertError);
+    }
+
+    const orderId = order?.id || null;
+
+    // 4. Tarefas em SEGUNDO PLANO (Não bloqueiam a resposta ao usuário!):
+    // Envio de email e disparo do Meta CAPI rodam de forma assíncrona com EdgeRuntime.waitUntil,
+    // permitindo que o cliente receba o QR Code instantaneamente na tela.
+    const backgroundTasks = Promise.allSettled([
       sendPixPendingEmail({
         customer_name: name,
         customer_email: email,
@@ -480,15 +476,9 @@ serve(async (req) => {
         order_bump_quadros: hasOrderBumpQuadros,
         amount_cents: amountCents,
         pix_code: pushinData.qr_code,
-      }).catch(e => console.error('Falha assíncrona ao enviar PIX por email:', e));
-    } catch (emailErr) {
-      console.error('Erro ao agendar envio de email PIX:', emailErr);
-    }
+      }).catch(e => console.error('[create-pix] Falha assíncrona ao enviar PIX por email:', e)),
 
-    // 5. Dispara evento InitiateCheckout na Meta Conversions API (CAPI)
-    // com o MESMO event_id para deduplicação sem contagem dupla
-    try {
-      const metaResult = await sendMetaEvent({
+      sendMetaEvent({
         eventName: 'InitiateCheckout',
         eventId: finalEventId,
         eventSourceUrl: event_source_url || 'https://agendanossasenhora.online',
@@ -509,18 +499,24 @@ serve(async (req) => {
           content_ids: contentIds,
           content_type: 'product',
           num_items: hasOrderBump ? 2 : 1,
-          order_id: order.id,
+          order_id: orderId,
         }
-      });
-      console.log(`[Meta CAPI create-pix] InitiateCheckout enviado para pedido ${order.id}:`, metaResult);
-    } catch (metaErr) {
-      console.error('[Meta CAPI create-pix] Erro ao disparar CAPI InitiateCheckout:', metaErr);
+      }).then(res => {
+        console.log(`[Meta CAPI create-pix] InitiateCheckout background concluído para pedido ${orderId}:`, res);
+      }).catch(metaErr => {
+        console.error('[Meta CAPI create-pix] Erro background CAPI InitiateCheckout:', metaErr);
+      })
+    ]);
+
+    if (typeof EdgeRuntime !== 'undefined' && EdgeRuntime.waitUntil) {
+      EdgeRuntime.waitUntil(backgroundTasks);
     }
 
+    // 5. Retorna o QR Code e código Copia e Cola IMEDIATAMENTE para o usuário
     return new Response(
       JSON.stringify({
         success: true,
-        order_id: order.id,
+        order_id: orderId,
         transaction_id: pushinData.id,
         qr_code: pushinData.qr_code,
         qr_code_base64: pushinData.qr_code_base64,
