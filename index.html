@@ -4879,8 +4879,8 @@
                 <input class="checkout-input" type="tel" id="cust-phone" placeholder="(11) 99999-9999" required autocomplete="tel">
               </div>
               <div class="checkout-field">
-                <label class="checkout-label" for="cust-cpf">CPF (para PIX) *</label>
-                <input class="checkout-input" type="text" id="cust-cpf" placeholder="000.000.000-00" required>
+                <label class="checkout-label" for="cust-cpf">CPF <span style="font-size:0.75rem; color:#64748b; font-weight:normal;">(opcional)</span></label>
+                <input class="checkout-input" type="text" id="cust-cpf" placeholder="000.000.000-00">
               </div>
             </div>
 
@@ -6002,6 +6002,36 @@
         });
       }
 
+      
+      // ─── MÁSCARAS E VALIDAÇÕES AMIGÁVEIS (TELEFONE & CPF) ───
+      if (inputPhone) {
+        inputPhone.addEventListener('input', function(e) {
+          var v = e.target.value.replace(/\D/g, '').substring(0, 11);
+          if (v.length > 10) {
+            e.target.value = '(' + v.substring(0, 2) + ') ' + v.substring(2, 7) + '-' + v.substring(7);
+          } else if (v.length > 6) {
+            e.target.value = '(' + v.substring(0, 2) + ') ' + v.substring(2, 6) + '-' + v.substring(6);
+          } else if (v.length > 2) {
+            e.target.value = '(' + v.substring(0, 2) + ') ' + v.substring(2);
+          } else if (v.length > 0) {
+            e.target.value = '(' + v;
+          }
+        });
+      }
+
+      if (inputCpf) {
+        inputCpf.addEventListener('input', function(e) {
+          var v = e.target.value.replace(/\D/g, '').substring(0, 11);
+          if (v.length > 9) {
+            e.target.value = v.substring(0, 3) + '.' + v.substring(3, 6) + '.' + v.substring(6, 9) + '-' + v.substring(9);
+          } else if (v.length > 6) {
+            e.target.value = v.substring(0, 3) + '.' + v.substring(3, 6) + '.' + v.substring(6);
+          } else if (v.length > 3) {
+            e.target.value = v.substring(0, 3) + '.' + v.substring(3);
+          }
+        });
+      }
+
       // Submissão do Formulário de Checkout (Interrompe com Modal se ainda não escolheu os Quadros)
       var checkoutForm = document.getElementById('checkout-native-form');
       if (checkoutForm) {
@@ -6013,11 +6043,29 @@
           var phone = inputPhone ? inputPhone.value.trim() : '';
           var cpf = inputCpf ? inputCpf.value.trim() : '';
 
-          if (!name || !email || !phone) {
+          if (!name) {
             if (checkoutFormError) {
-              checkoutFormError.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+              checkoutFormError.textContent = 'Por favor, informe seu nome completo.';
               checkoutFormError.style.display = 'block';
             }
+            if (inputName) inputName.focus();
+            return;
+          }
+          if (!email || email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+            if (checkoutFormError) {
+              checkoutFormError.textContent = 'Por favor, informe um e-mail válido para receber os arquivos.';
+              checkoutFormError.style.display = 'block';
+            }
+            if (inputEmail) inputEmail.focus();
+            return;
+          }
+          var cleanPhoneDigits = phone.replace(/\D/g, '');
+          if (cleanPhoneDigits.length < 10) {
+            if (checkoutFormError) {
+              checkoutFormError.textContent = 'Por favor, informe seu WhatsApp completo com DDD (ex: 11 99999-9999).';
+              checkoutFormError.style.display = 'block';
+            }
+            if (inputPhone) inputPhone.focus();
             return;
           }
 
