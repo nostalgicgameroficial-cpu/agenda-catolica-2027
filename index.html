@@ -688,31 +688,30 @@
       text-align: center;
     }
 
-        /* ========================================================
-       HERO SECTION: FUNDO BRANCO / OFF-WHITE SACRAL COM LETRAS AZUIS (#0F1B33)
+            /* ========================================================
+       HERO SECTION: AZUL-MARINHO PROFUNDO COM ILUMINAÇÃO CELESTIAL
        ======================================================== */
     .hero {
-      background: #FFFFFF;
-      background: radial-gradient(ellipse at 50% 0%, #FFFFFF 0%, #F8FAFC 55%, #EEF2F6 100%);
-      color: #0F1B33;
-      padding: 38px 0 44px;
+      background: radial-gradient(ellipse at 50% -10%, #1a2f55 0%, #0F1B33 55%, #081120 100%);
+      color: #FBF6EC;
+      padding: 42px 0 52px;
       position: relative;
-      border-bottom: 2px solid #E2E8F0;
+      border-bottom: 2px solid rgba(212, 166, 60, 0.45);
       text-align: center;
       overflow: hidden;
     }
 
-    /* Suave halo de iluminação celestial dourada suave sobre o fundo claro */
+    /* Suave halo de iluminação celestial no fundo que não compete com a leitura */
     .hero::before {
       content: "";
       position: absolute;
-      top: -80px;
+      top: -120px;
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
-      max-width: 920px;
-      height: 420px;
-      background: radial-gradient(circle, rgba(212, 166, 60, 0.14) 0%, rgba(29, 77, 144, 0.04) 50%, transparent 75%);
+      max-width: 860px;
+      height: 440px;
+      background: radial-gradient(circle, rgba(255, 208, 0, 0.18) 0%, rgba(38, 100, 190, 0.08) 50%, transparent 75%);
       pointer-events: none;
       z-index: 0;
     }
@@ -722,76 +721,117 @@
       z-index: 1;
     }
 
-    /* PILL BADGE SUPERIOR */
+    /* PILL BADGE SUPERIOR COM BORDA DOURADA */
     .hero-pill-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      background: #FEF3C7;
-      border: 1.5px solid #D4A63C;
-      color: #92400E;
-      font-size: clamp(0.7rem, 2.2vw, 0.82rem);
+      background: rgba(255, 208, 0, 0.12);
+      border: 1.5px solid #FFD000;
+      color: #FBF6EC;
+      font-size: clamp(0.68rem, 2.2vw, 0.82rem);
       font-weight: 800;
-      padding: 7px 16px;
+      padding: 6px 14px;
       border-radius: var(--radius-full);
-      margin-bottom: 18px;
-      box-shadow: 0 4px 14px rgba(212, 166, 60, 0.22);
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 14px rgba(255, 208, 0, 0.25);
       letter-spacing: 0.03em;
       text-transform: uppercase;
       max-width: 100%;
       text-align: center;
     }
 
-    /* HEADLINE PRINCIPAL COM LETRAS AZUIS (#0F1B33) */
+    /* HEADLINE PRINCIPAL (POPPINS EXTRA BOLD / GROSSA COM ALTO IMPACTO) */
     .hero-content h1 {
       font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      color: #0F1B33;
+      color: #FFFFFF;
       margin-bottom: 18px;
-      font-weight: 800;
-      font-size: clamp(1.22rem, 3.8vw, 1.7rem);
+      font-weight: 900;
+      font-size: clamp(1.28rem, 4vw, 1.75rem);
       line-height: 1.34;
-      letter-spacing: -0.015em;
+      letter-spacing: -0.01em;
       text-transform: none;
       max-width: 920px;
       margin-left: auto;
       margin-right: auto;
-      text-shadow: none;
-      -webkit-text-stroke: 0;
+      text-shadow: 
+        -1px -1px 0 #000000,
+         1px -1px 0 #000000,
+        -1px  1px 0 #000000,
+         1px  1px 0 #000000,
+         0 2px 5px rgba(0, 0, 0, 0.85);
+      -webkit-text-stroke: 0.5px #000000;
     }
 
     @media (min-width: 640px) {
       .hero-content h1 {
-        font-size: clamp(1.5rem, 3vw, 2.1rem);
+        font-size: clamp(1.5rem, 3.2vw, 2.15rem);
         line-height: 1.3;
       }
     }
 
     @media (min-width: 900px) {
       .hero-content h1 {
-        font-size: clamp(1.85rem, 2.6vw, 2.45rem);
+        font-size: clamp(1.85rem, 2.8vw, 2.5rem);
         line-height: 1.25;
       }
     }
 
-    /* DESTAQUE DOURADO COM ALTO CONTRASTE NO FUNDO BRANCO (#B4821A) */
-    .hero-content h1 .gold-word,
-    .hero-content h1 .gold-highlight,
-    .hero-content h1 em {
-      color: #B4821A;
-      font-style: normal;
-      font-weight: 900;
-      background: none;
-      -webkit-text-fill-color: #B4821A;
-      display: inline;
+    /* Linhas intencionais para hierarquia e ritmo visual perfeito */
+    .hero-line {
+      display: block;
+    }
+
+    .hero-line-1 {
+      color: #FFFFFF;
+    }
+
+    .hero-line-2 {
+      color: #FFFFFF;
+      margin-top: 6px;
+    }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    /* Terceira linha com sutileza e elegância */
+    .hero-line-sub {
+      display: block;
+      margin-top: 10px;
+      font-size: clamp(0.72rem, 2.1vw, 0.95rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #cbd5e1;
+      opacity: 0.92;
       text-shadow: none;
       -webkit-text-stroke: 0;
     }
 
-    /* BADGE ACIMA DA IMAGEM: AZUL MARINHO COM TEXTO DOURADO */
+    /* Destaques em Amarelo Puro e Forte (#FFD000) */
+    .hero-content h1 .gold-word,
+    .hero-content h1 .gold-highlight,
+    .hero-content h1 em {
+      color: #FFD000;
+      font-style: normal;
+      font-weight: 900;
+      background: none;
+      -webkit-text-fill-color: #FFD000;
+      display: inline;
+      text-shadow: 
+        -1px -1px 0 #000000,
+         1px -1px 0 #000000,
+        -1px  1px 0 #000000,
+         1px  1px 0 #000000,
+         0 2px 4px rgba(0, 0, 0, 0.8);
+      -webkit-text-stroke: 0.5px #000000;
+    }
+
+    /* BADGE ACIMA DA IMAGEM: DOURADO BRILHANTE */
     .hero-badge-top-container {
       text-align: center;
-      margin: 0 auto 16px;
+      margin: 0 auto 18px;
       position: relative;
       z-index: 2;
     }
@@ -800,14 +840,14 @@
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      background: #0F1B33;
-      color: #FFD000;
-      padding: 8px 22px;
+      background: var(--gold-gradient);
+      color: #0F1B33;
+      padding: 9px 24px;
       border-radius: var(--radius-full);
-      font-weight: 800;
-      font-size: 0.82rem;
-      box-shadow: 0 4px 16px rgba(15, 27, 51, 0.22);
-      border: 1.5px solid #D4A63C;
+      font-weight: 900;
+      font-size: 0.85rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 18px rgba(212, 166, 60, 0.5);
+      border: 2px solid #ffffff;
       white-space: nowrap;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -829,7 +869,7 @@
       transform: translate(-50%, -50%);
       width: 75%;
       height: 75%;
-      background: radial-gradient(circle, rgba(212, 166, 60, 0.28) 0%, rgba(245, 158, 11, 0.15) 45%, transparent 75%);
+      background: radial-gradient(circle, rgba(212, 166, 60, 0.35) 0%, rgba(245, 158, 11, 0.18) 45%, transparent 75%);
       filter: blur(28px);
       z-index: 0;
       pointer-events: none;
@@ -844,17 +884,17 @@
       box-shadow: none;
       position: relative;
       z-index: 1;
-      filter: drop-shadow(0 14px 28px rgba(15, 27, 51, 0.18)) drop-shadow(0 4px 12px rgba(212, 166, 60, 0.25));
+      filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.5)) drop-shadow(0 4px 14px rgba(212, 166, 60, 0.35));
       display: block;
     }
 
-    /* SUBHEADLINE (LEAD) PARA FUNDO BRANCO */
+    /* SUBHEADLINE (LEAD) */
     .hero-lead {
       font-family: 'Inter', system-ui, sans-serif;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #334155;
-      margin: 14px auto 22px;
+      font-size: 1.15rem;
+      line-height: 1.65;
+      color: #E2E8F0;
+      margin: 16px auto 26px;
       max-width: 760px;
       font-weight: 500;
       text-align: center;
@@ -862,12 +902,12 @@
     }
 
     .hero-lead strong {
-      color: #0F1B33;
+      color: #FBF6EC;
       font-weight: 700;
     }
 
     .hero-lead .lead-gold {
-      color: #B4821A;
+      color: #FFD000;
       font-weight: 700;
     }
 
@@ -881,7 +921,7 @@
     }
 
     .hero .btn-subtext {
-      color: #64748B;
+      color: #94A3B8;
       font-weight: 600;
       font-size: 0.86rem;
       margin-top: 8px;
@@ -3849,38 +3889,40 @@
     ⚡ Oferta especial somente hoje <span id="top-bar-date">21/10/2026</span>
   </aside>
 
-    <!-- HERO SECTION COM FUNDO BRANCO E LETRAS AZUIS -->
+      <!-- HERO SECTION AZUL MARINHO: HEADLINE POPPINS GROSSA COM DESTAQUES EM AMARELO -->
   <header class="hero">
     <div class="wrap">
       <div class="hero-content">
-        
-        <!-- 0. PILL BADGE SUPERIOR -->
+
+        <!-- PILL BADGE SUPERIOR -->
         <div class="hero-pill-badge">
           <span>✨</span>
-          <span>A EDIÇÃO MAIS LINDA DE TODOS OS ANOS · 10 CAPAS + 5 BÔNUS EXCLUSIVOS</span>
+          <span>LITURGIA DIÁRIA COMPLETA + 5 BÔNUS DEVOCIONAIS EXCLUSIVOS</span>
         </div>
 
-        <!-- 1. HEADLINE PRINCIPAL (LETRAS AZUIS + DESTAQUE DOURADO) -->
+        <!-- 1. HEADLINE PRINCIPAL (FONTE GROSSA + DESTAQUES EM AMARELO) -->
         <h1>
-          Rotina corrida em 2027? Abra a agenda e reze o <span class="gold-word">Evangelho do dia</span> em apenas <span class="gold-word">5 minutos</span>.
+          <span class="hero-line hero-line-1">COMO VIVER <span class="gold-word">2027</span> COM MAIS PAZ E FÉ:</span>
+          <span class="hero-line hero-line-2"><span class="nowrap"><span class="gold-word">365 DIAS</span> DE</span> <span class="nowrap">LITURGIA DIÁRIA</span> <span class="nowrap"><span class="gold-word">COM NOSSA SENHORA</span></span></span>
+          <span class="hero-line-sub">DE FORMA SIMPLES, PROFUNDA E ABENÇOADA</span>
         </h1>
 
         <!-- BADGE ACIMA DA IMAGEM -->
         <div class="hero-badge-top-container">
           <div class="hero-badge-float">
             <span>⭐</span>
-            <span>Kit 2027 Completo</span>
+            <span>Edição 2027 Completa</span>
           </div>
         </div>
 
         <!-- 2. IMAGEM DA HERO ENTRE A HEADLINE E A SUBHEADLINE (MOBILE-FIRST) -->
         <div class="hero-mid-image">
-          <img src="assets/hero_bundle_2027.webp" alt="Kit Completo Agenda Católica 2027 com Liturgia Diária, Calendários Litúrgicos e Marcadores Devocionais" width="916" height="990" fetchpriority="high" decoding="async">
+          <img src="assets/hero_bundle_2027.webp" alt="Kit Completo Agenda Católica 2027 com Liturgia Diária, Calendários Litúrgicos e Marcadores Devocionais" width="995" height="834" fetchpriority="high" decoding="async">
         </div>
 
         <!-- 3. SUBHEADLINE -->
         <p class="hero-lead">
-          A <strong>Agenda Católica 2027</strong> traz a liturgia dos 365 dias já pronta nas suas mãos. <span class="lead-gold">Sem desculpas, sem complicações e sem culpa.</span>
+          Sua agenda personalizada de <strong>2027</strong>, com <strong>entrega imediata</strong>, pronta para <span class="lead-gold">imprimir e rezar</span>.
         </p>
 
         <!-- 4. BOTÃO DE AÇÃO HERO -->
@@ -3891,7 +3933,7 @@
           <span class="btn-subtext">⚡ Acesso imediato no e-mail e WhatsApp · A partir de apenas R$ 19,90</span>
         </div>
 
-                <!-- 5. CARROSSEL CONTÍNUO DAS CAPAS EXCLUSIVAS (LOGO ABAIXO DO BOTÃO) -->
+        <!-- 5. CARROSSEL CONTÍNUO DAS CAPAS EXCLUSIVAS (LOGO ABAIXO DO BOTÃO) -->
         <div class="hero-covers-carousel-section">
           <div class="covers-carousel-header">
             <span class="covers-badge">✨ CAPAS EM ALTA DEFINIÇÃO INCLUSAS</span>
