@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Vive 2027 con la Virgen del Pilar | Agenda Católica 2027 en PDF (Para Imprimir y Digital)</title>
+  <title>Cómo Vivir 2027 con Más Paz y Fe: 365 Días de Liturgia Diaria con la Virgen del Pilar</title>
   <meta name="description" content="365 días de liturgia diaria con Nuestra Señora, de forma sencilla, profunda y bendecida. Agenda católica en PDF, lista para imprimir y rezar, con 5 bonus devocionales.">
 
   <!-- TRACK GO - Smart Tracking & Meta Conversions Engine -->
@@ -11,7 +11,7 @@
   (function() {
     'use strict';
     var PRODUCT_NAME = "Agenda Católica 2027 - Virgen del Pilar";
-    var PIXEL_ID = "2333041117531828";
+    var PIXEL_ID = "2333041117531828"; // Mismo píxel de Guadalupe
     var ENDPOINT = "https://ucsccgihiomuwgqngept.supabase.co/functions/v1/webhook-tracking";
     var EMBED_PIXEL = true;
 
@@ -220,19 +220,84 @@
       letter-spacing: -0.01em;
     }
 
-    h1 {
-      font-size: clamp(1.45rem, 4.4vw, 2.35rem);
+    /* HEADLINE PRINCIPAL POPPINS GROSSA COM DESTAQUES EM AMARELO */
+    .hero-content h1 {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #FFFFFF;
+      margin-bottom: 18px;
       font-weight: 900;
-      line-height: 1.26;
-      letter-spacing: -0.015em;
-      text-transform: uppercase;
-      color: #ffffff;
+      font-size: clamp(1.28rem, 4vw, 1.78rem);
+      line-height: 1.34;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      max-width: 920px;
+      margin-left: auto;
+      margin-right: auto;
       text-shadow: 
         -1px -1px 0 #000000,
          1px -1px 0 #000000,
         -1px  1px 0 #000000,
          1px  1px 0 #000000,
          0 2px 6px rgba(0, 0, 0, 0.85);
+      -webkit-text-stroke: 0.5px #000000;
+    }
+
+    @media (min-width: 640px) {
+      .hero-content h1 {
+        font-size: clamp(1.5rem, 3.2vw, 2.15rem);
+        line-height: 1.3;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .hero-content h1 {
+        font-size: clamp(1.85rem, 2.8vw, 2.5rem);
+        line-height: 1.25;
+      }
+    }
+
+    .hero-line {
+      display: block;
+    }
+
+    .hero-line-1 {
+      color: #FFFFFF;
+    }
+
+    .hero-line-2 {
+      color: #FFFFFF;
+      margin-top: 6px;
+    }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    .hero-line-sub {
+      display: block;
+      margin-top: 10px;
+      font-size: clamp(0.72rem, 2.1vw, 0.95rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #cbd5e1;
+      opacity: 0.92;
+      text-shadow: none;
+      -webkit-text-stroke: 0;
+    }
+
+    .hero-content h1 .gold-word {
+      color: #FFD000;
+      font-style: normal;
+      font-weight: 900;
+      background: none;
+      -webkit-text-fill-color: #FFD000;
+      display: inline;
+      text-shadow: 
+        -1px -1px 0 #000000,
+         1px -1px 0 #000000,
+        -1px  1px 0 #000000,
+         1px  1px 0 #000000,
+         0 2px 4px rgba(0, 0, 0, 0.8);
       -webkit-text-stroke: 0.5px #000000;
     }
 
@@ -340,7 +405,7 @@
       font-weight: 500;
     }
 
-    /* TOP ANNOUNCEMENT BAR */
+    /* TOP BAR */
     .top-bar {
       background: #091324;
       color: #FFD000;
@@ -352,7 +417,7 @@
       border-bottom: 1px solid rgba(255, 208, 0, 0.3);
     }
 
-    /* HERO SECTION */
+    /* HERO */
     .hero {
       background: radial-gradient(ellipse at 50% -10%, #1a2f55 0%, #0F1B33 55%, #081120 100%);
       color: #FBF6EC;
@@ -400,13 +465,6 @@
       text-transform: uppercase;
       max-width: 100%;
       text-align: center;
-    }
-
-    .hero-content h1 .gold-word {
-      color: #FFD000;
-      font-style: normal;
-      font-weight: 900;
-      -webkit-text-fill-color: #FFD000;
     }
 
     .hero-lead-text {
@@ -524,7 +582,7 @@
       margin-top: 2px;
     }
 
-    /* SECTION PAIN & EMPATHY */
+    /* PAIN & EMPATHY */
     .section-pain {
       padding: 56px 0;
       background: #ffffff;
@@ -575,17 +633,26 @@
       margin-bottom: 18px;
     }
 
-    /* HOW TO USE SECTION */
+    /* HOW TO USE SECTION COM INFOGRÁFICO */
     .section-how {
-      padding: 56px 0;
+      padding: 58px 0;
       background: #f1f5f9;
+    }
+
+    .how-infographic-wrap {
+      max-width: 680px;
+      margin: 0 auto 36px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(15, 27, 51, 0.12);
+      border: 2px solid #e2e8f0;
+      background: #ffffff;
     }
 
     .steps-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 18px;
-      margin-top: 30px;
     }
 
     @media (min-width: 640px) {
@@ -640,7 +707,7 @@
       line-height: 1.45;
     }
 
-    /* SECTION FEATURES */
+    /* FEATURES */
     .section-features {
       padding: 58px 0;
       background: #ffffff;
@@ -698,7 +765,7 @@
       line-height: 1.5;
     }
 
-    /* SHOWCASE SECTION */
+    /* SHOWCASE */
     .section-showcase {
       padding: 58px 0;
       background: #f8fafc;
@@ -776,7 +843,164 @@
       line-height: 1.4;
     }
 
-    /* BONUSES SECTION */
+    /* SECCIÓN DE DEPOIMENTOS / TESTIMONIOS (INSTAGRAM STORIES) */
+    .section-testimonials {
+      padding: 68px 0 76px;
+      background: #f1f5f9;
+      border-top: 1px solid var(--line);
+      position: relative;
+    }
+
+    .ig-carousel-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin-top: 36px;
+      padding: 10px 0 20px;
+    }
+
+    .ig-carousel-track {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .ig-carousel-track {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+    }
+
+    .ig-story-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(15, 27, 51, 0.16);
+      border: 2px solid #e2e8f0;
+      background: #000000;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .ig-story-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(15, 27, 51, 0.25), 0 0 18px rgba(212, 166, 60, 0.35);
+      border-color: #D4A63C;
+    }
+
+    .ig-story-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ig-story-overlay-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 85px;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+      z-index: 1;
+    }
+
+    .ig-story-overlay-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 110px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+      z-index: 1;
+    }
+
+    .ig-story-header {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .ig-story-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      padding: 1.5px;
+      flex-shrink: 0;
+    }
+
+    .ig-story-avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #0F1B33;
+      color: #FFD000;
+      font-size: 0.72rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ig-story-name-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .ig-story-name {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .ig-story-location {
+      font-size: 0.65rem;
+      color: #e2e8f0;
+      opacity: 0.85;
+    }
+
+    .ig-story-bottom {
+      position: absolute;
+      bottom: 12px;
+      left: 10px;
+      right: 10px;
+      z-index: 2;
+    }
+
+    .ig-story-sticker {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(4px);
+      color: #0F1B33;
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      line-height: 1.3;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      margin-bottom: 6px;
+    }
+
+    .ig-story-stars {
+      color: #FFD000;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    /* 5 BONUSES */
     .section-bonuses {
       background: radial-gradient(ellipse at 50% -10%, #1a2f55 0%, #0F1B33 55%, #081120 100%);
       color: #ffffff;
@@ -913,7 +1137,7 @@
       margin-right: auto;
     }
 
-    /* PRICING SECTION */
+    /* PRICING */
     .section-pricing {
       padding: 60px 0;
       background: #ffffff;
@@ -1107,7 +1331,7 @@
       box-shadow: 0 10px 24px rgba(212, 166, 60, 0.6);
     }
 
-    /* GUARANTEE SECTION */
+    /* GUARANTEE */
     .section-guarantee {
       padding: 50px 0;
       background: #f8fafc;
@@ -1172,7 +1396,7 @@
       line-height: 1.55;
     }
 
-    /* FAQ SECTION */
+    /* FAQ */
     .section-faq {
       padding: 56px 0;
       background: #ffffff;
@@ -1285,7 +1509,7 @@
     ⚡ Oferta especial 2027 · Descarga inmediata en PDF · Disponibilidad limitada
   </aside>
 
-  <!-- HERO SECTION -->
+  <!-- HERO SECTION CON HEADLINE SOLICITADA EN ESPAÑOL -->
   <header class="hero">
     <div class="wrap">
       <div class="hero-content">
@@ -1296,9 +1520,11 @@
           <span>LITURGIA DIARIA COMPLETA + 5 BONUS DEVOCIONALES EXCLUSIVOS</span>
         </div>
 
-        <!-- HEADLINE -->
+        <!-- HEADLINE PRINCIPAL POPPINS GROSSA COM DESTAQUES EM AMARELO -->
         <h1>
-          VIVE <span class="gold-word">2027</span> CON LA VIRGEN DEL PILAR
+          <span class="hero-line hero-line-1">CÓMO VIVIR <span class="gold-word">2027</span> CON MÁS PAZ Y FE:</span>
+          <span class="hero-line hero-line-2"><span class="nowrap"><span class="gold-word">365 DÍAS</span> DE</span> <span class="nowrap">LITURGIA DIARIA</span> <span class="nowrap"><span class="gold-word">CON LA VIRGEN DEL PILAR</span></span></span>
+          <span class="hero-line-sub">DE FORMA SENCILLA, PROFUNDA Y BENDECIDA</span>
         </h1>
 
         <!-- PRODUCT IMAGE HERO -->
@@ -1406,13 +1632,17 @@
     </div>
   </section>
 
-  <!-- HOW TO USE SECTION -->
+  <!-- HOW TO USE SECTION COM NOVO INFOGRÁFICO DE ALTA CONVERSÃO -->
   <section class="section-how" id="como-usar">
     <div class="wrap">
       <div style="text-align: center;">
         <span class="section-tag">PRÁCTICO Y SENCILLO</span>
         <h2>CÓMO USAR TU AGENDA EN PDF</h2>
         <p class="section-subtitle">Sencillo, práctico y flexible. Tú eliges cómo seguir tu 2027.</p>
+      </div>
+
+      <div class="how-infographic-wrap">
+        <img src="assets/pilar_como_usar_passo_a_passo.webp" alt="Infografía ilustrando cómo usar la agenda en PDF en 4 pasos sencillos" width="800" height="800" loading="lazy" decoding="async">
       </div>
 
       <div class="steps-grid">
@@ -1576,7 +1806,7 @@
     </div>
   </section>
 
-  <!-- 5 BONUSES SECTION -->
+  <!-- 5 BONUSES SECTION (COM AS NOVAS IMAGENS GERADAS) -->
   <section class="section-bonuses" id="bonus">
     <div class="wrap">
       <div style="text-align: center;">
@@ -1598,7 +1828,7 @@
         <!-- Bonus 1: Marcapáginas -->
         <div class="bonus-card">
           <div class="bonus-card-img">
-            <img src="assets/pilar_bonus_bookmarks.webp" alt="Kit de 12 marcapáginas católicos" width="510" height="150" loading="lazy" decoding="async">
+            <img src="assets/pilar_bonus1_marcapaginas.webp" alt="Kit de 12 marcapáginas católicos con la Virgen del Pilar" width="700" height="700" loading="lazy" decoding="async">
           </div>
           <span class="bonus-tag">BONUS 01</span>
           <h3>KIT DE 12 MARCAPÁGINAS CATÓLICOS</h3>
@@ -1612,7 +1842,7 @@
         <!-- Bonus 2: Vía Crucis -->
         <div class="bonus-card">
           <div class="bonus-card-img">
-            <img src="assets/bonus2_viasacra.webp" alt="Vía Crucis ilustrado con meditaciones" width="380" height="380" loading="lazy" decoding="async">
+            <img src="assets/pilar_bonus2_viacrucis.webp" alt="Vía Crucis ilustrado con meditaciones de San Alfonso" width="700" height="700" loading="lazy" decoding="async">
           </div>
           <span class="bonus-tag">BONUS 02</span>
           <h3>VÍA CRUCIS ILUSTRADO</h3>
@@ -1626,7 +1856,7 @@
         <!-- Bonus 3: Calendario Litúrgico -->
         <div class="bonus-card">
           <div class="bonus-card-img">
-            <img src="assets/pilar_bonus_calendar.webp" alt="Calendario litúrgico de pared 2027" width="160" height="310" loading="lazy" decoding="async">
+            <img src="assets/pilar_bonus3_calendario.webp" alt="Calendario litúrgico de pared 2027 Virgen del Pilar" width="700" height="700" loading="lazy" decoding="async">
           </div>
           <span class="bonus-tag">BONUS 03</span>
           <h3>CALENDARIO LITÚRGICO DE PARED 2027</h3>
@@ -1640,7 +1870,7 @@
         <!-- Bonus 4: Plan Biblia -->
         <div class="bonus-card">
           <div class="bonus-card-img">
-            <img src="assets/bonus4_leitura_biblia.webp" alt="Plan de lectura de la Biblia en 1 año" width="380" height="380" loading="lazy" decoding="async">
+            <img src="assets/pilar_bonus4_biblia.webp" alt="Plan de lectura de la Biblia en 1 año" width="700" height="700" loading="lazy" decoding="async">
           </div>
           <span class="bonus-tag">BONUS 04</span>
           <h3>PLAN DE LECTURA DE LA BIBLIA EN 1 AÑO</h3>
@@ -1654,7 +1884,7 @@
         <!-- Bonus 5: Cuaderno de novenas -->
         <div class="bonus-card">
           <div class="bonus-card-img">
-            <img src="assets/bonus1_novenas.webp" alt="Cuaderno de novenas y oraciones" width="380" height="380" loading="lazy" decoding="async">
+            <img src="assets/pilar_bonus5_novenas.webp" alt="Cuaderno de novenas y oraciones a la Virgen del Pilar" width="700" height="700" loading="lazy" decoding="async">
           </div>
           <span class="bonus-tag">BONUS 05</span>
           <h3>CUADERNO DE NOVENAS Y ORACIONES</h3>
@@ -1673,6 +1903,113 @@
         <a class="btn btn-gold btn-pulse" href="#packs">
           👉 ELEGIR EL PACK COMPLETO
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE TESTIMONIOS (INSTAGRAM STORIES COM FOTOS REAIS DA ESPANHA) -->
+  <section class="section-testimonials" id="testimonios">
+    <div class="wrap">
+      <div style="text-align: center;">
+        <span class="section-tag">TESTIMONIOS REALES</span>
+        <h2>QUIENES YA TIENEN SU AGENDA EN ESPAÑA</h2>
+        <p class="section-subtitle">
+          Familias y devotos de toda España compartiendo su devoción y gratitud en redes sociales:
+        </p>
+      </div>
+
+      <div class="ig-carousel-wrapper">
+        <div class="ig-carousel-track">
+          
+          <!-- STORY 1: Carmen (Zaragoza) -->
+          <div class="ig-story-card">
+            <img src="assets/pilar_story_1.webp" alt="Carmen Navarro en Zaragoza con su agenda de la Virgen del Pilar" class="ig-story-img" loading="lazy" decoding="async">
+            <div class="ig-story-overlay-top"></div>
+            <div class="ig-story-overlay-bottom"></div>
+            <div class="ig-story-header">
+              <div class="ig-story-avatar">
+                <div class="ig-story-avatar-inner">CN</div>
+              </div>
+              <div class="ig-story-name-wrap">
+                <span class="ig-story-name">Carmen Navarro</span>
+                <span class="ig-story-location">Zaragoza, España</span>
+              </div>
+            </div>
+            <div class="ig-story-bottom">
+              <div class="ig-story-sticker">
+                «¡La portada de la Virgen del Pilar es bellísima! Impresa quedó perfecta.»
+              </div>
+              <div class="ig-story-stars">★★★★★</div>
+            </div>
+          </div>
+
+          <!-- STORY 2: María (Madrid) -->
+          <div class="ig-story-card">
+            <img src="assets/pilar_story_2.webp" alt="Mesa de oración de María en Madrid con la agenda abierta" class="ig-story-img" loading="lazy" decoding="async">
+            <div class="ig-story-overlay-top"></div>
+            <div class="ig-story-overlay-bottom"></div>
+            <div class="ig-story-header">
+              <div class="ig-story-avatar">
+                <div class="ig-story-avatar-inner">ME</div>
+              </div>
+              <div class="ig-story-name-wrap">
+                <span class="ig-story-name">María Eugenia</span>
+                <span class="ig-story-location">Madrid, España</span>
+              </div>
+            </div>
+            <div class="ig-story-bottom">
+              <div class="ig-story-sticker">
+                «Mis mañanas con el Evangelio diario y mi café son pura paz.»
+              </div>
+              <div class="ig-story-stars">★★★★★</div>
+            </div>
+          </div>
+
+          <!-- STORY 3: Isabel (Sevilla) -->
+          <div class="ig-story-card">
+            <img src="assets/pilar_story_3.webp" alt="Isabel en Sevilla con la agenda católica encuadernada" class="ig-story-img" loading="lazy" decoding="async">
+            <div class="ig-story-overlay-top"></div>
+            <div class="ig-story-overlay-bottom"></div>
+            <div class="ig-story-header">
+              <div class="ig-story-avatar">
+                <div class="ig-story-avatar-inner">IR</div>
+              </div>
+              <div class="ig-story-name-wrap">
+                <span class="ig-story-name">Isabel Romero</span>
+                <span class="ig-story-location">Sevilla, España</span>
+              </div>
+            </div>
+            <div class="ig-story-bottom">
+              <div class="ig-story-sticker">
+                «He impreso dos copias más para regalar a mis hermanas. ¡Una joya!»
+              </div>
+              <div class="ig-story-stars">★★★★★</div>
+            </div>
+          </div>
+
+          <!-- STORY 4: Lucía (Valencia / iPad) -->
+          <div class="ig-story-card">
+            <img src="assets/pilar_story_4.webp" alt="Lucía en Valencia usando la agenda digital en iPad con Apple Pencil" class="ig-story-img" loading="lazy" decoding="async">
+            <div class="ig-story-overlay-top"></div>
+            <div class="ig-story-overlay-bottom"></div>
+            <div class="ig-story-header">
+              <div class="ig-story-avatar">
+                <div class="ig-story-avatar-inner">LS</div>
+              </div>
+              <div class="ig-story-name-wrap">
+                <span class="ig-story-name">Lucía Sánchez</span>
+                <span class="ig-story-location">Valencia, España</span>
+              </div>
+            </div>
+            <div class="ig-story-bottom">
+              <div class="ig-story-sticker">
+                «En el iPad con GoodNotes funciona de maravilla. ¡Los marcapáginas son divinos!»
+              </div>
+              <div class="ig-story-stars">★★★★★</div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
