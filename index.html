@@ -409,7 +409,7 @@
   <!-- Performance & Preload -->
   <link rel="dns-prefetch" href="https://connect.facebook.net">
   <link rel="dns-prefetch" href="https://api.pushinpay.com.br">
-  <link rel="preload" as="image" href="assets/prod_planner_mulher_catolica.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/prod_hero_principal.webp" type="image/webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -883,6 +883,21 @@
       object-fit: cover;
       object-position: center 40%;
       display: block;
+    }
+
+    #hero-rotator .rotator-stage {
+      aspect-ratio: 1 / 1;
+      background: #FBF8F1;
+    }
+
+    #hero-rotator .rotator-slide img {
+      object-fit: contain;
+      object-position: center;
+      background: #FBF8F1;
+    }
+
+    #hero-rotator .rotator-slide.hero-cover-square img {
+      object-fit: cover;
     }
 
     .rotator-arrow {
@@ -3712,17 +3727,21 @@
           <span class="hero-line-sub">DE FORMA SIMPLES, PROFUNDA E ABENÇOADA</span>
         </h1>
 
-        <!-- 2. GALERIA ROTATIVA DA HERO: PLANNER DA MULHER CATÓLICA, AGENDA E CADERNOS DE ORAÇÕES -->
+        <!-- 2. GALERIA ROTATIVA DA HERO: AGENDA CATÓLICA PRINCIPAL, PLANNER DA MULHER CATÓLICA, AGENDA E CADERNOS DE ORAÇÕES -->
         <div class="hero-mid-image" id="hero-rotator" data-rotator="hero" data-interval="2800">
           <div class="hero-rotator-tabs" role="tablist" aria-label="Produtos em destaque">
-            <button type="button" class="rotator-tab-btn active" data-jump="0">🌸 Planner Mulher Católica</button>
-            <button type="button" class="rotator-tab-btn" data-jump="1">📅 Agenda 2027</button>
-            <button type="button" class="rotator-tab-btn" data-jump="2">🙏 Caderno de Orações</button>
+            <button type="button" class="rotator-tab-btn active" data-jump="0">✨ Coleção 2027</button>
+            <button type="button" class="rotator-tab-btn" data-jump="1">🌸 Planner Mulher Católica</button>
+            <button type="button" class="rotator-tab-btn" data-jump="2">📅 Agenda 2027</button>
+            <button type="button" class="rotator-tab-btn" data-jump="3">🙏 Caderno de Orações</button>
           </div>
 
           <div class="rotator-stage">
-            <div class="rotator-slide active" data-label="⭐ Planner da Mulher Católica 2027" data-group="planner">
-              <img src="assets/prod_planner_mulher_catolica.webp" alt="Planner da Mulher Católica 2027 - Liturgia Diária" width="481" height="614" fetchpriority="high" decoding="async">
+            <div class="rotator-slide active hero-cover-square" data-label="⭐ Agenda Católica 2027 · Impressa e Digital" data-group="colecao">
+              <img src="assets/prod_hero_principal.webp" alt="Agenda Católica Liturgia Diária 2027 impressa com folhas de planejamento, orações, impressora e versão digital no tablet" width="820" height="820" fetchpriority="high" decoding="async">
+            </div>
+            <div class="rotator-slide" data-label="🌸 Planner da Mulher Católica 2027" data-group="planner">
+              <img src="assets/prod_planner_mulher_catolica.webp" alt="Planner da Mulher Católica 2027 - Liturgia Diária" width="481" height="614" loading="lazy" decoding="async">
             </div>
             <div class="rotator-slide" data-label="📅 Agenda de Versículos 2027 · 1 Dia/Pág" data-group="agenda">
               <img src="assets/prod_agenda_versiculos_1dia.webp" alt="Agenda de Versículos 2027 - 1 Dia por Página com Horário" width="700" height="875" loading="lazy" decoding="async">
@@ -3757,7 +3776,7 @@
           </div>
 
           <div class="hero-badge-float" id="hero-rotator-badge">
-            <span>⭐ Planner da Mulher Católica 2027</span>
+            <span>⭐ Agenda Católica 2027 · Impressa e Digital</span>
           </div>
 
           <div class="rotator-dots" aria-label="Navegação das imagens">
@@ -3771,6 +3790,7 @@
             <button type="button" class="rotator-dot" aria-label="Slide 8"></button>
             <button type="button" class="rotator-dot" aria-label="Slide 9"></button>
             <button type="button" class="rotator-dot" aria-label="Slide 10"></button>
+            <button type="button" class="rotator-dot" aria-label="Slide 11"></button>
           </div>
         </div>
 
