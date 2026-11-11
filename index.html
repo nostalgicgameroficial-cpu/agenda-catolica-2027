@@ -409,7 +409,7 @@
   <!-- Performance & Preload -->
   <link rel="dns-prefetch" href="https://connect.facebook.net">
   <link rel="dns-prefetch" href="https://api.pushinpay.com.br">
-  <link rel="preload" as="image" href="assets/prod_hero_principal.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/agenda_hero_mockup_completo.webp" type="image/webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -686,18 +686,18 @@
       text-align: center;
     }
 
-    /* HERO SECTION: FUNDO CLARO LUMINOSO EM MARFIM E AZUL CÉU SUAVE */
+    /* HERO SECTION: AZUL-MARINHO #0F1B33, SACRAL, VIBRANTE E COM CONTRASTE MÁXIMO */
     .hero {
-      background: radial-gradient(ellipse at 50% 0%, #FFFFFF 0%, #FBF8F1 52%, #F3ECE0 100%);
-      color: #13294B;
-      padding: 36px 0 54px;
+      background: radial-gradient(ellipse at 50% -10%, #1a2f55 0%, #0F1B33 55%, #081120 100%);
+      color: #FBF6EC;
+      padding: 44px 0 58px;
       position: relative;
-      border-bottom: 2px solid #E8DCC8;
+      border-bottom: 2px solid rgba(212, 166, 60, 0.45);
       text-align: center;
       overflow: hidden;
     }
 
-    /* Suave halo luminoso celestial */
+    /* Suave halo de iluminação celestial no fundo que não compete com a leitura */
     .hero::before {
       content: "";
       position: absolute;
@@ -705,9 +705,9 @@
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
-      max-width: 920px;
-      height: 460px;
-      background: radial-gradient(circle, rgba(212, 166, 60, 0.14) 0%, rgba(219, 234, 254, 0.42) 48%, transparent 75%);
+      max-width: 860px;
+      height: 440px;
+      background: radial-gradient(circle, rgba(255, 208, 0, 0.18) 0%, rgba(38, 100, 190, 0.08) 50%, transparent 75%);
       pointer-events: none;
       z-index: 0;
     }
@@ -722,15 +722,15 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      background: rgba(212, 166, 60, 0.14);
-      border: 1.5px solid #C99834;
-      color: #13294B;
+      background: rgba(255, 208, 0, 0.12);
+      border: 1.5px solid #FFD000;
+      color: #FBF6EC;
       font-size: clamp(0.68rem, 2.2vw, 0.82rem);
       font-weight: 800;
       padding: 6px 14px;
       border-radius: var(--radius-full);
-      margin-bottom: 18px;
-      box-shadow: 0 4px 14px rgba(19, 41, 75, 0.08);
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 14px rgba(255, 208, 0, 0.25);
       letter-spacing: 0.03em;
       text-transform: uppercase;
       max-width: 100%;
@@ -739,11 +739,11 @@
 
     .hero-content h1 {
       font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      color: #13294B;
-      margin-bottom: 18px;
+      color: #FFFFFF;
+      margin-bottom: 20px;
       font-weight: 800;
-      font-size: clamp(1.12rem, 3.6vw, 1.45rem);
-      line-height: 1.32;
+      font-size: clamp(1.1rem, 3.6vw, 1.45rem);
+      line-height: 1.34;
       letter-spacing: -0.01em;
       text-transform: uppercase;
       max-width: 960px;
@@ -755,27 +755,28 @@
     @media (min-width: 640px) {
       .hero-content h1 {
         font-size: clamp(1.4rem, 2.8vw, 1.85rem);
-        line-height: 1.28;
+        line-height: 1.3;
       }
     }
 
     @media (min-width: 900px) {
       .hero-content h1 {
         font-size: clamp(1.85rem, 2.6vw, 2.45rem);
-        line-height: 1.24;
+        line-height: 1.25;
       }
     }
 
+    /* Linhas intencionais para evitar linhas órfãs */
     .hero-line {
       display: block;
     }
 
     .hero-line-1 {
-      color: #13294B;
+      color: #FFFFFF;
     }
 
     .hero-line-2 {
-      color: #13294B;
+      color: #FFFFFF;
       margin-top: 6px;
     }
 
@@ -783,207 +784,75 @@
       white-space: nowrap;
     }
 
+    /* Redução intencional da última linha para criar hierarquia / segunda camada */
     .hero-line-sub {
       display: block;
       margin-top: 8px;
       font-size: clamp(0.72rem, 2.1vw, 0.95rem);
       font-weight: 700;
       letter-spacing: 0.04em;
-      color: #42526e;
-      opacity: 1;
+      color: #cbd5e1;
+      opacity: 0.92;
       text-shadow: none;
     }
 
-    /* Destaques em Dourado Nobre de Alto Contraste sobre Fundo Claro */
+    /* Destaques em Amarelo Puro, Forte e Sem Sombra Preta (#FFD000) */
     .hero-content h1 .gold-word,
     .hero-content h1 .gold-highlight,
     .hero-content h1 em {
-      color: #B47B12;
+      color: #FFD000;
       font-style: normal;
-      font-weight: 900;
+      font-weight: 800;
       background: none;
-      -webkit-text-fill-color: #B47B12;
+      -webkit-text-fill-color: #FFD000;
       text-shadow: none;
       filter: none;
       display: inline;
     }
 
-    /* ROTATOR DA HERO (CADERNO, AGENDA, PLANNER) */
+    /* IMAGEM NO MEIO (ENTRE HEADLINE E SUBHEADLINE) - MOCKUP COMPLETO DO BUNDLE */
     .hero-mid-image {
       width: 100%;
-      max-width: 440px;
+      max-width: 620px;
       margin: 0 auto 28px;
       position: relative;
     }
 
-    .hero-rotator-tabs {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .rotator-tab-btn {
-      background: #FFFFFF;
-      border: 1.5px solid #DFD3BC;
-      color: #42526e;
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 0.74rem;
-      font-weight: 800;
-      padding: 6px 12px;
-      border-radius: var(--radius-full);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 6px rgba(19, 41, 75, 0.05);
-    }
-
-    .rotator-tab-btn:hover {
-      border-color: #D4A63C;
-      color: #13294B;
-    }
-
-    .rotator-tab-btn.active {
-      background: #13294B;
-      border-color: #13294B;
-      color: #FFFFFF;
-      box-shadow: 0 4px 12px rgba(19, 41, 75, 0.2);
-    }
-
-    .rotator-stage {
-      position: relative;
+    .hero-mid-image img {
       width: 100%;
-      aspect-ratio: 4 / 5;
-      background: #FFFFFF;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 2px solid rgba(212, 166, 60, 0.55);
-      box-shadow: 0 18px 42px rgba(19, 41, 75, 0.14), 0 0 24px rgba(212, 166, 60, 0.12);
-    }
-
-    .rotator-slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 0.45s ease, transform 0.45s ease;
-      transform: scale(1.015);
-      pointer-events: none;
-    }
-
-    .rotator-slide.active {
-      opacity: 1;
-      transform: scale(1);
-      pointer-events: auto;
-      z-index: 1;
-    }
-
-    .rotator-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 40%;
-      display: block;
-    }
-
-    #hero-rotator .rotator-stage {
-      aspect-ratio: 1 / 1;
-      background: #FBF8F1;
-    }
-
-    #hero-rotator .rotator-slide img {
-      object-fit: contain;
-      object-position: center;
-      background: #FBF8F1;
-    }
-
-    #hero-rotator .rotator-slide.hero-cover-square img {
-      object-fit: cover;
-    }
-
-    .rotator-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 4;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.92);
-      border: 1.5px solid #D4A63C;
-      color: #13294B;
-      font-size: 1rem;
-      font-weight: 900;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(19, 41, 75, 0.16);
-      transition: all 0.2s ease;
-    }
-
-    .rotator-arrow:hover {
-      background: #13294B;
-      color: #FFFFFF;
-    }
-
-    .rotator-arrow.prev { left: 10px; }
-    .rotator-arrow.next { right: 10px; }
-
-    .rotator-dots {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 6px;
-      flex-wrap: wrap;
-    }
-
-    .rotator-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      border: none;
-      background: #D6CCB8;
-      cursor: pointer;
-      padding: 0;
-      transition: all 0.25s ease;
-    }
-
-    .rotator-dot.active {
-      width: 22px;
-      border-radius: 9999px;
-      background: #B47B12;
+      height: auto;
+      border-radius: 18px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55), 0 0 35px rgba(212, 166, 60, 0.28);
+      border: 3px solid rgba(212, 166, 60, 0.65);
     }
 
     .hero-badge-float {
-      position: relative;
-      z-index: 5;
-      margin: -18px auto 10px;
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
       background: var(--gold-gradient);
       color: #0F1B33;
-      padding: 7px 16px;
+      padding: 8px 20px;
       border-radius: var(--radius-full);
       font-weight: 900;
-      font-size: 0.78rem;
-      box-shadow: 0 6px 20px rgba(19, 41, 75, 0.22), 0 0 12px rgba(212, 166, 60, 0.35);
-      display: inline-flex;
+      font-size: 0.82rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 16px rgba(212, 166, 60, 0.45);
+      display: flex;
       align-items: center;
-      justify-content: center;
       gap: 6px;
       border: 2px solid #ffffff;
       white-space: nowrap;
       text-transform: uppercase;
       letter-spacing: 0.03em;
-      max-width: 94%;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .hero-lead {
       font-family: 'Inter', system-ui, sans-serif;
-      font-size: 1.12rem;
-      line-height: 1.62;
-      color: #334155;
-      margin: 12px auto 24px;
+      font-size: 1.15rem;
+      line-height: 1.65;
+      color: #E2E8F0;
+      margin: 16px auto 26px;
       max-width: 720px;
       font-weight: 500;
       text-align: center;
@@ -991,19 +860,19 @@
     }
 
     .hero-lead strong {
-      color: #13294B;
-      font-weight: 800;
+      color: #FBF6EC;
+      font-weight: 700;
     }
 
     .hero-lead .lead-gold {
-      color: #B47B12;
-      font-weight: 800;
+      color: #D4A63C;
+      font-weight: 700;
     }
 
     .hero-checklist {
       list-style: none;
-      margin-top: 8px;
-      margin-bottom: 24px;
+      margin-top: 10px;
+      margin-bottom: 28px;
       display: inline-block;
       text-align: left;
     }
@@ -1011,7 +880,7 @@
     .hero-checklist li {
       position: relative;
       padding: 8px 0 8px 34px;
-      color: #334155;
+      color: #E2E8F0;
       font-size: 0.98rem;
       font-weight: 500;
       line-height: 1.45;
@@ -1019,7 +888,7 @@
 
     .hero-checklist li strong {
       font-weight: 700;
-      color: #13294B;
+      color: #FBF6EC;
     }
 
     .hero-checklist li::before {
@@ -1037,7 +906,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 6px rgba(19, 41, 75, 0.16);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
     }
 
     .hero-cta-group {
@@ -1049,7 +918,7 @@
     }
 
     .hero .btn-subtext {
-      color: #475569;
+      color: #cbd5e1;
     }
 
     /* TRUST BAR */
@@ -1168,29 +1037,28 @@
 
     .punch-box {
       margin-top: 28px;
-      padding: 24px 20px;
-      background: linear-gradient(135deg, #FFFDF7 0%, #F7ECCD 100%);
+      padding: 22px 18px;
+      background: linear-gradient(135deg, #0c1830 0%, #173260 100%);
       border-radius: var(--radius-md);
-      color: #13294B;
+      color: #ffffff;
       text-align: center;
       border: 2px solid var(--gold-500);
-      box-shadow: 0 8px 22px rgba(19, 41, 75, 0.06);
     }
 
     .punch-box p.lead-quote {
-      font-size: 1.12rem;
-      font-weight: 800;
+      font-size: 1.15rem;
+      font-weight: 700;
       line-height: 1.5;
       letter-spacing: 0.02em;
-      color: #13294B;
+      color: var(--gold-300);
       margin-bottom: 10px;
       text-transform: uppercase;
     }
 
     .punch-box p.lead-sub {
       font-size: 0.95rem;
-      color: #42526e;
-      font-weight: 600;
+      color: #d6e2f5;
+      font-weight: 500;
     }
 
     /* HOW TO USE - 4 STEPS */
@@ -1489,215 +1357,27 @@
       }
     }
 
-    /* SEÇÃO 12 CAPAS EXCLUSIVAS */
-    .section-capas {
-      background: #f7f0e6;
-      padding: 64px 0 68px;
-      border-top: 1px solid #E8DCC8;
-      border-bottom: 1px solid #E8DCC8;
-      text-align: center;
-    }
-
-    .capas-showcase-frame {
-      max-width: 960px;
-      margin: 0 auto;
-      background: #ffffff;
-      border: 2px solid rgba(212, 166, 60, 0.45);
-      border-radius: 22px;
-      padding: 14px;
-      box-shadow: 0 16px 38px rgba(19, 41, 75, 0.08);
-      cursor: zoom-in;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .capas-showcase-frame:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 20px 44px rgba(19, 41, 75, 0.13);
-      border-color: #D4A63C;
-    }
-
-    .capas-showcase-frame img {
-      width: 100%;
-      height: auto;
-      border-radius: 14px;
-      display: block;
-    }
-
-    .capas-zoom-hint {
-      margin-top: 12px;
-      font-size: 0.84rem;
-      font-weight: 700;
-      color: #8C6214;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #FEF8EB;
-      padding: 6px 14px;
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(201, 152, 52, 0.35);
-    }
-
-    /* LIGHTBOX MODAL PARA AMPLIAR AS 12 CAPAS */
-    .capas-lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 27, 51, 0.88);
-      backdrop-filter: blur(5px);
-      z-index: 99999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-
-    .capas-lightbox.active {
-      display: flex;
-    }
-
-    .capas-lightbox-inner {
-      position: relative;
-      max-width: 1080px;
-      width: 100%;
-      max-height: 92vh;
-      background: #f7f0e6;
-      border-radius: 18px;
-      padding: 10px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-      overflow: auto;
-    }
-
-    .capas-lightbox-inner img {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      display: block;
-    }
-
-    .capas-lightbox-close {
-      position: sticky;
-      top: 6px;
-      float: right;
-      background: #13294B;
-      color: #ffffff;
-      border: 2px solid #ffffff;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      font-size: 1rem;
-      font-weight: 900;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 2;
-    }
-
-    /* BÔNUS COM FUNDO CLARO LUMINOSO & VITRINE ROTATIVA DOS 3 PRODUTOS */
+    /* BÔNUS COM IMAGENS */
     .section-bonuses {
-      background: linear-gradient(180deg, #FAF6ED 0%, #F2ECE0 100%);
-      color: var(--ink-primary);
+      background: radial-gradient(circle at 50% 15%, #152d56 0%, #0c1830 65%, #050a14 100%);
+      color: #ffffff;
       padding: 65px 0 75px;
       position: relative;
-      border-top: 2px solid #E8DCC8;
+      border-top: 3px solid var(--gold-500);
     }
 
-    .section-bonuses .section-tag.dark {
-      background: #FEF8EB;
-      border-color: rgba(201, 152, 52, 0.45);
-      color: #9A6B12;
-    }
-
-    .section-bonuses h2.dark-title {
-      color: #13294B;
-    }
-
-    .section-bonuses .section-subtitle.dark {
-      color: #42526e;
-    }
-
-    /* TRIO ROTATIVO NOS BÔNUS (CADERNO, AGENDA, PLANNER) */
-    .bonus-trio-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      margin: 0 auto 42px;
-    }
-
-    @media (min-width: 680px) {
-      .bonus-trio-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-      }
-    }
-
-    .trio-rotator-card {
-      background: #FFFFFF;
-      border: 1.5px solid #E5D9C3;
-      border-radius: 20px;
-      padding: 16px;
-      box-shadow: 0 10px 28px rgba(19, 41, 75, 0.07);
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-    }
-
-    .trio-rotator-card:hover {
-      transform: translateY(-4px);
-      border-color: #D4A63C;
-      box-shadow: 0 16px 36px rgba(19, 41, 75, 0.12);
-    }
-
-    .trio-stage {
-      position: relative;
+    .bonus-lead-hero {
       width: 100%;
-      aspect-ratio: 4 / 5;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #FAF6ED;
-      border: 1px solid #EAE0CE;
-      margin-bottom: 12px;
+      max-width: 540px;
+      margin: 0 auto 38px;
+      text-align: center;
     }
 
-    .trio-stage .rotator-arrow {
-      width: 30px;
-      height: 30px;
-      font-size: 0.9rem;
-    }
-
-    .trio-stage .rotator-arrow.prev { left: 6px; }
-    .trio-stage .rotator-arrow.next { right: 6px; }
-
-    .trio-slide-caption {
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: #8C6214;
-      background: #FEF8EB;
-      border: 1px solid rgba(201, 152, 52, 0.35);
-      border-radius: var(--radius-full);
-      padding: 4px 12px;
-      margin: 0 auto 8px;
-      display: inline-block;
-    }
-
-    .trio-rotator-card h3 {
-      color: #13294B;
-      font-size: 1.05rem;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-
-    .trio-rotator-card p {
-      color: #42526e;
-      font-size: 0.86rem;
-      line-height: 1.45;
-      margin-bottom: 10px;
-      flex: 1;
-    }
-
-    .trio-rotator-card .rotator-dots {
-      margin-top: 2px;
+    .bonus-lead-hero img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
+      border: 2px solid rgba(247, 214, 121, 0.4);
     }
 
     .bonus-cards-grid {
@@ -1719,22 +1399,22 @@
     }
 
     .bonus-card {
-      background: #FFFFFF;
-      border: 1.5px solid #E5D9C3;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(247, 214, 121, 0.3);
       border-radius: var(--radius-lg);
       padding: 18px;
       display: flex;
       flex-direction: column;
       text-align: center;
       transition: all 0.3s ease;
-      box-shadow: 0 8px 24px rgba(19, 41, 75, 0.06);
     }
 
     .bonus-card:hover {
       transform: translateY(-4px);
       border-color: var(--gold-400);
-      box-shadow: 0 14px 32px rgba(19, 41, 75, 0.12);
-      background: #FFFFFF;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.08);
     }
 
     .bonus-card-img {
@@ -1743,9 +1423,8 @@
       border-radius: 12px;
       overflow: hidden;
       margin-bottom: 14px;
-      background: #FAF6ED;
-      border: 1px solid #EAE0CE;
-      position: relative;
+      background: #070e1c;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .bonus-card-img img {
@@ -1753,11 +1432,6 @@
       height: 100%;
       object-fit: cover;
       transition: transform 0.4s ease;
-    }
-
-    .bonus-card-img .rotator-slide img {
-      object-fit: contain;
-      background: #FAF6ED;
     }
 
     .bonus-card:hover .bonus-card-img img {
@@ -1779,8 +1453,8 @@
     }
 
     .bonus-card h3 {
-      color: #13294B;
-      font-size: 1.08rem;
+      color: #ffffff;
+      font-size: 1.1rem;
       font-weight: 800;
       letter-spacing: -0.02em;
       margin-bottom: 6px;
@@ -1789,7 +1463,7 @@
     }
 
     .bonus-card p {
-      color: #42526e;
+      color: #cbd8ef;
       font-size: 0.9rem;
       line-height: 1.48;
       font-weight: 500;
@@ -1801,27 +1475,26 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-top: 1px solid #EFE7D8;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
       padding-top: 10px;
       font-size: 0.85rem;
-      color: #475569;
     }
 
     .bonus-price-row .cross {
-      color: #c22919;
+      color: #ea8d8d;
       text-decoration: line-through;
       font-weight: 600;
     }
 
     .bonus-price-row .free {
-      color: #15803d;
+      color: var(--gold-300);
       font-weight: 900;
       font-size: 0.9rem;
       letter-spacing: 0.02em;
     }
 
     .bonus-card.economy-highlight {
-      background: linear-gradient(135deg, #FFFDF7 0%, #F7ECCD 100%);
+      background: linear-gradient(135deg, rgba(201, 152, 52, 0.22) 0%, rgba(12, 24, 48, 0.7) 100%);
       border: 2px solid var(--gold-400);
       justify-content: center;
       padding: 26px 20px;
@@ -1829,7 +1502,7 @@
 
     .bonus-card.economy-highlight h3 {
       font-size: 1.65rem;
-      color: #13294B;
+      color: var(--gold-300);
       margin-bottom: 10px;
       text-transform: uppercase;
       font-weight: 900;
@@ -2305,24 +1978,18 @@
       color: var(--ink-primary);
     }
 
-    /* FINAL CTA: FUNDO CLARO LUMINOSO */
+    /* FINAL CTA */
     .section-final-cta {
-      background: linear-gradient(180deg, #FBF8F1 0%, #F1E9DA 100%);
-      color: #13294B;
+      background: radial-gradient(circle at 50% 20%, #172a4d 0%, #0F1B33 70%, #070e1c 100%);
+      color: #FBF6EC;
       padding: 68px 0;
       text-align: center;
-      border-top: 2px solid #E5D9C3;
-    }
-
-    .section-final-cta .section-tag.dark {
-      background: #FEF8EB;
-      border-color: rgba(201, 152, 52, 0.45);
-      color: #9A6B12;
+      border-top: 3px solid var(--gold-500);
     }
 
     .section-final-cta h2 {
       font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      color: #13294B;
+      color: #FFFFFF;
       font-weight: 800;
       letter-spacing: -0.01em;
       text-transform: uppercase;
@@ -2330,7 +1997,7 @@
     }
 
     .section-final-cta p {
-      color: #42526e;
+      color: #E2E8F0;
       font-size: 1.05rem;
       max-width: 640px;
       margin: 0 auto 28px;
@@ -3722,75 +3389,17 @@
 
         <!-- 1. HEADLINE PRINCIPAL (POPPINS CAIXA ALTA + QUEBRAS INTENCIONAIS + DESTAQUES EM AMARELO FORTE) -->
         <h1>
-          <span class="hero-line hero-line-1">VIVA <span class="gold-word">2027</span> COM MAIS FÉ, PAZ E PROXIMIDADE <span class="nowrap">COM DEUS:</span></span>
-          <span class="hero-line hero-line-2"><span class="nowrap"><span class="gold-word">365 DIAS</span> DE</span> <span class="nowrap">LITURGIA DIÁRIA</span> + <span class="gold-word">UMA COLEÇÃO CATÓLICA COMPLETA</span> PARA O <span class="nowrap">ANO TODO!</span></span>
+          <span class="hero-line hero-line-1">COMO VIVER <span class="gold-word">2027</span> COM MAIS PAZ E FÉ:</span>
+          <span class="hero-line hero-line-2"><span class="nowrap"><span class="gold-word">365 DIAS</span> DE</span> <span class="nowrap">LITURGIA DIÁRIA</span> <span class="nowrap"><span class="gold-word">COM NOSSA SENHORA</span></span></span>
           <span class="hero-line-sub">DE FORMA SIMPLES, PROFUNDA E ABENÇOADA</span>
         </h1>
 
-        <!-- 2. GALERIA ROTATIVA DA HERO: AGENDA CATÓLICA PRINCIPAL, PLANNER DA MULHER CATÓLICA, AGENDA E CADERNOS DE ORAÇÕES -->
-        <div class="hero-mid-image" id="hero-rotator" data-rotator="hero" data-interval="2800">
-          <div class="hero-rotator-tabs" role="tablist" aria-label="Produtos em destaque">
-            <button type="button" class="rotator-tab-btn active" data-jump="0">✨ Coleção 2027</button>
-            <button type="button" class="rotator-tab-btn" data-jump="1">🌸 Planner Mulher Católica</button>
-            <button type="button" class="rotator-tab-btn" data-jump="2">📅 Agenda 2027</button>
-            <button type="button" class="rotator-tab-btn" data-jump="3">🙏 Caderno de Orações</button>
-          </div>
-
-          <div class="rotator-stage">
-            <div class="rotator-slide active hero-cover-square" data-label="⭐ Agenda Católica 2027 · Impressa e Digital" data-group="colecao">
-              <img src="assets/prod_hero_principal.webp" alt="Agenda Católica Liturgia Diária 2027 impressa com folhas de planejamento, orações, impressora e versão digital no tablet" width="820" height="820" fetchpriority="high" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="🌸 Planner da Mulher Católica 2027" data-group="planner">
-              <img src="assets/prod_planner_mulher_catolica.webp" alt="Planner da Mulher Católica 2027 - Liturgia Diária" width="481" height="614" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="📅 Agenda de Versículos 2027 · 1 Dia/Pág" data-group="agenda">
-              <img src="assets/prod_agenda_versiculos_1dia.webp" alt="Agenda de Versículos 2027 - 1 Dia por Página com Horário" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="🙏 Caderno de Orações · Sagrado Coração" data-group="caderno">
-              <img src="assets/prod_caderno_oracoes_capa.webp" alt="Caderno de Orações Devocionais" width="463" height="608" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="📖 Planner Liturgia Diária · Página Diária" data-group="planner">
-              <img src="assets/prod_planner_liturgia_1dia.webp" alt="Planner Liturgia Diária 2027 - 1 Dia por Página" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="📅 Agenda 2027 · 2 Dias por Página" data-group="agenda">
-              <img src="assets/prod_agenda_versiculos_2dias.webp" alt="Agenda de Versículos 2027 - 2 Dias por Página" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="📿 Caderno · Santo Terço Passo a Passo" data-group="caderno">
-              <img src="assets/prod_caderno_santo_terco.webp" alt="Caderno de Orações - Santo Terço Passo a Passo" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="✝️ Liturgia Diária · Evangelho e Salmo" data-group="planner">
-              <img src="assets/prod_planner_liturgia_card.webp" alt="Bloco Liturgia Diária 2027 - Leituras e Evangelho" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="🕊️ Agenda · Oração para Começar o Dia" data-group="agenda">
-              <img src="assets/prod_agenda_oracao_dia.webp" alt="Agenda 2027 - Oração para Começar o Dia" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="📜 Caderno · Orações da Tradição Católica" data-group="caderno">
-              <img src="assets/prod_caderno_oracoes_tradicao.webp" alt="Caderno de Orações da Tradição Católica" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="👑 Caderno · Consagração a Nossa Senhora" data-group="caderno">
-              <img src="assets/prod_caderno_consagracao.webp" alt="Caderno de Orações - Consagração a Nossa Senhora" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-
-            <button type="button" class="rotator-arrow prev" aria-label="Imagem anterior">&#10094;</button>
-            <button type="button" class="rotator-arrow next" aria-label="Próxima imagem">&#10095;</button>
-          </div>
-
-          <div class="hero-badge-float" id="hero-rotator-badge">
-            <span>⭐ Agenda Católica 2027 · Impressa e Digital</span>
-          </div>
-
-          <div class="rotator-dots" aria-label="Navegação das imagens">
-            <button type="button" class="rotator-dot active" aria-label="Slide 1"></button>
-            <button type="button" class="rotator-dot" aria-label="Slide 2"></button>
-            <button type="button" class="rotator-dot" aria-label="Slide 3"></button>
-            <button type="button" class="rotator-dot" aria-label="Slide 4"></button>
-            <button type="button" class="rotator-dot" aria-label="Slide 5"></button>
-            <button type="button" class="rotator-dot" aria-label="Slide 6"></button>
-            <button type="button" class="rotator-dot" aria-label="Slide 7"></button>
-            <button type="button" class="rotator-dot" aria-label="Slide 8"></button>
-            <button type="button" class="rotator-dot" aria-label="Slide 9"></button>
-            <button type="button" class="rotator-dot" aria-label="Slide 10"></button>
-            <button type="button" class="rotator-dot" aria-label="Slide 11"></button>
+        <!-- 2. IMAGEM DA HERO ENTRE A HEADLINE E A SUBHEADLINE (MOBILE-FIRST) -->
+        <div class="hero-mid-image">
+          <img src="assets/agenda_hero_mockup_completo.webp" alt="Kit Completo Agenda Católica 2027 com Liturgia Diária, Calendários Litúrgicos e Marcadores Devocionais" width="666" height="618" fetchpriority="high" decoding="async">
+          <div class="hero-badge-float">
+            <span>⭐</span>
+            <span>Edição 2027 Completa</span>
           </div>
         </div>
 
@@ -4016,24 +3625,6 @@
     </div>
   </section>
 
-  <!-- SEÇÃO EXCLUSIVA: 12 CAPAS NOS 3 PRODUTOS -->
-  <section class="section-capas" id="capas">
-    <div class="wrap">
-      <div style="text-align: center;">
-        <span class="section-tag">PERSONALIZAÇÃO COMPLETA</span>
-        <h2>12 CAPAS LINDAS NOS 3 PRODUTOS</h2>
-        <p class="section-subtitle">
-          Todas as 12 capas acompanham versões personalizadas para o <strong>Planner da Mulher Católica</strong>, a <strong>Agenda 2027</strong> e o <strong>Caderno de Orações</strong> — incluindo artes sacras e capas minimalistas com versículos.
-        </p>
-      </div>
-
-      <div class="capas-showcase-frame" id="open-capas-zoom" role="button" tabindex="0" aria-label="Ampliar imagem das 12 capas exclusivas">
-        <img src="assets/prod_12_capas_completo.webp" alt="12 capas exclusivas nos 3 produtos: Nossa Senhora Aparecida, Imaculado Coração, Sagrado Coração, Sagrada Família, São José, Santa Teresinha e versículos bíblicos" width="1024" height="804" loading="lazy" decoding="async">
-        <span class="capas-zoom-hint">🔍 Toque ou clique para ampliar e ver cada capa de perto</span>
-      </div>
-    </div>
-  </section>
-
   <!-- SHOWCASE EM USO -->
   <section class="section-showcase">
     <div class="wrap">
@@ -4114,99 +3705,20 @@
     </div>
   </section>
 
-  <!-- BÔNUS & VITRINE ROTATIVA DOS 3 PRODUTOS EM FUNDO CLARO -->
+  <!-- BÔNUS COM IMAGENS INDIVIDUAIS -->
   <section class="section-bonuses" id="bonus">
     <div class="wrap">
       <div style="text-align: center;">
-        <span class="section-tag dark">CONHEÇA CADA DETALHE &amp; BÔNUS</span>
-        <h2 class="dark-title">CADERNOS DE ORAÇÕES, AGENDA, PLANNER &amp; 5 BÔNUS ABENÇOADOS</h2>
+        <span class="section-tag dark">PRESENTES EXCLUSIVOS</span>
+        <h2 class="dark-title">5 BÔNUS ABENÇOADOS NO PACOTE COMPLETO</h2>
         <p class="section-subtitle dark">
-          Confira por dentro o <strong>Caderno de Orações</strong>, a <strong>Agenda 2027</strong> e o <strong>Planner da Mulher Católica</strong> — além de 5 bônus devocionais gratuitos no pacote de <strong>R$ 27,90</strong>!
+          Materiais devocionais ricos que complementam sua rotina. No pacote de <strong>R$ 27,90</strong>, você leva todos eles 100% gratuitos!
         </p>
       </div>
 
-      <!-- VITRINE ROTATIVA DOS 3 PRODUTOS (CADERNO DE ORAÇÕES, AGENDA E PLANNER DA MULHER CATÓLICA) -->
-      <div class="bonus-trio-grid">
-        
-        <!-- CARD ROTATIVO 1: CADERNO DE ORAÇÕES -->
-        <div class="trio-rotator-card" data-rotator="caderno" data-interval="2700">
-          <div class="trio-stage">
-            <div class="rotator-slide active" data-label="Capa Sagrado Coração">
-              <img src="assets/prod_caderno_oracoes_capa.webp" alt="Capa do Caderno de Orações" width="463" height="608" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="Santo Terço Passo a Passo">
-              <img src="assets/prod_caderno_santo_terco.webp" alt="Santo Terço Passo a Passo no Caderno de Orações" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="Orações da Tradição">
-              <img src="assets/prod_caderno_oracoes_tradicao.webp" alt="Orações da Tradição Católica" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="Consagração a Nossa Senhora">
-              <img src="assets/prod_caderno_consagracao.webp" alt="Consagração a Nossa Senhora no Caderno de Orações" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <button type="button" class="rotator-arrow prev" aria-label="Anterior">&#10094;</button>
-            <button type="button" class="rotator-arrow next" aria-label="Próximo">&#10095;</button>
-          </div>
-          <span class="trio-slide-caption">Capa Sagrado Coração</span>
-          <h3>🙏 CADERNOS DE ORAÇÕES</h3>
-          <p>Orações prontas, Santo Terço passo a passo, Consagração a Maria e páginas para registrar graças recebidas.</p>
-          <div class="rotator-dots">
-            <button type="button" class="rotator-dot active" aria-label="Foto 1"></button>
-            <button type="button" class="rotator-dot" aria-label="Foto 2"></button>
-            <button type="button" class="rotator-dot" aria-label="Foto 3"></button>
-            <button type="button" class="rotator-dot" aria-label="Foto 4"></button>
-          </div>
-        </div>
-
-        <!-- CARD ROTATIVO 2: AGENDA DE VERSÍCULOS 2027 -->
-        <div class="trio-rotator-card" data-rotator="agenda" data-interval="3100">
-          <div class="trio-stage">
-            <div class="rotator-slide active" data-label="1 Dia por Página c/ Horário">
-              <img src="assets/prod_agenda_versiculos_1dia.webp" alt="Agenda de Versículos 2027 - 1 Dia por Página" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="2 Dias por Página">
-              <img src="assets/prod_agenda_versiculos_2dias.webp" alt="Agenda de Versículos 2027 - 2 Dias por Página" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="Oração para Começar o Dia">
-              <img src="assets/prod_agenda_oracao_dia.webp" alt="Oração para Começar o Dia na Agenda 2027" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <button type="button" class="rotator-arrow prev" aria-label="Anterior">&#10094;</button>
-            <button type="button" class="rotator-arrow next" aria-label="Próximo">&#10095;</button>
-          </div>
-          <span class="trio-slide-caption">1 Dia por Página c/ Horário</span>
-          <h3>📅 AGENDA 2027</h3>
-          <p>Versões 1 dia e 2 dias por página com versículo bíblico diário e Oração da Manhã.</p>
-          <div class="rotator-dots">
-            <button type="button" class="rotator-dot active" aria-label="Foto 1"></button>
-            <button type="button" class="rotator-dot" aria-label="Foto 2"></button>
-            <button type="button" class="rotator-dot" aria-label="Foto 3"></button>
-          </div>
-        </div>
-
-        <!-- CARD ROTATIVO 3: PLANNER DA MULHER CATÓLICA 2027 -->
-        <div class="trio-rotator-card" data-rotator="planner" data-interval="3400">
-          <div class="trio-stage">
-            <div class="rotator-slide active" data-label="Capa Santa Teresinha 2027">
-              <img src="assets/prod_planner_mulher_catolica.webp" alt="Capa do Planner da Mulher Católica 2027" width="481" height="614" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="Miolo 1 Dia por Página">
-              <img src="assets/prod_planner_liturgia_1dia.webp" alt="Página Diária do Planner Liturgia Diária 2027" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide" data-label="Evangelho &amp; Leituras do Dia">
-              <img src="assets/prod_planner_liturgia_card.webp" alt="Referências completas da Liturgia Diária" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <button type="button" class="rotator-arrow prev" aria-label="Anterior">&#10094;</button>
-            <button type="button" class="rotator-arrow next" aria-label="Próximo">&#10095;</button>
-          </div>
-          <span class="trio-slide-caption">Capa Santa Teresinha 2027</span>
-          <h3>🌸 PLANNER DA MULHER CATÓLICA</h3>
-          <p>Acompanha o tempo litúrgico da Igreja com referências da 1ª leitura, Salmo e Evangelho de todos os dias.</p>
-          <div class="rotator-dots">
-            <button type="button" class="rotator-dot active" aria-label="Foto 1"></button>
-            <button type="button" class="rotator-dot" aria-label="Foto 2"></button>
-            <button type="button" class="rotator-dot" aria-label="Foto 3"></button>
-          </div>
-        </div>
-
+      <!-- MOCKUP BUNDLE CENTRAL (MAIS QUE UM CALENDÁRIO, UM GUIA PARA VIVER A FÉ) -->
+      <div class="bonus-lead-hero">
+        <img src="assets/agenda_bonus_bundle_completo.webp" alt="Kit completo Agenda Católica 2027 com Calendários Litúrgicos e os 5 Bônus Exclusivos" width="672" height="742" loading="lazy" decoding="async">
       </div>
 
       <!-- CARDS DE BÔNUS COM IMAGENS DEDICADAS -->
@@ -4268,25 +3780,14 @@
           </div>
         </div>
 
-        <!-- BÔNUS 5 (COM GALERIA ROTATIVA DO CADERNO DE ORAÇÕES) -->
-        <div class="bonus-card" data-rotator="bonus-caderno" data-interval="2900">
+        <!-- BÔNUS 5 -->
+        <div class="bonus-card">
           <div class="bonus-card-img">
-            <div class="rotator-slide active">
-              <img src="assets/prod_caderno_oracoes_capa.webp" alt="Capa do Caderno de Orações e Novenas" width="463" height="608" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide">
-              <img src="assets/prod_caderno_santo_terco.webp" alt="Santo Terço passo a passo no Caderno de Orações" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide">
-              <img src="assets/prod_caderno_oracoes_tradicao.webp" alt="Orações da Tradição Católica" width="700" height="875" loading="lazy" decoding="async">
-            </div>
-            <div class="rotator-slide">
-              <img src="assets/prod_caderno_consagracao.webp" alt="Consagração a Nossa Senhora" width="700" height="875" loading="lazy" decoding="async">
-            </div>
+            <img src="assets/bonus1_novenas.webp" alt="Capa 3D do Caderno de Novenas e Orações Poderosas" width="400" height="400" loading="lazy" decoding="async">
           </div>
           <span class="bonus-tag">BÔNUS 05</span>
-          <h3>CADERNO DE ORAÇÕES &amp; NOVENAS PODEROSAS</h3>
-          <p>Coletânea completa com Santo Terço passo a passo, Consagração a Nossa Senhora, Orações da Tradição, Terço da Misericórdia e novenas.</p>
+          <h3>CADERNO DE NOVENAS & ORAÇÕES PODEROSAS</h3>
+          <p>Coletânea com as maiores novenas: N. Sra. Desatadora dos Nós, São Miguel Arcanjo, Santa Teresinha, Terço da Misericórdia e orações de proteção.</p>
           <div class="bonus-price-row">
             <span>Valor: <span class="cross">R$ 37,00</span></span>
             <span class="free">GRÁTIS NO COMPLETO</span>
@@ -4295,20 +3796,22 @@
 
         <!-- CARD ECONOMIA -->
         <div class="bonus-card economy-highlight">
-          <span class="bonus-tag" style="background:#13294B; color:#ffffff;">SUPER BENEFÍCIO</span>
+          <span class="bonus-tag" style="background:#ffffff; color:#0c1830;">SUPER BENEFÍCIO</span>
           <h3>MAIS DE R$ 132 EM BÔNUS!</h3>
-          <p style="color:#334155; font-size:1rem;">
-            No Pacote Completo por apenas <strong>R$ 27,90</strong>, você leva a Agenda 2027 + Planner + Caderno de Orações + 12 Capas + todos os presentes por apenas <strong>R$ 8,00 de diferença</strong>!
+          <p style="color:#e2ecf9; font-size:1rem;">
+            No Pacote Completo por apenas <strong>R$ 27,90</strong>, você leva a Agenda 2027 + todos os 5 presentes por uma diferença de <strong>apenas R$ 8,00</strong>!
           </p>
-          <div class="bonus-price-row" style="border-top-color: rgba(180, 123, 18, 0.28);">
-            <span style="font-weight:800; color:#13294B;">Economia de +R$ 100</span>
-            <span class="free" style="color:#15803d;">100% INCLUSO</span>
+          <div class="bonus-price-row" style="border-top-color: rgba(255,255,255,0.25);">
+            <span style="font-weight:700; color:#fff;">Economia de +R$ 100</span>
+            <span class="free" style="color:#ffe28a;">100% INCLUSO</span>
           </div>
         </div>
 
       </div>
     </div>
   </section>
+
+
 
   <!-- =========================================================================
        SEÇÃO DE OFERTAS: CARDS LADO A LADO NO MOBILE (INSPIRADO NO SEU PRINT)
@@ -4544,7 +4047,7 @@
       <a class="btn btn-gold btn-pulse" href="#oferta">
         👉 GARANTIR MINHA AGENDA 2027 AGORA
       </a>
-      <span class="btn-subtext" style="color: #475569;">
+      <span class="btn-subtext" style="color: #a9bedc;">
         Download imediato em PDF · Acesso vitalício · Garantia incondicional de 15 dias
       </span>
     </div>
@@ -4876,14 +4379,6 @@
           <span>Não adicionar</span>
         </button>
       </div>
-    </div>
-  </div>
-
-  <!-- MODAL LIGHTBOX PARA AMPLIAR AS 12 CAPAS -->
-  <div class="capas-lightbox" id="capas-lightbox" role="dialog" aria-modal="true" aria-label="Zoom das 12 capas exclusivas">
-    <div class="capas-lightbox-inner">
-      <button type="button" class="capas-lightbox-close" id="close-capas-zoom" aria-label="Fechar ampliação">✕</button>
-      <img src="assets/prod_12_capas_completo.webp" alt="Visualização ampliada das 12 capas exclusivas">
     </div>
   </div>
 
@@ -5891,125 +5386,6 @@
             });
           }, 60);
         }, { passive: true });
-      })();
-
-      // ─── GALERIAS ROTATIVAS (HERO, TRIO BÔNUS E CADERNO) ───
-      (function initAllRotators() {
-        document.querySelectorAll('[data-rotator]').forEach(function(container) {
-          var slides = container.querySelectorAll('.rotator-slide');
-          if (!slides.length) return;
-
-          var dots = container.querySelectorAll('.rotator-dot');
-          var tabBtns = container.querySelectorAll('.rotator-tab-btn');
-          var prevBtn = container.querySelector('.rotator-arrow.prev');
-          var nextBtn = container.querySelector('.rotator-arrow.next');
-          var badgeEl = container.querySelector('#hero-rotator-badge span');
-          var captionEl = container.querySelector('.trio-slide-caption');
-          var intervalMs = parseInt(container.getAttribute('data-interval'), 10) || 3000;
-
-          var current = 0;
-          var timer = null;
-
-          function showSlide(idx) {
-            current = (idx + slides.length) % slides.length;
-            slides.forEach(function(s, i) {
-              s.classList.toggle('active', i === current);
-            });
-            dots.forEach(function(d, i) {
-              d.classList.toggle('active', i === current);
-            });
-            var activeSlide = slides[current];
-            var label = activeSlide ? activeSlide.getAttribute('data-label') : '';
-            var group = activeSlide ? activeSlide.getAttribute('data-group') : '';
-
-            if (badgeEl && label) badgeEl.textContent = label;
-            if (captionEl && label) captionEl.textContent = label;
-
-            if (tabBtns.length && group) {
-              tabBtns.forEach(function(btn) {
-                var jumpIdx = parseInt(btn.getAttribute('data-jump'), 10);
-                var targetGroup = slides[jumpIdx] ? slides[jumpIdx].getAttribute('data-group') : '';
-                btn.classList.toggle('active', targetGroup === group);
-              });
-            }
-          }
-
-          function startAuto() {
-            if (timer) clearInterval(timer);
-            timer = setInterval(function() {
-              showSlide(current + 1);
-            }, intervalMs);
-          }
-
-          function stopAuto() {
-            if (timer) {
-              clearInterval(timer);
-              timer = null;
-            }
-          }
-
-          if (prevBtn) {
-            prevBtn.addEventListener('click', function() {
-              showSlide(current - 1);
-              startAuto();
-            });
-          }
-
-          if (nextBtn) {
-            nextBtn.addEventListener('click', function() {
-              showSlide(current + 1);
-              startAuto();
-            });
-          }
-
-          dots.forEach(function(dot, i) {
-            dot.addEventListener('click', function() {
-              showSlide(i);
-              startAuto();
-            });
-          });
-
-          tabBtns.forEach(function(btn) {
-            btn.addEventListener('click', function() {
-              var jumpIdx = parseInt(btn.getAttribute('data-jump'), 10) || 0;
-              showSlide(jumpIdx);
-              startAuto();
-            });
-          });
-
-          container.addEventListener('mouseenter', stopAuto);
-          container.addEventListener('mouseleave', startAuto);
-          container.addEventListener('touchstart', stopAuto, { passive: true });
-          container.addEventListener('touchend', startAuto, { passive: true });
-
-          startAuto();
-        });
-      })();
-
-      // ─── LIGHTBOX DE ZOOM PARA AS 12 CAPAS ───────────────
-      (function initCapasLightbox() {
-        var openTrigger = document.getElementById('open-capas-zoom');
-        var lightbox = document.getElementById('capas-lightbox');
-        var closeBtn = document.getElementById('close-capas-zoom');
-        if (!openTrigger || !lightbox) return;
-
-        function openZoom() { lightbox.classList.add('active'); }
-        function closeZoom() { lightbox.classList.remove('active'); }
-
-        openTrigger.addEventListener('click', openZoom);
-        openTrigger.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            openZoom();
-          }
-        });
-        if (closeBtn) closeBtn.addEventListener('click', closeZoom);
-        lightbox.addEventListener('click', function(e) {
-          if (e.target === lightbox) closeZoom();
-        });
-        document.addEventListener('keydown', function(e) {
-          if (e.key === 'Escape' && lightbox.classList.contains('active')) closeZoom();
-        });
       })();
 
       // ─── LOG DE DIAGNÓSTICO (só em dev) ─────────────────
